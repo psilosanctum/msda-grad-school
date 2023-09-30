@@ -1,0 +1,6 @@
+"0","boxplot(cars$Horsepower, "
+"0","        main = ""Horsepower Box Plot - All Vehicles"","
+"0","        xlab = ""Horsepower"","
+"0","        ylab = ""Value"","
+"0","        col = ""red"","
+"0","        border = ""black""); "

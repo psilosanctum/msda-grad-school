@@ -1,0 +1,44 @@
+install.packages("MASS")
+view(airquality)
+airquality
+library("MASS")
+dim(airquality)
+class(airquality)
+str(airquality)
+data()
+## 2. import excel or csv file
+setwd("C:/Users/sdy897/Box/Working files/Class/UTSA_STA6443_Algorithms1/data")  # need to change this path
+## 2. import excel or csv file
+setwd("C:/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/datasets")  # need to change this path
+prof=read.csv("Professor.csv", header=TRUE)
+prof=read.csv("professor.csv", header=TRUE)
+## 2. import excel or csv file
+setwd("C:/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/datasets/")  # need to change this path
+prof=read.csv("professor.csv", header=TRUE)
+pwd
+## 2. import excel or csv file
+setwd("C:/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms")  # need to change this path
+prof=read.csv("professor.csv", header=TRUE)
+dim(airquality)  # the number of observations and variables
+prof=read.csv("professor.csv", header=TRUE)
+View(prof)
+dim(prof)
+class(prof)
+## 2. import excel or csv file
+setwd("C:/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/datasets")  # need to change this path
+## 2. import excel or csv file
+work_dir <- "C:/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/datasets"
+setwd(work_dir)  # need to change this path
+## 2. import excel or csv file
+getwd()
+work_dir <- "/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/datasets"
+setwd(work_dir)  # need to change this path
+prof=read.csv("professor.csv", header=TRUE)
+View(prof)
+dim(prof)
+class(prof)
+str(prof)
+install.packages("readxl")
+library("readxl")
+cars <- read_xlsx("CARS.xlsx")
+install.packages("readxl")

@@ -1,0 +1,1 @@
+"0","qqnorm(cars2$Horsepower[cars2$Type==""Sports""]);"

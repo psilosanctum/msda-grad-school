@@ -1,0 +1,251 @@
+---
+title: "HW1"
+format: html
+---
+Collaborators: Collin Real (yhi267), Seth Harris (dmp903)
+
+Import libraries.
+```{r}
+library(dplyr)
+library(e1071)
+library(fBasics)
+library(MASS)
+```
+
+
+Set working directory path.
+
+```{r}
+setwd("/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/HW1") 
+```
+
+
+Read in HW1 dataset.
+
+```{r}
+cars=read.csv("Cars.csv", header = TRUE)
+```
+
+(1a) 
+Create the combined MPG variable and create a new dataframe with the new MPG_Combo column.
+```{r}
+MPG_Combo <- 0.6*cars$MPG_City+0.4*cars$MPG_Highway   
+cars=data.frame(cars, MPG_Combo)
+```
+
+Create box plot for the new MPG_Combo variable.
+```{r}
+boxplot(cars$MPG_Combo, 
+        main="MPG Combined - 60% City & 40% Highway",
+        ylab="MPG",
+        xlab="MPG Combo",
+        col="red",
+        border="black"); 
+points(mean(cars$MPG_Combo, na.rm = TRUE), col="blue")
+```
+**Comments:**
+The box plot illustrates several outliers above the maximum and below the minumum. The mean and median values are almost equal indicating the possibility of normal distribution. The plot also illustrates that 50% of the cars have a 20-25 MPG range. Finally, the minimum value for MPG is ~14, and the maximum value is ~31.
+
+(1b) Create box plots for MPG_Combo by Type.
+```{r}
+boxplot(MPG_Combo~Type,
+        data = cars,
+        main="MPG_Combo by Type",
+        xlab="Type",
+        ylab="MPG_Combo",
+        col="red",
+        border="black")
+```
+**Comments:**
+The box plot illustrates that Sedan has several outliers above the maximum value. Truck and SUV have the lowest fuel efficiencies, whereas Wagon and Sedan have the highest. Sports vehicles fall between Truck/SUV and Wagon/Sedan in terms of fuel efficiency.
+
+(1c) Basic descriptive statistics for Horsepower for all vehicles.
+```{r}
+summary(cars$Horsepower)
+mean(cars$Horsepower)
+median(cars$Horsepower)
+var(cars$Horsepower)
+range(cars$Horsepower)
+skewness(cars$Horsepower)
+```
+**Comments:**
+The mean (216.8) is greater than the median (210) indicating that the data is skewed to the right. Our skewness assumption is confirmed since our calculated skewness (0.9528091) is greater than zero. The values range from 100 to 500.
+
+**Visual Methods for Normality Assumption**
+```{r}
+boxplot(cars$Horsepower, 
+        main = "Horsepower Box Plot - All Vehicles",
+        xlab = "Horsepower",
+        ylab = "Value",
+        col = "red",
+        border = "black"); 
+points(mean(cars$Horsepower, na.rm = TRUE), col="blue")
+```
+
+
+```{r}
+hist(cars$Horsepower, 
+     main = "Horsepower Histogram - All Vehicles",
+     col = "red",
+     border = "black")
+```
+
+```{r}
+qqnorm(cars$Horsepower,
+       main = "Horsepower QQ-Plot - All Vehicles");
+qqline(cars$Horsepower, col = "red")
+```
+**Comments:**
+The histogram and box plot further illustrate the right skewness of the Horsepower data. The QQ-plot demonstrates a majority of the values near the red line, but there are various outliers. 
+
+**Quantitative**:
+Shapiro-Wilks Test is the quantitative method used to comment on the assumption of Normality for the Horsepower variable.
+
+```{r}
+shapiro.test(cars$Horsepower)
+```
+**Conclusion:**
+Since the p-value (2.32e-11) of is less than the significance value (α=0.05), Horsepower **does not** follow normal distribution.
+
+(1d) 
+Assumption of normality for Horsepower by Type - Sports, SUV, Truck only.
+H0: Data follows normal distribution.; H1: Data does not follow normal distribution.
+```{r}
+specified_types <- c("Sports", "SUV", "Truck")
+cars2 = filter(cars, Type %in% specified_types)
+boxplot(Horsepower ~ Type, 
+        data = cars2, 
+        main="Horsepower by Type",
+        xlab="Type", 
+        ylab="Horsepower", 
+        col="red", 
+        border="black"); 
+points(mean(cars$Horsepower), col="blue")
+```
+
+
+**Sports** - visual and quantitative methods for normality check.
+```{r}
+qqnorm(cars2$Horsepower[cars2$Type=="Sports"],
+       main = "QQ-Plot - Sports");
+qqline(cars2$Horsepower[cars2$Type=="Sports"], col = "red")
+hist(cars2$Horsepower[cars2$Type=="Sports"], 
+     main = "Histogram - Sports", 
+     xlab="Sports",
+     col = "red",
+     border = "black")
+shapiro.test(cars2$Horsepower[cars2$Type=="Sports"])
+```
+**Comments:**
+The histogram and box plots illustrate slight right skewness for Sports. The QQ-plot illustrates the majority of values close to the red line, but there are many outliers; therefore, the Shapiro-Wilk test was used to determine the normality of the data. Since the p-value (0.01898) is less than the significance level (α=0.05), we reject the null hypothesis. The data does not follow normal distribution.
+
+**SUV** - visual and quantitative methods for normality check.
+```{r}
+qqnorm(cars2$Horsepower[cars2$Type=="SUV"],
+       main = "QQ-Plot - SUV");
+qqline(cars2$Horsepower[cars2$Type=="SUV"], col = "red")
+hist(cars2$Horsepower[cars2$Type=="SUV"], 
+     main = "Histogram - SUV", 
+     xlab="SUV",
+     col = "red",
+     border = "black")
+shapiro.test(cars2$Horsepower[cars2$Type=="SUV"])
+
+```
+**Comments:**
+The histogram and box plots illustrate slight left skewness for SUV. The QQ-plot illustrates the majority of values close to the red line, but there are many outliers; therefore, the Shapiro-Wilk test was used to determine the normality of the data. Since the p-value (0.04423) is less than the significance level (α=0.05), we reject the null hypothesis. The data does not follow normal distribution.
+
+**Truck** - visual and quantitative methods for normality check.
+```{r}
+qqnorm(cars2$Horsepower[cars2$Type=="Truck"],
+       main = "QQ-Plot - Truck");
+qqline(cars2$Horsepower[cars2$Type=="Truck"], col = "red")
+hist(cars2$Horsepower[cars2$Type=="Truck"], 
+     main = "Histogram - Truck", 
+     xlab="Truck",
+     col = "red",
+     border = "black")
+shapiro.test(cars2$Horsepower[cars2$Type=="Truck"])
+```
+**Comments:**
+The histogram and box plots illustrate that the data is not normal for Truck. The QQ-plot illustrates that the majority of values are not close to the red line. The Shapiro-Wilk test was used to further demonstrate the non-normality of the data. Since the p-value (0.01697) is less than the significance level (α=0.05), we reject the null hypothesis. The data does not follow normal distribution.
+
+**Exercise 2: Hypothesis Testing**
+
+(2a) 
+The p-values of SUV (0.04423) and Truck (0.01697) are less than the significance level (α=0.05), so we reject the null hypothesis; therefore, we should perform the **nonparametric Wilcoxon rank-sum test** because SUV and Truck are **not** normally distributed. 
+
+(2b)
+H0: SUV and Truck have similar horsepower because the two groups are from the same distribution with equal median values.;
+H1: SUV and Truck have different horsepower because one of the groups has a larger median value.
+
+(2c)
+```{r}
+# Filter DataFrame to include only SUV & Truck 
+suv_truck_types <- c("SUV", "Truck")
+cars3 = filter(cars2, Type %in% suv_truck_types)
+
+# Perform the Wilcoxon rank-sum test
+wilcox.test(Horsepower~Type, data = cars3, exact=FALSE)
+```
+**Conclusion:** 
+Since p-value (0.3942) is larger than significance level (α=0.05), we do **not** have enough evidence to reject the null hypothesis (HO); therefore, SUV and Truck have similar horsepower because the two groups are from the same distribution with equal medians.
+
+**Exercise 3: Hypothesis Testing**
+
+(3a)
+Import dataset and filter DataFrame to include only July & August
+```{r}
+# Import dataset
+df = airquality
+
+# Filter DataFrame to include only July & August 
+months <- c(7, 8)
+aug_july_df = filter(df, Month %in% months)
+```
+
+
+Create QQ-plots and perform the Shapiro-Wilk test for July and August normality check.
+```{r}
+# Create QQ-plot for July normality check.
+qqnorm(aug_july_df$Wind[aug_july_df$Month==7],
+       main = "QQ-Plot - July");
+qqline(aug_july_df$Wind[aug_july_df$Month==7], col = "red")
+
+# Perform the Shapiro-Wilk test for July normality check.
+shapiro.test(aug_july_df$Wind[aug_july_df$Month==7])
+
+# Create QQ-plot for August normality check.
+qqnorm(aug_july_df$Wind[aug_july_df$Month==8],
+       main = "QQ-Plot - August");
+qqline(aug_july_df$Wind[aug_july_df$Month==8], col = "red")
+
+# Perform the Shapiro-Wilk test for August normality check.
+shapiro.test(aug_july_df$Wind[aug_july_df$Month==8])
+```
+
+Since both p-values for July (0.1564) and August (0.937) follow the normal distribution (p-values > significance level), we perform the equal variance test to choose between the pooled t-test (equal variance case) and Satterthwaite t-test (unequal variance case).
+```{r}
+var.test(Wind ~ Month, data=aug_july_df, alternative="two.sided")
+```
+Since the p-value (0.7418) of the equal variance test is greater than the significance level (α=0.05), we do not have enough evidence to reject the null hypothesis; therefore, we will perform the **pooled t-test** because July and August have the same variance.
+
+(3b)
+H0: mean of July = mean of August;
+H1: mean of July != mean of August
+
+(3c)
+```{r}
+t.test(Wind ~ Month, data = aug_july_df, alternative = "two.sided", var.equal=TRUE)
+```
+**Conclusion:**
+Since the p-value (0.8527) of the pooled t-test is greater than the significance level (α=0.05), we do not have enough evidence to reject the null hypothesis; therefore, the data is normally distributed and the two groups have equal means.
+
+
+
+
+
+
+
+
+

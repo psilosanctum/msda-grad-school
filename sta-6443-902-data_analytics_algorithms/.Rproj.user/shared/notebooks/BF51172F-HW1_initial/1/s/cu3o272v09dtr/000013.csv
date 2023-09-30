@@ -1,0 +1,2 @@
+"0","# Create QQ-plot for July normality check."
+"0","qqnorm(aug_july_df$Wind[aug_july_df$Month==7]);qqline(aug_july_df$Wind[aug_july_df$Month==7], col = 2)"

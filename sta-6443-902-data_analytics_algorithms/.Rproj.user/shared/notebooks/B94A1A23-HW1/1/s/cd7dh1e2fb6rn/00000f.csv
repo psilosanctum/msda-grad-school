@@ -1,0 +1,6 @@
+"0","# Import dataset"
+"0","df = airquality"
+"0",""
+"0","# Filter DataFrame to include only July & August "
+"0","months <- c(7, 8)"
+"0","aug_july_df = filter(df, Month %in% months)"

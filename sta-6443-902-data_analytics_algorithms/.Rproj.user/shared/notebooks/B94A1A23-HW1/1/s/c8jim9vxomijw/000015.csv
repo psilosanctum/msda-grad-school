@@ -1,0 +1,7 @@
+"0","boxplot(MPG_Combo~Type,"
+"0","        data = cars,"
+"0","        main=""MPG_Combo by Type"","
+"0","        xlab=""Type"","
+"0","        ylab=""MPG_Combo"","
+"0","        col=""red"","
+"0","        border=""black"")"

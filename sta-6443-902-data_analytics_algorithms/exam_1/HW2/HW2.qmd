@@ -1,0 +1,434 @@
+---
+title: "HW2"
+format: html
+author: "Collin Real (yhi267), Seth Harris (dmp903)"
+---
+
+Import libraries.
+```{r}
+library(car)
+library(MASS)
+library(DescTools)
+```
+
+
+Set path.
+
+```{r}
+setwd("/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/HW2")
+```
+
+Exercise 1: Analysis of Variance
+The heartbpchol.csv data set contains continuous cholesterol (Cholesterol) and blood pressure status (BP_Status) (category: High/ Normal/ Optimal) for alive patients.
+For the heartbpchol data set, consider a one-way ANOVA model to identify differences between group cholesterol means. The normality assumption is reasonable, so you can proceed without testing normality.
+
+a) Perform a one-way ANOVA for Cholesterol with BP_Status as the categorical predictor.Comment on statistical significance of BP_Status, the amount of variation described by the model, and whether or not the equal variance assumption can be trusted.
+
+**Importing Data**
+```{r}
+heart = read.csv("data/heartbpchol.csv") 
+heart$Cholesterol = as.numeric(heart$Cholesterol)
+heart$BP_Status = as.factor(heart$BP_Status)
+str(heart)
+```
+
+**Balance Check**
+```{r}
+table(heart$BP_Status) 
+```
+Since the number of observations for each group is different, the distribution of BP_Status is **unbalanced.**
+
+```{r}
+boxplot(Cholesterol ~ BP_Status, heart, 
+        main = "Cholesterol Distribution by BP Status",
+        xlab = "BP Status",
+        ylab = "Cholesterol",
+        col = "red",
+        horizontal = FALSE)
+```
+
+**One-Way ANOVA (Cholesterol with BP_Status)**
+```{r}
+aov.heart = aov(Cholesterol ~ BP_Status, heart)
+summary(aov.heart)
+```
+Since the p-value (0.00137) is below the significance level (0.05), we **reject the null hypothesis.** At least one group in BP Status has a different mean of Cholesterol; therefore, BP Status has a significant effect on Cholesterol.
+
+**R-Square**
+```{r}
+lm.res = lm(Cholesterol ~ BP_Status, heart)
+summary(lm.res)$r.squared
+```
+This means that **2.4%** of the total variation of Cholesterol can be explained by the BP_Status. 
+
+**Equal-Variance Assumption (Levene Test)**
+```{r}
+leveneTest(aov.heart)
+```
+Since our p-value (0.8332) is greater than the significance level (0.05), we **do not reject** the null hypothesis. All groups in BP_Status have equal variance.
+
+**Normality Check**
+```{r}
+par(mfrow=c(2,2)) 
+plot(aov.heart)
+```
+The Q-Q Plot shows that most of the data follows a normal distribution with some deviation at the tail. Despite the slight deviation, we can assume normality. On the Residuals vs. Fitted plot, group 1 shows less variation than groups 2 and 3; however, the equal variance assumption can be trusted since the Levene Test calculated a p-value of 0.8332.
+
+
+b) Comment on any significantly different cholesterol means as determined by the post-hoc test comparing all pairwise differences. Specifically explain what that tells us about differences in cholesterol levels across blood pressure status groups, like which group has the highest or lowest mean values of Cholesterol
+
+
+```{r}
+ScheffeTest(aov.heart)
+```
+Since the p-values for Normal-High (0.0159) and Optimal-High (0.0089) are less than the significance level (0.05), we **reject** the null hypothesis. The Normal-High group's means and the Optimal-High group's means are not equal.  
+Since the p-value for Optimal-Normal (0.4958) is greater than the significance level (0.05), we **do not reject** the null hypothesis. The Optimal-Normal group's means are equal.
+
+Effects of BP_Status on Cholesterol:          
+Normal < High, the mean value of Normal Cholesterol is less than the mean value of High Cholesterol.     
+Optimal < High, the mean value of Optimal Cholesterol is less than the mean value of High Cholesterol.     
+Optimal = Normal, the mean value of Optimal Cholesteral is equal to the mean value of Normal Cholesterol.   
+
+
+Exercise 2: Analysis of Variance
+For this problem use the bupa.csv data set. Check UCI Machine Learning Repository for more information (http://archive.ics.uci.edu/ml/datasets/Liver+Disorders). The mean corpuscular volume and alkaline phosphatase are blood tests thought to be sensitive to liver disorder related to excessive alcohol consumption. We assume that normality and independence assumptions are valid.
+
+a) Perform a one-way ANOVA for mcv as a function of drinkgroup. Comment on significance of the drinkgroup, the amount of variation described by the model, and whether or not the equal variance assumption can be trusted.
+
+**Importing Data**
+```{r}
+bupa = read.csv("data/bupa.csv")
+bupa$mcv = as.numeric(bupa$mcv)
+bupa$alkphos = as.numeric(bupa$alkphos)
+bupa$drinkgroup = as.factor(bupa$drinkgroup)
+str(bupa)
+```
+**Balance Check**
+```{r}
+table(bupa$drinkgroup) 
+```
+Since the number of observations for each group is different, the distribution of BP_Status is **unbalanced.**
+
+```{r}
+boxplot(mcv ~ drinkgroup, bupa, 
+      main = "Mean Corpuscular Volume Distribution by Drink Group",
+      xlab = "Drink Group",
+      ylab = "Mean Corpuscular Volume",
+      col = "red",
+      horizontal = FALSE)
+```
+
+**One-Way ANOVA (MCV with Drink Group)**
+
+```{r}
+aov.mcv <- aov(mcv ~ drinkgroup, bupa)
+summary(aov.mcv)
+```
+Since the p-value (7.43e-08) is less than the significance level (0.05), we **reject** the null hypothesis. At least one group in drinkgroup has a different mean of mcv; therefore, drinkgroup has a significant effect on mcv. 
+
+**R-Square**
+```{r}
+lm.res_mcv <- lm(mcv ~ drinkgroup, bupa)
+summary(lm.res_mcv)$r.squared
+```
+This means that **10.8%** of the total variation of mcv can be explained by the drinkgroup.
+
+**Equal-Variance Assumption (Levene Test)**
+```{r}
+leveneTest(aov.mcv)
+```
+Since our p-value (0.8744) is greater than the significance level (0.05), we **do not reject** the null hypothesis. All groups in drinkgroup have equal variance.
+
+
+**Normality Check**
+```{r}
+par(mfrow=c(2,2))
+plot(aov.mcv)
+```
+The Q-Q Plot shows that most of the data follows a normal distribution, so we can assume normality. On the Residuals vs. Fitted plot, all groups are displaying similar variances, and the Levene Test calculated a p-value of 0.8744; therefore, the equal variance assumption can be trusted.
+
+
+b) Perform a one-way ANOVA for alkphos as a function of drinkgroup. Comment on statistical significance of the drinkgroup, the amount of variation described by the model, and whether or not the equal variance assumption can be trusted.
+
+**Balance Check**
+```{r}
+table(bupa$drinkgroup) 
+```
+```{r}
+boxplot(alkphos ~ drinkgroup, bupa,
+        main = "Alkaline Phosphatase Distribution by Drink Group",
+        xlab = "Alkaline Phosphatase",
+        ylab = "Drink Group",
+        col = "red",
+        horizontal = FALSE)
+```
+When looking at the statistical significance, the distribution of Drink Group is clearly unbalanced. The observations for each group is different.
+
+**One-Way ANOVA (Alkphos with Drink Group)**
+
+```{r}
+aov.alkphos <- aov(alkphos ~ drinkgroup, bupa)
+summary(aov.alkphos)
+```
+Since the p-value (0.00495) is less than the significance level (0.05), we **reject** the null hypothesis. At least one group in drinkgroup has a different mean of alkphos; therefore, drinkgroup has a significant effect on alkphos. 
+
+**R-Square**
+```{r}
+lm.alkphos <- lm(alkphos ~ drinkgroup, bupa)
+summary(lm.alkphos)$r.squared
+```
+This means that **4.3%** of the total variation of alkphos can be explained by the drinkgroup.
+
+
+**Equal-Variance Assumption (Levene Test)**
+```{r}
+leveneTest(aov.alkphos)
+```
+Since our p-value (0.5201) is greater than the significance level (0.05), we **do not reject** the null hypothesis. All groups in drinkgroup have equal variance.
+
+
+**Normality Check**
+```{r}
+par(mfrow=c(2,2))
+plot(aov.alkphos)
+```
+The Q-Q Plot shows that most of the data follows a normal distribution with some deviation at the tail. Despite the slight deviation, we can assume normality. On the Residuals vs. Fitted plot, group 2 shows less variation than the rest of the groups; however, since the Levene Test calculated a p-value of 0.5201, the equal variance assumption can be trusted.
+
+
+c) Perform post-hoc tests for models in a) and b). Comment on any similarities or differences you observe from their results.
+
+**mcv**
+```{r}
+ScheffeTest(aov.mcv)
+```
+
+Since the p-values of 4-1 (1.9e-06), 5-1 (0.0081), 4-2 (0.0380), and 4-3 (0.0025) are less than the significance level (0.05), we **reject** the null hypothesis. The means of these drinkgroup pairs are not equal and have a significant effect on mcv.    
+Since the p-values of 2-1 (0.5410), 3-1 (0.6495), 3-2 (0.9966), 5-2 (0.2646), 5-3 (0.1151), and 5-4 (1.0000) are greater than the significance level (0.05), we **do not reject** the null hypothesis. The means of these drinkgroup pairs are equal.
+
+The Scheffe Test identified significant pairwise differences between these drinkgroup pairs:      
+4 > 1 (mean mcv of 4 is greater than mean mcv of 1 by +3.74)           
+5 > 1 (mean mcv of 5 is greater than mean mcv of 1 by +3.75)          
+4 > 2 (mean mcv of 4 is greater than mean mcv of 2 by +2.50)      
+4 > 3 (mean mcv of 4 is greater than mean mcv of 3 by +2.81)       
+
+drinkgroup pairs with equal mean values: 2-1, 3-1, 3-2, 5-2, 5-3, and 5-4 
+
+**alkphos**
+```{r}
+ScheffeTest(aov.alkphos)
+```
+Since the p-values of 5-2 (0.0329) and 5-3 (0.0069) are less than the significance level (0.05), we **reject** the null hypothesis. The means of these drinkgroup pairs are not equal and have a significant effect on alkphos.     
+Since the p-values of 2-1 (0.9419), 3-1 (0.6389), 4-1 (0.9965), 5-1 (0.0734), 3-2 (0.9953), 4-2 (0.9952), 4-3 (0.9117), and 5-4 (0.0578) are greater than the significance level (0.05), we **do not reject** the null hypothesis. The means of these drinkgroup pairs are equal.
+
+The Scheffe Test identified significant pairwise differences between these drinkgroup pairs:
+5 > 2 (mean alkphos of 5 is higher than mean alkphos of 2 by +15.22)
+5 > 3 (mean alkphos of 5 is higher than mean alkphos of 3 by +16.63)
+
+drinkgroup pairs with equal mean values: 2-1, 3-1, 4-1, 5-1, 3-2, 4-2, 4-3, 5-4
+
+**Similarities:** The p-values of drinkgroup pairs 2-1, 3-1, 3-2, and 5-4 are greater than the significance level in both post-hoc tests; therefore, these pairs do not have any significant effect on mcv and alkphos.
+
+
+Exercise 3:
+The psychology department at a hypothetical university has been accused of underpaying female faculty members. The data represent salary (in thousands of dollars) for all 22 professors in the department.This problem is from Maxwell and Delaney (2004).
+
+**Importing Data**
+```{r}
+psych = read.csv("data/psych.csv")
+psych$salary = as.numeric(psych$salary)
+str(psych)
+```
+**Balance Check**
+```{r}
+table(psych$sex); table(psych$rank)
+```
+Since the number of observations for each group is different, the distributions of sex and rank are **unbalanced.**
+
+a) Fit a two-way ANOVA model including sex (F, M) and rank (Assistant, Associate) the interaction term. What do the Type 1 and Type 3 sums of squares tell us about significance of effects? Is the interaction between sex and rank significant? Also comment on the variation explained by the model.
+
+**Two-Way ANOVA Type 1:**
+
+```{r}
+aov.psych1 = aov(salary ~ sex * rank, psych)
+summary(aov.psych1)
+```
+
+```{r}
+aov.psych2 = aov(salary ~ rank * sex, psych)
+summary(aov.psych2)
+```
+
+Since both groups have p-values less than the significance value, we **reject** the null hypothesis. These groups have a significant effect on salary.    
+In addition, we can see the interaction between sex and rank result in a p-value greater than the significance level, so we **do not reject** the null hypothesis. The interaction between sex and rank does not have a significant effect on salary.
+
+**Two-Way ANOVA Type 3:**
+
+```{r}
+Anova(aov.psych1, type = 3)
+```
+Since rank has a p-value (0.01240) less than the significance level (0.05), we **reject** the null hypothesis. Rank has a significant effect on salary.     
+Since the p-values of sex (0.09671) and the interaction between sex and rank (0.79510) are greater than the significance level, we **do not reject** the null hypothesis. Sex and the interaction group do not have a significant effect on salary.
+
+**Variation Explained by model (Sex and Rank)**
+```{r}
+lm.psych1 = lm(salary ~ sex*rank, psych)
+summary(lm.psych1)$r.squared
+```
+This means **66.5%** of the salary variation can be explained by using the model.
+
+b) Refit the model without the interaction term. Comment on the significance of effects and variation explained. Report and interpret the Type 1 and Type 3 tests of the main effects. Are the main effects of rank and sex significant?
+
+**Two-Way ANOVA Type 1:**
+```{r}
+aov.psych3 = aov(salary ~ rank + sex, psych)
+summary(aov.psych3)
+```
+```{r}
+aov.psych4 = aov(salary ~ sex + rank, psych)
+summary(aov.psych4)
+```
+Since the p-values of sex (0.000454) and rank (0.000291) are less than the significance level (0.05), we **reject** the null hypothesis and conclude that both groups have a significant effect on salary. There's at least one group in sex and rank whose mean values are not equal.
+
+**Two-Way ANOVA Type 3:**
+```{r}
+Anova(aov.psych3, type = 3)
+```
+Since the p-values of rank (0.0002912) and sex (0.0092618) are less than the significance level (0.05), we **reject** the null hypothesis and conclude that both groups have a significant effect on salary. There's at least one group in sex and rank whose mean values are not equal.
+
+**Variation Explained by model**
+
+```{r}
+lm.psych3 = lm(salary ~ rank + sex, psych)
+summary(lm.psych3)$r.squared
+```
+This means 66.3% of the salary variation can be explained by using the model.
+
+c) Obtain model diagnostics to validate your Normality assumptions.
+
+```{r}
+par(mfrow=c(2,2))
+plot(aov.psych3)
+```
+The Q-Q Plot shows that most of the data follows a normal distribution, so we can assume normality. On the Residuals vs. Fitted plot, the groups are **not** displaying similar variances, and the Levene Test cannot be used for this two-way ANOVA because the distributions are unbalanced. The equal variance assumption cannot be trusted. 
+
+d) Choose a final model based on your results from parts (a) and (b). Comment on any significant group differences through the post-hoc test. State the differences in salary across different main effect groups and interaction (if included) between them.
+Hint: For interpretations of differences for the main effects, state quantitative interpretations of the significantly different groups (e.g. estimated differences between groups and what the difference tells us about salary). For interaction term, identify significant interactions, but no need to interpret it quantitatively.
+
+Based on the results from (a) and (b), we choose the **two-way ANOVA - Type 3 with no interaction effect.**
+
+**Post-HOC Test**
+```{r}
+TukeyHSD(aov.psych4)
+```
+Since the p-values of rank and sex are less than the significance level, we **reject** the null hypothesis. Both rank and sex have a significant effect on salary. The means of M-F are not equal, and the means of Assoc-Assist are not equal.
+
+M > F (Male salary average is greater than Female salary average by +5.33)
+Assoc > Assist (Assoc salary average is greater than Assist salary average by +5.37)
+
+```{r}
+TukeyHSD(aov.psych3)
+```
+Since the p-values of rank and sex are less than the significance level, we **reject** the null hypothesis. Both rank and sex have a significant effect on salary. The means of M-F are not equal, and the means of Assoc-Assist are not equal.
+
+M > F (Male salary average is greater than Female salary average by +3.52)
+Assoc > Assist (Assoc salary average is greater than Assist salary average by +6.80)
+
+
+Exercise 4:
+Use the cars_new.csv. See HW1 for detailed information of variables.
+
+**Importing Data**
+```{r}
+## Importing Data ###
+cars = read.csv("data/cars_new.csv")
+cars$mpg_highway = as.numeric(cars$mpg_highway)
+cars$cylinders = as.factor(cars$cylinders)
+cars$origin = as.factor(cars$origin)
+cars$type = as.factor(cars$type)
+str(cars)
+```
+**Balance Check**
+```{r}
+table(cars$type)
+table(cars$origin)
+table(cars$cylinders)
+```
+Since the number of observations for each group is different, the distributions of type, origin, and cylinders are **unbalanced**.
+
+a) Start with a three-way main effects ANOVA and choose the best main effects ANOVA model for mpg_highway as a function of cylinders, origin, and type for the cars in this set. Comment on which terms should be kept in a model for mpg_highway and why based on Type 3 SS. For the model with just predictors you decide to keep, comment on the significant effects in the model and comment on how much variation in highway fuel efficiency the model describes.
+
+**Three-Way Anova (Type 3):
+
+```{r}
+aov.cars <- aov(mpg_highway ~ cylinders + origin + type, cars)
+Anova(aov.cars, type = 3)
+```
+Since the p-values of cylinders (< 2e-16) and type (0.00175) are less than the significance level (0.05), we **reject** the null hypothesis. These groups significantly affect mpg_highway. At least one group's mean values are not equal.    
+Since the p-value of origin (0.77948) is greater than the significance level (0.05), we **do not** reject the null hypothesis. Origin does not have a significant effect on mpg_highway, so we will eliminate it from the model. 
+
+**Variation Explained by the Model with cylinders and type**
+```{r}
+lm.cars <- lm(mpg_highway ~ cylinders + type, cars)
+summary(lm.cars)$r.squared
+```
+This means that when looking at the variation of mpg_highway, only around **45.7%** can be explained by the cylinders and type. 
+
+
+
+b) Starting with main effects chosen in part (a), find your best ANOVA model by adding in any additional interaction terms that will significantly improve the model. For your final model, comment on the significant effects and variation explained by the model.
+
+```{r}
+aov.cars2 <- aov(mpg_highway ~ cylinders + type + cylinders * type, cars)
+Anova(aov.cars2, type = 3)
+```
+
+Two-way ANOVA, Type 3, with the inclusion of cylinders, type, and its interaction, is the best model. We may **reject** the null hypothesis and draw the conclusion that they have a substantial impact on mpg_highway since all three of them have p-values below the significance level of 0.05.
+
+**Variation explained by the model**
+```{r}
+lm.cars2 <- lm(mpg_highway ~ cylinders + type + cylinders * type, cars)
+summary(lm.cars2)$r.squared
+```
+This means that when looking at the variation of mpg_highway, only **48.1%** can be explained by the cylinders and type and its interaction.
+
+**Normality Check**
+```{r}
+par(mfrow=c(2,2))
+plot(aov.cars2)
+```
+The Q-Q Plot shows that most of the data follows a normal distribution, so we can assume normality. On the Residuals vs. Fitted plot, the groups are **not** displaying similar variances, and the Levene Test cannot be used for this two-way ANOVA because the distributions are unbalanced. The equal variance assumption cannot be trusted. 
+
+c) Comment on any significant group differences through the post-hoc test. What does this tell us about fuel efficiency differences across cylinders, origin, or type groups? See Hint in Exercise 3.
+
+
+**Post-Hoc Test**
+```{r}
+TukeyHSD(aov.cars2)
+```
+
+**cylinders:**
+Since the p-value of cylinders (0) is less than the significance level (0.05), we **reject** the null hypothesis. Cylinders have a significant effect on mpg_highway.
+6 < 4 (The mean mpg_highway of 6 is less than the mean mpg_highway of 4 by -5.72 mpg.)
+
+**type:**
+Since the p-value of type (0.0009407) is less than the significance level (0.05), we **reject** the null hypothesis. Type have a significant effect on mpg_highway.
+Sports < Sedan (The mean mpg_highway for Sports is less than the mean mpg_highway for Sedan cars by -2.82 mpg.)
+
+
+**cylinders and types interactions:**
+Since the p-values of 6:Sedan-4:Sedan (0.0000000), 4:Sports-4:Sedan (0.0001079), and 6:Sports-4:Sedan (0.0000006) are less than the significance level (0.05), we **reject** the null hypothesis. These pairs have a significant effect on mpg_highway.
+
+Since the p-values of 4:Sports-6:Sedan (0.8546517), 6:Sports-6:Sedan (0.9834567), and 6:Sports-4:Sports (0.8253946) are greater than the significance level (0.05), we **do not reject** the null hypothesis. These pairs do not have a significant effect on mpg_highway.
+
+6:Sedan < 4:Sedan (The mean mpg_highway of 6:Sedan is less than than mean mpg_highway of 4:Sedan by -6.17 mpg).  
+4:Sports < 4:Sedan (The mean mpg_highway of 4:Sports is less than mean mpg_highway of 4:Sedan by -5.23 mpg).    
+6:Sports < 4:Sedan (The mean mpg_highway of 6:Sports is less than mean mpg_highway of 4:Sedan by -6.60 mpg).     
+cylinders:type pairs with equal mean values: 4:Sports-6:Sedan, 6:Sports-6:Sedan, and 6:Sports-4:Sports. 
+
+**Additional comments**
+- The mean mpg_highway of Sedans is greater than Sports car, so Sedans are more fuel efficient.
+- The mean mpg_highway of 4 cylinders is greater than 6 cylinders, so 4 cylinders is more fuel efficient.
+- 4 cylinder Sedan is the most fuel efficient car
+- 6 cylinder Sports is the least fuel efficient car
+
+

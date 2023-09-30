@@ -1,0 +1,5 @@
+"0","hist(cars2$Horsepower[cars2$Type==""Sports""], "
+"0","     main = ""Sports"", "
+"0","     xlab=""Sports"","
+"0","     col = ""red"","
+"0","     border = ""black"")"

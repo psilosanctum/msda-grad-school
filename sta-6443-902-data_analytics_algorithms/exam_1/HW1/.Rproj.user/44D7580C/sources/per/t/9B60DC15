@@ -1,0 +1,26 @@
+{
+    "id": "9B60DC15",
+    "path": "~/codebase/msda/sta-6443-902-data_analytics_algorithms/HW1/HW1_initial.r",
+    "project_path": "HW1_initial.r",
+    "type": "r_source",
+    "hash": "2902627600",
+    "contents": "",
+    "dirty": false,
+    "created": 1693530870553.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "22,23",
+        "scrollLine": "27"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1693620371,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1693620371500,
+    "read_only": false,
+    "read_only_alternatives": []
+}

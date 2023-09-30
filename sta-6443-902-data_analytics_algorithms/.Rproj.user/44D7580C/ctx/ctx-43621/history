@@ -1,0 +1,16 @@
+install.packages("readxl")
+library("readxl")
+cars <- read_xlsx("cars.xlsx")
+read_xlsx("cars.xlsx")
+ls
+clear
+## 2. import excel or csv file
+getwd()
+work_dir <- "/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/datasets"
+setwd(work_dir)  # need to change this path
+prof=read.csv("professor.csv", header=TRUE)
+View(prof)
+dim(prof)
+class(prof)
+str(prof)
+install.packages("readxl")

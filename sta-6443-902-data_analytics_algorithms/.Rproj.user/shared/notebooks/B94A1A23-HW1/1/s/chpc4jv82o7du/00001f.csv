@@ -1,0 +1,4 @@
+"0","hist(cars$Horsepower, "
+"0","     main = ""Horsepower Histogram - All Vehicles"","
+"0","     col = ""red"","
+"0","     border = ""black"")"

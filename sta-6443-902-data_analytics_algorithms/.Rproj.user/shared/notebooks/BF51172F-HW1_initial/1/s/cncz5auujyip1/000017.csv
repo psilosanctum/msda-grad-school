@@ -1,0 +1,6 @@
+"0","boxplot(cars$MPG_Combo, "
+"0","        main=""MPG Combined - 60% City & 40% Highway"","
+"0","        ylab=""MPG"","
+"0","        xlab=""MPG Combo"","
+"0","        col=""red"","
+"0","        border=""black""); points(mean(cars$MPG_Combo, na.rm = TRUE), col=""blue"")"
