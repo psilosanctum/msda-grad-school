@@ -1,0 +1,284 @@
+---
+title: "variables"
+author: "Pallav Routh"
+date: "7/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message = FALSE, warning = FALSE)
+library(dplyr)
+```
+
+Creation of variables
+
+1. Order related variables
+
+2. Product related variables
+
+3. Seller specific
+
+4. Customer specific
+
+5. Other factors
+
+
+
+
+1. Order related variables
+
+a. Order delivary time = delivary date - order date
+
+b. Order approval time = order date - approval date
+
+```{r}
+estimation_data <- 
+  p_merged_data |> 
+  mutate(del_time = order_delivered_customer_dt - order_purchase_dt,
+         app_time = order_approved_at_dt - order_purchase_dt)
+```
+
+2. Product related variables
+
+a. Product dimensions - height, weight and width
+
+b. Product price - the price of the product
+
+c. Product photos - #photos of the product. Here we want to limit the number of cases to under 5 or over 5. 
+
+d. product description length
+
+```{r}
+table(p_merged_data$product_photos_qty)
+hist(p_merged_data$product_description_length)
+my_breaks <- quantile(p_merged_data$product_description_length,probs = c(0:4)/4)
+
+estimation_data <- 
+  p_merged_data |> 
+  mutate(del_time = order_delivered_customer_dt - order_purchase_dt,
+         app_time = order_approved_at_dt - order_purchase_dt,
+         photos = ifelse(product_photos_qty > 5,"greater than 5",product_photos_qty),
+         des_qntile = cut(product_description_length,
+                          breaks = my_breaks,
+                          labels = c("25pct","50pct","75pct","100pct"),
+                          include.lowest = T)) 
+
+table(estimation_data$des_qntile)
+  
+```
+
+3. Seller specific
+
+a. Seller business size - the number of products the seller sells
+
+b. Seller competition in a state - the number of sellers within the same state
+
+c. Seller competition in category - the number of sellers within the same product category
+
+```{r}
+estimation_data <- 
+  p_merged_data |> 
+  mutate(del_time = order_delivered_customer_dt - order_purchase_dt,
+         app_time = order_approved_at_dt - order_purchase_dt,
+         photos = ifelse(product_photos_qty > 5,"greater than 5",product_photos_qty),
+         des_qntile = cut(product_description_length,
+                          breaks = my_breaks,
+                          labels = c("25pct","50pct","75pct","100pct"),
+                          include.lowest = T)) |> 
+  group_by(seller_id) |> 
+    mutate(cust_size = n_distinct(customer_id),
+           pdt_size = n_distinct(product_id)) |> 
+  ungroup() |> 
+  group_by(seller_state) |> 
+    mutate(sellersize1 = n_distinct(seller_id)) |> 
+  ungroup() |> 
+  group_by(product_category_name) |> 
+    mutate(sellersize2 = n_distinct(seller_id)) |> 
+  ungroup()
+
+estimation_data |> 
+  select(product_category_name,sellersize2)
+```
+
+4. Customer specific
+
+a. Customer state location - which part of Brazil is the customer located. 
+North States: Acre (AC), Amapá (AP), Amazonas (AM), Pará (PA), Rondônia (RO), Roraima (RR), Tocantins (TO). South States: Espírito Santo (ES), Minas Gerais (MG), Rio de Janeiro (RJ), São Paulo (SP), Paraná (PR), Rio Grande do Sul (RS), Santa Catarina (SC)
+
+b. Customers propensity to provide scores in a region - how high do customers in a region usually rate products
+
+```{r}
+north <- c("AC","AP","AM","PA","RO","RR","TO")
+south <- c("ES","MG","RJ","SP","PR","RS","SC")
+
+estimation_data <- 
+  p_merged_data |> 
+  mutate(del_time = order_delivered_customer_dt - order_purchase_dt,
+         app_time = order_approved_at_dt - order_purchase_dt,
+         photos = ifelse(product_photos_qty > 5,"greater than 5",product_photos_qty),
+         des_qntile = cut(product_description_length,
+                          breaks = my_breaks,
+                          labels = c("25pct","50pct","75pct","100pct"),
+                          include.lowest = T)) |> 
+  group_by(seller_id) |> 
+    mutate(cust_size = n_distinct(customer_id),
+           pdt_size = n_distinct(product_id)) |> 
+  ungroup() |> 
+  group_by(seller_state) |> 
+    mutate(sellersize1 = n_distinct(seller_id)) |> 
+  ungroup() |> 
+  group_by(product_category_name) |> 
+    mutate(sellersize2 = n_distinct(seller_id)) |> 
+  ungroup() |> 
+  mutate(stateloc = case_when(customer_state %in% north ~ "north",
+                              customer_state %in% south ~ "south",
+                              TRUE ~ "other"))
+
+table(estimation_data$stateloc)
+```
+
+But we want to save customer state as dummy variables
+
+```{r}
+estimation_data |> 
+  select(stateloc)  |> 
+  mutate(row_no = 1:n(),
+         indicator = 1) |> 
+  #by pivoting wider we are forcing R to create
+  #3 different column - north,couth and others - for every row
+  #when south pivots for row 1, it will have 1 but north
+  #and other are forced to have NA
+  #we will need a unique identifier for every row
+  #we need to tell R that this row is different from this row
+  tidyr::pivot_wider(names_from = stateloc,
+                     values_from = indicator,
+                     values_fill = 0)
+
+# if you wanted to create this the traditional way
+estimation_data |> 
+  select(stateloc)  |> 
+  mutate(row_no = 1:n(),
+         indicator = ifelse(stateloc == "other",0,1)) |> 
+  tidyr::pivot_wider(names_from = stateloc,
+                     values_from = indicator,
+                     values_fill = 0)
+
+estimation_data <- 
+  p_merged_data |> 
+  mutate(del_time = order_delivered_customer_dt - order_purchase_dt,
+         app_time = order_approved_at_dt - order_purchase_dt,
+         photos = ifelse(product_photos_qty > 5,"greater than 5",product_photos_qty),
+         des_qntile = cut(product_description_length,
+                          breaks = my_breaks,
+                          labels = c("25pct","50pct","75pct","100pct"),
+                          include.lowest = T)) |> 
+  group_by(seller_id) |> 
+    mutate(cust_size = n_distinct(customer_id),
+           pdt_size = n_distinct(product_id)) |> 
+  ungroup() |> 
+  group_by(seller_state) |> 
+    mutate(sellersize1 = n_distinct(seller_id)) |> 
+  ungroup() |> 
+  group_by(product_category_name) |> 
+    mutate(sellersize2 = n_distinct(seller_id)) |> 
+  ungroup() |> 
+  mutate(stateloc = case_when(customer_state %in% north ~ "north",
+                              customer_state %in% south ~ "south",
+                              TRUE ~ "other")) |> 
+  mutate(row_no = 1:n(),
+         indicator = ifelse(stateloc == "other",0,1)) |> 
+  tidyr::pivot_wider(names_from = stateloc,
+                     values_from = indicator,
+                     values_fill = 0)
+```
+
+avg review
+
+```{r}
+estimation_data <- 
+  p_merged_data |> 
+  mutate(del_time = order_delivered_customer_dt - order_purchase_dt,
+         app_time = order_approved_at_dt - order_purchase_dt,
+         photos = ifelse(product_photos_qty > 5,"greater than 5",product_photos_qty),
+         des_qntile = cut(product_description_length,
+                          breaks = my_breaks,
+                          labels = c("25pct","50pct","75pct","100pct"),
+                          include.lowest = T)) |> 
+  group_by(seller_id) |> 
+    mutate(cust_size = n_distinct(customer_id),
+           pdt_size = n_distinct(product_id)) |> 
+  ungroup() |> 
+  group_by(seller_state) |> 
+    mutate(sellersize1 = n_distinct(seller_id)) |> 
+  ungroup() |> 
+  group_by(product_category_name) |> 
+    mutate(sellersize2 = n_distinct(seller_id)) |> 
+  ungroup() |> 
+  mutate(stateloc = case_when(customer_state %in% north ~ "north",
+                              customer_state %in% south ~ "south",
+                              TRUE ~ "other")) |> 
+  mutate(row_no = 1:n(),
+         indicator = ifelse(stateloc == "other",0,1)) |> 
+  tidyr::pivot_wider(names_from = stateloc,
+                     values_from = indicator,
+                     values_fill = 0) |> 
+  group_by(customer_state) |> 
+    mutate(avg_rev_score = mean(review_score,na.rm = TRUE)) |> 
+  ungroup()
+
+estimation_data |> 
+  select(customer_state,avg_rev_score)
+```
+
+
+5. Other variables
+
+a. Review scores have some contagion - does review scores for a product on time t-1 have an impact on time t?
+
+```{r}
+p_merged_data |> 
+  select(seller_id,order_approved_at_dt,product_category_name,review_score) |> 
+  arrange(seller_id,order_approved_at_dt)
+
+estimation_data <- 
+  p_merged_data |> 
+  mutate(del_time = order_delivered_customer_dt - order_purchase_dt,
+         app_time = order_approved_at_dt - order_purchase_dt,
+         photos = ifelse(product_photos_qty > 5,"greater than 5",product_photos_qty),
+         des_qntile = cut(product_description_length,
+                          breaks = my_breaks,
+                          labels = c("25pct","50pct","75pct","100pct"),
+                          include.lowest = T)) |> 
+  group_by(seller_id) |> 
+    mutate(cust_size = n_distinct(customer_id),
+           pdt_size = n_distinct(product_id)) |> 
+  ungroup() |> 
+  group_by(seller_state) |> 
+    mutate(sellersize1 = n_distinct(seller_id)) |> 
+  ungroup() |> 
+  group_by(product_category_name) |> 
+    mutate(sellersize2 = n_distinct(seller_id)) |> 
+  ungroup() |> 
+  mutate(stateloc = case_when(customer_state %in% north ~ "north",
+                              customer_state %in% south ~ "south",
+                              TRUE ~ "other")) |> 
+  mutate(row_no = 1:n(),
+         indicator = ifelse(stateloc == "other",0,1)) |> 
+  tidyr::pivot_wider(names_from = stateloc,
+                     values_from = indicator,
+                     values_fill = 0) |> 
+  group_by(customer_state) |> 
+    mutate(avg_rev_score = mean(review_score,na.rm = TRUE)) |> 
+  ungroup() |> 
+  arrange(seller_id,order_approved_at_dt) |> 
+  group_by(seller_id,product_category_name) |> 
+    mutate(lag_revscore = lag(review_score,1)) |> 
+  ungroup()
+
+estimation_data |> 
+  select(seller_id,order_approved_at_dt,
+         product_category_name,review_score,lag_revscore) |> 
+  arrange(seller_id,order_approved_at_dt) 
+```
+
+

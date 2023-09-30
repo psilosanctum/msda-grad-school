@@ -1,0 +1,173 @@
+---
+title: "Importing data"
+author: "Pallav Routh"
+date: "7/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message = FALSE, warning = FALSE)
+```
+
+First lets save the path to the data sets
+
+```{r}
+path <- "/Users/pallavrouth/Dropbox/Teaching/R bootcamp/Olist Ecom Proj/"
+```
+
+Now lets list the names of all files in this
+
+```{r}
+list.files(path = path)
+```
+
+There are excel and csv format files. So, we will need to use the `readxl` and `read_csv` functions. Instead of writing out the calls to import one by one we can automate this process using a function.
+
+```{r}
+# my_split <- function(text,pattern,fixed = TRUE,elem){
+#   s_txt <- unlist(strsplit(text,pattern,fixed = fixed))
+#   return(s_txt[elem])
+# }
+
+source("myfunctions.R")
+
+paste0(path,"customers.csv")
+grepl("csv","customers.csv")
+assign("my_name","Pallav",envir = .GlobalEnv)
+
+# import_files <- function(x){
+#   
+#   file_path <- paste0(path,x)
+#   file_name <- my_split(x,".",elem = 1)
+#   
+#   if (grepl("csv",x)) {
+#     imported_file <- readr::read_csv(file_path)
+#     assign(file_name,imported_file,envir = .GlobalEnv)
+#   } else if (grepl("xlsx",x)) {
+#     imported_file <- readxl::read_excel(file_path)
+#     assign(file_name,imported_file,envir = .GlobalEnv)
+#   } else {
+#     imported_file <- "this file is of a different extension"
+#     assign(file_name,imported_file,envir = .GlobalEnv)
+#   }
+# }
+
+library(purrr)
+rnorm(n = 1)
+ns <- c(1:5)
+ns
+map(ns,rnorm)
+
+map(list.files(path = path),import_files)
+```
+
+Lets view the contents of any file. I find the `glimpse` function quite neat.
+
+```{r}
+dplyr::glimpse(orders)
+janitor::get_dupes(orders,`order id`)
+```
+
+It gives us the types of each variable in the data. This information will be useful to you later on for when it comes to pre processing. For example the date variables are listed as character variables. That's a mistake which needs to be fixed. 
+
+Next we will attempt the first level of preprocessing. We will aim to change the date variables from text to date. 
+
+This will require heavy data wrangling. Lets import the dplyr package -
+
+```{r}
+library(dplyr)
+library(lubridate)
+library(janitor)
+```
+
+Clean names
+Remove duplicates
+Fix classes/types -
+- Also change the delivered to factor
+- Now lets change the type of the date. "10/2/17" - month/day/year
+
+```{r}
+p_orders <-
+  orders |> 
+  janitor::clean_names()
+
+names(p_orders)
+
+p_orders <-
+  orders |> 
+  janitor::clean_names() |> 
+  group_by(order_id) |> 
+    mutate(duplicates = 1:n()) |> 
+  ungroup() 
+
+#25872
+
+p_orders <-
+  orders |> 
+  janitor::clean_names() |> 
+  group_by(order_id) |> 
+    mutate(duplicates = 1:n()) |> 
+  ungroup() |> 
+  filter(duplicates == 1) |> 
+  mutate(order_status = as.factor(order_status),
+         order_purchase_dt = as_date(order_purchase_dt, format = "%m/%d/%y"))
+
+glimpse(p_orders)
+```
+
+Automate this process using mutate_at
+
+```{r}
+p_orders <-
+  orders |> 
+  mutate(order_status = as.factor(order_status)) |> 
+  mutate_at(.vars = vars(order_purchase_dt:order_estimated_delivery_dt),
+            .funs = as_date,
+            format = "%m/%d/%y")
+
+glimpse(p_orders)
+```
+
+Alternatively, you can also target the nature of the variable and use the mutate_if function
+
+```{r}
+p_orders <-
+  orders |> 
+  mutate(order_status = as.factor(order_status)) |> 
+  mutate_if(.predicate = is.character,
+            .funs = as_date,
+            format = "%m/%d/%y")
+
+glimpse(p_orders)
+```
+
+Check if the other files have similar issues
+
+```{r}
+glimpse(order_item)
+```
+
+Fix the data variable
+
+```{r}
+p_orderitems <-
+  order_item |> 
+  mutate(ship_lim_dt = as_date(ship_lim_dt, format = "%m/%d/%y"))
+
+glimpse(p_orderitems)
+```
+
+Keep checking
+
+```{r}
+glimpse(customers)
+glimpse(products)
+glimpse(sellers)
+glimpse(reviews)
+
+p_reviews <-
+  reviews |> 
+  mutate(review_crt_dt = as_date(review_crt_dt, format = "%m/%d/%y"))
+```
+
+

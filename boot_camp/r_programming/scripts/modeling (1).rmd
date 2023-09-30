@@ -1,0 +1,56 @@
+---
+title: "Estimation"
+author: "Pallav Routh"
+date: "7/22/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(pglm)
+library(dplyr)
+```
+
+```{r}
+names(estimation_data_f)
+```
+
+revscore ~ 5 : 25
+
+```{r}
+independent_vars <- 
+  estimation_data_f |> 
+  select(price:lag_revscore) |> 
+  names()
+
+independent_vars
+```
+
+```{r}
+rhs <-
+paste0(independent_vars,collapse = "+")
+
+rhs
+```
+
+```{r}
+fmla <- paste0("review_score","~",rhs)
+fmla
+```
+
+```{r}
+mod1 <- glm(formula = formula(fmla),
+            data = estimation_data_f,
+            family = poisson(link = 'log'))
+summary(mod1)
+```
+
+```{r}
+library(randomForest)
+
+mod2 <- randomForest(formula = formula(fmla),
+                     data = estimation_data_f,
+                     ntree = 500,
+                     na.action = na.omit)
+```
+

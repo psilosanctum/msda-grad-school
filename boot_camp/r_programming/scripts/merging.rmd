@@ -1,0 +1,160 @@
+---
+title: "Merging data"
+author: "Pallav Routh"
+date: "7/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message = FALSE, warning = FALSE)
+```
+
+Now we will try to merge all available information into one master data set. Again we will rely on dplyr
+
+```{r}
+library(dplyr)
+```
+
+First we will need to ID variable we can merge on. 
+
+There is no specific order which one can follow to merge multiple files. But, I always like to start with the largest file. So lets try to merge order and order items.
+
+What are variables we can merge on?
+
+```{r}
+names(p_orderitems)
+```
+
+```{r}
+names(p_orders)
+```
+
+We can use order ID. We can join p_orderitems from the left of orders.
+
+```{r}
+merged_data <-
+  p_orderitems |> 
+  left_join(p_orders,"order_id")
+```
+
+```{r}
+nrow(merged_data) == nrow(p_orderitems)
+```
+
+Next lets look at reviews data. 
+
+```{r}
+names(p_reviews)
+```
+
+```{r}
+names(merged_data)
+```
+
+Again we can use order id.
+
+```{r}
+merged_data <-
+  p_orderitems |> 
+  left_join(p_orders,"order_id") |> 
+  left_join(p_reviews,"order_id") 
+```
+
+```{r}
+nrow(merged_data) == nrow(p_orderitems)
+```
+
+Why did it increase?
+
+```{r}
+p_reviews |> 
+  filter(!is.na(order_id)) |> 
+  group_by(order_id) |> 
+    summarise(n_obs = n_distinct(review_id)) |> 
+  ungroup() |> 
+  filter(n_obs > 1)
+```
+
+Thats why it grew in size
+
+How can we automate this process?
+
+merged_data <-
+  p_orderitems |> 
+  left_join(p_orders,"order_id") |> 
+  left_join(p_reviews,"order_id") 
+  customers - customer id
+  sellers - seller_id
+  products - product_id
+
+```{r}
+names(customers)
+names(sellers)
+names(products)
+
+names(merged_data)
+```
+
+```{r}
+merged_data <-
+  p_orderitems |> 
+  left_join(p_orders,"order_id") |> 
+  left_join(p_reviews,"order_id") |> 
+  left_join(customers,"customer_id") |> 
+  left_join(sellers,"seller_id") |> 
+  left_join(products,"product_id")
+```
+
+
+```{r}
+all_data <- list(p_orderitems,p_orders,p_reviews,customers,sellers,products)
+by_args <- c(rep("order_id",2),"customer_id","seller_id","product_id")
+
+merged_data <- reduce2(all_data,by_args,left_join)
+```
+
+
+Names
+
+```{r}
+names(merged_data)
+```
+
+Now we will apply pre processing on this merged data. This step is optional.
+
+One thing we need to adjust for is the presence of missing values. The other thing we want to do process variable names. 
+
+```{r}
+colSums(is.na(merged_data))
+```
+
+Suppose we wish to not deal with them. We can remove these entries. Also notice the few naming errors.
+
+```{r}
+p_merged_data <-
+  merged_data |> 
+    mutate(filter_rows = ifelse(is.na(order_delivered_customer_dt) |
+                                is.na(order_approved_at_dt) |
+                                is.na(product_category_name),1,0)) |> 
+    filter(filter_rows == 0) 
+
+p_merged_data <-
+  merged_data |> 
+  filter_at(.vars = vars(order_delivered_customer_dt,
+                         order_approved_at_dt,
+                         product_category_name),
+            .vars_predicate = all_vars(!is.na(.)))
+
+p_merged_data <-
+    merged_data |> 
+    filter_at(.vars = vars(order_delivered_customer_dt,
+                         order_approved_at_dt,
+                         product_category_name),
+             .vars_predicate = all_vars(!is.na(.))) |> 
+    select(-review_comm_title,-review_comm_msg) |> 
+    rename("product_name_length" = "product_name_lenght",
+           "product_description_length" = "product_description_lenght") 
+
+colSums(is.na(p_merged_data))
+```
+
