@@ -1,0 +1,93 @@
+---
+title: "Untitled"
+format: html
+---
+
+We will install `tidyverse` packages using the following command in the **console**.
+
+
+`install.packages("tidyverse")`
+
+Load the package
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+print(mpg)
+```
+
+```{r}
+head(mpg, n = 8)
+```
+```{r}
+tail(mpg)
+```
+```{r}
+slice(mpg, 10:20)
+```
+
+```{r}
+dim(mpg)
+```
+Get number of rows
+
+```{r}
+nrow(mpg)
+```
+
+```{r}
+ncol(mpg)
+```
+```{r}
+class(mpg)
+```
+```{r}
+colnames(mpg)
+```
+
+## Subsetting columns using select() function
+
+```{r}
+select(mpg, model, year)
+```
+
+
+```{r}
+select(mpg, starts_with("c"))
+```
+
+```{r}
+select(mpg, ends_with("l"))
+```
+
+
+```{r}
+select(mpg, contains("e"))
+```
+
+
+## subsetting rows
+
+```{r}
+filter(mpg, year == 2008, cyl >= 6)
+```
+
+```{r}
+filter(mpg, (year == 2008 & cyl >= 6))
+```
+
+
+```{r}
+dt = readr::read_csv("Data/svcckww1jskrstnz_csv.zip")
+
+```
+
+```{r}
+select(dt, 1:7)
+```
+
+
+
+
