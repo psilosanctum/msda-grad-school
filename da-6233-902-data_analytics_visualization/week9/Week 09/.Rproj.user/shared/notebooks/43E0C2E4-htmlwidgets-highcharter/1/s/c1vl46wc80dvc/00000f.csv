@@ -1,0 +1,6 @@
+"0","hc <- highchart() %>% "
+"0","  hc_xAxis(categories = citytemp$month) %>% "
+"0","  hc_add_series(name = ""Tokyo"", data = citytemp$tokyo) %>% "
+"0","  hc_add_series(name = ""London"", data = citytemp$london) %>% "
+"0","  hc_add_series(name = ""NYC"", data = citytemp$new_york)"
+"0","hc"

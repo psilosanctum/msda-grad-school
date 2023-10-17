@@ -1,0 +1,1 @@
+"0","hchart(df, ""pyramid"", hcaes(y = yval, name = nm, color = col))"

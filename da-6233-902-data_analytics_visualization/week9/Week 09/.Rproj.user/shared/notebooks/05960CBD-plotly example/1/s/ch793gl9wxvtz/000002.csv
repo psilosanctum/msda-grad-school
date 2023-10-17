@@ -1,0 +1,18 @@
+"0","```r
+amzn <- read_csv(here::here('Data', 'amzn_2005_2020.csv')) %>% 
+  mutate(mktval = PRC*SHROUT*1000,
+         date2 = as.Date(as.character(date), format = '%Y%m%d')) %>% 
+  filter(!is.na(mktval)) %>% 
+  mutate(id = row_number())
+```"
+"1","Rows: 192 Columns: 64── Column specification ───────────────────────────────────────────────────────────────────
+Delimiter: \",\"
+chr (10): NCUSIP, TICKER, COMNAM, TSYMBOL, PRIMEXCH, TRDSTAT, SECSTAT, CUSIP, DLRETX, D...
+dbl (39): PERMNO, date, NAMEENDT, SHRCD, EXCHCD, SICCD, NAICS, PERMCO, ISSUNO, HEXCD, H...
+lgl (15): SHRCLS, DCLRDT, DLPDT, NEXTDT, PAYDT, RCRDDT, HSICMG, HSICIG, DISTCD, DIVAMT,...
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+"
+"0","```r
+head(amzn)
+```"

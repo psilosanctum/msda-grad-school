@@ -1,0 +1,29 @@
+{
+    "id": "A75CD58D",
+    "path": "~/Dropbox/Work/Teaching/Visualization/Fall 2023/DA6233-2023/Week09/htmlwidgets/plotly.Rmd",
+    "project_path": "htmlwidgets/plotly.Rmd",
+    "type": "r_markdown",
+    "hash": "110084376",
+    "contents": "",
+    "dirty": false,
+    "created": 1697550772096.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "tempName": "Untitled1",
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "166,0",
+        "scrollLine": "147",
+        "last_setup_crc32": "bbc2af3dc2234455"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697550886,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697550886372,
+    "read_only": false,
+    "read_only_alternatives": []
+}

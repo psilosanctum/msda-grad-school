@@ -1,0 +1,18 @@
+"0","```r
+base %>%
+  add_markers(frame = ~ year,
+              ids = ~ country) %>%
+  animation_opts(1000, 
+                 easing = \"bounce-in-out\", 
+                 redraw = FALSE
+                 ) %>%
+  animation_button( x = 1,
+                    xanchor = \"right\",
+                    y = 0,
+                    yanchor = \"bottom\"
+                    ) %>%
+  animation_slider(currentvalue = list(prefix = \"Year: \",
+                                       font = list(color = \"red\")
+                                       )
+                   )
+```"

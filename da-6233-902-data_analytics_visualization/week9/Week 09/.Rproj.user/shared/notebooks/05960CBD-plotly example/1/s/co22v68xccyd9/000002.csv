@@ -1,0 +1,13 @@
+"0","```r
+gg <- ggplot(gapminder, 
+             aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  geom_point(aes(size = pop, frame = year, ids = country)) +
+  scale_x_log10() +
+  labs(x = 'GDP per Capital',
+       y = 'Life Expectancy',
+       color = 'Continent') +
+  scale_color_manual(values = wesanderson::wes_palette(\"Moonrise3\")) +
+  theme_minimal() 
+```"
+"1","Warning: Ignoring unknown aesthetics: frame, ids
+"

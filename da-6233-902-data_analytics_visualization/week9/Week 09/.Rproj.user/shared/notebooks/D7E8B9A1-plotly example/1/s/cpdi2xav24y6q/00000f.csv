@@ -1,0 +1,8 @@
+"0","base <- gapminder %>%"
+"0","  plot_ly(x = ~ gdpPercap,"
+"0","          y = ~ lifeExp,"
+"0","          size = ~ pop,"
+"0","          color = ~ continent,"
+"0","          text = ~ country,"
+"0","          hoverinfo = ""text"") %>%"
+"0","  layout(xaxis = list(type = ""log""))"

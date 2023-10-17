@@ -1,0 +1,1 @@
+"0","hchart(df, ""funnel"", hcaes(y = yval, name = nm, color = col))"

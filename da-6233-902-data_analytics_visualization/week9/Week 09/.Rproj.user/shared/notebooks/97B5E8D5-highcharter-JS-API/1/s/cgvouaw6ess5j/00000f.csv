@@ -1,0 +1,4 @@
+"0","hc1 <- mpg %>% filter(class != ""minivan"") %>% "
+"0","  hchart(""scatter"", hcaes(x = cty, y = hwy, group = class))"
+"0",""
+"0","hc1"

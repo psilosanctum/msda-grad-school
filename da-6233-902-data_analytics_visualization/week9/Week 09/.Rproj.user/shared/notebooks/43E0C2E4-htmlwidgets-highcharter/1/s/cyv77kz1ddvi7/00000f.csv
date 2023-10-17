@@ -1,0 +1,2 @@
+"0","citytemp %>% "
+"0","  pivot_longer(cols = where(is.numeric), names_to = ""city"", values_to = ""temperature"")"

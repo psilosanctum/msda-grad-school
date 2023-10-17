@@ -1,0 +1,3 @@
+"0","USArrests2 <- dplyr::mutate(USArrests, `woe-name` = rownames(USArrests))"
+"0",""
+"0","head(USArrests2)"

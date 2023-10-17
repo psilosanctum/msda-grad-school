@@ -1,0 +1,36 @@
+"0","```r
+p <- amzn2 %>%
+  plot_ly(
+    x = ~ id, 
+    y = ~ mktval,
+    frame = ~frame, 
+    type = 'scatter',
+    mode = 'lines'
+  ) %>% 
+  layout(
+    xaxis = list(
+      title = \"Date\",
+      zeroline = F
+    ),
+    yaxis = list(
+      title = \"Market Value\",
+      zeroline = F
+    )
+  ) %>%
+  animation_opts(
+    frame = 10,
+    transition = 0,
+    redraw = FALSE
+  ) %>%
+  animation_slider(
+    hide = T
+  ) %>%
+  animation_button(
+    x = 1,
+    xanchor = \"right\",
+    y = 0,
+    yanchor = \"bottom\"
+  )
+
+p
+```"

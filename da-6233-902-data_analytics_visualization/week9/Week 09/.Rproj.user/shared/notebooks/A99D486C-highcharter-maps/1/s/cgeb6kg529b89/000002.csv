@@ -1,0 +1,14 @@
+"0","```r
+hcmap(map = \"countries/us/us-all\", 
+      data = USArrests2,
+      joinBy = \"woe-name\",
+      value = \"Rape\",
+      name = \"Rape Rate per 100,000\",
+      nullColor = \"#DADADA\",
+      download_map_data = TRUE) 
+```"
+"1","trying URL 'https://code.highcharts.com/mapdata/countries/us/us-all.js'
+Content type 'text/javascript' length 66923 bytes (65 KB)
+==================================================
+downloaded 65 KB
+"

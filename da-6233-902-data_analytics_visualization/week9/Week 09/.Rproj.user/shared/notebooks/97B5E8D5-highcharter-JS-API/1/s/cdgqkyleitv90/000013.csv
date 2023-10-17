@@ -1,0 +1,7 @@
+"0","hc3 <- mpg %>% filter(class != ""minivan"") %>% "
+"0","  hchart(""scatter"", hcaes(x = cty, y = hwy, group = class)) %>% "
+"0","  hc_legend(backgroundColor =  '#FCFFC5',"
+"0","            title = list(text = ""Vehicle Class"")) %>% "
+"0","  hc_tooltip(pointFormat = ""City MPG: <b>{point.x}</b><br/>Highway MPG: <b>{point.y}</b><br/>"")"
+"0",""
+"0","hc3"
