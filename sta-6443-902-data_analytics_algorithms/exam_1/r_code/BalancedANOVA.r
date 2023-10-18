@@ -1,6 +1,6 @@
 library(DescTools); library(MASS)
 
-setwd("/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/")  # need to change this path
+setwd("/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms/")  # need to change this path
 
 ######################################
 ## import data
@@ -72,10 +72,18 @@ TukeyHSD(aov.tooth)      # Tukey test
 ####################################
 
 aov.tooth2 <- aov(Toothlength ~ Dose * Supplement , data = tooth)
-aov.tooth3 <- aov(Toothlength ~ Dose + Supplement + Dose*Supplement , data = tooth)  
+Anova(aov.tooth2, type = 3)
+
+# aov.tooth3 <- aov(Toothlength ~ Dose + Supplement + Dose*Supplement , data = tooth)  
+# aov.tooth4 = aov(Toothlength ~ Supplement + Dose + Supplement*Dose, data = tooth)
+# aov.tooth5 <- aov(Toothlength ~ Dose + Supplement , data = tooth)
+# aov.tooth6 <- aov(Toothlength ~ Supplement + Dose , data = tooth)
 
 summary(aov.tooth2)
-summary(aov.tooth3)
+# summary(aov.tooth3)
+# summary(aov.tooth4)
+# summary(aov.tooth5)
+# summary(aov.tooth6)
 
 LeveneTest(aov.tooth2)  # equal variance check - error with leveneTest(aov.tooth3)
 
@@ -123,7 +131,7 @@ interaction.plot(tooth$Supplement, tooth$Dose, tooth$Toothlength,
 #################################
 ## practice 
 ################################
-grass=read.csv("Grass.csv", header=TRUE)
+grass=read.csv("datasets/Grass.csv", header=TRUE)
 str(grass)
 
 # change format to factor

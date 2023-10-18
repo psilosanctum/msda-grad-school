@@ -4,7 +4,7 @@ library(car); library(DescTools); library(MASS)
 # Review of balanced case
 #####################################
 
-setwd("/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms")  # need to change this path
+setwd("/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms/")  # need to change this path
 tooth <- read.csv("datasets/toothgrowth.csv")
 tooth$Dose= as.factor(tooth$Dose)
 
@@ -58,18 +58,25 @@ boxplot(days ~ type,data=ozkid, main=" Days by type ",
 ####################################################
 
 aov.ozkid1= aov(days ~  grade + origin, data=ozkid) # type 1 test
+summary(aov.ozkid1)
 aov.ozkid2= aov(days ~  origin + grade, data=ozkid) 
+summary(aov.ozkid2)
 
 aov.ozkid3=Anova(aov.ozkid1, type=3)  # type 3 test from package 'car'
 aov.ozkid3
 Anova(aov.ozkid2, type=3)
+
+# include interaction and check its significance
+aov.ozkid3= aov(days ~ origin +  grade +origin*grade , data = ozkid)
+Anova(aov.ozkid3, type=3)
+summary(aov.ozkid3)
 
 
 # post-hoc analysis
 TukeyHSD(aov.ozkid1)
 
 # assumption check
-LeveneTest(aov.ozkid1)  # error says - Model must be completely crossed formula only
+# LeveneTest(aov.ozkid1)  # error says - Model must be completely crossed formula only
 
 ########################################################################
 # Levene's test works only for the full model with all interaction terms
@@ -97,10 +104,7 @@ tmp2= aov(days ~ origin +  grade , data = ozkid)
 Anova(tmp2, type=3)
 summary(tmp2)
 
-# include interaction and check its significance
-aov.ozkid3= aov(days ~ origin +  grade +origin*grade , data = ozkid)
-Anova(aov.ozkid3, type=3)
-summary(aov.ozkid3)
+
 
 
 

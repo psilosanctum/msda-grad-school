@@ -1,4 +1,4 @@
-setwd("/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms")  # need to change this path
+setwd("/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms")  # need to change this path
 
 #install.packages("BSDA")  # BSDA package for Sign test
 
@@ -25,12 +25,12 @@ shapiro.test(water$hardness)
 # one-sample t-test
 t.test(water$mortal, mu=1500)
 
-# t.test(water$mortal, mu=1500, alternative = "less") # "greater"
+t.test(water$mortal, mu=1500, alternative = "less") # "greater"
 
 
 # sign test
 library(BSDA)
-SIGN.test(water$hardness, md=45)
+?SIGN.test(water$hardness, md=45)
 
 # SIGN.test(water$hardness, md=45, alternative = "less")
 # for the homework, make a very specific conclusion: "we reject the null because..."

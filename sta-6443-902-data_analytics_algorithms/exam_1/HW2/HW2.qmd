@@ -15,7 +15,7 @@ library(DescTools)
 Set path.
 
 ```{r}
-setwd("/Users/c2cypher/codebase/msda/sta-6443-902-data_analytics_algorithms/HW2")
+setwd("/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms/exam_1/HW2")
 ```
 
 Exercise 1: Analysis of Variance
@@ -318,7 +318,8 @@ Based on the results from (a) and (b), we choose the **two-way ANOVA - Type 3 wi
 
 **Post-HOC Test**
 ```{r}
-TukeyHSD(aov.psych4)
+# aov.psych4 = aov(salary ~ sex + rank, psych)
+ScheffeTest(aov.psych4)
 ```
 Since the p-values of rank and sex are less than the significance level, we **reject** the null hypothesis. Both rank and sex have a significant effect on salary. The means of M-F are not equal, and the means of Assoc-Assist are not equal.
 
@@ -326,7 +327,8 @@ M > F (Male salary average is greater than Female salary average by +5.33)
 Assoc > Assist (Assoc salary average is greater than Assist salary average by +5.37)
 
 ```{r}
-TukeyHSD(aov.psych3)
+# aov.psych3 = aov(salary ~ rank + sex, psych)
+ScheffeTest(aov.psych3)
 ```
 Since the p-values of rank and sex are less than the significance level, we **reject** the null hypothesis. Both rank and sex have a significant effect on salary. The means of M-F are not equal, and the means of Assoc-Assist are not equal.
 

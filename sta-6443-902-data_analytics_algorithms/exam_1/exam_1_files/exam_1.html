@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Collin Real (yhi267)">
+
+<title>Exam 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="exam_1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="exam_1_files/libs/quarto-html/quarto.js"></script>
+<script src="exam_1_files/libs/quarto-html/popper.min.js"></script>
+<script src="exam_1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="exam_1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="exam_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="exam_1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="exam_1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="exam_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="exam_1_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Exam 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Collin Real (yhi267) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="exercise-1" class="level1">
+<h1>Exercise 1</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'DescTools'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:car':
+
+    Recode</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fBasics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'fBasics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:e1071':
+
+    kurtosis, skewness</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:car':
+
+    densityPlot</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms/exam_1/exam_1_files"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>birthweight <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"birthweight.csv"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>birthweight<span class="sc">$</span>Weight <span class="ot">=</span> <span class="fu">as.numeric</span>(birthweight<span class="sc">$</span>Weight)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>birthweight<span class="sc">$</span>MomSmoke <span class="ot">=</span> <span class="fu">as.factor</span>(birthweight<span class="sc">$</span>MomSmoke)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>birthweight<span class="sc">$</span>Black <span class="ot">=</span> <span class="fu">as.factor</span>(birthweight<span class="sc">$</span>Black)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>birthweight<span class="sc">$</span>Married <span class="ot">=</span> <span class="fu">as.factor</span>(birthweight<span class="sc">$</span>Married)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>birthweight<span class="sc">$</span>Boy <span class="ot">=</span> <span class="fu">as.factor</span>(birthweight<span class="sc">$</span>Boy)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>birthweight<span class="sc">$</span>Ed <span class="ot">=</span> <span class="fu">as.factor</span>(birthweight<span class="sc">$</span>Ed)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(birthweight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   295 obs. of  6 variables:
+ $ Weight  : num  2891 3572 3827 4593 3940 ...
+ $ Black   : Factor w/ 2 levels "0","1": 1 1 1 1 1 1 1 1 1 1 ...
+ $ Married : Factor w/ 2 levels "0","1": 2 2 2 2 1 2 2 2 1 2 ...
+ $ Boy     : Factor w/ 2 levels "0","1": 1 2 1 2 2 1 2 1 1 2 ...
+ $ MomSmoke: Factor w/ 2 levels "0","1": 1 1 1 1 2 1 1 1 1 1 ...
+ $ Ed      : Factor w/ 2 levels "0","1": 2 1 2 2 2 2 2 2 1 2 ...</code></pre>
+</div>
+</div>
+<section id="a" class="level2">
+<h2 class="anchored" data-anchor-id="a">1a)</h2>
+<section id="boxplot-for-infant-birth-weight" class="level3">
+<h3 class="anchored" data-anchor-id="boxplot-for-infant-birth-weight">Boxplot for infant birth weight</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(birthweight<span class="sc">$</span>Weight,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Weight Boxplot"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"Infant Weight"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"Grams"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="st">"red"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">border=</span><span class="st">"black"</span>);</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">mean</span>(birthweight<span class="sc">$</span>Weight, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exam_1_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Box Plot Comments:</strong> The box plot illustrates few outliers above the maximum and below the minimum. The minimum value of the box plot is ~2100 grams, whereas the maximum value is ~4600 grams. The mean and medium values displayed on the plot are almost equal (~3400 grams), indicating low skewness; however, since the mean is larger than the median, the data is slightly skewed to the right. Finally, the box plot illustrates that the data most likely follows normal distribution.</p>
+</section>
+<section id="qq-plot" class="level3">
+<h3 class="anchored" data-anchor-id="qq-plot">QQ-Plot</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(birthweight<span class="sc">$</span>Weight,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">main=</span><span class="st">"Weight QQ-Plot"</span>);</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(birthweight<span class="sc">$</span>Weight, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exam_1_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="shapiro-wilk-normality-test" class="level3">
+<h3 class="anchored" data-anchor-id="shapiro-wilk-normality-test">Shapiro-Wilk Normality Test</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(birthweight<span class="sc">$</span>Weight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  birthweight$Weight
+W = 0.99206, p-value = 0.1153</code></pre>
+</div>
+</div>
+<p><strong>QQ-Plot &amp; Shapiro-Wilk Normality Test Comments:</strong> The QQ-Plot illustrates a majority of the values near the red line. Since the p-value (0.1153) of the Shapiro-Wilk Normality Test is <strong>greater than</strong> the significance level (α=0.05), Weight follows normal distribution. We <strong>do not reject</strong> the null hypothesis.</p>
+</section>
+</section>
+<section id="b" class="level2">
+<h2 class="anchored" data-anchor-id="b">1b)</h2>
+<section id="boxplot-of-weight-by-momsmoke" class="level3">
+<h3 class="anchored" data-anchor-id="boxplot-of-weight-by-momsmoke">Boxplot of Weight by MomSmoke</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Weight<span class="sc">~</span>MomSmoke,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">data=</span>birthweight,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Infant Weight by MomSmoke"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab=</span><span class="st">"MomSmoke"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"Infant Weight (grams)"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="st">"red"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">border=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exam_1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Boxplot Comments:</strong> The box plots illustrate that the median infant weight of non-smoking moms is greater than the median of moms who smoke. Additionally, the infant weights of non-smoking moms have a higher range of values than smoking moms. For non-smoking moms, the minimum value of the boxplot is ~2200 grams and the maximum ~4600 grams, whereas the minimum value of smoking moms is ~2400 grams and the maximum ~4000 grams.</p>
+</section>
+</section>
+<section id="c" class="level2">
+<h2 class="anchored" data-anchor-id="c">1c)</h2>
+<section id="shapiro-wilk-normality-test---non-smoking-moms" class="level3">
+<h3 class="anchored" data-anchor-id="shapiro-wilk-normality-test---non-smoking-moms">Shapiro-Wilk Normality Test - Non-Smoking Moms</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(birthweight<span class="sc">$</span>Weight[birthweight<span class="sc">$</span>MomSmoke<span class="sc">==</span><span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  birthweight$Weight[birthweight$MomSmoke == 0]
+W = 0.99362, p-value = 0.3549</code></pre>
+</div>
+</div>
+</section>
+<section id="shapiro-wilk-normality-test---smoking-moms" class="level3">
+<h3 class="anchored" data-anchor-id="shapiro-wilk-normality-test---smoking-moms">Shapiro-Wilk Normality Test - Smoking Moms</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(birthweight<span class="sc">$</span>Weight[birthweight<span class="sc">$</span>MomSmoke<span class="sc">==</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  birthweight$Weight[birthweight$MomSmoke == 1]
+W = 0.96299, p-value = 0.2</code></pre>
+</div>
+</div>
+<p><strong>Conclusion:</strong> Since the p-values of non-smoking (0.3549) and smoking moms (0.2) are <strong>greater than</strong> the significance level (α=0.05), we <strong>do not reject</strong> the null hypothesis. The data for both non-smoking and smoking moms follow normal distribution.</p>
+</section>
+</section>
+</section>
+<section id="exercise-2" class="level1">
+<h1>Exercise 2</h1>
+<p>Since both non-smoking and smoking moms follow normal distribution, we will perform a <strong>parametric hypothesis T-test</strong> to compare the mean values of the two groups.</p>
+<p><strong>Specify null and alternative hypothesis:</strong><br>
+H0: The mean of non-smoking moms is equal to the mean of smoking moms.<br>
+H1: The mean of non-smoking moms is not equal to the mean of smoking moms.</p>
+<p>We need to check <strong>equal variance</strong> to choose between the pooled t-test (equal variance) or the Satterthwaite t-test (unequal variance).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(Weight <span class="sc">~</span> MomSmoke,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>birthweight,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test to compare two variances
+
+data:  Weight by MomSmoke
+F = 1.0786, num df = 253, denom df = 40, p-value = 0.8009
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.6421109 1.6671729
+sample estimates:
+ratio of variances 
+          1.078555 </code></pre>
+</div>
+</div>
+<p>Since the p-value (0.8009) is <strong>greater than</strong> the significance level (α=0.05), we <strong>do not reject</strong> the null hypothesis. The two groups have equal variance; therefore, we will perform the pooled t-test.</p>
+<section id="pooled-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="pooled-t-test">Pooled T-test</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Weight <span class="sc">~</span> MomSmoke,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>birthweight,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative=</span><span class="st">"two.sided"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  Weight by MomSmoke
+t = 3.071, df = 293, p-value = 0.002334
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+  93.37931 426.65488
+sample estimates:
+mean in group 0 mean in group 1 
+       3422.724        3162.707 </code></pre>
+</div>
+</div>
+<p><strong>Conclusion:</strong> Since the p-value of the pooled t-test (0.002334) is <strong>less than</strong> the signifiance level (α=0.05), we <strong>reject</strong> the null hypothesis test. The mean of non-smoking moms is not equal to the mean of smoking moms.</p>
+</section>
+</section>
+<section id="exercise-3" class="level1">
+<h1>Exercise 3</h1>
+<p>First, we check to see if the data is balanced/unbalanced. The table shows that our data is <strong>unbalanced.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(birthweight<span class="sc">$</span>MomSmoke)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  0   1 
+254  41 </code></pre>
+</div>
+</div>
+<section id="a-1" class="level2">
+<h2 class="anchored" data-anchor-id="a-1">3a)</h2>
+<p>Next, we perform the <strong>Levene Test</strong> to check the homogeneity of variance (equal variance assumption). ### Levene Test</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>aov.momsmoke <span class="ot">=</span> <span class="fu">aov</span>(Weight<span class="sc">~</span>MomSmoke,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">data=</span>birthweight)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">LeveneTest</span>(aov.momsmoke)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+       Df F value Pr(&gt;F)
+group   1  0.6767 0.4114
+      293               </code></pre>
+</div>
+</div>
+<p>Since the p-value (0.4114) of the Levene Test is <strong>greater than</strong> the significance level (α=0.05), we <strong>do not reject</strong> the null hypothesis. The equal variance assumption holds, and it is okay to perform classic ANOVA.</p>
+</section>
+<section id="b-1" class="level2">
+<h2 class="anchored" data-anchor-id="b-1">3b)</h2>
+<section id="classic-anova-and-post-hoc-test" class="level3">
+<h3 class="anchored" data-anchor-id="classic-anova-and-post-hoc-test">Classic ANOVA and Post-Hoc Test</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov.momsmoke)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df   Sum Sq Mean Sq F value  Pr(&gt;F)   
+MomSmoke      1  2386708 2386708   9.431 0.00233 **
+Residuals   293 74151291  253076                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ScheffeTest</span>(aov.momsmoke)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  Posthoc multiple comparisons of means: Scheffe Test 
+    95% family-wise confidence level
+
+$MomSmoke
+         diff    lwr.ci    upr.ci   pval    
+1-0 -260.0171 -426.6549 -93.37931 0.0023 ** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Since the p-value (0.00233) of our one-way ANOVA is <strong>less than</strong> the significance level (α=0.05), we <strong>reject</strong> the null hypothesis. The mean of non-smoking moms <strong>does not equal</strong> the mean of smoking moms. These conclusions are similar to our pooled t-test conclusion in exercise 2. Using the Scheffe post-hoc test, we can also conclude that the mean infant weight of smoking moms is <strong>less than</strong> the mean of smoking moms by -260.02 grams.</p>
+</section>
+<section id="r-square" class="level3">
+<h3 class="anchored" data-anchor-id="r-square">R-Square</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lm.momsmoke <span class="ot">=</span> <span class="fu">lm</span>(Weight<span class="sc">~</span>MomSmoke,</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data=</span>birthweight)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.momsmoke)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03118331</code></pre>
+</div>
+</div>
+<p>This means that <strong>3.12%</strong> of the total variation of Weight can be explained by our model.</p>
+</section>
+<section id="normality-check" class="level3">
+<h3 class="anchored" data-anchor-id="normality-check">Normality Check</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aov.momsmoke)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exam_1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The QQ-Plot illustrates that most of the data follows a normal distribution. The Residuals vs.&nbsp;Fitted graph illustrates that group 1 has less variation than group 2; however, we already verified that the equal variance assumptions holds true via the Levene test. The diagnostic plots are being presented for qualitative purposes.</p>
+</section>
+</section>
+</section>
+<section id="exercise-4" class="level1">
+<h1>Exercise 4</h1>
+<section id="a-2" class="level2">
+<h2 class="anchored" data-anchor-id="a-2">4a)</h2>
+<section id="backward-selection" class="level3">
+<h3 class="anchored" data-anchor-id="backward-selection">Backward Selection</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>full_model <span class="ot">=</span> <span class="fu">aov</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> Married <span class="sc">+</span> Boy <span class="sc">+</span> MomSmoke <span class="sc">+</span> Ed,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>birthweight)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(full_model, <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Weight
+               Sum Sq  Df   F value    Pr(&gt;F)    
+(Intercept) 470708892   1 1936.5547 &lt; 2.2e-16 ***
+Black         2778525   1   11.4312 0.0008217 ***
+Married         53455   1    0.2199 0.6394546    
+Boy            190845   1    0.7852 0.3763046    
+MomSmoke      2225578   1    9.1563 0.0027017 ** 
+Ed               7295   1    0.0300 0.8625846    
+Residuals    70245819 289                        
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>temp_model_1 <span class="ot">=</span> <span class="fu">aov</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> Married <span class="sc">+</span> Boy <span class="sc">+</span> MomSmoke,</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>birthweight)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(temp_model_1, <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Weight
+               Sum Sq  Df   F value    Pr(&gt;F)    
+(Intercept) 504241891   1 2081.4757 &lt; 2.2e-16 ***
+Black         2794731   1   11.5365 0.0007778 ***
+Married         61146   1    0.2524 0.6157671    
+Boy            186656   1    0.7705 0.3807876    
+MomSmoke      2227433   1    9.1947 0.0026466 ** 
+Residuals    70253114 290                        
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>temp_model_2 <span class="ot">=</span> <span class="fu">aov</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> Boy <span class="sc">+</span> MomSmoke,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>birthweight)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(temp_model_2, <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Weight
+                Sum Sq  Df   F value    Pr(&gt;F)    
+(Intercept) 1413353138   1 5849.2511 &lt; 2.2e-16 ***
+Black          3664133   1   15.1642 0.0001223 ***
+Boy             179990   1    0.7449 0.3888071    
+MomSmoke       2498854   1   10.3417 0.0014471 ** 
+Residuals     70314260 291                        
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>temp_model_3 <span class="ot">=</span> <span class="fu">aov</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> MomSmoke,</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>birthweight)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(temp_model_3, <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Weight
+                Sum Sq  Df   F value    Pr(&gt;F)    
+(Intercept) 2600800716   1 10772.989 &lt; 2.2e-16 ***
+Black          3657042   1    15.148 0.0001232 ***
+MomSmoke       2513301   1    10.411 0.0013954 ** 
+Residuals     70494249 292                        
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>temp_model_4 <span class="ot">=</span> <span class="fu">aov</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> MomSmoke <span class="sc">+</span> Black<span class="sc">*</span>MomSmoke,</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>birthweight)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(temp_model_4, <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Weight
+                   Sum Sq  Df    F value    Pr(&gt;F)    
+(Intercept)    2546671287   1 10513.4642 &lt; 2.2e-16 ***
+Black             3292713   1    13.5934 0.0002707 ***
+MomSmoke          2222570   1     9.1755 0.0026729 ** 
+Black:MomSmoke       5461   1     0.0225 0.8807474    
+Residuals        70488788 291                         
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>final_model <span class="ot">=</span> <span class="fu">aov</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> MomSmoke,</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>birthweight)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(final_model, <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Weight
+                Sum Sq  Df   F value    Pr(&gt;F)    
+(Intercept) 2600800716   1 10772.989 &lt; 2.2e-16 ***
+Black          3657042   1    15.148 0.0001232 ***
+MomSmoke       2513301   1    10.411 0.0013954 ** 
+Residuals     70494249 292                        
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>First, run ANOVA with the full model that includes every variable (Black, Married, Boy, MomSmoke, Ed). From those results, we will remove Ed since it had the largest p-value over the significance level (0.8625846). Next, we exclude Ed and run a new model with the remaining four variables. From those results, we will remove Married since it had the largest p-value over the significance level (0.6157671). Then, we exclude Ed/Married and run a new model with the remaining three variables. From those results, we will remove Boy since it had the largest p-value over the significance level (0.3888071). Next, we exclude Ed/Married/Boy and run a new model with the remaining two variables. From those results, the remaining variables calculated p-values are less than the significance level, so neither are excluded from our final model. Finally, we check the interaction effects based only on these two significant main effect terms. We run a new model with Black, MomSmoke, and their interaction effects. From those results, we conclude that the Black/MomSmoke interaction does not have a significant effect since the interaction’s p-value (0.8807474) is greater than the significance level (α=0.05); therefore, we exclude the interaction effect from our final model.</p>
+</section>
+</section>
+<section id="b-2" class="level2">
+<h2 class="anchored" data-anchor-id="b-2">4b)</h2>
+<section id="final-model-r-square" class="level3">
+<h3 class="anchored" data-anchor-id="final-model-r-square">Final Model &amp; R-Square</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>lm.final_model <span class="ot">=</span> <span class="fu">lm</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> MomSmoke,</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data=</span>birthweight)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm.final_model)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07896405</code></pre>
+</div>
+</div>
+<p>This means that <strong>7.90%</strong> of the total variation of Weight can be explained by our model (Black + MomSmoke).</p>
+</section>
+<section id="normality-assumption" class="level3">
+<h3 class="anchored" data-anchor-id="normality-assumption">Normality Assumption</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(full_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exam_1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The QQ-Plot illustrates that most of the data near the line; therefore, we can assume normality of our data.</p>
+</section>
+</section>
+<section id="c-1" class="level2">
+<h2 class="anchored" data-anchor-id="c-1">4c)</h2>
+<section id="final-model-anova-post-hoc-test" class="level3">
+<h3 class="anchored" data-anchor-id="final-model-anova-post-hoc-test">Final Model ANOVA &amp; Post-Hoc Test</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>final_model <span class="ot">=</span> <span class="fu">aov</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> MomSmoke,</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span>birthweight)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(final_model, <span class="at">type=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Anova Table (Type III tests)
+
+Response: Weight
+                Sum Sq  Df   F value    Pr(&gt;F)    
+(Intercept) 2600800716   1 10772.989 &lt; 2.2e-16 ***
+Black          3657042   1    15.148 0.0001232 ***
+MomSmoke       2513301   1    10.411 0.0013954 ** 
+Residuals     70494249 292                        
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ScheffeTest</span>(final_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  Posthoc multiple comparisons of means: Scheffe Test 
+    95% family-wise confidence level
+
+$Black
+         diff    lwr.ci    upr.ci  pval    
+1-0 -293.9412 -483.0575 -104.8249 8e-04 ***
+
+$MomSmoke
+        diff    lwr.ci    upr.ci   pval    
+1-0 -266.763 -470.2261 -63.29987 0.0060 ** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p><strong>Conclusion:</strong><br>
+Since the p-values of Black (0.0001232) and MomSmoke (0.0013954) are <strong>less than</strong> the significance level (α=0.05), we <strong>reject</strong> the null hypothesis and conclude that these variables have a significant effect on Weight.</p>
+<p>Using the Scheffe post-hoc test, we can determine the difference in means between each significant variable:<br>
+<strong>Black:</strong> The mean infant weight of blacks are less than the mean infant weight of whites by -293.9412 grams.<br>
+<strong>MomSmoke:</strong> The mean infant weight of smoking moms is less than the mean infant weight of non-smoking moms by -266.763 grams.</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

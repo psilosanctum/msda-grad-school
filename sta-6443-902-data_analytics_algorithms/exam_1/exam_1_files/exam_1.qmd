@@ -1,0 +1,206 @@
+---
+title: "Exam 1"
+format: html
+author: Collin Real (yhi267)
+---
+
+# Exercise 1
+
+```{r}
+library(car) 
+library(DescTools)
+library(MASS)
+library(e1071)
+library(fBasics)
+library(MASS)
+
+setwd("/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms/exam_1/exam_1_files")
+birthweight = read.csv("birthweight.csv", header=TRUE)
+
+birthweight$Weight = as.numeric(birthweight$Weight)
+birthweight$MomSmoke = as.factor(birthweight$MomSmoke)
+birthweight$Black = as.factor(birthweight$Black)
+birthweight$Married = as.factor(birthweight$Married)
+birthweight$Boy = as.factor(birthweight$Boy)
+birthweight$Ed = as.factor(birthweight$Ed)
+str(birthweight)
+```
+
+
+
+## 1a)    
+### Boxplot for infant birth weight
+```{r}
+boxplot(birthweight$Weight,
+        main="Weight Boxplot",
+        xlab="Infant Weight",
+        ylab="Grams",
+        col="red",
+        border="black");
+points(mean(birthweight$Weight, na.rm=TRUE), col="blue")
+```
+**Box Plot Comments:** The box plot illustrates few outliers above the maximum and below the minimum. The minimum value of the box plot is ~2100 grams, whereas the maximum value is ~4600 grams. The mean and medium values displayed on the plot are almost equal (~3400 grams), indicating low skewness; however, since the mean is larger than the median, the data is slightly skewed to the right. Finally, the box plot illustrates that the data most likely follows normal distribution.
+
+### QQ-Plot
+```{r}
+qqnorm(birthweight$Weight,
+       main="Weight QQ-Plot");
+qqline(birthweight$Weight, col="red")
+```
+
+### Shapiro-Wilk Normality Test
+```{r}
+shapiro.test(birthweight$Weight)
+```
+**QQ-Plot & Shapiro-Wilk Normality Test Comments:** The QQ-Plot illustrates a majority of the values near the red line. Since the p-value (0.1153) of the Shapiro-Wilk Normality Test is **greater than** the significance level (α=0.05), Weight follows normal distribution. We **do not reject** the null hypothesis.
+
+## 1b)
+### Boxplot of Weight by MomSmoke
+```{r}
+boxplot(Weight~MomSmoke,
+        data=birthweight,
+        main="Infant Weight by MomSmoke",
+        xlab="MomSmoke",
+        ylab="Infant Weight (grams)",
+        col="red",
+        border="black")
+```
+**Boxplot Comments:** The box plots illustrate that the median infant weight of non-smoking moms is greater than the median of moms who smoke. Additionally, the infant weights of non-smoking moms have a higher range of values than smoking moms. For non-smoking moms, the minimum value of the boxplot is ~2200 grams and the maximum ~4600 grams, whereas the minimum value of smoking moms is ~2400 grams and the maximum ~4000 grams.
+
+## 1c)
+### Shapiro-Wilk Normality Test - Non-Smoking Moms
+```{r}
+shapiro.test(birthweight$Weight[birthweight$MomSmoke==0])
+```
+### Shapiro-Wilk Normality Test - Smoking Moms
+```{r}
+shapiro.test(birthweight$Weight[birthweight$MomSmoke==1])
+```
+**Conclusion:** Since the p-values of non-smoking (0.3549) and smoking moms (0.2) are **greater than** the significance level (α=0.05), we **do not reject** the null hypothesis. The data for both non-smoking and smoking moms follow normal distribution.
+
+# Exercise 2
+Since both non-smoking and smoking moms follow normal distribution, we will perform a **parametric hypothesis T-test** to compare the mean values of the two groups. 
+
+**Specify null and alternative hypothesis:**   
+H0: The mean of non-smoking moms is equal to the mean of smoking moms.    
+H1: The mean of non-smoking moms is not equal to the mean of smoking moms.
+
+We need to check **equal variance** to choose between the pooled t-test (equal variance) or the Satterthwaite t-test (unequal variance).
+```{r}
+var.test(Weight ~ MomSmoke,
+         data=birthweight,
+         alternative="two.sided")
+```
+Since the p-value (0.8009) is **greater than** the significance level (α=0.05), we **do not reject** the null hypothesis. The two groups have equal variance; therefore, we will perform the pooled t-test.
+
+### Pooled T-test
+```{r}
+t.test(Weight ~ MomSmoke,
+       data=birthweight,
+       alternative="two.sided",
+       var.equal=TRUE)
+```
+**Conclusion:** Since the p-value of the pooled t-test (0.002334) is **less than** the signifiance level (α=0.05), we **reject** the null hypothesis test. The mean of non-smoking moms is not equal to the mean of smoking moms.
+
+# Exercise 3
+First, we check to see if the data is balanced/unbalanced. The table shows that our data is **unbalanced.**
+```{r}
+table(birthweight$MomSmoke)
+```
+
+## 3a)
+Next, we perform the **Levene Test** to check the homogeneity of variance (equal variance assumption).
+### Levene Test
+```{r}
+aov.momsmoke = aov(Weight~MomSmoke,
+                   data=birthweight)
+LeveneTest(aov.momsmoke)
+```
+Since the p-value (0.4114) of the Levene Test is **greater than** the significance level (α=0.05), we **do not reject** the null hypothesis. The equal variance assumption holds, and it is okay to perform classic ANOVA.
+
+## 3b)
+### Classic ANOVA and Post-Hoc Test
+```{r}
+summary(aov.momsmoke)
+ScheffeTest(aov.momsmoke)
+```
+Since the p-value (0.00233) of our one-way ANOVA is **less than** the significance level (α=0.05), we **reject** the null hypothesis. The mean of non-smoking moms **does not equal** the mean of smoking moms. These conclusions are similar to our pooled t-test conclusion in exercise 2. Using the Scheffe post-hoc test, we can also conclude that the mean infant weight of smoking moms is **less than** the mean of smoking moms by -260.02 grams.
+
+### R-Square
+```{r}
+lm.momsmoke = lm(Weight~MomSmoke,
+                 data=birthweight)
+summary(lm.momsmoke)$r.squared
+```
+This means that **3.12%** of the total variation of Weight can be explained by our model.
+
+### Normality Check
+```{r}
+par(mfrow=c(2,2))
+plot(aov.momsmoke)
+```
+The QQ-Plot illustrates that most of the data follows a normal distribution. The Residuals vs. Fitted graph illustrates that group 1 has less variation than group 2; however, we already verified that the equal variance assumptions holds true via the Levene test. The diagnostic plots are being presented for qualitative purposes.
+
+# Exercise 4
+## 4a)
+### Backward Selection
+```{r}
+full_model = aov(Weight ~ Black + Married + Boy + MomSmoke + Ed,
+                data=birthweight)
+Anova(full_model, type=3)
+
+temp_model_1 = aov(Weight ~ Black + Married + Boy + MomSmoke,
+                data=birthweight)
+Anova(temp_model_1, type=3)
+
+temp_model_2 = aov(Weight ~ Black + Boy + MomSmoke,
+                data=birthweight)
+Anova(temp_model_2, type=3)
+
+temp_model_3 = aov(Weight ~ Black + MomSmoke,
+                data=birthweight)
+Anova(temp_model_3, type=3)
+
+temp_model_4 = aov(Weight ~ Black + MomSmoke + Black*MomSmoke,
+                data=birthweight)
+Anova(temp_model_4, type=3)
+
+final_model = aov(Weight ~ Black + MomSmoke,
+                data=birthweight)
+Anova(final_model, type=3)
+```
+First, run ANOVA with the full model that includes every variable (Black, Married, Boy, MomSmoke, Ed). From those results, we will remove Ed since it had the largest p-value over the significance level (0.8625846). Next, we exclude Ed and run a new model with the remaining four variables. From those results, we will remove Married since it had the largest p-value over the significance level (0.6157671). Then, we exclude Ed/Married and run a new model with the remaining three variables. From those results, we will remove Boy since it had the largest p-value over the significance level (0.3888071). Next, we exclude Ed/Married/Boy and run a new model with the remaining two variables. From those results, the remaining variables calculated p-values are less than the significance level, so neither are excluded from our final model. Finally, we check the interaction effects based only on these two significant main effect terms. We run a new model with Black, MomSmoke, and their interaction effects. From those results, we conclude that the Black/MomSmoke interaction does not have a significant effect since the interaction's p-value (0.8807474) is greater than the significance level (α=0.05); therefore, we exclude the interaction effect from our final model.
+
+## 4b)
+### Final Model & R-Square
+```{r}
+lm.final_model = lm(Weight ~ Black + MomSmoke,
+                    data=birthweight)
+summary(lm.final_model)$r.squared
+```
+This means that **7.90%** of the total variation of Weight can be explained by our model (Black + MomSmoke).
+
+### Normality Assumption
+```{r}
+par(mfrow=c(2,2))
+plot(full_model)
+```
+The QQ-Plot illustrates that most of the data near the line; therefore, we can assume normality of our data.
+
+## 4c)
+### Final Model ANOVA & Post-Hoc Test
+```{r}
+final_model = aov(Weight ~ Black + MomSmoke,
+                data=birthweight)
+Anova(final_model, type=3)
+ScheffeTest(final_model)
+```
+**Conclusion:**        
+Since the p-values of Black (0.0001232) and MomSmoke (0.0013954) are **less than** the significance level (α=0.05), we **reject** the null hypothesis and conclude that these variables have a significant effect on Weight.      
+
+Using the Scheffe post-hoc test, we can determine the difference in means between each significant variable:      
+**Black:** The mean infant weight of blacks are less than the mean infant weight of whites by -293.9412 grams.     
+**MomSmoke:** The mean infant weight of smoking moms is less than the mean infant weight of non-smoking moms by -266.763 grams.
+
+
+
