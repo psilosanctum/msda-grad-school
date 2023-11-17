@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Collin Real (yhi267), Seth Harris (dmp903)">
+
+<title>HW3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="HW3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="HW3_files/libs/quarto-html/quarto.js"></script>
+<script src="HW3_files/libs/quarto-html/popper.min.js"></script>
+<script src="HW3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="HW3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="HW3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="HW3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="HW3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="HW3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="HW3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">HW3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Collin Real (yhi267), Seth Harris (dmp903) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Import libraries.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(olsrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'olsrr'
+
+The following object is masked from 'package:datasets':
+
+    rivers</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData
+
+Attaching package: 'car'
+
+The following object is masked from 'package:dplyr':
+
+    recode
+
+The following object is masked from 'package:purrr':
+
+    some</code></pre>
+</div>
+</div>
+<p>Set path.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms/exam_2/HW3/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Exercise 1: The medical director at your company wants to know if Weight alone can predict Cholesterol outcomes. Consider modeling Cholesterol as a function of Weight.</p>
+<ol type="a">
+<li>Fit a linear regression model for Cholesterol as a function of Weight. If any points are unduly influential, note those points, then remove them and refit the model. Consider Cook’s distance cut-off to be 0.015.</li>
+</ol>
+<p><strong>Importing Data</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>heart <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"heart.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Fitted Linear Regression Model (Cholesterol ~ Weight)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>linearmodel.heart <span class="ot">=</span> <span class="fu">lm</span>(Cholesterol <span class="sc">~</span> Weight, heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Scatter Plot and Correlation (Cholesterol ~ Weight)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(heart<span class="sc">$</span>Weight, heart<span class="sc">$</span>Cholesterol, <span class="at">xlab =</span><span class="st">"Weight"</span>, <span class="at">ylab =</span><span class="st">"Cholesterol"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(linearmodel.heart, <span class="at">col =</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Spearman Correlation</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(heart<span class="sc">$</span>Weight, heart<span class="sc">$</span>Cholesterol, <span class="at">method =</span><span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1078544</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> The calculated Spearman Correlation is <strong>0.1078544</strong>. With this in mind, we know that the Spearman Correlation is robust to outliers in the given data in the selection; therefore, this indicates a significantly low correlation between our Weight and Cholesterol variables.</p>
+<p><strong>Performing Model Diagnostics</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(linearmodel.heart, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Conclusion</strong> - When looking at the Standardized Residual Plot, the normality assumption is not reasonable because many points fall above the y-axis (1.5). - In addition, when looking at the Normal QQ-Plot, many of the points fall on the straight, gray line; however, towards the end of the line, some of the points (23 and 210) are unduly influential points distanced away from the gray line. Based on this, we can determine that our normality assumption is not reasonable as well. - Third, when we consider Cook’s Distance Plot, it is observed that points 23 and 210 are also unduly influential points that are substantially separated. - When checking for Equal Variance, we look at the Standardized Residuals Plot and can note there is clearly a pattern in the residual plot, which as a result supports heteroscedasticity.</p>
+<ol start="2" type="a">
+<li>Comment on the significance of the parameters, variation explained by the model, and any remaining issues noted in the diagnostics plots. What does this model tell us about the relationship between Cholesterol and Weight? Interpret the relationship specifically. Explain to the medical director whether this is a good model for predicting Cholesterol levels.</li>
+</ol>
+<p><strong>R-Output</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linearmodel.heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Cholesterol ~ Weight, data = heart)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-111.95  -29.59   -4.64   23.49  334.35 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 205.86763    4.24729  48.470  &lt; 2e-16 ***
+Weight        0.10867    0.02786   3.901 9.78e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 43.62 on 3132 degrees of freedom
+Multiple R-squared:  0.004835,  Adjusted R-squared:  0.004518 
+F-statistic: 15.22 on 1 and 3132 DF,  p-value: 9.778e-05</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> - When looking at Individual Term Significance, we shall look at the p-value from the T-test of Weight. As shown above, we can see that it contains a value of 9.78e-05, which as a result falls below the significance level of 0.05. With this in mind, we can clearly reject the Null Hypothesis (H0) and make the conclusion that there is a clear linear relationship between the variables of Weight and Cholesterol. - When checking for Equal Variance, we look at the Standardized Residuals Plot and can note there is clearly a pattern in the residual plot, which as a result supports heteroscedasticity. - When looking at Model Significance, we can check the p-value, which is 9.778e-05, as a result this would mean this would also fall below the significance level of 0.05. Therefore, we can reject the Null Hypothesis (H0) and can make the conclusion that the linear regression model is useful, which means at least one Beta is not equal to zero. - When looking at the Estimated Regression Line we know that our estimated regression line as ŷ = 205.86763 + 0.10867x. Based on this we can say that Cholesterol can be expected to have a 0.10867 increase with one unit increase of Weight. - When looking at R-Squared, we can see that there is only 0.4835% of the variation in Cholesterol that can further be explained by the variable of Weight. Therefore, we should be very clear that this is not a good model for the prediction of Cholesterol level (low predictive power). Overall, we should not recommend this model (Weight) to the medical director for the prediction of Cholesterol level.</p>
+<p>Exercise 2: The medical director wants to know if blood pressure and weight can better predict cholesterol outcomes. Consider modeling cholesterol as a function of diastolic, systolic, and weight.</p>
+<ol type="a">
+<li>Fit a linear regression model for cholesterol as a function of diastolic, systolic, and weight. Generate the diagnostics plots and comment on any issues that need to be noted. For Cook’s distances, do not leave any points that have Cook’s distance greater than 0.015.</li>
+</ol>
+<p><strong>Fitted Linear Regression Model (Cholesterol ~ Diastolic, Systolic, and Weight)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>linearmodel.heart2 <span class="ot">=</span> <span class="fu">lm</span>(Cholesterol<span class="sc">~</span>., <span class="at">data =</span> heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Scatter Plot and Correlation (Cholesterol ~ Diastolic, Systolic, and Weight)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Comments</strong> Based on the scatter plot above, there appears to be a strong linear relationship between both our variables Diastolic and Systolic.</p>
+<p><strong>Performing Model Diagnostics</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(linearmodel.heart2, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Conclusion</strong> - When looking at the Standardized Residual Plot, it is clear that the normality assumption is not reasonable, because many points fall above y-axis (1.5). - In addition, when looking at the Normal QQ-Plot, it is clear that many of the points given can fall on the straight grey line, based on our normality check. However, towards the end of the line some of the points 23, 210, 2035 for instance are unduly influential points distanced away from the grey line. Based on this, we can determine that our normality assumption is not reasonable as well. - When checking for Equal Variance, we look at the Standardized Residuals Plot and can note there is clearly a pattern in the residual plot, which as a result supports heteroscedasticity. - Fourth, when we consider Cook’s Distance Plot above, it is observed that points 23 and 210 are also unduly influential points, that are very far separated. <strong>Confirming Two Points have Cook’s Distance Greater than 0.015</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>influentialpoints <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">cooks.distance</span>(linearmodel.heart2) <span class="sc">&gt;</span> <span class="fl">0.015</span>) </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>heart[influentialpoints, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  Weight Diastolic Systolic Cholesterol
+   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+1     90        82      130         550
+2    100        82      130         500</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> As seen above, Cook’s Distance Plot is clearly greater than 0.015. Now we will refit the model.</p>
+<p><strong>Remitted Model</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>linearmodel.heart2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Cholesterol<span class="sc">~</span>., <span class="at">data =</span> heart[<span class="sc">-</span>influentialpoints, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Comment on the significance of the parameters and how much variation in cholesterol is described by the model. Comment on the relationship between cholesterol and statistically significant predictor(s). Check multicollinearity issues among predictors. Explain to the medical director whether this is a good model for predicting Cholesterol levels.</li>
+</ol>
+<p><strong>R-Output</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linearmodel.heart2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Cholesterol ~ ., data = heart[-influentialpoints, 
+    ])
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-110.617  -29.371   -4.476   23.755  216.041 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 156.32618    6.27153  24.926  &lt; 2e-16 ***
+Weight        0.03671    0.02860   1.284   0.1994    
+Diastolic     0.24922    0.10665   2.337   0.0195 *  
+Systolic      0.30073    0.06340   4.743  2.2e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 42.26 on 3128 degrees of freedom
+Multiple R-squared:  0.03767,   Adjusted R-squared:  0.03675 
+F-statistic: 40.81 on 3 and 3128 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong></p>
+<ul>
+<li><p>When looking at Individual Term Significance, we shall look at the p-value from the T-test of Diastolic, Systolic, and Weight.</p></li>
+<li><p>Diastolic: As shown above, we can see that it contains a p-value of 0.0195, which as a result falls below the significance level of 0.05. With this in mind, we can clearly reject the Null Hypothesis (H0) and make the conclusion that there is a clear linear relationship between the variables of Diastolic and Cholesterol. -Systolic: As shown above, we can see that it contains the least amount of p-value containing 2.2e-06, which as a result also falls below the significance level of 0.05. With this in mind, we can clearly reject the Null Hypothesis (H0) and make the conclusion that there is a clear linear relationship between the variables of Systolic and Cholesterol. -Weight: As shown above, we can see that it contains a p-value of 0.1994, which as a result falls above the significance level of 0.05. With this in mind, we can clearly cannot reject the Null Hypothesis (H0) and make the conclusion that there is no linear relationship between the variables of Weight and Cholesterol.</p></li>
+<li><p>When looking at Model Significance from the F statistic, we can check the p-value, which is &lt; 2.2e-16, as a result this would mean this would also fall below the significance level of 0.05. Therefore, we can reject the Null Hypothesis (H0) and can make the conclusion that the linear regression model is useful, which means at least one Beta is not equal to zero.</p></li>
+<li><p>When looking at the Estimated Regression Line we know that our estimated regression line as ŷ = 156.32618 + 0.24922(Diastolic) + 0.30073(Systolic).Based on this we can say with a one unit increase in Diastolic, Cholesterol will increase by 0.24922, while Systolic stays constant. On the other hand, with one unit increase in Systolic, Cholesterol will increase by 0.30073, while Diastolic stays constant.</p></li>
+<li><p>When looking at R-Squared, we can see that there is only 3.767% of the variation in Cholesterol that can further be explained by the variables of Diastolic and Systolic. Therefore, we should be very clear that this is not a good model for the prediction of Cholesterol level (low predictive power). Overall, we should not recommend this model (Weight) to the medical director for the prediction of Cholesterol level.</p></li>
+</ul>
+<p><strong>Multicollinearity Being Checked With VIF (Variance Inflation Factors)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(linearmodel.heart2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Weight Diastolic  Systolic 
+ 1.120631  2.558914  2.454207 </code></pre>
+</div>
+</div>
+<p><strong>Conclusion</strong> Overall, our predictor variables, such as Diastolic, Systolic, and Weight have not exceeded the VIF cutoff, which is 10, as a result we can make a clear conclusion that they are not correlated with each other, since it would be very low correlation if anything.</p>
+<p>Exercise 3: Now consider stepwise model selection for the Cholesterol model. Before performing the model selection, we remove influential points detected in Exercise 2, which have a cook’s distance larger than 0.015.</p>
+<ol type="a">
+<li>Perform stepwise model selection with .05 criteria and address any issues in diagnostics plots.</li>
+</ol>
+<p><strong>Performing Stepwise Model Selection</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>stepwisemodel <span class="ot">=</span> <span class="fu">ols_step_both_p</span>(linearmodel.heart2, <span class="at">pent =</span> <span class="fl">0.05</span>, <span class="at">prem =</span> <span class="fl">0.05</span>, <span class="at">details =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>stepwisemodel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                               Stepwise Selection Summary                                
+----------------------------------------------------------------------------------------
+                      Added/                   Adj.                                         
+Step    Variable     Removed     R-Square    R-Square     C(p)        AIC         RMSE      
+----------------------------------------------------------------------------------------
+   1    Systolic     addition       0.035       0.035    8.6850    32349.7666    42.3013    
+   2    Diastolic    addition       0.037       0.037    3.6480    32344.7321    42.2606    
+----------------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p><strong>Diagnostic Plots</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stepwisemodel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Comments</strong> Based on the above Stepwise Selection Model, the variables Diastolic and Systolic should be included in the Final Model.</p>
+<p><strong>Linear Model Without Weight</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>linearmodel.step <span class="ot">=</span> <span class="fu">lm</span>(Cholesterol<span class="sc">~</span> Systolic <span class="sc">+</span> Diastolic, <span class="at">data =</span> heart[<span class="sc">-</span>influentialpoints, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Scatter Plots</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(linearmodel.step, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="HW3_files/figure-html/unnamed-chunk-19-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Comments</strong> - When looking at the Normal QQ-Plot, it is clear that many of the points given can fall on the straight grey line for the most part, based on our normality check. However, towards the end of the line some of the points curve off the line. Based on this, we can determine that our normality assumption is not reasonable as well. - In addition, when checking for Equal Variance, we look at the Standardized Residuals Plot and can note there is clearly a pattern in the residual plot, which as a result supports heteroscedasticity.</p>
+<ol start="2" type="a">
+<li>Interpret the final model and comment on the variation in Cholesterol explained. Compare the variations explained by the models from Exercises 1 and 2. <strong>R-Output</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>linearmodel.step <span class="ot">=</span> <span class="fu">lm</span>(Cholesterol<span class="sc">~</span> Systolic <span class="sc">+</span> Diastolic, <span class="at">data =</span> heart)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linearmodel.step)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Cholesterol ~ Systolic + Diastolic, data = heart)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-109.52  -29.58   -4.57   23.79  328.47 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 159.63995    5.91244  27.001  &lt; 2e-16 ***
+Systolic      0.30193    0.06442   4.687 2.89e-06 ***
+Diastolic     0.27609    0.10612   2.602  0.00932 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 42.94 on 3131 degrees of freedom
+Multiple R-squared:  0.03589,   Adjusted R-squared:  0.03527 
+F-statistic: 58.27 on 2 and 3131 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> - When looking at Individual Term Significance, we shall look at the p-value from the T-test of Diastolic and Systolic. - Diastolic: As shown above, we can see that it contains a p-value of 0.00932, which as a result falls below the significance level of 0.05. With this in mind, we can clearly reject the Null Hypothesis (H0) and make the conclusion that there is a clear linear relationship between the variables of Diastolic and Cholesterol. -Systolic: As shown above, we can see that it contains the least amount of p-value containing 2.89e-06, which as a result also falls below the significance level of 0.05. With this in mind, we can clearly reject the Null Hypothesis (H0) and make the conclusion that there is a clear linear relationship between the variables of Systolic and Cholesterol.</p>
+<ul>
+<li>When looking at Model Significance from the F statistic, we can check the p-value, which is &lt; 2.2e-16, as a result this would mean this would also fall below the significance level of 0.05. Therefore, we can reject the Null Hypothesis (H0) and can make the conclusion that the linear regression model is useful, which means at least one Beta is not equal to zero.</li>
+<li>When looking at the Estimated Regression Line we know that our estimated regression line as ŷ=159.63995 + 0.30193(Systolic) + 0.27609(Diastolic). Based on this, with a one unit increase in Systolic, Cholesterol will increase by 0.30193, while Diastolic stays constant. On the other hand, with a one unit increase in Diastolic, Cholesterol will increase by 0.27609, while Systolic stays constant.</li>
+<li>When looking at R-Squared, we can see that there is only 3.589% of the variation in Cholesterol that can further be explained by the variables of Diastolic and Systolic. Therefore, we should be very clear that this is not a good model for the prediction of Cholesterol level (low predictive power). Overall, we should not recommend this model (Weight) to the medical director for the prediction of Cholesterol level.</li>
+</ul>
+<p><strong>Comparison of Variations Between Models of Exercise 1 and 2</strong> Exercise 1: We can see that there is only 0.4835% of the variation in Cholesterol that can further be explained by the variable of Weight. Therefore, we should be very clear that this is not a good model for the prediction of Cholesterol level (low predictive power). Exercise 2: We can see that there is only 3.767% of the variation in Cholesterol that can further be explained by the variables of Diastolic and Systolic. Therefore, we should be very clear that this is not a good model for the prediction of Cholesterol level (low predictive power).</p>
+<p>As a conclusion from these exercises, both can tell us to be very clear that all variables, such as Weight, Diastolic, and Systolic are not good models for the prediction of Cholesterol levels, therefore meaning very low predictive power.</p>
+<p>Exercise 4: Now consider the best subset selection for the Cholesterol model. Again, we remove influential points detected in Exercise 2, which has a cook’s distance larger than 0.015, before performing the model selection.</p>
+<ol type="a">
+<li>Find the best model based on adjusted-R square criteria and specify which predictors are selected. <strong>Finding Best Model</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>bestmodel <span class="ot">=</span> <span class="fu">ols_step_best_subset</span>(linearmodel.heart2)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>bestmodel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Best Subsets Regression         
+----------------------------------------
+Model Index    Predictors
+----------------------------------------
+     1         Systolic                  
+     2         Diastolic Systolic        
+     3         Weight Diastolic Systolic 
+----------------------------------------
+
+                                                          Subsets Regression Summary                                                          
+----------------------------------------------------------------------------------------------------------------------------------------------
+                       Adj.        Pred                                                                                                        
+Model    R-Square    R-Square    R-Square     C(p)        AIC           SBIC          SBC            MSEP           FPE        HSP       APC  
+----------------------------------------------------------------------------------------------------------------------------------------------
+  1        0.0350      0.0347      0.0337    8.6847    32349.7666    23461.5297    32367.9149    5604396.2122    1790.5412    0.5719    0.9662 
+  2        0.0372      0.0365      0.0352    3.6475    32344.7321    23456.5056    32368.9298    5593610.3978    1787.6653    0.5710    0.9647 
+  3        0.0377      0.0367      0.0351    4.0000    32345.0829    23456.8621    32375.3300    5592453.6261    1787.8655    0.5710    0.9648 
+----------------------------------------------------------------------------------------------------------------------------------------------
+AIC: Akaike Information Criteria 
+ SBIC: Sawa's Bayesian Information Criteria 
+ SBC: Schwarz Bayesian Criteria 
+ MSEP: Estimated error of prediction, assuming multivariate normality 
+ FPE: Final Prediction Error 
+ HSP: Hocking's Sp 
+ APC: Amemiya Prediction Criteria </code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> -When specifying which predictors are the best, it is clear and obvious it includes the variables, Diastolic, Systolic, and Weight in the Model 3. -When looking at the Best Model for our variable, Cholesterol, based on adjusted-R square criteria it would have to be Model 3, due to the fact it has the highest adjusted R-square of 0.0367.</p>
+<ol start="2" type="a">
+<li><p>Find the best model based on AIC criteria and specify which predictors are selected. <strong>Comments</strong> -When specifying which predictors are the best, it is clear and obvious it includes the variables, Diastolic and Systolic in the Model 2. -When looking at the Best Model for our variable, Cholesterol, based on AIC criteria it would have to be Model 2, due to the fact it has the lowest AIC out of all three of 32344.7321.</p></li>
+<li><p>Compare the final models selected in a) and b). Also, compare the final models from the best subset approach with the final model from the stepwise selection. <strong>Comparisons</strong></p></li>
+</ol>
+<ul>
+<li>When comparing our final models selected in both A and B, it is clear that both models AIC and Adjusted R-Square based have p-values lowered under the significance level of 0.05, as a result, we can say that these models as useful. In addition, they contain both our variables, Diastolic and Systolic predictors in their models that contain p-values that also are lowered under the significance level of 0.05. Finally, we can make the conclusion that there is a significant linear relationship between these 2 predictors, such as Diastolic and Systolic and Cholesterol.</li>
+<li>Overall, the Best Subset Approach with the Stepwise Selection returned our variables of Diastolic and Systolic predictors. As a result , we can say that the final selected model is Y = 159.63995 + 0.30193 (Systolic) + 0.27609 (Diastolic) + E.</li>
+</ul>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
