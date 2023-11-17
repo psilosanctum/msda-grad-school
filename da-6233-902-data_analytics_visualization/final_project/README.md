@@ -1,5 +1,6 @@
-# Introduction Slide - Answer a problem facing organizations, policymakers, and consumers
-##  Importance of Energy Consumption/Production (Collin 2-3 mins)
+# Final Presentation Outline
+##  Introduction Slide - Importance of Energy Consumption/Production (Collin 2-3 mins)
+    **Objective: Answer a problem facing organizations, policymakers, and consumers**
     (1) Economic indicator
         - Energy is the ultimate form of currency 
         - Manufacturing goods requires mechanical/electrical energy for machines and providing services requires chemical energy (food) for humans
