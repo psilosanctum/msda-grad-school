@@ -1,0 +1,231 @@
+Country,Features,Region,Year,Amount,Unit
+Algeria,net consumption,Africa,2021,68.66337919,billion kWh
+Angola,net consumption,Africa,2021,14.56049071,billion kWh
+Benin,net consumption,Africa,2021,0.523382994,billion kWh
+Botswana,net consumption,Africa,2021,3.35303816,billion kWh
+Burkina Faso,net consumption,Africa,2021,2.642688237,billion kWh
+Burundi,net consumption,Africa,2021,0.417981972,billion kWh
+Cabo Verde,net consumption,Africa,2021,0.321463467,billion kWh
+Cameroon,net consumption,Africa,2021,6.084346389,billion kWh
+Central African Republic,net consumption,Africa,2021,0.141064,billion kWh
+Chad,net consumption,Africa,2021,0.263581184,billion kWh
+Comoros,net consumption,Africa,2021,0.101814786,billion kWh
+Congo-Brazzaville,net consumption,Africa,2021,2.214975806,billion kWh
+Congo-Kinshasa,net consumption,Africa,2021,8.920147734,billion kWh
+Cote d'Ivoire,net consumption,Africa,2021,7.977315028,billion kWh
+Djibouti,net consumption,Africa,2021,0.468196929,billion kWh
+Egypt,net consumption,Africa,2021,168.3228366,billion kWh
+Equatorial Guinea,net consumption,Africa,2021,1.269944203,billion kWh
+Eritrea,net consumption,Africa,2021,0.404890124,billion kWh
+Eswatini,net consumption,Africa,2021,1.495128269,billion kWh
+Ethiopia,net consumption,Africa,2021,9.520959162,billion kWh
+Gabon,net consumption,Africa,2021,2.351990662,billion kWh
+"Gambia, The",net consumption,Africa,2021,0.237916525,billion kWh
+Ghana,net consumption,Africa,2021,18.27374496,billion kWh
+Guinea,net consumption,Africa,2021,2.481586351,billion kWh
+Guinea-Bissau,net consumption,Africa,2021,0.076457786,billion kWh
+Kenya,net consumption,Africa,2021,9.061198138,billion kWh
+Lesotho,net consumption,Africa,2021,0.902244103,billion kWh
+Liberia,net consumption,Africa,2021,0.871109839,billion kWh
+Libya,net consumption,Africa,2021,27.18002723,billion kWh
+Madagascar,net consumption,Africa,2021,1.955814061,billion kWh
+Malawi,net consumption,Africa,2021,0.964462345,billion kWh
+Mali,net consumption,Africa,2021,2.678220623,billion kWh
+Mauritania,net consumption,Africa,2021,1.855855218,billion kWh
+Mauritius,net consumption,Africa,2021,2.742610665,billion kWh
+Morocco,net consumption,Africa,2021,35.38603385,billion kWh
+Mozambique,net consumption,Africa,2021,13.48867831,billion kWh
+Namibia,net consumption,Africa,2021,3.434334454,billion kWh
+Niger,net consumption,Africa,2021,1.27920845,billion kWh
+Nigeria,net consumption,Africa,2021,26.595583,billion kWh
+Reunion,net consumption,Africa,2021,0.0,billion kWh
+Rwanda,net consumption,Africa,2021,0.692177964,billion kWh
+Saint Helena,net consumption,Africa,2021,0.007244152,billion kWh
+Sao Tome and Principe,net consumption,Africa,2021,0.088663497,billion kWh
+Senegal,net consumption,Africa,2021,5.299708528,billion kWh
+Seychelles,net consumption,Africa,2021,0.6131768,billion kWh
+Sierra Leone,net consumption,Africa,2021,0.130889733,billion kWh
+Somalia,net consumption,Africa,2021,0.392563143,billion kWh
+South Africa,net consumption,Africa,2021,191.4408006,billion kWh
+South Sudan,net consumption,Africa,2021,0.54690729,billion kWh
+Sudan,net consumption,Africa,2021,13.24149591,billion kWh
+Tanzania,net consumption,Africa,2021,7.193058291,billion kWh
+Togo,net consumption,Africa,2021,1.240065047,billion kWh
+Tunisia,net consumption,Africa,2021,16.47929688,billion kWh
+Uganda,net consumption,Africa,2021,3.07311486,billion kWh
+Western Sahara,net consumption,Africa,2021,0.0,billion kWh
+Zambia,net consumption,Africa,2021,14.32075156,billion kWh
+Zimbabwe,net consumption,Africa,2021,8.340104173,billion kWh
+Armenia,net consumption,Eurasia,2021,6.13238676,billion kWh
+Azerbaijan,net consumption,Eurasia,2021,24.618773,billion kWh
+Belarus,net consumption,Eurasia,2021,40.83656734,billion kWh
+Former U.S.S.R.,net consumption,Eurasia,2021,0.0,billion kWh
+Georgia,net consumption,Eurasia,2021,13.39998476,billion kWh
+Kazakhstan,net consumption,Eurasia,2021,96.58101004,billion kWh
+Kyrgyzstan,net consumption,Eurasia,2021,11.77158864,billion kWh
+Moldova,net consumption,Eurasia,2021,9.6678,billion kWh
+Russia,net consumption,Eurasia,2021,996.4429162,billion kWh
+Tajikistan,net consumption,Eurasia,2021,15.67030669,billion kWh
+Turkmenistan,net consumption,Eurasia,2021,15.23232021,billion kWh
+Ukraine,net consumption,Eurasia,2021,134.2524318,billion kWh
+Uzbekistan,net consumption,Eurasia,2021,57.83014726,billion kWh
+Albania,net consumption,Europe,2021,7.415870874,billion kWh
+Austria,net consumption,Europe,2021,68.5343248,billion kWh
+Belgium,net consumption,Europe,2021,83.4132299,billion kWh
+Bosnia and Herzegovina,net consumption,Europe,2021,11.4477785,billion kWh
+Bulgaria,net consumption,Europe,2021,30.32132826,billion kWh
+Croatia,net consumption,Europe,2021,15.93211966,billion kWh
+Cyprus,net consumption,Europe,2021,4.659154866,billion kWh
+Czechia,net consumption,Europe,2021,61.914601,billion kWh
+Denmark,net consumption,Europe,2021,38.1825901,billion kWh
+Estonia,net consumption,Europe,2021,8.8419177,billion kWh
+Faroe Islands,net consumption,Europe,2021,0.397132418,billion kWh
+Finland,net consumption,Europe,2021,83.7249711,billion kWh
+Former Czechoslovakia,net consumption,Europe,2021,0.0,billion kWh
+Former Serbia and Montenegro,net consumption,Europe,2021,0.0,billion kWh
+Former Yugoslavia,net consumption,Europe,2021,0.0,billion kWh
+France,net consumption,Europe,2021,447.4470538,billion kWh
+Germany,net consumption,Europe,2021,511.6603884,billion kWh
+"Germany, East",net consumption,Europe,2021,0.0,billion kWh
+"Germany, West",net consumption,Europe,2021,0.0,billion kWh
+Gibraltar,net consumption,Europe,2021,0.200984867,billion kWh
+Greece,net consumption,Europe,2021,52.1395064,billion kWh
+Hungary,net consumption,Europe,2021,43.9138754,billion kWh
+Iceland,net consumption,Europe,2021,18.7089881,billion kWh
+Ireland,net consumption,Europe,2021,32.6454046,billion kWh
+Italy,net consumption,Europe,2021,299.9218318,billion kWh
+Kosovo,net consumption,Europe,2021,5.550981154,billion kWh
+Latvia,net consumption,Europe,2021,6.9167337,billion kWh
+Lithuania,net consumption,Europe,2021,11.8215147,billion kWh
+Luxembourg,net consumption,Europe,2021,6.4955446,billion kWh
+Malta,net consumption,Europe,2021,2.4946277,billion kWh
+Montenegro,net consumption,Europe,2021,2.890510285,billion kWh
+Netherlands,net consumption,Europe,2021,113.2784676,billion kWh
+North Macedonia,net consumption,Europe,2021,6.732141077,billion kWh
+Norway,net consumption,Europe,2021,130.8432097,billion kWh
+Poland,net consumption,Europe,2021,158.1944616,billion kWh
+Portugal,net consumption,Europe,2021,47.7430319,billion kWh
+Romania,net consumption,Europe,2021,50.52736748,billion kWh
+Serbia,net consumption,Europe,2021,31.08700068,billion kWh
+Slovakia,net consumption,Europe,2021,26.1033634,billion kWh
+Slovenia,net consumption,Europe,2021,13.7271202,billion kWh
+Spain,net consumption,Europe,2021,233.9770099,billion kWh
+Sweden,net consumption,Europe,2021,130.7561128,billion kWh
+Switzerland,net consumption,Europe,2021,57.6972307,billion kWh
+Turkiye,net consumption,Europe,2021,284.2542337,billion kWh
+United Kingdom,net consumption,Europe,2021,287.3188985,billion kWh
+Afghanistan,net consumption,Asia & Oceania,2021,5.530597212,billion kWh
+American Samoa,net consumption,Asia & Oceania,2021,0.155598053,billion kWh
+Australia,net consumption,Asia & Oceania,2021,237.485875,billion kWh
+Bangladesh,net consumption,Asia & Oceania,2021,77.67773423,billion kWh
+Bhutan,net consumption,Asia & Oceania,2021,3.268873742,billion kWh
+Brunei,net consumption,Asia & Oceania,2021,4.245993947,billion kWh
+Burma,net consumption,Asia & Oceania,2021,17.31460198,billion kWh
+Cambodia,net consumption,Asia & Oceania,2021,10.90708477,billion kWh
+China,net consumption,Asia & Oceania,2021,7805.656341,billion kWh
+Cook Islands,net consumption,Asia & Oceania,2021,0.03946,billion kWh
+Fiji,net consumption,Asia & Oceania,2021,1.027828785,billion kWh
+French Polynesia,net consumption,Asia & Oceania,2021,0.649411907,billion kWh
+Guam,net consumption,Asia & Oceania,2021,1.729080013,billion kWh
+Hawaiian Trade Zone,net consumption,Asia & Oceania,2021,0.0,billion kWh
+Hong Kong,net consumption,Asia & Oceania,2021,46.32022044,billion kWh
+India,net consumption,Asia & Oceania,2021,1442.750051,billion kWh
+Indonesia,net consumption,Asia & Oceania,2021,281.5298376,billion kWh
+Japan,net consumption,Asia & Oceania,2021,913.0781497,billion kWh
+Kiribati,net consumption,Asia & Oceania,2021,0.0290778,billion kWh
+Laos,net consumption,Asia & Oceania,2021,6.065839386,billion kWh
+Macau,net consumption,Asia & Oceania,2021,5.629531551,billion kWh
+Malaysia,net consumption,Asia & Oceania,2021,150.7613646,billion kWh
+Maldives,net consumption,Asia & Oceania,2021,0.639484441,billion kWh
+Micronesia,net consumption,Asia & Oceania,2021,0.0,billion kWh
+Mongolia,net consumption,Asia & Oceania,2021,7.750090242,billion kWh
+Nauru,net consumption,Asia & Oceania,2021,0.037426351,billion kWh
+Nepal,net consumption,Asia & Oceania,2021,7.245611302,billion kWh
+New Caledonia,net consumption,Asia & Oceania,2021,3.296477019,billion kWh
+New Zealand,net consumption,Asia & Oceania,2021,40.51547044,billion kWh
+Niue,net consumption,Asia & Oceania,2021,0.003307615,billion kWh
+North Korea,net consumption,Asia & Oceania,2021,12.10801386,billion kWh
+Northern Mariana Islands,net consumption,Asia & Oceania,2021,0.0,billion kWh
+Pakistan,net consumption,Asia & Oceania,2021,132.3234316,billion kWh
+Papua New Guinea,net consumption,Asia & Oceania,2021,4.563458391,billion kWh
+Philippines,net consumption,Asia & Oceania,2021,98.46767231,billion kWh
+Samoa,net consumption,Asia & Oceania,2021,0.162506587,billion kWh
+Singapore,net consumption,Asia & Oceania,2021,52.91064061,billion kWh
+Solomon Islands,net consumption,Asia & Oceania,2021,0.096444086,billion kWh
+South Korea,net consumption,Asia & Oceania,2021,567.6724331,billion kWh
+Sri Lanka,net consumption,Asia & Oceania,2021,14.85574145,billion kWh
+Taiwan,net consumption,Asia & Oceania,2021,278.146543,billion kWh
+Thailand,net consumption,Asia & Oceania,2021,202.5913037,billion kWh
+Timor-Leste,net consumption,Asia & Oceania,2021,0.430617159,billion kWh
+Tonga,net consumption,Asia & Oceania,2021,0.07202576,billion kWh
+Tuvalu,net consumption,Asia & Oceania,2021,0.0,billion kWh
+U.S. Pacific Islands,net consumption,Asia & Oceania,2021,0.489689203,billion kWh
+Vanuatu,net consumption,Asia & Oceania,2021,0.065950234,billion kWh
+Vietnam,net consumption,Asia & Oceania,2021,228.9733093,billion kWh
+Wake Island,net consumption,Asia & Oceania,2021,0.0,billion kWh
+Bahrain,net consumption,Middle East,2021,31.37811543,billion kWh
+Iran,net consumption,Middle East,2021,301.9687305,billion kWh
+Iraq,net consumption,Middle East,2021,52.73421624,billion kWh
+Israel,net consumption,Middle East,2021,63.358029,billion kWh
+Jordan,net consumption,Middle East,2021,19.68910483,billion kWh
+Kuwait,net consumption,Middle East,2021,64.57876384,billion kWh
+Lebanon,net consumption,Middle East,2021,18.85709846,billion kWh
+Oman,net consumption,Middle East,2021,32.7798173,billion kWh
+Palestinian Territories,net consumption,Middle East,2021,6.23388887,billion kWh
+Qatar,net consumption,Middle East,2021,44.61817631,billion kWh
+Saudi Arabia,net consumption,Middle East,2021,329.0072713,billion kWh
+Syria,net consumption,Middle East,2021,12.75392781,billion kWh
+United Arab Emirates,net consumption,Middle East,2021,128.61007,billion kWh
+Yemen,net consumption,Middle East,2021,2.931320206,billion kWh
+Bermuda,net consumption,North America,2021,0.539310022,billion kWh
+Canada,net consumption,North America,2021,554.7443874,billion kWh
+Greenland,net consumption,North America,2021,0.582709742,billion kWh
+Mexico,net consumption,North America,2021,300.9570645,billion kWh
+Saint Pierre and Miquelon,net consumption,North America,2021,0.053198517,billion kWh
+U.S. Territories,net consumption,North America,2021,0.0,billion kWh
+United States,net consumption,North America,2021,3979.279761,billion kWh
+Antarctica,net consumption,Central & South America,2021,0.0,billion kWh
+Antigua and Barbuda,net consumption,Central & South America,2021,0.28587519,billion kWh
+Argentina,net consumption,Central & South America,2021,126.7355285,billion kWh
+Aruba,net consumption,Central & South America,2021,0.7676192,billion kWh
+Barbados,net consumption,Central & South America,2021,1.005727309,billion kWh
+Belize,net consumption,Central & South America,2021,0.925221695,billion kWh
+Bolivia,net consumption,Central & South America,2021,9.676011123,billion kWh
+Brazil,net consumption,Central & South America,2021,577.2953567,billion kWh
+British Virgin Islands,net consumption,Central & South America,2021,0.117269621,billion kWh
+Cayman Islands,net consumption,Central & South America,2021,0.702392687,billion kWh
+Chile,net consumption,Central & South America,2021,81.4005473,billion kWh
+Colombia,net consumption,Central & South America,2021,76.1928486,billion kWh
+Costa Rica,net consumption,Central & South America,2021,10.659704,billion kWh
+Cuba,net consumption,Central & South America,2021,16.26872091,billion kWh
+Dominica,net consumption,Central & South America,2021,0.16299964,billion kWh
+Dominican Republic,net consumption,Central & South America,2021,15.42583555,billion kWh
+Ecuador,net consumption,Central & South America,2021,26.60766825,billion kWh
+El Salvador,net consumption,Central & South America,2021,6.424477451,billion kWh
+Falkland Islands,net consumption,Central & South America,2021,0.019132136,billion kWh
+French Guiana,net consumption,Central & South America,2021,0.0,billion kWh
+Grenada,net consumption,Central & South America,2021,0.198807688,billion kWh
+Guadeloupe,net consumption,Central & South America,2021,0.0,billion kWh
+Guatemala,net consumption,Central & South America,2021,12.82267342,billion kWh
+Guyana,net consumption,Central & South America,2021,0.980883161,billion kWh
+Haiti,net consumption,Central & South America,2021,0.365929086,billion kWh
+Honduras,net consumption,Central & South America,2021,8.157778012,billion kWh
+Jamaica,net consumption,Central & South America,2021,3.19920181,billion kWh
+Martinique,net consumption,Central & South America,2021,0.0,billion kWh
+Montserrat,net consumption,Central & South America,2021,0.01448104,billion kWh
+Netherlands Antilles,net consumption,Central & South America,2021,0.764007905,billion kWh
+Nicaragua,net consumption,Central & South America,2021,4.929996152,billion kWh
+Panama,net consumption,Central & South America,2021,9.488975158,billion kWh
+Paraguay,net consumption,Central & South America,2021,7.677260571,billion kWh
+Peru,net consumption,Central & South America,2021,51.762119,billion kWh
+Puerto Rico,net consumption,Central & South America,2021,17.12121736,billion kWh
+Saint Kitts and Nevis,net consumption,Central & South America,2021,0.175865022,billion kWh
+Saint Lucia,net consumption,Central & South America,2021,0.326964342,billion kWh
+Saint Vincent/Grenadines,net consumption,Central & South America,2021,0.154165575,billion kWh
+Suriname,net consumption,Central & South America,2021,2.370408283,billion kWh
+The Bahamas,net consumption,Central & South America,2021,1.97622619,billion kWh
+Trinidad and Tobago,net consumption,Central & South America,2021,8.303561981,billion kWh
+Turks and Caicos Islands,net consumption,Central & South America,2021,0.25976828,billion kWh
+U.S. Virgin Islands,net consumption,Central & South America,2021,0.6415072,billion kWh
+Uruguay,net consumption,Central & South America,2021,13.61377336,billion kWh
+Venezuela,net consumption,Central & South America,2021,71.04766385,billion kWh

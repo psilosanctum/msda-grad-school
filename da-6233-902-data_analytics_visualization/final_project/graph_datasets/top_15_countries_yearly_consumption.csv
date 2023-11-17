@@ -1,0 +1,631 @@
+Country,Features,Region,Year,Amount,Unit
+China,net consumption,Asia & Oceania,2021,7805.656341,billion kWh
+United States,net consumption,North America,2021,3979.279761,billion kWh
+India,net consumption,Asia & Oceania,2021,1442.750051,billion kWh
+Russia,net consumption,Eurasia,2021,996.4429162,billion kWh
+Japan,net consumption,Asia & Oceania,2021,913.0781497,billion kWh
+Brazil,net consumption,Central & South America,2021,577.2953567,billion kWh
+South Korea,net consumption,Asia & Oceania,2021,567.6724331,billion kWh
+Canada,net consumption,North America,2021,554.7443874,billion kWh
+Germany,net consumption,Europe,2021,511.6603884,billion kWh
+France,net consumption,Europe,2021,447.4470538,billion kWh
+Saudi Arabia,net consumption,Middle East,2021,329.0072713,billion kWh
+Iran,net consumption,Middle East,2021,301.9687305,billion kWh
+Mexico,net consumption,North America,2021,300.9570645,billion kWh
+Italy,net consumption,Europe,2021,299.9218318,billion kWh
+United Kingdom,net consumption,Europe,2021,287.3188985,billion kWh
+China,net consumption,Asia & Oceania,2020,7115.077185,billion kWh
+United States,net consumption,North America,2020,3897.894198,billion kWh
+India,net consumption,Asia & Oceania,2020,1328.658815,billion kWh
+Russia,net consumption,Eurasia,2020,940.046104,billion kWh
+Japan,net consumption,Asia & Oceania,2020,914.5201395,billion kWh
+Canada,net consumption,North America,2020,533.5070587,billion kWh
+Brazil,net consumption,Central & South America,2020,533.36096,billion kWh
+South Korea,net consumption,Asia & Oceania,2020,531.7351135,billion kWh
+Germany,net consumption,Europe,2020,499.2452768,billion kWh
+France,net consumption,Europe,2020,425.070898,billion kWh
+Saudi Arabia,net consumption,Middle East,2020,308.3425776,billion kWh
+United Kingdom,net consumption,Europe,2020,295.0513947,billion kWh
+Mexico,net consumption,North America,2020,292.5304682,billion kWh
+Italy,net consumption,Europe,2020,287.2633359,billion kWh
+Iran,net consumption,Middle East,2020,286.693449,billion kWh
+China,net consumption,Asia & Oceania,2019,6802.698896,billion kWh
+United States,net consumption,North America,2019,3989.378249,billion kWh
+India,net consumption,Asia & Oceania,2019,1342.052063,billion kWh
+Russia,net consumption,Eurasia,2019,945.36056,billion kWh
+Japan,net consumption,Asia & Oceania,2019,944.8867835,billion kWh
+Canada,net consumption,North America,2019,547.2500179,billion kWh
+Brazil,net consumption,Central & South America,2019,537.9698027,billion kWh
+South Korea,net consumption,Asia & Oceania,2019,534.2725603,billion kWh
+Germany,net consumption,Europe,2019,517.4728151,billion kWh
+France,net consumption,Europe,2019,448.0217777,billion kWh
+Saudi Arabia,net consumption,Middle East,2019,331.5737,billion kWh
+United Kingdom,net consumption,Europe,2019,309.2651075,billion kWh
+Italy,net consumption,Europe,2019,284.0286052,billion kWh
+Iran,net consumption,Middle East,2019,283.763607,billion kWh
+Mexico,net consumption,North America,2019,278.8829731,billion kWh
+China,net consumption,Asia & Oceania,2018,6450.426757,billion kWh
+United States,net consumption,North America,2018,4032.628267,billion kWh
+India,net consumption,Asia & Oceania,2018,1312.596163,billion kWh
+Japan,net consumption,Asia & Oceania,2018,963.9000025,billion kWh
+Russia,net consumption,Eurasia,2018,931.11845,billion kWh
+Canada,net consumption,North America,2018,554.0621157,billion kWh
+South Korea,net consumption,Asia & Oceania,2018,542.9004483,billion kWh
+Germany,net consumption,Europe,2018,532.1598444,billion kWh
+Brazil,net consumption,Central & South America,2018,531.1582795,billion kWh
+France,net consumption,Europe,2018,451.3417492,billion kWh
+Saudi Arabia,net consumption,Middle East,2018,330.59566,billion kWh
+United Kingdom,net consumption,Europe,2018,313.6035513,billion kWh
+Italy,net consumption,Europe,2018,306.2798323,billion kWh
+Mexico,net consumption,North America,2018,291.1822412,billion kWh
+Iran,net consumption,Middle East,2018,271.485472,billion kWh
+China,net consumption,Asia & Oceania,2017,6057.175784,billion kWh
+United States,net consumption,North America,2017,3888.305645,billion kWh
+India,net consumption,Asia & Oceania,2017,1228.624117,billion kWh
+Japan,net consumption,Asia & Oceania,2017,965.224223,billion kWh
+Russia,net consumption,Eurasia,2017,920.425948,billion kWh
+Canada,net consumption,North America,2017,547.034675,billion kWh
+Germany,net consumption,Europe,2017,540.634873,billion kWh
+South Korea,net consumption,Asia & Oceania,2017,520.97747,billion kWh
+Brazil,net consumption,Central & South America,2017,519.883011,billion kWh
+France,net consumption,Europe,2017,454.23484,billion kWh
+Saudi Arabia,net consumption,Middle East,2017,323.06642,billion kWh
+United Kingdom,net consumption,Europe,2017,312.481032,billion kWh
+Italy,net consumption,Europe,2017,304.722482,billion kWh
+Iran,net consumption,Middle East,2017,268.628759,billion kWh
+Mexico,net consumption,North America,2017,265.574923,billion kWh
+China,net consumption,Asia & Oceania,2016,5585.625151,billion kWh
+United States,net consumption,North America,2016,3921.110699,billion kWh
+India,net consumption,Asia & Oceania,2016,1161.54307,billion kWh
+Japan,net consumption,Asia & Oceania,2016,956.720654,billion kWh
+Russia,net consumption,Eurasia,2016,911.41306,billion kWh
+Canada,net consumption,North America,2016,548.451276,billion kWh
+Germany,net consumption,Europe,2016,539.79954,billion kWh
+South Korea,net consumption,Asia & Oceania,2016,516.627693,billion kWh
+Brazil,net consumption,Central & South America,2016,513.88606,billion kWh
+France,net consumption,Europe,2016,457.025221,billion kWh
+Saudi Arabia,net consumption,Middle East,2016,318.60396,billion kWh
+United Kingdom,net consumption,Europe,2016,317.4593842,billion kWh
+Italy,net consumption,Europe,2016,298.250334,billion kWh
+Mexico,net consumption,North America,2016,263.298089,billion kWh
+Iran,net consumption,Middle East,2016,252.252,billion kWh
+China,net consumption,Asia & Oceania,2015,5273.535637,billion kWh
+United States,net consumption,North America,2015,3914.299176,billion kWh
+India,net consumption,Asia & Oceania,2015,1093.537704,billion kWh
+Japan,net consumption,Asia & Oceania,2015,962.442903,billion kWh
+Russia,net consumption,Eurasia,2015,891.82394,billion kWh
+Canada,net consumption,North America,2015,543.406076,billion kWh
+Germany,net consumption,Europe,2015,537.623698,billion kWh
+Brazil,net consumption,Central & South America,2015,512.906384,billion kWh
+South Korea,net consumption,Asia & Oceania,2015,505.535225,billion kWh
+France,net consumption,Europe,2015,450.044349,billion kWh
+United Kingdom,net consumption,Europe,2015,320.635534,billion kWh
+Saudi Arabia,net consumption,Middle East,2015,312.08536,billion kWh
+Italy,net consumption,Europe,2015,300.060217,billion kWh
+Mexico,net consumption,North America,2015,256.556957,billion kWh
+Iran,net consumption,Middle East,2015,236.544,billion kWh
+China,net consumption,Asia & Oceania,2014,5078.71756,billion kWh
+United States,net consumption,North America,2014,3914.50681,billion kWh
+India,net consumption,Asia & Oceania,2014,1041.945749,billion kWh
+Japan,net consumption,Asia & Oceania,2014,983.904336,billion kWh
+Russia,net consumption,Eurasia,2014,892.8323,billion kWh
+Canada,net consumption,North America,2014,559.348308,billion kWh
+Germany,net consumption,Europe,2014,534.052503,billion kWh
+Brazil,net consumption,Central & South America,2014,522.46688,billion kWh
+South Korea,net consumption,Asia & Oceania,2014,504.727892,billion kWh
+France,net consumption,Europe,2014,440.727747,billion kWh
+United Kingdom,net consumption,Europe,2014,314.402287,billion kWh
+Saudi Arabia,net consumption,Middle East,2014,295.08274,billion kWh
+Italy,net consumption,Europe,2014,293.964149,billion kWh
+Mexico,net consumption,North America,2014,248.333396,billion kWh
+Iran,net consumption,Middle East,2014,233.224,billion kWh
+China,net consumption,Asia & Oceania,2013,4846.24602,billion kWh
+United States,net consumption,North America,2013,3876.510978,billion kWh
+Japan,net consumption,Asia & Oceania,2013,979.909071,billion kWh
+India,net consumption,Asia & Oceania,2013,946.3276169,billion kWh
+Russia,net consumption,Eurasia,2013,882.92126,billion kWh
+Canada,net consumption,North America,2013,560.744571,billion kWh
+Germany,net consumption,Europe,2013,544.830313,billion kWh
+Brazil,net consumption,Central & South America,2013,508.82972,billion kWh
+South Korea,net consumption,Asia & Oceania,2013,497.599475,billion kWh
+France,net consumption,Europe,2013,465.150496,billion kWh
+United Kingdom,net consumption,Europe,2013,327.229419,billion kWh
+Italy,net consumption,Europe,2013,299.787771,billion kWh
+Saudi Arabia,net consumption,Middle East,2013,263.96886,billion kWh
+Mexico,net consumption,North America,2013,244.726501,billion kWh
+Iran,net consumption,Middle East,2013,215.70767,billion kWh
+China,net consumption,Asia & Oceania,2012,4439.87758,billion kWh
+United States,net consumption,North America,2012,3838.802726,billion kWh
+Japan,net consumption,Asia & Oceania,2012,1000.306711,billion kWh
+India,net consumption,Asia & Oceania,2012,891.71308,billion kWh
+Russia,net consumption,Eurasia,2012,890.80348,billion kWh
+Germany,net consumption,Europe,2012,546.28479,billion kWh
+Canada,net consumption,North America,2012,539.186083,billion kWh
+Brazil,net consumption,Central & South America,2012,493.05156,billion kWh
+South Korea,net consumption,Asia & Oceania,2012,492.878837,billion kWh
+France,net consumption,Europe,2012,460.679742,billion kWh
+United Kingdom,net consumption,Europe,2012,328.261434,billion kWh
+Italy,net consumption,Europe,2012,309.529113,billion kWh
+Saudi Arabia,net consumption,Middle East,2012,247.55902,billion kWh
+Mexico,net consumption,North America,2012,241.758528,billion kWh
+Iran,net consumption,Middle East,2012,195.32188,billion kWh
+China,net consumption,Asia & Oceania,2011,4182.66356,billion kWh
+United States,net consumption,North America,2011,3886.633789,billion kWh
+Japan,net consumption,Asia & Oceania,2011,997.232672,billion kWh
+Russia,net consumption,Eurasia,2011,870.92041,billion kWh
+India,net consumption,Asia & Oceania,2011,841.71238,billion kWh
+Canada,net consumption,North America,2011,548.219153,billion kWh
+Germany,net consumption,Europe,2011,547.112355,billion kWh
+South Korea,net consumption,Asia & Oceania,2011,481.907834,billion kWh
+Brazil,net consumption,Central & South America,2011,475.7648,billion kWh
+France,net consumption,Europe,2011,449.868447,billion kWh
+United Kingdom,net consumption,Europe,2011,328.282185,billion kWh
+Italy,net consumption,Europe,2011,315.890681,billion kWh
+Mexico,net consumption,North America,2011,233.949821,billion kWh
+Saudi Arabia,net consumption,Middle East,2011,211.49538,billion kWh
+Iran,net consumption,Middle East,2011,186.1383,billion kWh
+United States,net consumption,North America,2010,3889.289876,billion kWh
+China,net consumption,Asia & Oceania,2010,3716.55362,billion kWh
+Japan,net consumption,Asia & Oceania,2010,1032.074897,billion kWh
+Russia,net consumption,Eurasia,2010,860.18224,billion kWh
+India,net consumption,Asia & Oceania,2010,727.51078,billion kWh
+Germany,net consumption,Europe,2010,553.832042,billion kWh
+Canada,net consumption,North America,2010,530.103604,billion kWh
+France,net consumption,Europe,2010,473.785653,billion kWh
+Brazil,net consumption,Central & South America,2010,459.68232,billion kWh
+South Korea,net consumption,Asia & Oceania,2010,458.783746,billion kWh
+United Kingdom,net consumption,Europe,2010,339.37752,billion kWh
+Italy,net consumption,Europe,2010,311.707063,billion kWh
+Mexico,net consumption,North America,2010,219.213769,billion kWh
+Saudi Arabia,net consumption,Middle East,2010,204.27298,billion kWh
+Iran,net consumption,Middle East,2010,182.7144,billion kWh
+United States,net consumption,North America,2009,3725.345123,billion kWh
+China,net consumption,Asia & Oceania,2009,3290.103,billion kWh
+Japan,net consumption,Asia & Oceania,2009,926.602,billion kWh
+Russia,net consumption,Eurasia,2009,817.8665,billion kWh
+India,net consumption,Asia & Oceania,2009,680.088,billion kWh
+Canada,net consumption,North America,2009,535.105882,billion kWh
+Germany,net consumption,Europe,2009,520.845,billion kWh
+France,net consumption,Europe,2009,446.59636,billion kWh
+Brazil,net consumption,Central & South America,2009,418.53774,billion kWh
+South Korea,net consumption,Asia & Oceania,2009,409.23182,billion kWh
+United Kingdom,net consumption,Europe,2009,323.73182,billion kWh
+Italy,net consumption,Europe,2009,297.3527,billion kWh
+Mexico,net consumption,North America,2009,202.09172,billion kWh
+Saudi Arabia,net consumption,Middle East,2009,186.092,billion kWh
+Iran,net consumption,Middle East,2009,169.8324,billion kWh
+United States,net consumption,North America,2008,3867.360635,billion kWh
+China,net consumption,Asia & Oceania,2008,3070.853,billion kWh
+Japan,net consumption,Asia & Oceania,2008,954.104,billion kWh
+Russia,net consumption,Eurasia,2008,857.29781,billion kWh
+India,net consumption,Asia & Oceania,2008,629.04,billion kWh
+Canada,net consumption,North America,2008,559.070389,billion kWh
+Germany,net consumption,Europe,2008,549.904,billion kWh
+France,net consumption,Europe,2008,462.5325,billion kWh
+Brazil,net consumption,Central & South America,2008,419.80854,billion kWh
+South Korea,net consumption,Asia & Oceania,2008,402.89236,billion kWh
+United Kingdom,net consumption,Europe,2008,343.63429,billion kWh
+Italy,net consumption,Europe,2008,314.60706,billion kWh
+Mexico,net consumption,North America,2008,204.56938,billion kWh
+Saudi Arabia,net consumption,Middle East,2008,174.236,billion kWh
+Iran,net consumption,Middle East,2008,162.10814,billion kWh
+United States,net consumption,North America,2007,3890.977208,billion kWh
+China,net consumption,Asia & Oceania,2007,2891.542,billion kWh
+Japan,net consumption,Asia & Oceania,2007,1020.313,billion kWh
+Russia,net consumption,Eurasia,2007,842.49394,billion kWh
+India,net consumption,Asia & Oceania,2007,580.237,billion kWh
+Canada,net consumption,North America,2007,560.760367,billion kWh
+Germany,net consumption,Europe,2007,552.6804,billion kWh
+France,net consumption,Europe,2007,449.71518,billion kWh
+Brazil,net consumption,Central & South America,2007,404.16758,billion kWh
+South Korea,net consumption,Asia & Oceania,2007,387.02124,billion kWh
+United Kingdom,net consumption,Europe,2007,345.0328,billion kWh
+Italy,net consumption,Europe,2007,314.7246,billion kWh
+Mexico,net consumption,North America,2007,202.2494,billion kWh
+Saudi Arabia,net consumption,Middle East,2007,163.413,billion kWh
+Iran,net consumption,Middle East,2007,153.26264,billion kWh
+United States,net consumption,North America,2006,3817.37405,billion kWh
+China,net consumption,Asia & Oceania,2006,2523.947,billion kWh
+Japan,net consumption,Asia & Oceania,2006,980.61,billion kWh
+Russia,net consumption,Eurasia,2006,818.24968,billion kWh
+Canada,net consumption,North America,2006,550.193991,billion kWh
+Germany,net consumption,Europe,2006,548.7564,billion kWh
+India,net consumption,Asia & Oceania,2006,548.192,billion kWh
+France,net consumption,Europe,2006,447.83318,billion kWh
+Brazil,net consumption,Central & South America,2006,382.53928,billion kWh
+South Korea,net consumption,Asia & Oceania,2006,364.48528,billion kWh
+United Kingdom,net consumption,Europe,2006,348.44823,billion kWh
+Italy,net consumption,Europe,2006,313.76748,billion kWh
+Mexico,net consumption,North America,2006,196.40852,billion kWh
+Saudi Arabia,net consumption,Middle East,2006,156.75,billion kWh
+Iran,net consumption,Middle East,2006,146.07354,billion kWh
+United States,net consumption,North America,2005,3811.346491,billion kWh
+China,net consumption,Asia & Oceania,2005,2196.172,billion kWh
+Japan,net consumption,Asia & Oceania,2005,962.937,billion kWh
+Russia,net consumption,Eurasia,2005,776.05376,billion kWh
+Canada,net consumption,North America,2005,560.37862,billion kWh
+Germany,net consumption,Europe,2005,543.7922,billion kWh
+India,net consumption,Asia & Oceania,2005,496.732,billion kWh
+France,net consumption,Europe,2005,452.11806,billion kWh
+Brazil,net consumption,Central & South America,2005,367.88328,billion kWh
+United Kingdom,net consumption,Europe,2005,351.07049,billion kWh
+South Korea,net consumption,Asia & Oceania,2005,350.19378,billion kWh
+Italy,net consumption,Europe,2005,306.6837,billion kWh
+Mexico,net consumption,North America,2005,192.27152,billion kWh
+Saudi Arabia,net consumption,Middle East,2005,146.978,billion kWh
+Iran,net consumption,Middle East,2005,135.19698,billion kWh
+United States,net consumption,North America,2004,3716.191051,billion kWh
+China,net consumption,Asia & Oceania,2004,1955.39,billion kWh
+Japan,net consumption,Asia & Oceania,2004,953.059,billion kWh
+Russia,net consumption,Eurasia,2004,765.242,billion kWh
+Germany,net consumption,Europe,2004,548.8792,billion kWh
+Canada,net consumption,North America,2004,534.064122,billion kWh
+India,net consumption,Asia & Oceania,2004,470.993,billion kWh
+France,net consumption,Europe,2004,446.95728,billion kWh
+Brazil,net consumption,Central & South America,2004,353.29366,billion kWh
+United Kingdom,net consumption,Europe,2004,343.05598,billion kWh
+South Korea,net consumption,Asia & Oceania,2004,332.92648,billion kWh
+Italy,net consumption,Europe,2004,302.0686,billion kWh
+Mexico,net consumption,North America,2004,184.40962,billion kWh
+Saudi Arabia,net consumption,Middle East,2004,137.355,billion kWh
+Iran,net consumption,Middle East,2004,126.99336,billion kWh
+United States,net consumption,North America,2003,3662.224009,billion kWh
+China,net consumption,Asia & Oceania,2003,1676.829,billion kWh
+Japan,net consumption,Asia & Oceania,2003,923.699,billion kWh
+Russia,net consumption,Eurasia,2003,744.126,billion kWh
+Germany,net consumption,Europe,2003,542.371,billion kWh
+Canada,net consumption,North America,2003,528.233048,billion kWh
+India,net consumption,Asia & Oceania,2003,442.127,billion kWh
+France,net consumption,Europe,2003,435.4392,billion kWh
+United Kingdom,net consumption,Europe,2003,342.71895,billion kWh
+Brazil,net consumption,Central & South America,2003,336.86862,billion kWh
+South Korea,net consumption,Asia & Oceania,2003,312.89178,billion kWh
+Italy,net consumption,Europe,2003,294.97176,billion kWh
+Mexico,net consumption,North America,2003,172.57702,billion kWh
+Saudi Arabia,net consumption,Middle East,2003,136.818,billion kWh
+Iran,net consumption,Middle East,2003,119.98682,billion kWh
+United States,net consumption,North America,2002,3631.817305,billion kWh
+China,net consumption,Asia & Oceania,2002,1459.429,billion kWh
+Japan,net consumption,Asia & Oceania,2002,932.99,billion kWh
+Russia,net consumption,Eurasia,2002,730.411,billion kWh
+Germany,net consumption,Europe,2002,532.51744,billion kWh
+Canada,net consumption,North America,2002,513.18464,billion kWh
+India,net consumption,Asia & Oceania,2002,420.808,billion kWh
+France,net consumption,Europe,2002,418.21038,billion kWh
+United Kingdom,net consumption,Europe,2002,339.88031,billion kWh
+Brazil,net consumption,Central & South America,2002,318.97716,billion kWh
+South Korea,net consumption,Asia & Oceania,2002,296.4001,billion kWh
+Italy,net consumption,Europe,2002,290.61424,billion kWh
+Mexico,net consumption,North America,2002,174.02456,billion kWh
+Saudi Arabia,net consumption,Middle East,2002,123.405,billion kWh
+Iran,net consumption,Middle East,2002,109.41404,billion kWh
+United States,net consumption,North America,2001,3557.247608,billion kWh
+China,net consumption,Asia & Oceania,2001,1314.783,billion kWh
+Japan,net consumption,Asia & Oceania,2001,919.667,billion kWh
+Russia,net consumption,Eurasia,2001,721.016,billion kWh
+Germany,net consumption,Europe,2001,520.1949,billion kWh
+Canada,net consumption,North America,2001,505.604054,billion kWh
+France,net consumption,Europe,2001,420.4527,billion kWh
+India,net consumption,Asia & Oceania,2001,391.979982,billion kWh
+United Kingdom,net consumption,Europe,2001,338.5837,billion kWh
+Brazil,net consumption,Central & South America,2001,304.48298,billion kWh
+Italy,net consumption,Europe,2001,284.27174,billion kWh
+South Korea,net consumption,Asia & Oceania,2001,279.25456,billion kWh
+Mexico,net consumption,North America,2001,171.14658,billion kWh
+Saudi Arabia,net consumption,Middle East,2001,118.078,billion kWh
+Iran,net consumption,Middle East,2001,101.70472,billion kWh
+United States,net consumption,North America,2000,3592.473307,billion kWh
+China,net consumption,Asia & Oceania,2000,1178.033,billion kWh
+Japan,net consumption,Asia & Oceania,2000,936.235,billion kWh
+Russia,net consumption,Eurasia,2000,717.253,billion kWh
+Germany,net consumption,Europe,2000,509.08148,billion kWh
+Canada,net consumption,North America,2000,505.225524,billion kWh
+France,net consumption,Europe,2000,409.74366,billion kWh
+India,net consumption,Asia & Oceania,2000,383.924,billion kWh
+United Kingdom,net consumption,Europe,2000,335.61762,billion kWh
+Brazil,net consumption,Central & South America,2000,321.99852,billion kWh
+Italy,net consumption,Europe,2000,278.36228,billion kWh
+South Korea,net consumption,Asia & Oceania,2000,259.54233,billion kWh
+Mexico,net consumption,North America,2000,166.51256,billion kWh
+Saudi Arabia,net consumption,Middle East,2000,109.489,billion kWh
+Iran,net consumption,Middle East,2000,94.35608,billion kWh
+United States,net consumption,North America,1999,3483.819094,billion kWh
+China,net consumption,Asia & Oceania,1999,1076.767,billion kWh
+Japan,net consumption,Asia & Oceania,1999,949.515,billion kWh
+Russia,net consumption,Eurasia,1999,688.434,billion kWh
+Germany,net consumption,Europe,1999,497.056,billion kWh
+Canada,net consumption,North America,1999,490.033692,billion kWh
+France,net consumption,Europe,1999,401.221,billion kWh
+India,net consumption,Asia & Oceania,1999,365.536,billion kWh
+United Kingdom,net consumption,Europe,1999,328.406,billion kWh
+Brazil,net consumption,Central & South America,1999,310.61948,billion kWh
+Italy,net consumption,Europe,1999,267.354,billion kWh
+South Korea,net consumption,Asia & Oceania,1999,212.019,billion kWh
+Mexico,net consumption,North America,1999,156.832,billion kWh
+Saudi Arabia,net consumption,Middle East,1999,107.131,billion kWh
+Iran,net consumption,Middle East,1999,84.623,billion kWh
+United States,net consumption,North America,1998,3425.184938,billion kWh
+China,net consumption,Asia & Oceania,1998,1017.457,billion kWh
+Japan,net consumption,Asia & Oceania,1998,943.324,billion kWh
+Russia,net consumption,Eurasia,1998,675.259,billion kWh
+Germany,net consumption,Europe,1998,497.445,billion kWh
+Canada,net consumption,North America,1998,479.436168,billion kWh
+France,net consumption,Europe,1998,393.359,billion kWh
+India,net consumption,Asia & Oceania,1998,360.501,billion kWh
+United Kingdom,net consumption,Europe,1998,322.783,billion kWh
+Brazil,net consumption,Central & South America,1998,302.90687,billion kWh
+Italy,net consumption,Europe,1998,260.883,billion kWh
+South Korea,net consumption,Asia & Oceania,1998,212.458,billion kWh
+Mexico,net consumption,North America,1998,148.949,billion kWh
+Saudi Arabia,net consumption,Middle East,1998,108.244,billion kWh
+Iran,net consumption,Middle East,1998,77.62,billion kWh
+United States,net consumption,North America,1997,3301.927385,billion kWh
+China,net consumption,Asia & Oceania,1997,983.495,billion kWh
+Japan,net consumption,Asia & Oceania,1997,937.534,billion kWh
+Russia,net consumption,Eurasia,1997,689.786,billion kWh
+Germany,net consumption,Europe,1997,492.93143,billion kWh
+Canada,net consumption,North America,1997,482.487399,billion kWh
+France,net consumption,Europe,1997,381.735,billion kWh
+India,net consumption,Asia & Oceania,1997,344.504,billion kWh
+United Kingdom,net consumption,Europe,1997,315.979,billion kWh
+Brazil,net consumption,Central & South America,1997,290.86791,billion kWh
+Italy,net consumption,Europe,1997,253.48497,billion kWh
+South Korea,net consumption,Asia & Oceania,1997,218.276237,billion kWh
+Mexico,net consumption,North America,1997,144.58669,billion kWh
+Saudi Arabia,net consumption,Middle East,1997,99.521,billion kWh
+Iran,net consumption,Middle East,1997,73.358,billion kWh
+United States,net consumption,North America,1996,3253.834756,billion kWh
+China,net consumption,Asia & Oceania,1996,920.966,billion kWh
+Japan,net consumption,Asia & Oceania,1996,910.51003,billion kWh
+Russia,net consumption,Eurasia,1996,700.221,billion kWh
+Germany,net consumption,Europe,1996,489.296,billion kWh
+Canada,net consumption,North America,1996,473.652624,billion kWh
+France,net consumption,Europe,1996,382.65,billion kWh
+India,net consumption,Asia & Oceania,1996,323.097,billion kWh
+United Kingdom,net consumption,Europe,1996,315.792,billion kWh
+Brazil,net consumption,Central & South America,1996,277.74329,billion kWh
+Italy,net consumption,Europe,1996,246.033,billion kWh
+South Korea,net consumption,Asia & Oceania,1996,199.95062,billion kWh
+Mexico,net consumption,North America,1996,132.938,billion kWh
+Saudi Arabia,net consumption,Middle East,1996,94.551,billion kWh
+Iran,net consumption,Middle East,1996,69.671,billion kWh
+United States,net consumption,North America,1995,3164.023808,billion kWh
+Japan,net consumption,Asia & Oceania,1995,890.385,billion kWh
+China,net consumption,Asia & Oceania,1995,876.577,billion kWh
+Russia,net consumption,Eurasia,1995,712.081,billion kWh
+Germany,net consumption,Europe,1995,482.523,billion kWh
+Canada,net consumption,North America,1995,466.698881,billion kWh
+France,net consumption,Europe,1995,367.8385,billion kWh
+India,net consumption,Asia & Oceania,1995,318.336,billion kWh
+United Kingdom,net consumption,Europe,1995,297.159,billion kWh
+Brazil,net consumption,Central & South America,1995,261.50987,billion kWh
+Italy,net consumption,Europe,1995,243.676,billion kWh
+South Korea,net consumption,Asia & Oceania,1995,180.03793,billion kWh
+Mexico,net consumption,North America,1995,125.452,billion kWh
+Saudi Arabia,net consumption,Middle East,1995,91.889,billion kWh
+Iran,net consumption,Middle East,1995,63.732,billion kWh
+United States,net consumption,North America,1994,3080.941273,billion kWh
+Japan,net consumption,Asia & Oceania,1994,866.555,billion kWh
+China,net consumption,Asia & Oceania,1994,818.535,billion kWh
+Russia,net consumption,Eurasia,1994,701.881,billion kWh
+Germany,net consumption,Europe,1994,475.055,billion kWh
+Canada,net consumption,North America,1994,459.642142,billion kWh
+France,net consumption,Europe,1994,363.556,billion kWh
+India,net consumption,Asia & Oceania,1994,297.98,billion kWh
+United Kingdom,net consumption,Europe,1994,287.214,billion kWh
+Brazil,net consumption,Central & South America,1994,247.990752,billion kWh
+Italy,net consumption,Europe,1994,236.957,billion kWh
+South Korea,net consumption,Asia & Oceania,1994,163.29574,billion kWh
+Mexico,net consumption,North America,1994,120.955,billion kWh
+Saudi Arabia,net consumption,Middle East,1994,85.163,billion kWh
+Iran,net consumption,Middle East,1994,65.533,billion kWh
+United States,net consumption,North America,1993,3000.747608,billion kWh
+Japan,net consumption,Asia & Oceania,1993,813.417,billion kWh
+Russia,net consumption,Eurasia,1993,807.823,billion kWh
+China,net consumption,Asia & Oceania,1993,738.807,billion kWh
+Germany,net consumption,Europe,1993,477.208,billion kWh
+Canada,net consumption,North America,1993,455.060803,billion kWh
+France,net consumption,Europe,1993,356.08,billion kWh
+United Kingdom,net consumption,Europe,1993,293.93,billion kWh
+India,net consumption,Asia & Oceania,1993,275.674877,billion kWh
+Brazil,net consumption,Central & South America,1993,239.094122,billion kWh
+Italy,net consumption,Europe,1993,229.536,billion kWh
+South Korea,net consumption,Asia & Oceania,1993,126.06542,billion kWh
+Mexico,net consumption,North America,1993,112.418312,billion kWh
+Saudi Arabia,net consumption,Middle East,1993,75.432,billion kWh
+Iran,net consumption,Middle East,1993,62.051,billion kWh
+United States,net consumption,North America,1992,2897.24991,billion kWh
+Russia,net consumption,Eurasia,1992,864.351,billion kWh
+Japan,net consumption,Asia & Oceania,1992,805.674,billion kWh
+China,net consumption,Asia & Oceania,1992,666.142,billion kWh
+Germany,net consumption,Europe,1992,485.685,billion kWh
+Canada,net consumption,North America,1992,444.724821,billion kWh
+France,net consumption,Europe,1992,355.1608,billion kWh
+United Kingdom,net consumption,Europe,1992,292.523,billion kWh
+India,net consumption,Asia & Oceania,1992,255.687,billion kWh
+Italy,net consumption,Europe,1992,229.821,billion kWh
+Brazil,net consumption,Central & South America,1992,228.10914,billion kWh
+South Korea,net consumption,Asia & Oceania,1992,118.985,billion kWh
+Mexico,net consumption,North America,1992,108.144,billion kWh
+Saudi Arabia,net consumption,Middle East,1992,67.819,billion kWh
+Iran,net consumption,Middle East,1992,59.171,billion kWh
+United States,net consumption,North America,1991,2886.099524,billion kWh
+Japan,net consumption,Asia & Oceania,1991,797.667,billion kWh
+China,net consumption,Asia & Oceania,1991,597.204,billion kWh
+Germany,net consumption,Europe,1991,491.098,billion kWh
+Canada,net consumption,North America,1991,439.87071,billion kWh
+France,net consumption,Europe,1991,345.386,billion kWh
+United Kingdom,net consumption,Europe,1991,291.603,billion kWh
+India,net consumption,Asia & Oceania,1991,240.203,billion kWh
+Italy,net consumption,Europe,1991,224.429,billion kWh
+Brazil,net consumption,Central & South America,1991,222.44502,billion kWh
+South Korea,net consumption,Asia & Oceania,1991,107.473,billion kWh
+Mexico,net consumption,North America,1991,104.712,billion kWh
+Saudi Arabia,net consumption,Middle East,1991,64.338,billion kWh
+Iran,net consumption,Middle East,1991,53.871,billion kWh
+Russia,net consumption,Eurasia,1991,0.0,billion kWh
+United States,net consumption,North America,1990,2837.118809,billion kWh
+Japan,net consumption,Asia & Oceania,1990,772.584,billion kWh
+China,net consumption,Asia & Oceania,1990,549.342,billion kWh
+Canada,net consumption,North America,1990,433.827893,billion kWh
+France,net consumption,Europe,1990,323.043,billion kWh
+United Kingdom,net consumption,Europe,1990,284.384,billion kWh
+India,net consumption,Asia & Oceania,1990,219.879,billion kWh
+Italy,net consumption,Europe,1990,219.007,billion kWh
+Brazil,net consumption,Central & South America,1990,212.64456,billion kWh
+Mexico,net consumption,North America,1990,100.471,billion kWh
+South Korea,net consumption,Asia & Oceania,1990,94.492,billion kWh
+Saudi Arabia,net consumption,Middle East,1990,60.914,billion kWh
+Iran,net consumption,Middle East,1990,49.792,billion kWh
+Russia,net consumption,Eurasia,1990,0.0,billion kWh
+Germany,net consumption,Europe,1990,0.0,billion kWh
+United States,net consumption,North America,1989,2755.66608,billion kWh
+Japan,net consumption,Asia & Oceania,1989,731.602,billion kWh
+China,net consumption,Asia & Oceania,1989,498.708,billion kWh
+Canada,net consumption,North America,1989,434.632367,billion kWh
+France,net consumption,Europe,1989,316.531,billion kWh
+United Kingdom,net consumption,Europe,1989,282.231,billion kWh
+Italy,net consumption,Europe,1989,211.8418,billion kWh
+Brazil,net consumption,Central & South America,1989,208.72774,billion kWh
+India,net consumption,Asia & Oceania,1989,202.681,billion kWh
+Mexico,net consumption,North America,1989,101.542,billion kWh
+South Korea,net consumption,Asia & Oceania,1989,81.014,billion kWh
+Saudi Arabia,net consumption,Middle East,1989,57.133,billion kWh
+Iran,net consumption,Middle East,1989,40.241,billion kWh
+Russia,net consumption,Eurasia,1989,0.0,billion kWh
+Germany,net consumption,Europe,1989,0.0,billion kWh
+United States,net consumption,North America,1988,2578.062495,billion kWh
+Japan,net consumption,Asia & Oceania,1988,695.604,billion kWh
+China,net consumption,Asia & Oceania,1988,466.479,billion kWh
+Canada,net consumption,North America,1988,422.242689,billion kWh
+France,net consumption,Europe,1988,309.385,billion kWh
+United Kingdom,net consumption,Europe,1988,277.391,billion kWh
+Brazil,net consumption,Central & South America,1988,200.76276,billion kWh
+Italy,net consumption,Europe,1988,186.849,billion kWh
+India,net consumption,Asia & Oceania,1988,185.924,billion kWh
+Mexico,net consumption,North America,1988,94.987,billion kWh
+South Korea,net consumption,Asia & Oceania,1988,73.367,billion kWh
+Saudi Arabia,net consumption,Middle East,1988,52.26,billion kWh
+Iran,net consumption,Middle East,1988,39.234,billion kWh
+Russia,net consumption,Eurasia,1988,0.0,billion kWh
+Germany,net consumption,Europe,1988,0.0,billion kWh
+United States,net consumption,North America,1987,2457.272219,billion kWh
+Japan,net consumption,Asia & Oceania,1987,663.17,billion kWh
+China,net consumption,Asia & Oceania,1987,425.192,billion kWh
+Canada,net consumption,North America,1987,405.2380648,billion kWh
+France,net consumption,Europe,1987,301.429,billion kWh
+United Kingdom,net consumption,Europe,1987,268.441,billion kWh
+Italy,net consumption,Europe,1987,193.549,billion kWh
+Brazil,net consumption,Central & South America,1987,190.47542,billion kWh
+India,net consumption,Asia & Oceania,1987,166.86,billion kWh
+Mexico,net consumption,North America,1987,91.09,billion kWh
+South Korea,net consumption,Asia & Oceania,1987,63.546,billion kWh
+Saudi Arabia,net consumption,Middle East,1987,47.388,billion kWh
+Iran,net consumption,Middle East,1987,31.105,billion kWh
+Russia,net consumption,Eurasia,1987,0.0,billion kWh
+Germany,net consumption,Europe,1987,0.0,billion kWh
+United States,net consumption,North America,1986,2368.753052,billion kWh
+Japan,net consumption,Asia & Oceania,1986,614.442,billion kWh
+Canada,net consumption,North America,1986,389.3921382,billion kWh
+China,net consumption,Asia & Oceania,1986,385.299,billion kWh
+France,net consumption,Europe,1986,292.67,billion kWh
+United Kingdom,net consumption,Europe,1986,258.26,billion kWh
+Brazil,net consumption,Central & South America,1986,186.48074,billion kWh
+Italy,net consumption,Europe,1986,183.551,billion kWh
+India,net consumption,Asia & Oceania,1986,154.717,billion kWh
+Mexico,net consumption,North America,1986,84.793,billion kWh
+South Korea,net consumption,Asia & Oceania,1986,55.935,billion kWh
+Saudi Arabia,net consumption,Middle East,1986,46.901,billion kWh
+Iran,net consumption,Middle East,1986,30.702,billion kWh
+Russia,net consumption,Eurasia,1986,0.0,billion kWh
+Germany,net consumption,Europe,1986,0.0,billion kWh
+United States,net consumption,North America,1985,2323.973852,billion kWh
+Japan,net consumption,Asia & Oceania,1985,609.764,billion kWh
+Canada,net consumption,North America,1985,372.3747488,billion kWh
+China,net consumption,Asia & Oceania,1985,351.318,billion kWh
+France,net consumption,Europe,1985,277.937,billion kWh
+United Kingdom,net consumption,Europe,1985,249.959,billion kWh
+Italy,net consumption,Europe,1985,178.066,billion kWh
+Brazil,net consumption,Central & South America,1985,171.04538,billion kWh
+India,net consumption,Asia & Oceania,1985,140.645,billion kWh
+Mexico,net consumption,North America,1985,82.01,billion kWh
+South Korea,net consumption,Asia & Oceania,1985,50.146,billion kWh
+Saudi Arabia,net consumption,Middle East,1985,40.281,billion kWh
+Iran,net consumption,Middle East,1985,31.582,billion kWh
+Russia,net consumption,Eurasia,1985,0.0,billion kWh
+Germany,net consumption,Europe,1985,0.0,billion kWh
+United States,net consumption,North America,1984,2285.796394,billion kWh
+Japan,net consumption,Asia & Oceania,1984,593.94,billion kWh
+Canada,net consumption,North America,1984,356.7081734,billion kWh
+China,net consumption,Asia & Oceania,1984,330.13,billion kWh
+France,net consumption,Europe,1984,260.163,billion kWh
+United Kingdom,net consumption,Europe,1984,238.652,billion kWh
+Italy,net consumption,Europe,1984,174.155,billion kWh
+Brazil,net consumption,Central & South America,1984,161.9187,billion kWh
+India,net consumption,Asia & Oceania,1984,130.42,billion kWh
+Mexico,net consumption,North America,1984,77.006,billion kWh
+South Korea,net consumption,Asia & Oceania,1984,46.327,billion kWh
+Saudi Arabia,net consumption,Middle East,1984,37.907,billion kWh
+Iran,net consumption,Middle East,1984,31.261,billion kWh
+Russia,net consumption,Eurasia,1984,0.0,billion kWh
+Germany,net consumption,Europe,1984,0.0,billion kWh
+United States,net consumption,North America,1983,2150.954584,billion kWh
+Japan,net consumption,Asia & Oceania,1983,560.357,billion kWh
+Canada,net consumption,North America,1983,331.6464341,billion kWh
+China,net consumption,Asia & Oceania,1983,307.606,billion kWh
+France,net consumption,Europe,1983,247.079,billion kWh
+United Kingdom,net consumption,Europe,1983,235.909,billion kWh
+Italy,net consumption,Europe,1983,164.854,billion kWh
+Brazil,net consumption,Central & South America,1983,145.44532,billion kWh
+India,net consumption,Asia & Oceania,1983,117.213,billion kWh
+Mexico,net consumption,North America,1983,72.852,billion kWh
+South Korea,net consumption,Asia & Oceania,1983,41.587,billion kWh
+Saudi Arabia,net consumption,Middle East,1983,31.986,billion kWh
+Iran,net consumption,Middle East,1983,28.086,billion kWh
+Russia,net consumption,Eurasia,1983,0.0,billion kWh
+Germany,net consumption,Europe,1983,0.0,billion kWh
+United States,net consumption,North America,1982,2086.441352,billion kWh
+Japan,net consumption,Asia & Oceania,1982,528.362,billion kWh
+Canada,net consumption,North America,1982,319.1662899,billion kWh
+China,net consumption,Asia & Oceania,1982,285.858,billion kWh
+France,net consumption,Europe,1982,242.635,billion kWh
+United Kingdom,net consumption,Europe,1982,233.385,billion kWh
+Italy,net consumption,Europe,1982,165.723,billion kWh
+Brazil,net consumption,Central & South America,1982,131.69046,billion kWh
+India,net consumption,Asia & Oceania,1982,113.695,billion kWh
+Mexico,net consumption,North America,1982,69.956,billion kWh
+South Korea,net consumption,Asia & Oceania,1982,36.97,billion kWh
+Saudi Arabia,net consumption,Middle East,1982,29.179,billion kWh
+Iran,net consumption,Middle East,1982,23.919,billion kWh
+Russia,net consumption,Eurasia,1982,0.0,billion kWh
+Germany,net consumption,Europe,1982,0.0,billion kWh
+United States,net consumption,North America,1981,2147.102862,billion kWh
+Japan,net consumption,Asia & Oceania,1981,522.127,billion kWh
+Canada,net consumption,North America,1981,319.0600113,billion kWh
+China,net consumption,Asia & Oceania,1981,268.754,billion kWh
+France,net consumption,Europe,1981,239.299,billion kWh
+United Kingdom,net consumption,Europe,1981,238.669,billion kWh
+Italy,net consumption,Europe,1981,163.087,billion kWh
+Brazil,net consumption,Central & South America,1981,124.1572,billion kWh
+India,net consumption,Asia & Oceania,1981,107.442,billion kWh
+Mexico,net consumption,North America,1981,64.407,billion kWh
+South Korea,net consumption,Asia & Oceania,1981,34.657,billion kWh
+Saudi Arabia,net consumption,Middle East,1981,23.18,billion kWh
+Iran,net consumption,Middle East,1981,21.156,billion kWh
+Russia,net consumption,Eurasia,1981,0.0,billion kWh
+Germany,net consumption,Europe,1981,0.0,billion kWh
+United States,net consumption,North America,1980,2094.449,billion kWh
+Japan,net consumption,Asia & Oceania,1980,521.374,billion kWh
+Canada,net consumption,North America,1980,309.4796186,billion kWh
+China,net consumption,Asia & Oceania,1980,261.492,billion kWh
+United Kingdom,net consumption,Europe,1980,243.387,billion kWh
+France,net consumption,Europe,1980,236.442,billion kWh
+Italy,net consumption,Europe,1980,164.891,billion kWh
+Brazil,net consumption,Central & South America,1980,121.7838,billion kWh
+India,net consumption,Asia & Oceania,1980,97.898,billion kWh
+Mexico,net consumption,North America,1980,56.71,billion kWh
+South Korea,net consumption,Asia & Oceania,1980,32.064,billion kWh
+Iran,net consumption,Middle East,1980,19.676,billion kWh
+Saudi Arabia,net consumption,Middle East,1980,19.103,billion kWh
+Russia,net consumption,Eurasia,1980,0.0,billion kWh
+Germany,net consumption,Europe,1980,0.0,billion kWh
