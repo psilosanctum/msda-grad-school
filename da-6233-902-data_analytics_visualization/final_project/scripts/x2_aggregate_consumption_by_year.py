@@ -1,0 +1,161 @@
+import pandas as pd
+import string
+pd.set_option('display.max_columns', None)
+# pd.set_option('display.max_rows', None)
+
+
+# path = 'v2_global_electricity_statistics.csv'
+path = 'processed/v3_global_electricity_statistics.csv'
+
+# Create DF 
+df = pd.read_csv(path)
+# print(df['Features'].value_counts())
+
+def yearly_consumption():
+    
+    # Create separate DF to include only energy consumption
+    yearly_consumption_df = df.loc[df['Features'] == 'net consumption']
+    # print(yearly_consumption_df)
+
+    # Create DF to include energy consumption by region, country, and year
+    yearly_consumption_by_country_df = yearly_consumption_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
+    yearly_consumption_by_country_df = yearly_consumption_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
+    # print(yearly_consumption_by_country_df.head(15))
+    # print(yearly_consumption_by_country_df.loc[yearly_consumption_by_country_df['Country'] == 'China'])
+    # print(yearly_consumption_by_country_df.loc[yearly_consumption_by_country_df['Country'] == 'United States'])
+    # print(yearly_consumption_by_country_df.loc[yearly_consumption_by_country_df['Country'] == 'India'])
+
+    # Create DF to include energy consumption by region and year
+    yearly_consumption_by_region_df = yearly_consumption_df.groupby(['Region', 'Year']).sum()['Amount'].reset_index()
+    # print(yearly_consumption_by_region_df['Region'].value_counts())
+    # print(yearly_consumption_by_region_df.loc[yearly_consumption_by_region_df['Region'] == 'Asia & Oceania'])
+    # print(yearly_consumption_by_region_df.loc[yearly_consumption_by_region_df['Region'] == 'North America'])
+
+    # Calculate total energy consumption of all countries by year
+    world_total_yearly_consumption = yearly_consumption_df.groupby(['Year']).sum()['Amount'].reset_index()
+    world_total_yearly_consumption.to_csv('graph_datasets/world_total_yearly_consumption.csv', index=False)
+    # print(world_total_yearly_consumption)
+
+def yearly_generation():
+
+    # Generation = Consumption - Distribution Losses + Net Imports
+
+    # Create separate DF to include only energy generation
+    yearly_generation_df = df.loc[df['Features'] == 'net generation']
+    # print(yearly_generation_df)
+
+    # Create DF to include energy generation by region, country, and year
+    yearly_generation_by_country_df = yearly_generation_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
+    yearly_generation_by_country_df = yearly_generation_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
+    # print(yearly_generation_by_country_df)
+
+def yearly_imports():
+    
+    # Create separate DF to include only energy imports
+    yearly_imports_df = df.loc[df['Features'] == 'imports ']
+    # print(yearly_imports_df)
+
+    # Create DF to include energy imports by region, country, and year
+    yearly_imports_by_country_df = yearly_imports_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
+    yearly_imports_by_country_df = yearly_imports_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
+    # print(yearly_imports_by_country_df)
+    # print(yearly_imports_by_country_df.loc[yearly_imports_by_country_df['Country'] == 'United States'])
+
+def yearly_exports():
+    
+    # Create separate DF to include only energy exports
+    yearly_exports_df = df.loc[df['Features'] == 'exports ']
+    # print(yearly_exports_df)
+
+    # Create DF to include energy exports by region, country, and year
+    yearly_exports_by_country_df = yearly_exports_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
+    yearly_exports_by_country_df = yearly_exports_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
+    # print(yearly_exports_by_country_df)
+    # print(yearly_exports_by_country_df.loc[yearly_exports_by_country_df['Country'] == 'United States'])
+    # print(yearly_exports_by_country_df.loc[yearly_exports_by_country_df['Country'] == 'Saudi Arabia'])
+
+def yearly_net_imports():
+    
+    # Create separate DF to include only energy net imports
+    yearly_net_imports_df = df.loc[df['Features'] == 'net imports ']
+    # print(yearly_net_imports_df)
+
+    # Create DF to include energy net imports by region, country, and year
+    yearly_net_imports_by_country_df = yearly_net_imports_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
+    yearly_net_imports_by_country_df = yearly_net_imports_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
+    # print(yearly_net_imports_by_country_df)
+    # print(yearly_net_imports_by_country_df.loc[yearly_net_imports_by_country_df['Country'] == 'China'])
+
+def yearly_distribution_losses():
+    
+    # Create separate DF to include only energy distribution losses
+    yearly_distribution_losses_df = df.loc[df['Features'] == 'distribution losses ']
+    # print(yearly_distribution_losses_df)
+
+    # Create DF to include energy distribution losses by region, country, and year
+    yearly_distribution_losses_by_country_df = yearly_distribution_losses_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
+    yearly_distribution_losses_by_country_df = yearly_distribution_losses_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
+    # print(yearly_distribution_losses_by_country_df)
+    # print(yearly_distribution_losses_by_country_df.loc[yearly_distribution_losses_by_country_df['Country'] == 'China'])
+    # print(yearly_distribution_losses_by_country_df.loc[yearly_distribution_losses_by_country_df['Country'] == 'United States'])
+
+def electricity_consumption_2021():
+    
+    # Create separate DF to include only energy consumption for 2021 by country
+    electricity_consumption_2021_df = df.loc[(df['Features'] == 'net consumption') & (df['Year'] == 2021)]
+    # electricity_consumption_2021_df.to_csv('graph_datasets/map_data_2021.csv', index=False)
+    # print(electricity_consumption_2021_df)
+
+    # Create variable to calculate total energy consumed by the world in 2021 - for the pie chart/heatmap
+    total_electricity_consumed_2021 = electricity_consumption_2021_df['Amount'].sum()
+    # print(total_electricity_consumed_2021)
+
+    # Calculate percentage of total energy consumed by country in 2021
+    electricity_consumption_2021_df['Percent of Total'] = (electricity_consumption_2021_df['Amount'] / total_electricity_consumed_2021)
+    
+    # Remove unnecessary columns
+    electricity_consumption_2021_df = electricity_consumption_2021_df[['Country', 'Region', 'Percent of Total']]
+    electricity_consumption_2021_df = electricity_consumption_2021_df.sort_values('Percent of Total', ascending=False)
+    # print(electricity_consumption_2021_df)
+    
+    # Create variable to calculate percentage of total energy consumed by region in 2021
+    pie_chart_by_region_df = electricity_consumption_2021_df.groupby(['Region']).sum()['Percent of Total'].reset_index()
+    pie_chart_by_region_df = pie_chart_by_region_df.sort_values('Percent of Total', ascending=False)
+    pie_chart_by_region_df.to_csv('graph_datasets/pie_chart_by_region_2021.csv', index=False)
+    print(pie_chart_by_region_df) 
+
+
+def top_15_countries_yearly_consumption():
+    
+    # Create separate DF to include only energy consumption
+    yearly_consumption_df = df.loc[(df['Features'] == 'net consumption') & 
+                                   ((df['Country'] == 'China') | 
+                                    (df['Country'] == 'United States') | 
+                                    (df['Country'] == 'India') | 
+                                    (df['Country'] == 'Russia') | 
+                                    (df['Country'] == 'Japan') | 
+                                    (df['Country'] == 'Brazil') | 
+                                    (df['Country'] == 'South Korea') | 
+                                    (df['Country'] == 'Canada') | 
+                                    (df['Country'] == 'Germany') | 
+                                    (df['Country'] == 'France') | 
+                                    (df['Country'] == 'Saudi Arabia') | 
+                                    (df['Country'] == 'Iran') | 
+                                    (df['Country'] == 'Mexico') | 
+                                    (df['Country'] == 'Italy') | 
+                                    (df['Country'] == 'United Kingdom'))]
+    yearly_consumption_df = yearly_consumption_df.sort_values(['Year', 'Amount'], ascending=[False, False])
+    yearly_consumption_df.to_csv('graph_datasets/top_15_countries_yearly_consumption.csv', index=False)
+    print(yearly_consumption_df)
+
+
+ 
+
+# yearly_generation()
+# yearly_consumption()
+# yearly_imports()
+# yearly_exports()
+# yearly_net_imports()
+# yearly_distribution_losses()
+electricity_consumption_2021()
+# top_15_countries_yearly_consumption()
