@@ -12,7 +12,6 @@ knitr::opts_chunk$set(echo = TRUE)
 # library(highcharter)
 # library(tidyverse)
 pacman::p_load(highcharter, tidyverse)
-
 ```
 
 For the first exercise, we will use `citytemp` data from `highcharter` package.
@@ -20,12 +19,6 @@ For the first exercise, we will use `citytemp` data from `highcharter` package.
 ```{r}
 data(citytemp)
 ```
-
-```{r}
-citytemp %>% 
-  pivot_longer(cols = where(is.numeric), names_to = "city", values_to = "temperature")
-```
-
 
 
 ```{r}
@@ -39,7 +32,11 @@ hc
 ```
 
 
-
+```{r}
+citytemp %>% 
+  pivot_longer(cols = where(is.numeric), names_to = "city", values_to = "temperature") %>%
+  hchart("line", hcaes(x=month, y=temperature, group=city))
+```
 
 ```{r}
 

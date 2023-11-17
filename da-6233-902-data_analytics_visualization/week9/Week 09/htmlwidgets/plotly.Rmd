@@ -99,7 +99,7 @@ Please download this file from here: <https://github.com/ashgreat/DA6233>
 And save it in a subdirectory "Data" in your project folder.
 
 ```{r}
-amzn <- read_csv(here::here('Data', 'amzn_2005_2020.csv')) %>% 
+amzn <- read_csv(here::here('/Users/c2cypher/codebase/msda/msda-grad-school/da-6233-902-data_analytics_visualization/week9/Week 09/Data', 'amzn_2005_2020.csv')) %>% 
   mutate(mktval = PRC*SHROUT*1000,
          date2 = as.Date(as.character(date), format = '%Y%m%d')) %>% 
   filter(!is.na(mktval)) %>% 
