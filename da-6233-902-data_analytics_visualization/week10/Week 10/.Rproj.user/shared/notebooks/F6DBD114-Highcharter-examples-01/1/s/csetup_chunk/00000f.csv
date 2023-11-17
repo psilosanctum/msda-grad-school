@@ -1,0 +1,15 @@
+"0",""
+"0","pacman::p_load(tidyverse, highcharter, tidytext, quantmod)"
+"0","pacman::p_load_gh(""lchiffon/wordcloud2"")"
+"0",""
+"0","d1 <- read_csv(here::here(""data"", ""tech_stocks_csv.zip""))"
+"2","[1mRows: [22m[34m93[39m [1mColumns: [22m[34m981[39m"
+"2","[36m──[39m [1mColumn specification[22m [36m────────────────────────────────────────────────────────────────────────────────────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m   (34): gvkey, indfmt, consol, popsrc, datafmt, tic, cusip, conm, acctchg, acctstd, acqmeth, compst, curcd, curncd, final, cik, ...
+[32mdbl[39m  (436): fyear, ajex, ajp, currtr, fyr, ismod, ltcm, pddur, scf, src, upd, acchg, acdo, aco, acodo, acominc, acox, acqao, acqcshi...
+[33mlgl[39m  (506): adrr, bspr, curuscn, ogm, stalt, udpl, acco, accrt, acoxar, acqlntal, acqniintc, adpac, aedi, afudcc, afudci, amc, amdc,...
+[34mdate[39m   (5): datadate, apdedate, fdate, pdate, ipodate"
+"2","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message."

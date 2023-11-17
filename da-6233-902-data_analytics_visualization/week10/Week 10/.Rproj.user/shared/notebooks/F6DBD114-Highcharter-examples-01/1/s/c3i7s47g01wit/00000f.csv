@@ -1,0 +1,3 @@
+"0","highchart(type = ""stock"") %>% "
+"0","  hc_add_series(aapl) %>% "
+"0","  hc_add_series(msft)"

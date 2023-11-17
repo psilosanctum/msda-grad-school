@@ -1,0 +1,8 @@
+"0","cols <- viridisLite::viridis(10, option = ""H"")"
+"0",""
+"0","cols <- substr(cols, 0, 7) # This will retain first 7 characters including the # sign."
+"0",""
+"0","d1 %>% "
+"0","  hchart(""scatter"", hcaes(x = sale, y = oibdp, group = conm)) %>% "
+"0","  hc_add_theme(hc_theme_538()) %>% "
+"0","  hc_colors(cols)"

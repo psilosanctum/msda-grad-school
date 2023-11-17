@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="lib/jquery-3.5.1/jquery.min.js"></script>
+<script src="lib/proj4js-2.3.15/proj4.js"></script>
+<link href="lib/highcharts-9.3.1/css/motion.css" rel="stylesheet" />
+<script src="lib/highcharts-9.3.1/highcharts.js"></script>
+<script src="lib/highcharts-9.3.1/highcharts-3d.js"></script>
+<script src="lib/highcharts-9.3.1/highcharts-more.js"></script>
+<script src="lib/highcharts-9.3.1/modules/stock.js"></script>
+<script src="lib/highcharts-9.3.1/modules/map.js"></script>
+<script src="lib/highcharts-9.3.1/modules/data.js"></script>
+<script src="lib/highcharts-9.3.1/modules/exporting.js"></script>
+<script src="lib/highcharts-9.3.1/modules/offline-exporting.js"></script>
+<script src="lib/highcharts-9.3.1/modules/drilldown.js"></script>
+<script src="lib/highcharts-9.3.1/modules/item-series.js"></script>
+<script src="lib/highcharts-9.3.1/modules/overlapping-datalabels.js"></script>
+<script src="lib/highcharts-9.3.1/modules/annotations.js"></script>
+<script src="lib/highcharts-9.3.1/modules/export-data.js"></script>
+<script src="lib/highcharts-9.3.1/modules/funnel.js"></script>
+<script src="lib/highcharts-9.3.1/modules/heatmap.js"></script>
+<script src="lib/highcharts-9.3.1/modules/treemap.js"></script>
+<script src="lib/highcharts-9.3.1/modules/sankey.js"></script>
+<script src="lib/highcharts-9.3.1/modules/dependency-wheel.js"></script>
+<script src="lib/highcharts-9.3.1/modules/organization.js"></script>
+<script src="lib/highcharts-9.3.1/modules/solid-gauge.js"></script>
+<script src="lib/highcharts-9.3.1/modules/streamgraph.js"></script>
+<script src="lib/highcharts-9.3.1/modules/sunburst.js"></script>
+<script src="lib/highcharts-9.3.1/modules/vector.js"></script>
+<script src="lib/highcharts-9.3.1/modules/wordcloud.js"></script>
+<script src="lib/highcharts-9.3.1/modules/xrange.js"></script>
+<script src="lib/highcharts-9.3.1/modules/tilemap.js"></script>
+<script src="lib/highcharts-9.3.1/modules/venn.js"></script>
+<script src="lib/highcharts-9.3.1/modules/gantt.js"></script>
+<script src="lib/highcharts-9.3.1/modules/timeline.js"></script>
+<script src="lib/highcharts-9.3.1/modules/parallel-coordinates.js"></script>
+<script src="lib/highcharts-9.3.1/modules/bullet.js"></script>
+<script src="lib/highcharts-9.3.1/modules/coloraxis.js"></script>
+<script src="lib/highcharts-9.3.1/modules/dumbbell.js"></script>
+<script src="lib/highcharts-9.3.1/modules/lollipop.js"></script>
+<script src="lib/highcharts-9.3.1/modules/series-label.js"></script>
+<script src="lib/highcharts-9.3.1/plugins/motion.js"></script>
+<script src="lib/highcharts-9.3.1/custom/reset.js"></script>
+<script src="lib/highcharts-9.3.1/modules/boost.js"></script>
+<script src="lib/highchart-binding-0.9.4/highchart.js"></script>
+
+</head>
+<body>
+<!-- htmlwidget-container-begin -->
+<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7ae7828e863d3cc35b07" style="width:500px;height:500px;"></div>
+<!-- htmlwidget-container-end -->
+<script type="application/json" data-for="htmlwidget-7ae7828e863d3cc35b07">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":""},"categories":["sale","oibdp","cogs","at","xrd","mkvalt","che","capx"],"reversed":true},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"boderWidth":0,"dataLabels":{"enabled":false}},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[{"x":0,"y":0,"value":1,"name":"sale ~ sale"},{"x":0,"y":1,"value":0.7663978908095432,"name":"sale ~ oibdp"},{"x":0,"y":2,"value":0.9574452620100599,"name":"sale ~ cogs"},{"x":0,"y":3,"value":0.891821846486723,"name":"sale ~ at"},{"x":0,"y":4,"value":0.8558247084267707,"name":"sale ~ xrd"},{"x":0,"y":5,"value":0.7692865165595394,"name":"sale ~ mkvalt"},{"x":0,"y":6,"value":0.5685984764768941,"name":"sale ~ che"},{"x":0,"y":7,"value":0.8057312750261093,"name":"sale ~ capx"},{"x":1,"y":0,"value":0.7663978908095432,"name":"oibdp ~ sale"},{"x":1,"y":1,"value":1,"name":"oibdp ~ oibdp"},{"x":1,"y":2,"value":0.6338301317823811,"name":"oibdp ~ cogs"},{"x":1,"y":3,"value":0.8989190631260326,"name":"oibdp ~ at"},{"x":1,"y":4,"value":0.5657123195363248,"name":"oibdp ~ xrd"},{"x":1,"y":5,"value":0.8604870325443327,"name":"oibdp ~ mkvalt"},{"x":1,"y":6,"value":0.6998985193668257,"name":"oibdp ~ che"},{"x":1,"y":7,"value":0.5394570740920865,"name":"oibdp ~ capx"},{"x":2,"y":0,"value":0.9574452620100599,"name":"cogs ~ sale"},{"x":2,"y":1,"value":0.6338301317823811,"name":"cogs ~ oibdp"},{"x":2,"y":2,"value":1,"name":"cogs ~ cogs"},{"x":2,"y":3,"value":0.7617601669476328,"name":"cogs ~ at"},{"x":2,"y":4,"value":0.7263684628071257,"name":"cogs ~ xrd"},{"x":2,"y":5,"value":0.6430317870407178,"name":"cogs ~ mkvalt"},{"x":2,"y":6,"value":0.3730178951237735,"name":"cogs ~ che"},{"x":2,"y":7,"value":0.6751573361764538,"name":"cogs ~ capx"},{"x":3,"y":0,"value":0.891821846486723,"name":"at ~ sale"},{"x":3,"y":1,"value":0.8989190631260326,"name":"at ~ oibdp"},{"x":3,"y":2,"value":0.7617601669476328,"name":"at ~ cogs"},{"x":3,"y":3,"value":1,"name":"at ~ at"},{"x":3,"y":4,"value":0.7865143043538761,"name":"at ~ xrd"},{"x":3,"y":5,"value":0.8400521893460492,"name":"at ~ mkvalt"},{"x":3,"y":6,"value":0.8247139434908369,"name":"at ~ che"},{"x":3,"y":7,"value":0.7789456854128142,"name":"at ~ capx"},{"x":4,"y":0,"value":0.8558247084267707,"name":"xrd ~ sale"},{"x":4,"y":1,"value":0.5657123195363248,"name":"xrd ~ oibdp"},{"x":4,"y":2,"value":0.7263684628071257,"name":"xrd ~ cogs"},{"x":4,"y":3,"value":0.7865143043538761,"name":"xrd ~ at"},{"x":4,"y":4,"value":1,"name":"xrd ~ xrd"},{"x":4,"y":5,"value":0.6605453848036202,"name":"xrd ~ mkvalt"},{"x":4,"y":6,"value":0.6241798134147138,"name":"xrd ~ che"},{"x":4,"y":7,"value":0.9383706840624358,"name":"xrd ~ capx"},{"x":5,"y":0,"value":0.7692865165595394,"name":"mkvalt ~ sale"},{"x":5,"y":1,"value":0.8604870325443327,"name":"mkvalt ~ oibdp"},{"x":5,"y":2,"value":0.6430317870407178,"name":"mkvalt ~ cogs"},{"x":5,"y":3,"value":0.8400521893460492,"name":"mkvalt ~ at"},{"x":5,"y":4,"value":0.6605453848036202,"name":"mkvalt ~ xrd"},{"x":5,"y":5,"value":1,"name":"mkvalt ~ mkvalt"},{"x":5,"y":6,"value":0.6868437176346759,"name":"mkvalt ~ che"},{"x":5,"y":7,"value":0.624778807395413,"name":"mkvalt ~ capx"},{"x":6,"y":0,"value":0.5685984764768941,"name":"che ~ sale"},{"x":6,"y":1,"value":0.6998985193668257,"name":"che ~ oibdp"},{"x":6,"y":2,"value":0.3730178951237735,"name":"che ~ cogs"},{"x":6,"y":3,"value":0.8247139434908369,"name":"che ~ at"},{"x":6,"y":4,"value":0.6241798134147138,"name":"che ~ xrd"},{"x":6,"y":5,"value":0.6868437176346759,"name":"che ~ mkvalt"},{"x":6,"y":6,"value":1,"name":"che ~ che"},{"x":6,"y":7,"value":0.6008331914910174,"name":"che ~ capx"},{"x":7,"y":0,"value":0.8057312750261093,"name":"capx ~ sale"},{"x":7,"y":1,"value":0.5394570740920865,"name":"capx ~ oibdp"},{"x":7,"y":2,"value":0.6751573361764538,"name":"capx ~ cogs"},{"x":7,"y":3,"value":0.7789456854128142,"name":"capx ~ at"},{"x":7,"y":4,"value":0.9383706840624358,"name":"capx ~ xrd"},{"x":7,"y":5,"value":0.624778807395413,"name":"capx ~ mkvalt"},{"x":7,"y":6,"value":0.6008331914910174,"name":"capx ~ che"},{"x":7,"y":7,"value":1,"name":"capx ~ capx"}],"type":"heatmap"}],"tooltip":{"formatter":"function(){\n                 return this.point.name + ': ' +\n                   Highcharts.numberFormat(this.point.value, 2)\n               }"},"legend":{"enabled":true},"colorAxis":{"auxarg":true,"stops":[[0,"#FCFFA4"],[0.1111111111111111,"#FACB5F"],[0.2222222222222222,"#F9981B"],[0.3333333333333333,"#E46F22"],[0.4444444444444444,"#C84943"],[0.5555555555555556,"#A42E59"],[0.6666666666666666,"#771D65"],[0.7777777777777778,"#4C0E62"],[0.8888888888888888,"#260733"],[1,"#000004"]]},"xAxis":{"categories":["sale","oibdp","cogs","at","xrd","mkvalt","che","capx"],"title":{"text":""},"opposite":true}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.formatter"],"jsHooks":[]}</script>
+<!-- htmlwidget-sizing-policy-base64 PHNjcmlwdCB0eXBlPSJhcHBsaWNhdGlvbi9odG1sd2lkZ2V0LXNpemluZyIgZGF0YS1mb3I9Imh0bWx3aWRnZXQtN2FlNzgyOGU4NjNkM2NjMzViMDciPnsidmlld2VyIjp7IndpZHRoIjoiMTAwJSIsImhlaWdodCI6MzUwLCJwYWRkaW5nIjowLCJmaWxsIjp0cnVlfSwiYnJvd3NlciI6eyJ3aWR0aCI6IjEwMCUiLCJoZWlnaHQiOjUwMCwicGFkZGluZyI6MCwiZmlsbCI6dHJ1ZX19PC9zY3JpcHQ+ -->
+</body>
+</html>

@@ -1,0 +1,4 @@
+"0","d1 %>% "
+"0","  filter(tic == ""META"") %>% "
+"0","  hchart(""column"" ,hcaes(x = fyear, y = oibdp), name = ""Operating Income"") %>% "
+"0","  hc_add_theme(hc_theme_monokai())"

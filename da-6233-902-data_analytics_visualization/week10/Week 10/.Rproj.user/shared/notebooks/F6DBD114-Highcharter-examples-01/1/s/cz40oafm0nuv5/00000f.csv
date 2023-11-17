@@ -1,0 +1,6 @@
+"0","d1 %>% "
+"0","  filter(tic == ""AAPL"") %>% "
+"0","  mutate(leverage = (replace_na(dltt, 0) + replace_na(dlc, 0))/ at,"
+"0","         leverage = round(leverage, 2)) %>% "
+"0","  hchart(""line"", hcaes(x = fyear, y = leverage), name = ""Leverage"") %>% "
+"0","  hc_add_theme(hc_theme_bloom())"

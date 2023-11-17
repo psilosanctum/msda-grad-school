@@ -1,0 +1,4 @@
+"0","data(stop_words)"
+"0",""
+"0","tweet_text = tweet_text %>% anti_join(stop_words)"
+"2","Joining with `by = join_by(word)`"

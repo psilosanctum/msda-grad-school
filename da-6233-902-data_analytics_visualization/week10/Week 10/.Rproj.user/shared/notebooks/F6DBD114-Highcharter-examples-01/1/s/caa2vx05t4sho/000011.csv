@@ -1,0 +1,5 @@
+"0","d1 %>% "
+"0","  filter(fyear == 2021) %>%"
+"0","  arrange(oibdp) %>% "
+"0","  mutate(conm = str_to_title(conm)) %>% # Convert company names to title case"
+"0","  hchart(""pie"", hcaes(x = conm, y = oibdp))"

@@ -1,0 +1,4 @@
+"0","cor_dt = d1 %>%"
+"0","  select(sale, oibdp, cogs, at, xrd, mkvalt, che, capx) %>% "
+"0","  drop_na() %>% "
+"0","  cor()"

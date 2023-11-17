@@ -1,0 +1,2 @@
+"0","aapl = getSymbols(""AAPL"", auto.assign = FALSE)"
+"0","msft = getSymbols(""MSFT"", auto.assign = FALSE)"

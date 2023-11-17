@@ -1,0 +1,5 @@
+"0","d1 %>% "
+"0","  filter(tic == ""AAPL"") %>% "
+"0","  hchart(""scatter"", hcaes(x = sale, y = oibdp), regression = TRUE) %>%"
+"0","  hc_add_dependency(""plugins/highcharts-regression.js"") %>%"
+"0","  hc_add_theme(hc_theme_538())"

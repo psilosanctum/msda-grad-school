@@ -1,0 +1,2 @@
+"0","tweet_text = tweet_text %>% "
+"0","  filter(!word %in% c(""im"", ""dont"", ""amp"", ""youre"", ""ive"", ""hes"", ""didnt"", ""isnt""))"

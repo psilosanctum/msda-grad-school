@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="lib/jquery-3.5.1/jquery.min.js"></script>
+<script src="lib/proj4js-2.3.15/proj4.js"></script>
+<link href="lib/highcharts-9.3.1/css/motion.css" rel="stylesheet" />
+<script src="lib/highcharts-9.3.1/highcharts.js"></script>
+<script src="lib/highcharts-9.3.1/highcharts-3d.js"></script>
+<script src="lib/highcharts-9.3.1/highcharts-more.js"></script>
+<script src="lib/highcharts-9.3.1/modules/stock.js"></script>
+<script src="lib/highcharts-9.3.1/modules/map.js"></script>
+<script src="lib/highcharts-9.3.1/modules/data.js"></script>
+<script src="lib/highcharts-9.3.1/modules/exporting.js"></script>
+<script src="lib/highcharts-9.3.1/modules/offline-exporting.js"></script>
+<script src="lib/highcharts-9.3.1/modules/drilldown.js"></script>
+<script src="lib/highcharts-9.3.1/modules/item-series.js"></script>
+<script src="lib/highcharts-9.3.1/modules/overlapping-datalabels.js"></script>
+<script src="lib/highcharts-9.3.1/modules/annotations.js"></script>
+<script src="lib/highcharts-9.3.1/modules/export-data.js"></script>
+<script src="lib/highcharts-9.3.1/modules/funnel.js"></script>
+<script src="lib/highcharts-9.3.1/modules/heatmap.js"></script>
+<script src="lib/highcharts-9.3.1/modules/treemap.js"></script>
+<script src="lib/highcharts-9.3.1/modules/sankey.js"></script>
+<script src="lib/highcharts-9.3.1/modules/dependency-wheel.js"></script>
+<script src="lib/highcharts-9.3.1/modules/organization.js"></script>
+<script src="lib/highcharts-9.3.1/modules/solid-gauge.js"></script>
+<script src="lib/highcharts-9.3.1/modules/streamgraph.js"></script>
+<script src="lib/highcharts-9.3.1/modules/sunburst.js"></script>
+<script src="lib/highcharts-9.3.1/modules/vector.js"></script>
+<script src="lib/highcharts-9.3.1/modules/wordcloud.js"></script>
+<script src="lib/highcharts-9.3.1/modules/xrange.js"></script>
+<script src="lib/highcharts-9.3.1/modules/tilemap.js"></script>
+<script src="lib/highcharts-9.3.1/modules/venn.js"></script>
+<script src="lib/highcharts-9.3.1/modules/gantt.js"></script>
+<script src="lib/highcharts-9.3.1/modules/timeline.js"></script>
+<script src="lib/highcharts-9.3.1/modules/parallel-coordinates.js"></script>
+<script src="lib/highcharts-9.3.1/modules/bullet.js"></script>
+<script src="lib/highcharts-9.3.1/modules/coloraxis.js"></script>
+<script src="lib/highcharts-9.3.1/modules/dumbbell.js"></script>
+<script src="lib/highcharts-9.3.1/modules/lollipop.js"></script>
+<script src="lib/highcharts-9.3.1/modules/series-label.js"></script>
+<script src="lib/highcharts-9.3.1/plugins/motion.js"></script>
+<script src="lib/highcharts-9.3.1/custom/reset.js"></script>
+<script src="lib/highcharts-9.3.1/modules/boost.js"></script>
+<script src="lib/highchart-binding-0.9.4/highchart.js"></script>
+
+</head>
+<body>
+<!-- htmlwidget-container-begin -->
+<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-e58d82c32e1dc5bee52a" style="width:500px;height:500px;"></div>
+<!-- htmlwidget-container-end -->
+<script type="application/json" data-for="htmlwidget-e58d82c32e1dc5bee52a">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":""},"categories":["oibdp","cogs","at","xrd","mkvalt","che","capx"],"reversed":true},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"boderWidth":0,"dataLabels":{"enabled":false}},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[{"x":0,"y":0,"value":1,"name":"oibdp ~ oibdp"},{"x":0,"y":1,"value":-0.6269930159978746,"name":"oibdp ~ cogs"},{"x":0,"y":2,"value":-0.1626045168873258,"name":"oibdp ~ at"},{"x":0,"y":3,"value":-0.6849199415974281,"name":"oibdp ~ xrd"},{"x":0,"y":4,"value":-0.07636549447881945,"name":"oibdp ~ mkvalt"},{"x":0,"y":5,"value":0.02402497108417667,"name":"oibdp ~ che"},{"x":0,"y":6,"value":-0.6342061665943575,"name":"oibdp ~ capx"},{"x":1,"y":0,"value":-0.6269930159978746,"name":"cogs ~ oibdp"},{"x":1,"y":1,"value":1,"name":"cogs ~ cogs"},{"x":1,"y":2,"value":-0.4305854998956961,"name":"cogs ~ at"},{"x":1,"y":3,"value":-0.07684379287953387,"name":"cogs ~ xrd"},{"x":1,"y":4,"value":-0.2707392938157732,"name":"cogs ~ mkvalt"},{"x":1,"y":5,"value":-0.6027444636078871,"name":"cogs ~ che"},{"x":1,"y":6,"value":0.05066390542247543,"name":"cogs ~ capx"},{"x":2,"y":0,"value":-0.1626045168873258,"name":"at ~ oibdp"},{"x":2,"y":1,"value":-0.4305854998956961,"name":"at ~ cogs"},{"x":2,"y":2,"value":1,"name":"at ~ at"},{"x":2,"y":3,"value":0.5560682181557763,"name":"at ~ xrd"},{"x":2,"y":4,"value":0.4897278941895954,"name":"at ~ mkvalt"},{"x":2,"y":5,"value":0.7446559192358886,"name":"at ~ che"},{"x":2,"y":6,"value":0.6036277502589762,"name":"at ~ capx"},{"x":3,"y":0,"value":-0.6849199415974281,"name":"xrd ~ oibdp"},{"x":3,"y":1,"value":-0.07684379287953387,"name":"xrd ~ cogs"},{"x":3,"y":2,"value":0.5560682181557763,"name":"xrd ~ at"},{"x":3,"y":3,"value":1,"name":"xrd ~ xrd"},{"x":3,"y":4,"value":0.3755335580919599,"name":"xrd ~ mkvalt"},{"x":3,"y":5,"value":0.4979556308022947,"name":"xrd ~ che"},{"x":3,"y":6,"value":0.7366796410571654,"name":"xrd ~ capx"},{"x":4,"y":0,"value":-0.07636549447881945,"name":"mkvalt ~ oibdp"},{"x":4,"y":1,"value":-0.2707392938157732,"name":"mkvalt ~ cogs"},{"x":4,"y":2,"value":0.4897278941895954,"name":"mkvalt ~ at"},{"x":4,"y":3,"value":0.3755335580919599,"name":"mkvalt ~ xrd"},{"x":4,"y":4,"value":1,"name":"mkvalt ~ mkvalt"},{"x":4,"y":5,"value":0.4025136431058989,"name":"mkvalt ~ che"},{"x":4,"y":6,"value":0.3104928032011307,"name":"mkvalt ~ capx"},{"x":5,"y":0,"value":0.02402497108417667,"name":"che ~ oibdp"},{"x":5,"y":1,"value":-0.6027444636078871,"name":"che ~ cogs"},{"x":5,"y":2,"value":0.7446559192358886,"name":"che ~ at"},{"x":5,"y":3,"value":0.4979556308022947,"name":"che ~ xrd"},{"x":5,"y":4,"value":0.4025136431058989,"name":"che ~ mkvalt"},{"x":5,"y":5,"value":1,"name":"che ~ che"},{"x":5,"y":6,"value":0.2794957881786736,"name":"che ~ capx"},{"x":6,"y":0,"value":-0.6342061665943575,"name":"capx ~ oibdp"},{"x":6,"y":1,"value":0.05066390542247543,"name":"capx ~ cogs"},{"x":6,"y":2,"value":0.6036277502589762,"name":"capx ~ at"},{"x":6,"y":3,"value":0.7366796410571654,"name":"capx ~ xrd"},{"x":6,"y":4,"value":0.3104928032011307,"name":"capx ~ mkvalt"},{"x":6,"y":5,"value":0.2794957881786736,"name":"capx ~ che"},{"x":6,"y":6,"value":1,"name":"capx ~ capx"}],"type":"heatmap"}],"tooltip":{"formatter":"function(){\n                 return this.point.name + ': ' +\n                   Highcharts.numberFormat(this.point.value, 2)\n               }"},"legend":{"enabled":true},"colorAxis":{"auxarg":true,"stops":[[0,"#FF5733"],[0.5,"#F8F5F5"],[1,"#2E86C1"]],"min":-1,"max":1},"xAxis":{"categories":["oibdp","cogs","at","xrd","mkvalt","che","capx"],"title":{"text":""},"opposite":true}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.formatter"],"jsHooks":[]}</script>
+<!-- htmlwidget-sizing-policy-base64 PHNjcmlwdCB0eXBlPSJhcHBsaWNhdGlvbi9odG1sd2lkZ2V0LXNpemluZyIgZGF0YS1mb3I9Imh0bWx3aWRnZXQtZTU4ZDgyYzMyZTFkYzViZWU1MmEiPnsidmlld2VyIjp7IndpZHRoIjoiMTAwJSIsImhlaWdodCI6MzUwLCJwYWRkaW5nIjowLCJmaWxsIjp0cnVlfSwiYnJvd3NlciI6eyJ3aWR0aCI6IjEwMCUiLCJoZWlnaHQiOjUwMCwicGFkZGluZyI6MCwiZmlsbCI6dHJ1ZX19PC9zY3JpcHQ+ -->
+</body>
+</html>

@@ -1,0 +1,2 @@
+"0","word_freq = tweet_text %>% "
+"0","  count(word, sort = T)"

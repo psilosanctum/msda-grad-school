@@ -1,0 +1,7 @@
+"0","cols <- pals::alphabet() %>% unname()"
+"0","# unname will remove the names from the vector. Highcharter throws an error if you pass a names vector with colors."
+"0",""
+"0","d1 %>% "
+"0","  hchart(""scatter"", hcaes(x = sale, y = oibdp, group = conm)) %>% "
+"0","  hc_add_theme(hc_theme_538()) %>% "
+"0","  hc_colors(cols)"

@@ -1,0 +1,3 @@
+"0","tweet_text = tibble(text = tweets$text) %>% "
+"0","  mutate(text = gsub(x = text, pattern = ""[0-9]+|[[:punct:]]|\\(.*\\)"", replacement = """")) %>% "
+"0","  tidytext::unnest_tokens(word, text)"
