@@ -25,7 +25,7 @@
         - What if there are ulterior motives behind the climate change propaganda?
         - If climate change activists are wrong/pushing false narratives, unnecessary fossil fuel regulations will negatively impact global citizens by reducing their standard of living.   
 
-# 1st Charts - Time Series Graph - Global Electricity Consumption Increase Over Time (2-3 mins)
+# 1st Charts - Time Series Graph - Global Electricity Consumption Increase Over Time (Joaquin 2-3 mins)
     - Global electricity consumption has increased by 3.5x since 1980
     - Causes: population increases, technological advances, developing countries being industrialized
     - As electricity consumption increases, pivoting towards sustainable, renewable energy is essential as scarce resources dry up.

@@ -34,7 +34,7 @@ def yearly_consumption():
     # Calculate total energy consumption of all countries by year
     world_total_yearly_consumption = yearly_consumption_df.groupby(['Year']).sum()['Amount'].reset_index()
     world_total_yearly_consumption.to_csv('graph_datasets/world_total_yearly_consumption.csv', index=False)
-    # print(world_total_yearly_consumption)
+    print(world_total_yearly_consumption)
 
 def yearly_generation():
 
@@ -58,7 +58,7 @@ def yearly_imports():
     # Create DF to include energy imports by region, country, and year
     yearly_imports_by_country_df = yearly_imports_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
     yearly_imports_by_country_df = yearly_imports_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
-    # print(yearly_imports_by_country_df)
+    print(yearly_imports_by_country_df)
     # print(yearly_imports_by_country_df.loc[yearly_imports_by_country_df['Country'] == 'United States'])
 
 def yearly_exports():
@@ -70,21 +70,89 @@ def yearly_exports():
     # Create DF to include energy exports by region, country, and year
     yearly_exports_by_country_df = yearly_exports_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
     yearly_exports_by_country_df = yearly_exports_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
-    # print(yearly_exports_by_country_df)
+    print(yearly_exports_by_country_df)
     # print(yearly_exports_by_country_df.loc[yearly_exports_by_country_df['Country'] == 'United States'])
     # print(yearly_exports_by_country_df.loc[yearly_exports_by_country_df['Country'] == 'Saudi Arabia'])
 
 def yearly_net_imports():
     
+    # Create DF for average prices per kWh 
+    avg_prices_df = pd.read_csv("raw/avg_prices_for_electricity_per_kwh.csv")
+    # print(avg_prices_df)
+
     # Create separate DF to include only energy net imports
     yearly_net_imports_df = df.loc[df['Features'] == 'net imports ']
     # print(yearly_net_imports_df)
 
     # Create DF to include energy net imports by region, country, and year
     yearly_net_imports_by_country_df = yearly_net_imports_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
-    yearly_net_imports_by_country_df = yearly_net_imports_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
+    yearly_net_imports_by_country_df = yearly_net_imports_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, True])
     # print(yearly_net_imports_by_country_df)
     # print(yearly_net_imports_by_country_df.loc[yearly_net_imports_by_country_df['Country'] == 'China'])
+    # print(yearly_net_imports_by_country_df.loc[yearly_net_imports_by_country_df['Year'] == 2020])
+
+    # Merge average prices DF with net imports by country by year DF
+    merged_df = pd.merge(yearly_net_imports_by_country_df, avg_prices_df, on='Year')
+    # print(merged_df)
+
+    # Column formatting
+    merged_df = merged_df.rename(columns={
+        'Amount': 'Net Imports (billion kWh)'
+    })
+
+    # Calculate net import cost by country by year
+    merged_df['Net Import Cost (billion $)'] = (merged_df['Net Imports (billion kWh)'] * merged_df['Average Price (per kWh)']).round(2)
+    # print(merged_df.head(15))
+    # print(merged_df.loc[merged_df['Year'] == 2020].head(15))
+    # print(merged_df.loc[merged_df['Country'] == 'China'])
+
+    # Create DF for top 15 importers
+    top_10_importers = merged_df.loc[(
+        (merged_df['Country'] == 'Italy') | 
+        (merged_df['Country'] == 'United States') | 
+        (merged_df['Country'] == 'Thailand') | 
+        (merged_df['Country'] == 'United Kingdom') | 
+        (merged_df['Country'] == 'Brazil') | 
+        (merged_df['Country'] == 'Iraq') | 
+        (merged_df['Country'] == 'Finland') | 
+        (merged_df['Country'] == 'Hungary') | 
+        (merged_df['Country'] == 'Hong Kong') | 
+        (merged_df['Country'] == 'Lithuania')
+    )]
+
+    sum_top_10_importers = top_10_importers.groupby(['Country', 'Region']).sum()[['Net Import Cost (billion $)', 'Net Imports (billion kWh)']].reset_index()
+    # print(sum_top_10_importers)
+    # sum_top_10_importers.to_csv('processed/top_10_importers.csv', index=False)
+    # print(top_10_importers)
+
+    # Create DF for top 10 exporters
+    top_10_exporters = merged_df.loc[(
+        (merged_df['Country'] == 'France') | 
+        (merged_df['Country'] == 'Canada') | 
+        (merged_df['Country'] == 'Laos') | 
+        (merged_df['Country'] == 'Paraguay') | 
+        (merged_df['Country'] == 'Sweden') | 
+        (merged_df['Country'] == 'Germany') | 
+        (merged_df['Country'] == 'China') | 
+        (merged_df['Country'] == 'Russia') | 
+        (merged_df['Country'] == 'Norway') | 
+        (merged_df['Country'] == 'Czechia')
+    )]
+
+
+    # Remove negative signs
+    top_10_exporters['Net Imports (billion kWh)'] = abs(top_10_exporters['Net Imports (billion kWh)'])
+    top_10_exporters['Net Import Cost (billion $)'] = abs(top_10_exporters['Net Import Cost (billion $)'])
+
+    # Column formatting
+    top_10_exporters = top_10_exporters.rename(columns={
+        'Net Imports (billion kWh)': 'Net Exports (billion kWh)',
+        'Net Import Cost (billion $)': 'Net Export Cost (billion $)'
+    })
+    sum_top_10_exporters = top_10_exporters.groupby(['Country', 'Region']).sum()[['Net Export Cost (billion $)', 'Net Exports (billion kWh)']].reset_index()
+    sum_top_10_exporters.to_csv('processed/top_10_exporters.csv', index=False)
+    # print(top_10_exporters)
+
 
 def yearly_distribution_losses():
     
@@ -95,7 +163,7 @@ def yearly_distribution_losses():
     # Create DF to include energy distribution losses by region, country, and year
     yearly_distribution_losses_by_country_df = yearly_distribution_losses_df.groupby(['Country', 'Region', 'Year']).sum()['Amount'].reset_index()
     yearly_distribution_losses_by_country_df = yearly_distribution_losses_by_country_df.sort_values(['Year', 'Amount'], ascending=[False, False])
-    # print(yearly_distribution_losses_by_country_df)
+    print(yearly_distribution_losses_by_country_df)
     # print(yearly_distribution_losses_by_country_df.loc[yearly_distribution_losses_by_country_df['Country'] == 'China'])
     # print(yearly_distribution_losses_by_country_df.loc[yearly_distribution_losses_by_country_df['Country'] == 'United States'])
 
@@ -145,8 +213,10 @@ def top_15_countries_yearly_consumption():
                                     (df['Country'] == 'Italy') | 
                                     (df['Country'] == 'United Kingdom'))]
     yearly_consumption_df = yearly_consumption_df.sort_values(['Year', 'Amount'], ascending=[False, False])
-    yearly_consumption_df.to_csv('graph_datasets/top_15_countries_yearly_consumption.csv', index=False)
-    print(yearly_consumption_df)
+    # yearly_consumption_df.to_csv('graph_datasets/top_15_countries_yearly_consumption.csv', index=False)
+    # print(yearly_consumption_df)
+    print(yearly_consumption_df.loc[yearly_consumption_df['Country'] == 'China'])
+    print(yearly_consumption_df.loc[yearly_consumption_df['Country'] == 'United States'])
 
 
  
@@ -155,7 +225,7 @@ def top_15_countries_yearly_consumption():
 # yearly_consumption()
 # yearly_imports()
 # yearly_exports()
-# yearly_net_imports()
+yearly_net_imports()
 # yearly_distribution_losses()
-electricity_consumption_2021()
+# electricity_consumption_2021()
 # top_15_countries_yearly_consumption()

@@ -3,7 +3,7 @@ pd.set_option('display.max_columns', None)
 # pd.set_option('display.max_rows', None)
 
 
-path = 'global_electricity_statistics.csv'
+path = 'raw/global_electricity_statistics.csv'
 df = pd.read_csv(path)
 # print(df)
 
