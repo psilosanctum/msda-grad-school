@@ -1,7 +1,7 @@
 library(DescTools); 
 library(ResourceSelection)
 
-setwd("C:/Users/sdy897/Box/Working files/Class/UTSA_STA6443_Algorithms1/data")  # need to change this path
+setwd("/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms/datasets")  # need to change this path
 
 #################################################
 # Example 1: plasma data

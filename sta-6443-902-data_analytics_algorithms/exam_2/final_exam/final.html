@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Collin Real (yhi267)">
+
+<title>Final Exam</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="final_files/libs/clipboard/clipboard.min.js"></script>
+<script src="final_files/libs/quarto-html/quarto.js"></script>
+<script src="final_files/libs/quarto-html/popper.min.js"></script>
+<script src="final_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="final_files/libs/quarto-html/anchor.min.js"></script>
+<link href="final_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="final_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="final_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="final_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="final_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Final Exam</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Collin Real (yhi267) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="import-libraries." class="level5">
+<h5 class="anchored" data-anchor-id="import-libraries."><strong>Import libraries.</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(olsrr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ResourceSelection)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="set-path." class="level5">
+<h5 class="anchored" data-anchor-id="set-path."><strong>Set path.</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms/exam_2/final_exam"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="read-csv-and-convert-the-data-types-of-variables-identified-as-categorical." class="level5">
+<h5 class="anchored" data-anchor-id="read-csv-and-convert-the-data-types-of-variables-identified-as-categorical."><strong>Read CSV and convert the data types of variables identified as categorical.</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">'birthweight_final.csv'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Black <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>Black)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Married <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>Married)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Boy <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>Boy)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MomSmoke <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>MomSmoke)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Ed <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>Ed)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   400 obs. of  10 variables:
+ $ Weight   : int  3657 3317 3232 2948 4564 2977 4394 2977 3855 2977 ...
+ $ Weight_Gr: int  0 1 1 1 0 1 0 1 0 1 ...
+ $ Black    : Factor w/ 2 levels "0","1": 1 1 2 1 1 1 1 1 1 1 ...
+ $ Married  : Factor w/ 2 levels "0","1": 2 1 1 2 2 2 1 2 2 1 ...
+ $ Boy      : Factor w/ 2 levels "0","1": 2 2 2 2 2 1 2 1 1 2 ...
+ $ MomSmoke : Factor w/ 2 levels "0","1": 1 1 1 1 1 1 1 1 1 2 ...
+ $ Ed       : Factor w/ 2 levels "0","1": 2 2 1 1 1 2 2 2 2 1 ...
+ $ MomAge   : int  4 -5 -7 -4 5 -6 -1 -1 1 -2 ...
+ $ MomWtGain: int  2 0 -10 18 27 2 17 -12 10 -2 ...
+ $ Visit    : int  3 3 3 3 3 3 3 3 3 1 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-1" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1">Exercise 1)</h2>
+<section id="consider-fitting-a-multiple-linear-regression-to-model-weight-using-possible-explanatory-variables-black-married-boy-momsmoke-ed-momage-momwtgain-and-visit-all-predictors-excluding-weight_gr." class="level4">
+<h4 class="anchored" data-anchor-id="consider-fitting-a-multiple-linear-regression-to-model-weight-using-possible-explanatory-variables-black-married-boy-momsmoke-ed-momage-momwtgain-and-visit-all-predictors-excluding-weight_gr.">Consider fitting a multiple linear regression to model Weight using possible explanatory variables; Black, Married, Boy, MomSmoke, Ed, MomAge, MomWtGain, and Visit (all predictors excluding Weight_Gr).</h4>
+</section>
+<section id="perform-the-following-four-model-selection-methods-and-compare-their-best-models.-comment-on-how-they-differ-or-similar-in-terms-of-selected-variables-in-the-final-model.-no-need-to-interpret-outputs." class="level4">
+<h4 class="anchored" data-anchor-id="perform-the-following-four-model-selection-methods-and-compare-their-best-models.-comment-on-how-they-differ-or-similar-in-terms-of-selected-variables-in-the-final-model.-no-need-to-interpret-outputs.">1) Perform the following four model selection methods and compare their best models. Comment on how they differ or similar in terms of selected variables in the final model. No need to interpret outputs.</h4>
+<pre><code>    • Stepwise selection with 0.01 p-value criteria for both entry and stay.  
+    • Forward selection with 0.01 p-value criteria for entry.  
+    • Backward selection with 0.01 p-value criteria for a stay.   
+    • Adjusted R-squared criteria.    </code></pre>
+<p>NOTE: R output from Backward selection displays variables “removed” from each step.</p>
+<section id="multiple-regression" class="level5">
+<h5 class="anchored" data-anchor-id="multiple-regression"><strong>Multiple Regression</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>q1.lm <span class="ot">=</span> <span class="fu">lm</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> Married <span class="sc">+</span> Boy <span class="sc">+</span> MomSmoke <span class="sc">+</span> Ed <span class="sc">+</span> MomAge <span class="sc">+</span> MomWtGain <span class="sc">+</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>             Visit, <span class="at">data =</span> df)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(q1.lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Weight ~ Black + Married + Boy + MomSmoke + Ed + 
+    MomAge + MomWtGain + Visit, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2433.18  -312.36    14.72   323.08  1562.40 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3249.006    120.298  27.008  &lt; 2e-16 ***
+Black1      -189.710     83.770  -2.265   0.0241 *  
+Married1      63.281     69.819   0.906   0.3653    
+Boy1         118.816     55.077   2.157   0.0316 *  
+MomSmoke1   -198.047     79.065  -2.505   0.0127 *  
+Ed1           71.241     56.300   1.265   0.2065    
+MomAge         3.048      5.305   0.574   0.5660    
+MomWtGain     12.136      2.117   5.733 1.98e-08 ***
+Visit         13.626     37.691   0.362   0.7179    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 547.1 on 391 degrees of freedom
+Multiple R-squared:  0.1456,    Adjusted R-squared:  0.1281 
+F-statistic: 8.328 on 8 and 391 DF,  p-value: 1.901e-10</code></pre>
+</div>
+</div>
+</section>
+<section id="stepwise-selection" class="level5">
+<h5 class="anchored" data-anchor-id="stepwise-selection"><strong>Stepwise Selection</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model.stepwise <span class="ot">=</span> <span class="fu">ols_step_both_p</span>(q1.lm, <span class="at">pent =</span> <span class="fl">0.01</span>, <span class="at">prem =</span> <span class="fl">0.01</span>, <span class="at">details =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model.stepwise</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                               Stepwise Selection Summary                                 
+-----------------------------------------------------------------------------------------
+                      Added/                   Adj.                                          
+Step    Variable     Removed     R-Square    R-Square     C(p)         AIC         RMSE      
+-----------------------------------------------------------------------------------------
+   1    MomWtGain    addition       0.089       0.087    20.7600    6201.2327    559.8163    
+   2    MomSmoke     addition       0.107       0.102    14.6830    6195.4042    555.0626    
+   3      Black      addition       0.127       0.120     7.4660    6188.2794    549.4600    
+-----------------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="stepwise-model" class="level5">
+<h5 class="anchored" data-anchor-id="stepwise-model"><strong>Stepwise Model</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model.lm.stepwise <span class="ot">=</span> <span class="fu">lm</span>(Weight <span class="sc">~</span> MomWtGain <span class="sc">+</span> MomSmoke <span class="sc">+</span> Black, <span class="at">data =</span> df)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.lm.stepwise)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Weight ~ MomWtGain + MomSmoke + Black, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2450.50  -312.94     7.73   325.68  1471.38 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3435.615     32.505 105.695  &lt; 2e-16 ***
+MomWtGain     12.006      2.116   5.673 2.71e-08 ***
+MomSmoke1   -237.799     77.271  -3.077  0.00223 ** 
+Black1      -236.556     78.257  -3.023  0.00267 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 549.5 on 396 degrees of freedom
+Multiple R-squared:  0.1271,    Adjusted R-squared:  0.1205 
+F-statistic: 19.22 on 3 and 396 DF,  p-value: 1.185e-11</code></pre>
+</div>
+</div>
+</section>
+<section id="forward-selection" class="level5">
+<h5 class="anchored" data-anchor-id="forward-selection"><strong>Forward Selection</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model.forward <span class="ot">=</span> <span class="fu">ols_step_forward_p</span>(q1.lm, <span class="at">pent =</span> <span class="fl">0.01</span>, <span class="at">details =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>model.forward</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                              Selection Summary                               
+-----------------------------------------------------------------------------
+        Variable                   Adj.                                          
+Step     Entered     R-Square    R-Square     C(p)         AIC         RMSE      
+-----------------------------------------------------------------------------
+   1    MomWtGain      0.0893      0.0870    20.7604    6201.2327    559.8163    
+   2    MomSmoke       0.1069      0.1024    14.6832    6195.4042    555.0626    
+   3    Black          0.1271      0.1205     7.4659    6188.2794    549.4600    
+-----------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="forward-selection-model" class="level5">
+<h5 class="anchored" data-anchor-id="forward-selection-model"><strong>Forward Selection Model</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>model.lm.forward <span class="ot">=</span> <span class="fu">lm</span>(Weight <span class="sc">~</span> MomWtGain <span class="sc">+</span> MomSmoke <span class="sc">+</span> Black, <span class="at">data =</span> df)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.lm.forward)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Weight ~ MomWtGain + MomSmoke + Black, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2450.50  -312.94     7.73   325.68  1471.38 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3435.615     32.505 105.695  &lt; 2e-16 ***
+MomWtGain     12.006      2.116   5.673 2.71e-08 ***
+MomSmoke1   -237.799     77.271  -3.077  0.00223 ** 
+Black1      -236.556     78.257  -3.023  0.00267 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 549.5 on 396 degrees of freedom
+Multiple R-squared:  0.1271,    Adjusted R-squared:  0.1205 
+F-statistic: 19.22 on 3 and 396 DF,  p-value: 1.185e-11</code></pre>
+</div>
+</div>
+</section>
+<section id="backward-selection" class="level5">
+<h5 class="anchored" data-anchor-id="backward-selection"><strong>Backward Selection</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>model.backward <span class="ot">=</span> <span class="fu">ols_step_backward_p</span>(q1.lm, <span class="at">prem =</span> <span class="fl">0.01</span>, <span class="at">details =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>model.backward</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                            Elimination Summary                             
+---------------------------------------------------------------------------
+        Variable                  Adj.                                         
+Step    Removed     R-Square    R-Square     C(p)        AIC         RMSE      
+---------------------------------------------------------------------------
+   1    Visit         0.1453       0.130    7.1307    6187.8448    546.4642    
+   2    MomAge        0.1445      0.1314    5.5158    6186.2385    546.0372    
+   3    Married       0.1409       0.130    5.1599    6185.9146    546.4876    
+   4    Ed            0.1364      0.1277    5.1841    6185.9688    547.1986    
+   5    Boy           0.1271      0.1205    7.4659    6188.2794    549.4600    
+---------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="backward-selection-model" class="level5">
+<h5 class="anchored" data-anchor-id="backward-selection-model"><strong>Backward Selection Model</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>model.lm.backward <span class="ot">=</span> <span class="fu">lm</span>(Weight <span class="sc">~</span> MomWtGain <span class="sc">+</span> MomSmoke <span class="sc">+</span> Black, <span class="at">data =</span> df)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.lm.backward)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Weight ~ MomWtGain + MomSmoke + Black, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2450.50  -312.94     7.73   325.68  1471.38 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3435.615     32.505 105.695  &lt; 2e-16 ***
+MomWtGain     12.006      2.116   5.673 2.71e-08 ***
+MomSmoke1   -237.799     77.271  -3.077  0.00223 ** 
+Black1      -236.556     78.257  -3.023  0.00267 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 549.5 on 396 degrees of freedom
+Multiple R-squared:  0.1271,    Adjusted R-squared:  0.1205 
+F-statistic: 19.22 on 3 and 396 DF,  p-value: 1.185e-11</code></pre>
+</div>
+</div>
+</section>
+<section id="adjusted-r-squared-criteria" class="level5">
+<h5 class="anchored" data-anchor-id="adjusted-r-squared-criteria"><strong>Adjusted R-squared Criteria</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>adj_r_sq <span class="ot">=</span> <span class="fu">ols_step_best_subset</span>(q1.lm)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>adj_r_sq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Best Subsets Regression                      
+-------------------------------------------------------------------
+Model Index    Predictors
+-------------------------------------------------------------------
+     1         MomWtGain                                            
+     2         MomSmoke MomWtGain                                   
+     3         Black MomSmoke MomWtGain                             
+     4         Black Boy MomSmoke MomWtGain                         
+     5         Black Boy MomSmoke Ed MomWtGain                      
+     6         Black Married Boy MomSmoke Ed MomWtGain              
+     7         Black Married Boy MomSmoke Ed MomAge MomWtGain       
+     8         Black Married Boy MomSmoke Ed MomAge MomWtGain Visit 
+-------------------------------------------------------------------
+
+                                                            Subsets Regression Summary                                                            
+--------------------------------------------------------------------------------------------------------------------------------------------------
+                       Adj.        Pred                                                                                                            
+Model    R-Square    R-Square    R-Square     C(p)         AIC         SBIC          SBC            MSEP             FPE          HSP        APC  
+--------------------------------------------------------------------------------------------------------------------------------------------------
+  1        0.0893      0.0870      0.0775    20.7604    6201.2327    5065.9178    6213.2071    125357705.0611    314961.2141    789.4062    0.9199 
+  2        0.1069      0.1024       0.091    14.6832    6195.4042    5060.1250    6211.3700    123238567.9566    310405.1540    778.0163    0.9066 
+  3        0.1271      0.1205      0.1059     7.4659    6188.2794    5053.1393    6208.2368    120764046.4868    304925.3190    764.3196    0.8906 
+  4        0.1364      0.1277      0.1114     5.1841    6185.9688    5050.9395    6209.9176    119772826.2237    303169.1473    759.9653    0.8854 
+  5        0.1409      0.1300      0.1116     5.1599    6185.9146    5050.9720    6213.8549    119462530.2702    303128.3995    759.9203    0.8853 
+  6        0.1445      0.1314      0.1103     5.5158    6186.2385    5051.3901    6218.1702    119266462.8033    303374.3231    760.6035    0.8860 
+  7        0.1453      0.1300      0.1052     7.1307    6187.8448    5053.0558    6223.7680    119453866.2656    304595.5958    763.7420    0.8896 
+  8        0.1456      0.1281      0.1014     9.0000    6189.7111    5054.9736    6229.6258    119720142.0535    306020.7931    767.4022    0.8938 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+AIC: Akaike Information Criteria 
+ SBIC: Sawa's Bayesian Information Criteria 
+ SBC: Schwarz Bayesian Criteria 
+ MSEP: Estimated error of prediction, assuming multivariate normality 
+ FPE: Final Prediction Error 
+ HSP: Hocking's Sp 
+ APC: Amemiya Prediction Criteria </code></pre>
+</div>
+</div>
+<p><strong>Since Model 6 has the biggest Adj. R-squared value (0.1314), it is the best model.</strong></p>
+</section>
+<section id="adj.-r-squared-model" class="level5">
+<h5 class="anchored" data-anchor-id="adj.-r-squared-model"><strong>Adj. R-squared Model</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model.lm.adj_r_sq <span class="ot">=</span> <span class="fu">lm</span>(Weight <span class="sc">~</span> Black <span class="sc">+</span> Married <span class="sc">+</span> Boy <span class="sc">+</span> MomSmoke <span class="sc">+</span> Ed <span class="sc">+</span> MomWtGain, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> df)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.lm.adj_r_sq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Weight ~ Black + Married + Boy + MomSmoke + Ed + 
+    MomWtGain, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2401.07  -313.80    19.42   323.47  1547.41 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3270.007     72.733  44.959  &lt; 2e-16 ***
+Black1      -193.724     81.970  -2.363   0.0186 *  
+Married1      82.540     64.252   1.285   0.1997    
+Boy1         120.232     54.936   2.189   0.0292 *  
+MomSmoke1   -201.548     78.751  -2.559   0.0109 *  
+Ed1           75.466     55.803   1.352   0.1770    
+MomWtGain     12.209      2.106   5.797 1.38e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 546 on 393 degrees of freedom
+Multiple R-squared:  0.1445,    Adjusted R-squared:  0.1314 
+F-statistic: 11.06 on 6 and 393 DF,  p-value: 2.107e-11</code></pre>
+</div>
+</div>
+</section>
+<section id="final-models" class="level5">
+<h5 class="anchored" data-anchor-id="final-models"><strong>Final Models</strong></h5>
+<p><strong>Stepwise:</strong> y = 3435.615 + (12.006 * MomWtGain) - (237.799 * MomSmoke) - (235.556 * Black)<br>
+<strong>Forward:</strong> y = 3435.615 + (12.006 * MomWtGain) - (237.799 * MomSmoke) - (235.556 * Black)<br>
+<strong>Backward:</strong> y = 3435.615 + (12.006 * MomWtGain) - (237.799 * MomSmoke) - (235.556 * Black)<br>
+<strong>Best Subset (Adj. R-squared):</strong> y = 3270.007 - (193.724 * Black) + (82.54 * Married) + (120.232 * Boy) - (201.548 * MomSmoke) + (75.466 * Ed) + (12.209 * MomWtGain)</p>
+<p><strong>Conclusion:</strong><br>
+The final models for stepwise, forward, and backward selection were composed of the same predictors (Black, MomSmoke, MomWtGain). Model 6 predictors (Black, Married, Boy, MomSmoke, Ed, MomWtGain) are included in the final model of the best subset strategy. Model 6 was chosen because it calculated the biggest Adj. R-squared (0.1314).</p>
+</section>
+<section id="answer-the-following-questions-from-the-best-model-determined-by-stepwise-selection-with-0.01-p-value-criteria." class="level5">
+<h5 class="anchored" data-anchor-id="answer-the-following-questions-from-the-best-model-determined-by-stepwise-selection-with-0.01-p-value-criteria."><strong>Answer the following questions from the best model determined by Stepwise selection with 0.01 p-value criteria.</strong></h5>
+</section>
+</section>
+<section id="fit-the-linear-regression-with-the-best-model-determined-by-stepwise-selection-and-comment-on-the-diagnostics-plot.-do-not-leave-an-observation-that-has-cooks-distance-larger-than-0.115.-re-fit-the-model-if-necessary.-finally-how-many-observations-did-you-use-in-the-final-model" class="level4">
+<h4 class="anchored" data-anchor-id="fit-the-linear-regression-with-the-best-model-determined-by-stepwise-selection-and-comment-on-the-diagnostics-plot.-do-not-leave-an-observation-that-has-cooks-distance-larger-than-0.115.-re-fit-the-model-if-necessary.-finally-how-many-observations-did-you-use-in-the-final-model">2) Fit the linear regression with the best model determined by stepwise selection and comment on the diagnostics plot. Do not leave an observation that has Cook’s distance larger than 0.115. Re-fit the model if necessary. Finally, how many observations did you use in the final model?</h4>
+<section id="fit-the-linear-regression" class="level5">
+<h5 class="anchored" data-anchor-id="fit-the-linear-regression"><strong>Fit the linear regression</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>q2.lm.stepwise <span class="ot">=</span> <span class="fu">lm</span>(Weight <span class="sc">~</span> MomWtGain <span class="sc">+</span> MomSmoke <span class="sc">+</span> Black, <span class="at">data =</span> df)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(q2.lm.stepwise)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Weight ~ MomWtGain + MomSmoke + Black, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2450.50  -312.94     7.73   325.68  1471.38 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3435.615     32.505 105.695  &lt; 2e-16 ***
+MomWtGain     12.006      2.116   5.673 2.71e-08 ***
+MomSmoke1   -237.799     77.271  -3.077  0.00223 ** 
+Black1      -236.556     78.257  -3.023  0.00267 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 549.5 on 396 degrees of freedom
+Multiple R-squared:  0.1271,    Adjusted R-squared:  0.1205 
+F-statistic: 19.22 on 3 and 396 DF,  p-value: 1.185e-11</code></pre>
+</div>
+</div>
+</section>
+<section id="diagnostic-plot" class="level5">
+<h5 class="anchored" data-anchor-id="diagnostic-plot"><strong>Diagnostic Plot</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(q2.lm.stepwise, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="final_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="diagnostic-plot-comments" class="level5">
+<h5 class="anchored" data-anchor-id="diagnostic-plot-comments"><strong>Diagnostic Plot Comments:</strong></h5>
+<p>The QQ Plot illustrates most of the data points along the line, but there’s a few significant outliers on the left tail of the plot. Despite these few outliers, we can assume normality. The Residuals vs.&nbsp;Fitted Plot illustrates that variance around the estimated regression line is mostly constant with the exception of 1-2 outliers. The Scale-Location Plot indicates that the standardized residual slightly decreases as x increases; however, it is mostly linear where a majority of the data lies, so it assumes homoscedasticity. The Cook’s Distance Plot shows that some points are greater than 0.115.</p>
+</section>
+<section id="cooks-distance" class="level5">
+<h5 class="anchored" data-anchor-id="cooks-distance"><strong>Cook’s Distance</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>q2.cooks <span class="ot">=</span> <span class="fu">which</span>(<span class="fu">cooks.distance</span>(q2.lm.stepwise) <span class="sc">&gt;</span> <span class="fl">0.115</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df[q2.cooks, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Weight Weight_Gr Black Married Boy MomSmoke Ed MomAge MomWtGain Visit
+129   1804         1     1       1   0        0  1      9        35     3</code></pre>
+</div>
+</div>
+</section>
+<section id="number-of-observations" class="level5">
+<h5 class="anchored" data-anchor-id="number-of-observations"><strong>Number of Observations</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df[<span class="sc">-</span>q2.cooks, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 399  10</code></pre>
+</div>
+</div>
+</section>
+<section id="refitted-model" class="level5">
+<h5 class="anchored" data-anchor-id="refitted-model"><strong>Refitted Model</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>q2.refitted.step <span class="ot">=</span> <span class="fu">lm</span>(Weight <span class="sc">~</span> MomWtGain <span class="sc">+</span> MomSmoke <span class="sc">+</span> Black, <span class="at">data =</span> df[<span class="sc">-</span>q2.cooks, ])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(q2.refitted.step)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Weight ~ MomWtGain + MomSmoke + Black, data = df[-q2.cooks, 
+    ])
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2427.02  -309.20     2.98   315.40  1472.75 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3434.252     32.078 107.059  &lt; 2e-16 ***
+MomWtGain     13.112      2.113   6.204 1.39e-09 ***
+MomSmoke1   -238.923     76.251  -3.133  0.00186 ** 
+Black1      -198.519     78.022  -2.544  0.01133 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 542.2 on 395 degrees of freedom
+Multiple R-squared:  0.1366,    Adjusted R-squared:  0.1301 
+F-statistic: 20.84 on 3 and 395 DF,  p-value: 1.493e-12</code></pre>
+</div>
+</div>
+<p><strong>Comments:</strong><br>
+We identified <strong>one influential point</strong> (row 129) to eliminate and refit the model. After removing this point, our refitted model contains <strong>399 observations</strong>.</p>
+</section>
+</section>
+<section id="how-much-of-the-variation-in-weight-is-explained-by-the-final-model" class="level4">
+<h4 class="anchored" data-anchor-id="how-much-of-the-variation-in-weight-is-explained-by-the-final-model">3) How much of the variation in Weight is explained by the final model?</h4>
+<p>The final (refitted) model can explain <strong>13.66%</strong> of the variation in Weight.</p>
+</section>
+<section id="interpret-the-relationship-between-predictor-variables-in-the-final-model-and-weight-value-specifically." class="level4">
+<h4 class="anchored" data-anchor-id="interpret-the-relationship-between-predictor-variables-in-the-final-model-and-weight-value-specifically.">4) Interpret the relationship between predictor variables (in the final model) and Weight value specifically.</h4>
+<section id="final-model" class="level5">
+<h5 class="anchored" data-anchor-id="final-model"><strong>Final Model</strong></h5>
+<p>y = 3434.252 + (13.112 * MomWtGain) - (238.923 * MomSmoke) - (198.519 * Black)</p>
+</section>
+<section id="interpret-the-relationships" class="level5">
+<h5 class="anchored" data-anchor-id="interpret-the-relationships"><strong>Interpret the relationships</strong></h5>
+<p>All predictor variables have a statistically significant relationship with Weight. Since all predictor variables reject the null hypothesis, our model has identified a linear relationship between these variables and Weight.</p>
+<ul>
+<li><strong>MomWtGain:</strong> Positively affects weight. An infant’s birth weight increases by 13.112 grams per one unit increase in MomWtGain.<br>
+</li>
+<li><strong>MomSmoke:</strong> Negatively affects weight. An infant’s birth weight decreases by 238.923 grams per one unit increase in MomSmoke.<br>
+</li>
+<li><strong>Black:</strong> Negatively affects weight. An infant’s birth weight decreases by 198.519 grams per one unit increase in Black.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="exercise-2" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2">Exercise 2)</h2>
+<section id="now-we-consider-fitting-a-logistic-regression-for-low-birthweight-weight_gr1.-again-consider-black-married-boy-momsmoke-ed-momage-momwtgain-and-visit-as-possible-explanatory-variables." class="level4">
+<h4 class="anchored" data-anchor-id="now-we-consider-fitting-a-logistic-regression-for-low-birthweight-weight_gr1.-again-consider-black-married-boy-momsmoke-ed-momage-momwtgain-and-visit-as-possible-explanatory-variables.">Now we consider fitting a logistic regression for low birthweight (Weight_Gr=1). Again, consider Black, Married, Boy, MomSmoke, Ed, MomAge, MomWtGain, and Visit as possible explanatory variables.</h4>
+</section>
+<section id="perform-the-following-model-selection-methods-and-compare-their-best-models.-comment-how-they-differ-or-are-similar-in-terms-of-selected-variables" class="level4">
+<h4 class="anchored" data-anchor-id="perform-the-following-model-selection-methods-and-compare-their-best-models.-comment-how-they-differ-or-are-similar-in-terms-of-selected-variables">1) Perform the following model selection methods and compare their best models. Comment how they differ or are similar in terms of selected variables</h4>
+<pre><code>    • Stepwise selection with AIC criteria        
+    • Stepwise selection with BIC criteria        </code></pre>
+<section id="fit-logistic-regression-model" class="level5">
+<h5 class="anchored" data-anchor-id="fit-logistic-regression-model"><strong>Fit Logistic Regression Model</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model.null <span class="ot">=</span> <span class="fu">glm</span>(Weight_Gr <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> df, </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>model.full <span class="ot">=</span> <span class="fu">glm</span>(Weight_Gr <span class="sc">~</span> Black <span class="sc">+</span> Married <span class="sc">+</span> Boy <span class="sc">+</span> MomSmoke <span class="sc">+</span> Ed <span class="sc">+</span> MomAge <span class="sc">+</span> MomWtGain </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                 <span class="sc">+</span> Visit,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> df,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="aic-stepwise-selection" class="level5">
+<h5 class="anchored" data-anchor-id="aic-stepwise-selection"><strong>AIC Stepwise Selection</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>step.models.AIC <span class="ot">=</span> <span class="fu">step</span>(model.null, </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">scope =</span> <span class="fu">list</span>(<span class="at">upper =</span> model.full),</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">direction =</span> <span class="st">"both"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">test =</span> <span class="st">"Chisq"</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">trace =</span> F)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(step.models.AIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Weight_Gr ~ MomWtGain + MomSmoke + MomAge + Boy + 
+    Ed, family = "binomial", data = df)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  0.240486   0.188075   1.279  0.20101    
+MomWtGain   -0.038047   0.008471  -4.492 7.07e-06 ***
+MomSmoke1    0.818590   0.310227   2.639  0.00832 ** 
+MomAge      -0.044444   0.019040  -2.334  0.01959 *  
+Boy1        -0.407560   0.212600  -1.917  0.05523 .  
+Ed1         -0.366259   0.217910  -1.681  0.09280 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 554.43  on 399  degrees of freedom
+Residual deviance: 510.15  on 394  degrees of freedom
+AIC: 522.15
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</section>
+<section id="bic-stepwise-selection" class="level5">
+<h5 class="anchored" data-anchor-id="bic-stepwise-selection"><strong>BIC Stepwise Selection</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>step.models.BIC <span class="ot">=</span> <span class="fu">step</span>(model.null,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">scope =</span> <span class="fu">list</span>(<span class="at">upper =</span> model.full),</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">direction =</span> <span class="st">"both"</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">test =</span> <span class="st">"Chisq"</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">trace =</span> F,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">k =</span> <span class="fu">log</span>(<span class="fu">nrow</span>(df)))</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(step.models.BIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Weight_Gr ~ MomWtGain + MomSmoke + MomAge, family = "binomial", 
+    data = df)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -0.132541   0.112817  -1.175  0.24006    
+MomWtGain   -0.036819   0.008389  -4.389 1.14e-05 ***
+MomSmoke1    0.865786   0.309944   2.793  0.00522 ** 
+MomAge      -0.048266   0.018730  -2.577  0.00997 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 554.43  on 399  degrees of freedom
+Residual deviance: 516.39  on 396  degrees of freedom
+AIC: 524.39
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+<p><strong>Conclusion:</strong><br>
+Both AIC &amp; BIC models produced the same predictors (MomWtGain, MomSmoke, MomAge) with p-values less than the significance level. The AIC model produced two additional predictors (Boy, Ed), but their p-values were greater than the significance level, so they are not statistically significant.</p>
+</section>
+</section>
+<section id="fit-the-logistic-regression-with-the-best-model-determined-by-stepwise-selection-with-bic-criteria.-do-not-leave-an-observation-that-has-cooks-d-larger-than-0.1.-re-fit-the-model-if-necessary.-finally-how-many-observations-did-you-use-in-the-final-model" class="level4">
+<h4 class="anchored" data-anchor-id="fit-the-logistic-regression-with-the-best-model-determined-by-stepwise-selection-with-bic-criteria.-do-not-leave-an-observation-that-has-cooks-d-larger-than-0.1.-re-fit-the-model-if-necessary.-finally-how-many-observations-did-you-use-in-the-final-model">2) Fit the logistic regression with the best model determined by stepwise selection with BIC criteria. Do not leave an observation that has Cook’s d larger than 0.1. Re-fit the model if necessary. Finally, how many observations did you use in the final model?</h4>
+<section id="logistic-regression---best-model-by-stepwise-selection-with-bic-criteria" class="level5">
+<h5 class="anchored" data-anchor-id="logistic-regression---best-model-by-stepwise-selection-with-bic-criteria"><strong>Logistic Regression - Best Model by Stepwise Selection with BIC Criteria</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>glm.model.bic <span class="ot">=</span> <span class="fu">glm</span>(Weight_Gr <span class="sc">~</span> MomWtGain <span class="sc">+</span> MomSmoke <span class="sc">+</span> MomAge,</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> df,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm.model.bic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Weight_Gr ~ MomWtGain + MomSmoke + MomAge, family = "binomial", 
+    data = df)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -0.132541   0.112817  -1.175  0.24006    
+MomWtGain   -0.036819   0.008389  -4.389 1.14e-05 ***
+MomSmoke1    0.865786   0.309944   2.793  0.00522 ** 
+MomAge      -0.048266   0.018730  -2.577  0.00997 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 554.43  on 399  degrees of freedom
+Residual deviance: 516.39  on 396  degrees of freedom
+AIC: 524.39
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</section>
+<section id="influential-points" class="level5">
+<h5 class="anchored" data-anchor-id="influential-points"><strong>Influential Points</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>inf.id <span class="ot">=</span> <span class="fu">which</span>(<span class="fu">cooks.distance</span>(glm.model.bic) <span class="sc">&gt;</span> <span class="fl">0.1</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>inf.id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>named integer(0)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df[inf.id])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 400   0</code></pre>
+</div>
+</div>
+<p><strong>Conclusion:</strong><br>
+No observation had a Cook’s Distance greater than 0.1, so refitting the model was not necessary, and the number of observations in our final model is 400. All predictors (MomWtGain, MomSmoke, MomAge) in the final model calculated a p-value less than the significance level.</p>
+</section>
+</section>
+<section id="based-on-your-final-model-interpret-the-explicit-relationship-between-response-and-predictors-using-odds-ratio." class="level4">
+<h4 class="anchored" data-anchor-id="based-on-your-final-model-interpret-the-explicit-relationship-between-response-and-predictors-using-odds-ratio.">3) Based on your final model, interpret the explicit relationship between response and predictors using Odds Ratio.</h4>
+<section id="odds-ratio" class="level5">
+<h5 class="anchored" data-anchor-id="odds-ratio"><strong>Odds Ratio</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>odds_ratio <span class="ot">=</span> <span class="fu">exp</span>(glm.model.bic<span class="sc">$</span>coefficients)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(odds_ratio, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)   MomWtGain   MomSmoke1      MomAge 
+      0.876       0.964       2.377       0.953 </code></pre>
+</div>
+</div>
+<p><strong>Conclusion:</strong><br>
+Continuous variables:<br>
+- The odds of low birthweight decrease by a factor of exp(-0.036819) = 0.964 with one unit increase in MomWtGain when all other predictors are the same.<br>
+- The odds of low birthweight decrease by a factor of exp(-0.048266) = 0.953 with one unit increase in MomAge when all other predictors are the same.<br>
+Categorical variable:<br>
+- The odds of low birthweight is exp(0.865786) = 2.377 times greater for smoking moms than non-smoking moms when all other predictors are the same.</p>
+</section>
+</section>
+<section id="which-woman-has-the-high-chance-of-delivering-a-low-birthweight-infant-for-example-the-answer-will-be-like-a-married-high-educated-older-woman-has-a-high-chance-of-delivering-a-low-birth-weight-infant." class="level4">
+<h4 class="anchored" data-anchor-id="which-woman-has-the-high-chance-of-delivering-a-low-birthweight-infant-for-example-the-answer-will-be-like-a-married-high-educated-older-woman-has-a-high-chance-of-delivering-a-low-birth-weight-infant.">4) Which woman has the high chance of delivering a low birthweight infant? For example, the answer will be like “a married, high-educated, older woman has a high chance of delivering a low birth weight infant.”</h4>
+<p>Women who are younger with lower weight gain and higher smoking levels have the highest chance of delivering a low birth weight infant.</p>
+</section>
+<section id="what-is-the-sample-proportion-of-low-birth-weight-infants-in-the-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-the-sample-proportion-of-low-birth-weight-infants-in-the-dataset">5) What is the sample proportion of low birth weight infants in the dataset?</h4>
+<section id="sample-proportion" class="level5">
+<h5 class="anchored" data-anchor-id="sample-proportion"><strong>Sample Proportion</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>sample.prop <span class="ot">=</span> <span class="fu">mean</span>(df<span class="sc">$</span>Weight_Gr)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>sample.prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4925</code></pre>
+</div>
+</div>
+<p><strong>Conclusion:</strong> The sample proportion of a low birth weight infant is 49.25%.</p>
+</section>
+</section>
+<section id="perform-classification-with-probability-cut-off-set-as-sample-proportion-you-answer-in-5.-what-is-the-misclassification-rate" class="level4">
+<h4 class="anchored" data-anchor-id="perform-classification-with-probability-cut-off-set-as-sample-proportion-you-answer-in-5.-what-is-the-misclassification-rate">6) Perform classification with probability cut-off set as sample proportion you answer in (5). What is the misclassification rate?</h4>
+<section id="misclassification-rate" class="level5">
+<h5 class="anchored" data-anchor-id="misclassification-rate"><strong>Misclassification Rate</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>fit.prob <span class="ot">=</span> <span class="fu">predict</span>(glm.model.bic, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>pred.class <span class="ot">=</span> <span class="fu">ifelse</span>(fit.prob <span class="sc">&gt;</span> sample.prop, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>Weight_Gr <span class="sc">!=</span> pred.class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.355</code></pre>
+</div>
+</div>
+<p><strong>Conclusion:</strong> The misclassification rate is 35.5%.</p>
+</section>
+</section>
+<section id="comment-on-the-goodness-of-fit-test-and-make-a-conclusion." class="level4">
+<h4 class="anchored" data-anchor-id="comment-on-the-goodness-of-fit-test-and-make-a-conclusion.">7) Comment on the Goodness of fit test and make a conclusion.</h4>
+<section id="goodness-of-fit-test" class="level5">
+<h5 class="anchored" data-anchor-id="goodness-of-fit-test"><strong>Goodness of Fit Test</strong></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hoslem.test</span>(glm.model.bic<span class="sc">$</span>y, <span class="fu">fitted</span>(glm.model.bic), <span class="at">g =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hosmer and Lemeshow goodness of fit (GOF) test
+
+data:  glm.model.bic$y, fitted(glm.model.bic)
+X-squared = 9.2068, df = 8, p-value = 0.3252</code></pre>
+</div>
+</div>
+<p><strong>Conclusion:</strong><br>
+Since the p-value (0.3252) of the Hosmer Lemeshow’s test was greater than the significance level, we do not reject the null hypothesis. The model is adequate.</p>
+</section>
+</section>
+</section>
+<section id="exercise-3" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3">Exercise 3)</h2>
+<section id="compare-results-from-exercise-1-2-and-comment-on-different-or-similar-conclusions-from-each-analysis." class="level4">
+<h4 class="anchored" data-anchor-id="compare-results-from-exercise-1-2-and-comment-on-different-or-similar-conclusions-from-each-analysis.">1) Compare results from Exercise 1-2 and comment on different or similar conclusions from each analysis.</h4>
+<p>The final models in both exercises had MomWtGain and MomSmoke as predictors of low birth weight. The final model in Exercise 1 had Black as its third predictor, whereas the final model in Exercise 2 had MomAge. Exercise 1’s model can explain 13.66% of the Weight variance. Exercise 2’s model calculated a misclassification rate of 35.5%. Therefore, Exercise 2’s model is superior because the model better explains the variation compared to Exercise 1’s.</p>
+</section>
+<section id="low-birth-weight-is-a-risk-factor-that-can-lead-to-infant-mortality.-if-you-want-to-implement-a-low-birthweight-prevention-program-what-would-you-suggest-to-pregnant-women" class="level4">
+<h4 class="anchored" data-anchor-id="low-birth-weight-is-a-risk-factor-that-can-lead-to-infant-mortality.-if-you-want-to-implement-a-low-birthweight-prevention-program-what-would-you-suggest-to-pregnant-women">2) Low birth weight is a risk factor that can lead to infant mortality. If you want to implement a low-birthweight prevention program, what would you suggest to pregnant women?</h4>
+<p>Since MomWtGain and MomSmoke were present in both of the final models, the low birth weight prevention program should recommend that pregnant women avoid smoking and maintain a healthy weight. The program would place more emphasize on smoking because it significantly increases the chance of a low birth weight infant compared to the weight gain predictor.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Collin Real (yhi267), Seth Harris (dmp903)">
+
+<title>HW4</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="v2HW4_files/libs/clipboard/clipboard.min.js"></script>
+<script src="v2HW4_files/libs/quarto-html/quarto.js"></script>
+<script src="v2HW4_files/libs/quarto-html/popper.min.js"></script>
+<script src="v2HW4_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="v2HW4_files/libs/quarto-html/anchor.min.js"></script>
+<link href="v2HW4_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="v2HW4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="v2HW4_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="v2HW4_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="v2HW4_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">HW4</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Collin Real (yhi267), Seth Harris (dmp903) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Import libraries.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ResourceSelection)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ResourceSelection 0.3-6      2023-06-27</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Set path.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/c2cypher/codebase/msda/msda-grad-school/sta-6443-902-data_analytics_algorithms/exam_2/HW4"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To complete this assignment, you will need to download liver.csv and sleep.csv. We use significance level alpha=0.1 in HW4.</p>
+<p>Exercise 1: The liver data set is a subset of the ILPD (Indian Liver Patient Dataset) data set. It contains the first 10 variables described on the UCI Machine Learning Repository and a LiverPatient variable (indicating whether or not the individual is a liver patient. People with active liver disease are coded as LiverPatient=1 and people without disease are coded LiverPatient=0) for adults in the data set. Adults here are defined to be individuals who are at least 18 years of age. It is possible that there will be different significant predictors of being a liver patient for adult females and adult males.</p>
+<ol type="a">
+<li>For only <strong>females</strong> in the data set, find and specify the best set of predictors via stepwise selection with AIC criteria for a logistic regression model predicting whether a female is a liver patient.</li>
+</ol>
+<p><strong>Importing Data</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>liverdata<span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"liver-1.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(liverdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   558 obs. of  10 variables:
+ $ Age         : int  65 62 62 58 72 46 26 29 55 57 ...
+ $ Gender      : chr  "Female" "Male" "Male" "Male" ...
+ $ TB          : num  0.7 10.9 7.3 1 3.9 1.8 0.9 0.9 0.7 0.6 ...
+ $ DB          : num  0.1 5.5 4.1 0.4 2 0.7 0.2 0.3 0.2 0.1 ...
+ $ Alkphos     : int  187 699 490 182 195 208 154 202 290 210 ...
+ $ Alamine     : int  16 64 60 14 27 19 16 14 53 51 ...
+ $ Aspartate   : int  18 100 68 20 59 14 12 11 58 59 ...
+ $ TP          : num  6.8 7.5 7 6.8 7.3 7.6 7 6.7 6.8 5.9 ...
+ $ ALB         : num  3.3 3.2 3.3 3.4 2.4 4.4 3.5 3.6 3.4 2.7 ...
+ $ LiverPatient: int  1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+</div>
+<p><strong>Running Fit Logistic Regression Model (Female)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>liverFemale <span class="ot">=</span> liverdata[<span class="fu">which</span>(liverdata<span class="sc">$</span>Gender <span class="sc">==</span> <span class="st">"Female"</span>),]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>glmnullFemale <span class="ot">=</span> <span class="fu">glm</span>(LiverPatient <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> liverFemale, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>glmfullFemale <span class="ot">=</span> <span class="fu">glm</span>(LiverPatient <span class="sc">~</span> Age <span class="sc">+</span> TB <span class="sc">+</span> DB <span class="sc">+</span>Alkphos <span class="sc">+</span> Alamine <span class="sc">+</span> Aspartate <span class="sc">+</span> TP <span class="sc">+</span> ALB, <span class="at">data =</span> liverFemale, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Stepwise Selection with AIC Criteria</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>stepwiseselectionfemale <span class="ot">=</span> <span class="fu">step</span>(glmnullFemale, <span class="at">scope =</span> <span class="fu">list</span>(<span class="at">upper =</span> glmfullFemale),</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">direction=</span><span class="st">"both"</span>,<span class="at">test=</span><span class="st">"Chisq"</span>, <span class="at">trace =</span> F) </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(stepwiseselectionfemale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = LiverPatient ~ DB + Aspartate, family = "binomial", 
+    data = liverFemale)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept) -0.32480    0.31013  -1.047   0.2950  
+DB           0.94479    0.55808   1.693   0.0905 .
+Aspartate    0.01106    0.00616   1.796   0.0726 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 175.72  on 134  degrees of freedom
+Residual deviance: 154.27  on 132  degrees of freedom
+AIC: 160.27
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> Overall, it is clear that our variables <strong>DB and Aspartate</strong> are significant predictors due to the fact that their p-values of DB (0.0905) and Aspartate (0.0726) are lower than the significance level of 0.10. In addition, the Final Model (Female Only), which is Log(LiverPatient) = -0.32480 + 0.94479 * DB + 0.01106 * Aspartate might include insignificant variables.</p>
+<ol start="2" type="a">
+<li>Comment on the significance of parameter estimates under significance level <strong>alpha=0.1</strong>, what Hosmer-Lemeshow’s test tells us about goodness of fit and point out any issues with diagnostics by checking residual plots and cook’s distance plot (with cut-off 0.25).</li>
+</ol>
+<p><strong>Comments</strong> When looking at the significance of parameter estimates under significance level alpha= 0.1, both our variables DB and Aspartate contain p-values of 0.0905 and 0.0726, which is below the significance level of 0.10. Therefore, as a result we can conclude that they are both significant predictors for female liver patients. Both of these specific variables (DB and Aspartate) have a increased chance of a relationship between female liver patients and active liver disease.</p>
+<p><strong>Calculating Goodness of Fit Using Hosmer-Lemeshow’s Test</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hoslem.test</span>(stepwiseselectionfemale<span class="sc">$</span>y, <span class="fu">fitted</span>(stepwiseselectionfemale), <span class="at">g=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hosmer and Lemeshow goodness of fit (GOF) test
+
+data:  stepwiseselectionfemale$y, fitted(stepwiseselectionfemale)
+X-squared = 7.7535, df = 8, p-value = 0.4579</code></pre>
+</div>
+</div>
+<p><strong>Comments on Goodness of Fit</strong> H0: Our model is adequate H1: Our model is not adequate As we can see shown above, the Hosmer-Lemeshow’s Goodness of Fit Test contained a p-value of 0.4579, which is clearly above the significance level of 0.10, therefore we cannot reject our null hypothesis (H0), which means the model fits well and is considered to be adequate.</p>
+<p><strong>Checking Residual Plots</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>residualdeviance <span class="ot">=</span> <span class="fu">residuals</span>(stepwiseselectionfemale, <span class="at">type =</span> <span class="st">"deviance"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>residualpearson <span class="ot">=</span> <span class="fu">residuals</span>(stepwiseselectionfemale, <span class="at">type =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>standardresidualdeviance <span class="ot">=</span> <span class="fu">residuals</span>(stepwiseselectionfemale, <span class="at">type =</span> <span class="st">"deviance"</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(stepwiseselectionfemale))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>standardresidualpearson <span class="ot">=</span> <span class="fu">residuals</span>(stepwiseselectionfemale, <span class="at">type =</span> <span class="st">"pearson"</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(stepwiseselectionfemale))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(standardresidualdeviance[stepwiseselectionfemale<span class="sc">$</span>model<span class="sc">$</span>LiverPatient<span class="sc">==</span><span class="dv">0</span>], <span class="at">col =</span> <span class="st">"red"</span>, </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>,<span class="fl">3.5</span>), <span class="at">ylab =</span> <span class="st">"Standard Deviance Residuals"</span>, <span class="at">xlab =</span> <span class="st">"ID"</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(standardresidualdeviance[stepwiseselectionfemale<span class="sc">$</span>model<span class="sc">$</span>LiverPatient<span class="sc">==</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(standardresidualpearson[stepwiseselectionfemale<span class="sc">$</span>model<span class="sc">$</span>LiverPatient<span class="sc">==</span><span class="dv">0</span>], <span class="at">col =</span> <span class="st">"red"</span>, </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>,<span class="fl">3.5</span>), <span class="at">ylab =</span> <span class="st">"Standard Pearson Residuals"</span>, <span class="at">xlab =</span> <span class="st">"ID"</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(standardresidualpearson[stepwiseselectionfemale<span class="sc">$</span>model<span class="sc">$</span>LiverPatient<span class="sc">==</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="v2HW4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Comments</strong> The residual plots follow a similar pattern in both the Standard Deviance Residuals and Standard Pearson Residuals. As we can see above, the red line does not go away from linearity and there is no large outstanding values it does not violate any assumptions. As a result, because there really are not any points with extremely big values, the Bernoulli assumption is valid. In addition, because there is no systematic pattern in the plot, we can conclude that the homoscedasticity assumption is true.</p>
+<p><strong>Using Cook’s Distance Plot</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stepwiseselectionfemale, <span class="at">which =</span> <span class="dv">4</span>, <span class="at">id.n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="v2HW4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>influenceddiagnostics <span class="ot">=</span> <span class="fu">which</span>(<span class="fu">cooks.distance</span>(stepwiseselectionfemale)<span class="sc">&gt;</span><span class="fl">0.25</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>influenceddiagnostics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>named integer(0)</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> As a result from Cook’s Distance Plot, we can see there are no influential points (observations) made with a Cook’s Distance Plot greater than 0.25.</p>
+<ol start="3" type="a">
+<li>Interpret relationships between predictors in the final model and the odds of an adult <strong>female</strong> being a liver patient. (based on estimated Odds Ratio). NOTE: stepwise selection with AIC criteria can be performed by default step() function in R. <strong>Final Model</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(stepwiseselectionfemale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = LiverPatient ~ DB + Aspartate, family = "binomial", 
+    data = liverFemale)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept) -0.32480    0.31013  -1.047   0.2950  
+DB           0.94479    0.55808   1.693   0.0905 .
+Aspartate    0.01106    0.00616   1.796   0.0726 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 175.72  on 134  degrees of freedom
+Residual deviance: 154.27  on 132  degrees of freedom
+AIC: 160.27
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> The final model would be <strong>log(p/1-p) = -0.32480 + 0.94479 * DB + 0.01106 * Aspartate</strong></p>
+<p><strong>Calculating Odds Ratio</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(stepwiseselectionfemale<span class="sc">$</span>coefficients),<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)          DB   Aspartate 
+      0.723       2.572       1.011 </code></pre>
+</div>
+</div>
+<p><strong>Interpretation of Odds Ratio</strong> As we can see shown above, we make the conclusion that the probability of female being a liver patient with active liver disease can be increased by a factor of exp(0.94479) = 2.572 with a one unit increase in DB when our variable Aspartate is held constant. On the other hand, the probability of female being a liver patient with active liver disease increases by a factor of exp(0.01106) = 1.011 with a one unit increase in Aspartate when our variable DB is held constant. As a result, a female with high levels of our variables Direct Bilirubin (DB) and Aspartate Aminotransferase (Aspartate) is more likely to be a liver patient with active liver disease.</p>
+<p>Exercise 2: Repeat exercise 1 for males. In addition to the previous questions, also d) comment on how the models for adult females and adult males differ. <strong>Use significance level alpha=0.1</strong> NOTE: You will get an error message “glm.fit: fitted probabilities numerically 0 or 1 occurred” for this run. Ignore this and use the result for the interpretation. I will explain what this error means in the class.</p>
+<ol type="a">
+<li>For only <strong>males</strong> in the data set, find and specify the best set of predictors via stepwise selection with AIC criteria for a logistic regression model predicting whether a female is a liver patient.</li>
+</ol>
+<p><strong>Running Fit Logistic Regression Model (Male)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>liverMale <span class="ot">=</span> liverdata[<span class="fu">which</span>(liverdata<span class="sc">$</span>Gender <span class="sc">==</span> <span class="st">"Male"</span>),]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>glmnullMale<span class="ot">=</span> <span class="fu">glm</span>(LiverPatient <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> liverMale, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>glmfullMale <span class="ot">=</span> <span class="fu">glm</span>(LiverPatient <span class="sc">~</span> Age <span class="sc">+</span> TB <span class="sc">+</span> DB <span class="sc">+</span>Alkphos <span class="sc">+</span> Alamine <span class="sc">+</span> Aspartate <span class="sc">+</span> TP <span class="sc">+</span> ALB, <span class="at">data =</span> liverMale, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+</div>
+<p><strong>Stepwise Selection with AIC Criteria</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>stepwiseselectionmale <span class="ot">=</span> <span class="fu">step</span>(glmnullMale, <span class="at">scope =</span> <span class="fu">list</span>(<span class="at">upper =</span> glmfullMale),</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">direction=</span><span class="st">"both"</span>,<span class="at">test=</span><span class="st">"Chisq"</span>, <span class="at">trace =</span> F) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(stepwiseselectionmale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = LiverPatient ~ DB + Alamine + Age + Alkphos, family = "binomial", 
+    data = liverMale)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept) -1.476570   0.481336  -3.068  0.00216 **
+DB           0.512503   0.176066   2.911  0.00360 **
+Alamine      0.016218   0.005239   3.095  0.00197 **
+Age          0.020616   0.008095   2.547  0.01087 * 
+Alkphos      0.001740   0.001058   1.645  0.09992 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 476.28  on 422  degrees of freedom
+Residual deviance: 395.05  on 418  degrees of freedom
+AIC: 405.05
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> Overall, it is clear that our variables <strong>DB, Alamine, Age, and Alkphos</strong> are significant predictors due to the fact that their p-values of DB (0.00360), Alamine (0.00197), Age (0.01087), and Alkphos (0.09992) are lower than the significance level of 0.10. In addition, the Final Model (Male Only), which is Log(LiverPatient) = -1.476570 + 0.512503 * DB + 0.016218 * Alamin + 0.020616 * Age + 0.001740 * Alkphos might include insignificant variables.</p>
+<ol start="2" type="a">
+<li>Comment on the significance of parameter estimates under significance level <strong>alpha=0.1</strong>, what Hosmer-Lemeshow’s test tells us about goodness of fit and point out any issues with diagnostics by checking residual plots and cook’s distance plot (with cut-off 0.25).</li>
+</ol>
+<p><strong>Comments</strong> When looking at the significance of parameter estimates under significance level alpha= 0.1, all our variables DB (0.00360), Alamine (0.00197), Age (0.01087), and Alkphos (0.09992), are below the significance level of 0.10. Therefore, as a result we can conclude that they are both significant predictors for male liver patients. Both of these specific variables (DB, Alamine, Age, and Alkphos) have a increased chance of a relationship between male liver patients and active liver disease.</p>
+<p><strong>Calculating Goodness of Fit Using Hosmer-Lemeshow’s Test</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hoslem.test</span>(stepwiseselectionmale<span class="sc">$</span>y, <span class="fu">fitted</span>(stepwiseselectionmale), <span class="at">g=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hosmer and Lemeshow goodness of fit (GOF) test
+
+data:  stepwiseselectionmale$y, fitted(stepwiseselectionmale)
+X-squared = 7.043, df = 8, p-value = 0.532</code></pre>
+</div>
+</div>
+<p><strong>Comments on Goodness of Fit</strong> H0: Our model is adequate H1: Our model is not adequate As we can see shown above, the Hosmer-Lemeshow’s Goodness of Fit Test contained a p-value of 0.532, which is clearly above the significance level of 0.10, therefore we cannot reject our null hypothesis (H0), which means the model fits well and is considered to be adequate.</p>
+<p><strong>Checking Residual Plots</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>residualdeviance <span class="ot">=</span> <span class="fu">residuals</span>(stepwiseselectionmale, <span class="at">type =</span> <span class="st">"deviance"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>residualpearson <span class="ot">=</span> <span class="fu">residuals</span>(stepwiseselectionmale, <span class="at">type =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>standardresidualdeviance <span class="ot">=</span> <span class="fu">residuals</span>(stepwiseselectionmale, <span class="at">type =</span> <span class="st">"deviance"</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(stepwiseselectionmale))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>standardresidualpearson <span class="ot">=</span> <span class="fu">residuals</span>(stepwiseselectionmale, <span class="at">type =</span> <span class="st">"pearson"</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(stepwiseselectionmale))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(standardresidualdeviance[stepwiseselectionmale<span class="sc">$</span>model<span class="sc">$</span>LiverPatient<span class="sc">==</span><span class="dv">0</span>], <span class="at">col =</span> <span class="st">"red"</span>, </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>,<span class="fl">3.5</span>), <span class="at">ylab =</span> <span class="st">"Standard Deviance Residuals"</span>, <span class="at">xlab =</span> <span class="st">"ID"</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(standardresidualdeviance[stepwiseselectionmale<span class="sc">$</span>model<span class="sc">$</span>LiverPatient<span class="sc">==</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(standardresidualpearson[stepwiseselectionmale<span class="sc">$</span>model<span class="sc">$</span>LiverPatient<span class="sc">==</span><span class="dv">0</span>], <span class="at">col =</span> <span class="st">"red"</span>, </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>,<span class="fl">3.5</span>), <span class="at">ylab =</span> <span class="st">"Standard Pearson Residuals"</span>, <span class="at">xlab =</span> <span class="st">"ID"</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(standardresidualpearson[stepwiseselectionmale<span class="sc">$</span>model<span class="sc">$</span>LiverPatient<span class="sc">==</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="v2HW4_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Comments</strong> The residual plots follow a similar pattern in both the Standard Deviance Residuals and Standard Pearson Residuals. As we can see above, the red line does not go away from linearity and there is no large outstanding values it does not violate any assumptions. As a result, because there really are not any points with extremely big values, the Bernoulli assumption is valid. In addition, because there is no systematic pattern in the plot, we can conclude that the homoscedasticity assumption is true.</p>
+<p><strong>Using Cook’s Distance Plot</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stepwiseselectionmale, <span class="at">which =</span> <span class="dv">4</span>, <span class="at">id.n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="v2HW4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>influenceddiagnostics2 <span class="ot">=</span> <span class="fu">which</span>(<span class="fu">cooks.distance</span>(stepwiseselectionmale)<span class="sc">&gt;</span><span class="fl">0.25</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>influenceddiagnostics2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>111 
+ 86 </code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> As a result from Cook’s Distance Plot, we can see there are 2 influential points (observations 111 and 86) made with a Cook’s Distance Plot greater than 0.25. We need to eliminate these influential points and refit the Model again.</p>
+<p><strong>Refitting Model</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>glmrefitliver2 <span class="ot">=</span>  <span class="fu">glm</span>(LiverPatient <span class="sc">~</span> DB <span class="sc">+</span> Alamine <span class="sc">+</span> Age <span class="sc">+</span> Alkphos, <span class="at">data =</span> liverMale[<span class="sc">-</span>influenceddiagnostics2, ], <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Interpret relationships between predictors in the final model and the odds of an adult <strong>male</strong> being a liver patient. (based on estimated Odds Ratio). NOTE: stepwise selection with AIC criteria can be performed by default step() function in R. <strong>Final Model</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glmrefitliver2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = LiverPatient ~ DB + Alamine + Age + Alkphos, family = "binomial", 
+    data = liverMale[-influenceddiagnostics2, ])
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -1.902754   0.527386  -3.608 0.000309 ***
+DB           0.573104   0.198893   2.881 0.003958 ** 
+Alamine      0.015850   0.005466   2.900 0.003737 ** 
+Age          0.020418   0.008210   2.487 0.012883 *  
+Alkphos      0.003744   0.001477   2.534 0.011262 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 473.51  on 421  degrees of freedom
+Residual deviance: 381.31  on 417  degrees of freedom
+AIC: 391.31
+
+Number of Fisher Scoring iterations: 8</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> The final model would be <strong>log(p/1-p) = -1.902754 + 0.573104 * DB + 0.015850 * Alamine + 0.020418 * Age + 0.003744 * Alkphos</strong></p>
+<p><strong>Calculating Odds Ratio</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(glmrefitliver2<span class="sc">$</span>coefficients),<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)          DB     Alamine         Age     Alkphos 
+      0.149       1.774       1.016       1.021       1.004 </code></pre>
+</div>
+</div>
+<p><strong>Interpretation of Odds Ratio</strong> As we can see shown above, we make the conclusion that the probability of male being a liver patient with active liver disease can be increased by a factor of The odds of a male liver patient having active liver disease increases by a fact of 1.774 with every unit increase in DB. On the other hand, we can assume all other variables remain constant the odds of liver disease increase by a factor of the following:The odds of liver disease increase by a factor of 1.016 with a one unit increase in Alamine, the odds of liver disease increase by a factor of 1.021 with a one unit increase in Age, and the odds of liver disease increase by a factor of 1.004 with a one unit increase in Alkphos variable. As a result we can make the conclusion, that an adult male with high levels of Direct Bilirubin (DB), Alamine Aminotransferase (Alamine), Alkaline Phosphotase (Alkphos), and Age is more likely to be a liver patient with active liver disease.</p>
+<ol start="4" type="a">
+<li>Comment on how the models for adult females and adult males differ. Use significance level alpha=0.1</li>
+</ol>
+<p><strong>Comments</strong> As we can see from above, when we compare the models for both females and males we can make the assumption that the females only have two significant predictors (DB and Aspartate) while the males have four significant predictors (DB, Alamine, Age, and Alkphos). While all of these predictors increase the odds of a patient having liver disease it may be easier to start predicting when a male is at risk easier than a female, simply because of the amount of predictors used.</p>
+<p>Exercise 3: Use the sleep data set which originates from http://lib.stat.cmu.edu/datasets/sleep. maxlife10 is 0 if the species maximum life span is less than 10 years and 1 if its maximum life span is greater than or equal to 10 years. Consider finding the best logistic model for predicting the probability that a species’ maximum lifespan will be at least 10 years. Consider all 6 variables as candidates (do not include species) and two index variables of them are categorical in nature. <strong>Treat two index variables as categorical variables (e.g.&nbsp;ignore the fact that they are ordinal)</strong>. Use significance level alpha=0.1</p>
+<ol type="a">
+<li>First find and specify the best set of predictors via stepwise selection with AIC criteria.</li>
+</ol>
+<p><strong>Importing Data</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sleepdata <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"sleep-1.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sleepdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   51 obs. of  8 variables:
+ $ species           : chr  "African" "African" "Arctic F" "Asian el" ...
+ $ bodyweight        : num  6654 1 3.38 2547 10.55 ...
+ $ brainweight       : num  5712 6.6 44.5 4603 179.5 ...
+ $ totalsleep        : num  3.3 8.3 12.5 3.9 9.8 19.7 6.2 14.5 9.7 12.5 ...
+ $ gestationtime     : num  645 42 60 624 180 35 392 63 230 112 ...
+ $ predationindex    : int  3 3 1 3 4 1 4 1 1 5 ...
+ $ sleepexposureindex: int  5 1 1 5 4 1 5 2 1 4 ...
+ $ maxlife10         : int  1 0 1 1 1 1 1 1 1 0 ...</code></pre>
+</div>
+</div>
+<p><strong>Running Fit Logistic Regression Model</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>glmnullsleep <span class="ot">=</span> <span class="fu">glm</span>(maxlife10 <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> sleepdata, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>glmfullsleep <span class="ot">=</span> <span class="fu">glm</span>(maxlife10 <span class="sc">~</span> bodyweight <span class="sc">+</span> brainweight <span class="sc">+</span> totalsleep <span class="sc">+</span> gestationtime <span class="sc">+</span> <span class="fu">as.factor</span>(predationindex) <span class="sc">+</span> <span class="fu">as.factor</span>(sleepexposureindex), </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> sleepdata, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+</div>
+<p><strong>Stepwise Selection with AIC Criteria</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>stepwiseselectionsleep <span class="ot">=</span> <span class="fu">step</span>(glmnullsleep, <span class="at">scope =</span> <span class="fu">list</span>(<span class="at">upper=</span>glmfullsleep),</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">direction =</span><span class="st">"both"</span>,<span class="at">test =</span><span class="st">"Chisq"</span>, <span class="at">trace =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(stepwiseselectionsleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = maxlife10 ~ brainweight + totalsleep + as.factor(sleepexposureindex) + 
+    as.factor(predationindex), family = "binomial", data = sleepdata)
+
+Coefficients:
+                                 Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)                    -6.602e+00  4.864e+00  -1.357   0.1747  
+brainweight                     5.101e-02  5.084e-02   1.003   0.3157  
+totalsleep                      4.230e-01  2.647e-01   1.598   0.1100  
+as.factor(sleepexposureindex)2  4.998e+00  2.559e+00   1.953   0.0508 .
+as.factor(sleepexposureindex)3  3.636e+01  9.624e+03   0.004   0.9970  
+as.factor(sleepexposureindex)4  3.370e+01  1.037e+04   0.003   0.9974  
+as.factor(sleepexposureindex)5  7.341e+01  1.262e+04   0.006   0.9954  
+as.factor(predationindex)2     -2.535e+00  1.960e+00  -1.293   0.1960  
+as.factor(predationindex)3     -2.512e+01  1.253e+04  -0.002   0.9984  
+as.factor(predationindex)4     -1.826e+01  6.795e+03  -0.003   0.9979  
+as.factor(predationindex)5     -5.264e+01  1.143e+04  -0.005   0.9963  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 68.31  on 50  degrees of freedom
+Residual deviance: 15.88  on 40  degrees of freedom
+AIC: 37.88
+
+Number of Fisher Scoring iterations: 20</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> Overall, it is clear that our variable <strong>sleepexposureindex2</strong> is a significant predictor due to the fact that the p-value is lower than the significance level of 0.10. In addition, there would be some discrepancies in model fit, due to the fact there are only 51 observations in the model. Also, because the index variables are considered categorical, the model would struggle to fit as it requires sufficient number of data points for accurate fit for all the categories.</p>
+<ol start="2" type="a">
+<li>What does Hosmer-Lemeshow’s test tells us about goodness of fit? And point out any issues with diagnostics by checking residual plots and cook’s distance plot. Do not remove influential points but just make comments on suspicious observations.</li>
+</ol>
+<p><strong>Calculating Goodness of Fit Using Hosmer-Lemeshow’s Test</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hoslem.test</span>(stepwiseselectionsleep<span class="sc">$</span>y, <span class="fu">fitted</span>(stepwiseselectionsleep), <span class="at">g=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in hoslem.test(stepwiseselectionsleep$y,
+fitted(stepwiseselectionsleep), : The data did not allow for the requested
+number of bins.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hosmer and Lemeshow goodness of fit (GOF) test
+
+data:  stepwiseselectionsleep$y, fitted(stepwiseselectionsleep)
+X-squared = 7.0397, df = 7, p-value = 0.4248</code></pre>
+</div>
+</div>
+<p><strong>Comments on Goodness of Fit</strong> H0: Our model is adequate H1: Our model is not adequate As we can see shown above, the Hosmer-Lemeshow’s Goodness of Fit Test contained a p-value of 0.4248, which is clearly above the significance level of 0.10, therefore we cannot reject our null hypothesis (H0), which means the model fits well and is considered to be adequate.</p>
+<p><strong>Checking Residual Plots</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>residudaldeviance2<span class="ot">&lt;-</span><span class="fu">residuals</span>(stepwiseselectionsleep, <span class="at">type =</span> <span class="st">"deviance"</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>residualpearson2<span class="ot">&lt;-</span><span class="fu">residuals</span>(stepwiseselectionsleep, <span class="at">type =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>standardresidualdeviance2<span class="ot">&lt;-</span><span class="fu">residuals</span>(stepwiseselectionsleep, <span class="at">type =</span> <span class="st">"deviance"</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(stepwiseselectionsleep)) </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>standardresidualpearson2 <span class="ot">&lt;-</span><span class="fu">residuals</span>(stepwiseselectionsleep, <span class="at">type =</span> <span class="st">"pearson"</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(stepwiseselectionsleep))</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(standardresidualdeviance2[stepwiseselectionsleep<span class="sc">$</span>model<span class="sc">$</span>maxlife10<span class="sc">==</span><span class="dv">0</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>,<span class="fl">3.5</span>), <span class="at">ylab =</span> <span class="st">"Standard Deviance Residuals"</span>, <span class="at">xlab =</span> <span class="st">"ID"</span>)</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(standardresidualdeviance2[stepwiseselectionsleep<span class="sc">$</span>model<span class="sc">$</span>maxlife10<span class="sc">==</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(standardresidualpearson2[stepwiseselectionsleep<span class="sc">$</span>model<span class="sc">$</span>maxlife10<span class="sc">==</span><span class="dv">0</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>,<span class="fl">3.5</span>), <span class="at">ylab =</span> <span class="st">"Standard Pearson Residuals"</span>, <span class="at">xlab =</span> <span class="st">"ID"</span>)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(standardresidualpearson2[stepwiseselectionsleep<span class="sc">$</span>model<span class="sc">$</span>maxlife10<span class="sc">==</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="v2HW4_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Comments</strong> As we can see above, both the standard deviance and standard pearson residual plots, the points are distributed between 2 and -2. Since there is not a pattern in the distribution of the residuals, as a result the model assumptions of residuals having Bernoulli distribution and homoscedasticity is valid. In addition to this, the linearity assumption is not violated since there is not a systematic pattern in the plot.</p>
+<p><strong>Using Cook’s Distance Plot</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stepwiseselectionsleep, <span class="at">which =</span> <span class="dv">4</span>, <span class="at">id.n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="v2HW4_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>influenceddiagnostics3 <span class="ot">=</span> <span class="fu">which</span>(<span class="fu">cooks.distance</span>(stepwiseselectionsleep)<span class="sc">&gt;</span><span class="fl">0.25</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>influenceddiagnostics3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>35 40 
+35 40 </code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> As a result from Cook’s Distance Plot, we can see there are 2 influential points (observations 35 and 40) made with a Cook’s Distance Plot greater than 0.25. We need to eliminate these influential points and refit the Model again.</p>
+<p><strong>Running Fit Logistic Regression Model</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>glmrefitsleep <span class="ot">=</span> <span class="fu">glm</span>(maxlife10 <span class="sc">~</span> brainweight <span class="sc">+</span> totalsleep <span class="sc">+</span> <span class="fu">as.factor</span>(predationindex) <span class="sc">+</span> <span class="fu">as.factor</span>(sleepexposureindex), </span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> sleepdata[<span class="sc">-</span>influenceddiagnostics3], <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Interpret what the model tells us about relationships between the predictors and the odds of a species’ maximum lifespan being at least 10 years. NOTE: For part (c), interpret the Odds Ratio for all covariates regardless of their significance. <strong>Final Model</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glmrefitsleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = maxlife10 ~ brainweight + totalsleep + as.factor(predationindex) + 
+    as.factor(sleepexposureindex), family = "binomial", data = sleepdata[-influenceddiagnostics3])
+
+Coefficients:
+                                 Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)                    -6.602e+00  4.864e+00  -1.357   0.1747  
+brainweight                     5.101e-02  5.084e-02   1.003   0.3157  
+totalsleep                      4.230e-01  2.647e-01   1.598   0.1100  
+as.factor(predationindex)2     -2.535e+00  1.960e+00  -1.293   0.1960  
+as.factor(predationindex)3     -2.512e+01  1.253e+04  -0.002   0.9984  
+as.factor(predationindex)4     -1.826e+01  6.795e+03  -0.003   0.9979  
+as.factor(predationindex)5     -5.264e+01  1.143e+04  -0.005   0.9963  
+as.factor(sleepexposureindex)2  4.998e+00  2.559e+00   1.953   0.0508 .
+as.factor(sleepexposureindex)3  3.636e+01  9.624e+03   0.004   0.9970  
+as.factor(sleepexposureindex)4  3.370e+01  1.037e+04   0.003   0.9974  
+as.factor(sleepexposureindex)5  7.341e+01  1.262e+04   0.006   0.9954  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 68.31  on 50  degrees of freedom
+Residual deviance: 15.88  on 40  degrees of freedom
+AIC: 37.88
+
+Number of Fisher Scoring iterations: 20</code></pre>
+</div>
+</div>
+<p><strong>Calculating Odds Ratio</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(glmrefitsleep<span class="sc">$</span>coefficients),<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   (Intercept)                    brainweight 
+                  1.000000e-03                   1.052000e+00 
+                    totalsleep     as.factor(predationindex)2 
+                  1.527000e+00                   7.900000e-02 
+    as.factor(predationindex)3     as.factor(predationindex)4 
+                  0.000000e+00                   0.000000e+00 
+    as.factor(predationindex)5 as.factor(sleepexposureindex)2 
+                  0.000000e+00                   1.480500e+02 
+as.factor(sleepexposureindex)3 as.factor(sleepexposureindex)4 
+                  6.173141e+15                   4.332708e+14 
+as.factor(sleepexposureindex)5 
+                  7.603846e+31 </code></pre>
+</div>
+</div>
+<p><strong>Interpretation of Odds Ratio</strong> As we can see shown above, we make the conclusion that the odds(sleepexposureindex = 2)/odds(sleepexposureindex = 1) = exp(4.998e+00) = 1.480500e+02 when the sleep exposure index is 1 when the rest of the other variables are kept constant. With this in mind, there is no need to interpret the insignificant levels as they imply zero coefficients (with large p-values). The odds that a species’ maximum lifespan will be at least 10 years is exp(4.998e+00) = 1.480500e+02 times for the sleepexposureindex Level 2 group compared other groups. As a result, we can make the assumption that animals that sleep in the second-best (Level 2) well-protected den will have a higher probability of achieving a maximum lifespan of at least 10 years.</p>
+<p>Exercise 4: The index variables in the data set are ordinal, meaning they are categorical and they have a natural ordering. If we treat an index variable as a continuous variable, this will imply a linear change as the index changes. Repeat Exercise 3 a)-c) by treating two index variables as continuous variables.</p>
+<ol type="a">
+<li>First find and specify the best set of predictors via stepwise selection with AIC criteria. <strong>Running Fit Logistic Regression Model</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>glmnullsleep2 <span class="ot">=</span> <span class="fu">glm</span>(maxlife10 <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> sleepdata, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>glmfullsleep2 <span class="ot">=</span> <span class="fu">glm</span>(maxlife10 <span class="sc">~</span> bodyweight <span class="sc">+</span> brainweight <span class="sc">+</span> totalsleep <span class="sc">+</span> gestationtime <span class="sc">+</span> predationindex <span class="sc">+</span> sleepexposureindex, <span class="at">data =</span> sleepdata, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+</div>
+<p><strong>Stepwise Selection with AIC Criteria</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>stepwiseselectionsleep2 <span class="ot">=</span> <span class="fu">step</span>(glmnullsleep2, <span class="at">scope =</span> <span class="fu">list</span>(<span class="at">upper=</span>glmfullsleep2),</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">direction =</span><span class="st">"both"</span>,<span class="at">test =</span><span class="st">"Chisq"</span>, <span class="at">trace =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(stepwiseselectionsleep2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = maxlife10 ~ brainweight + totalsleep + sleepexposureindex + 
+    predationindex, family = "binomial", data = sleepdata)
+
+Coefficients:
+                   Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)        -6.16387    3.59301  -1.716   0.0863 .
+brainweight         0.06018    0.03544   1.698   0.0895 .
+totalsleep          0.35985    0.20995   1.714   0.0865 .
+sleepexposureindex  4.42111    1.97540   2.238   0.0252 *
+predationindex     -3.36917    1.51823  -2.219   0.0265 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 68.310  on 50  degrees of freedom
+Residual deviance: 19.212  on 46  degrees of freedom
+AIC: 29.212
+
+Number of Fisher Scoring iterations: 11</code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> Overall, it is clear that our variables <strong>brainweight, totalsleep, sleepexposureindex, and predationindex</strong> are significant predictors due to the fact that their p-values are lower than the significance level of 0.10. In addition to this, we will consider both our variables <strong>sleep exposure index and predation index</strong> as continuous variable that cater the data issue discussed in Exercise 3.</p>
+<ol start="2" type="a">
+<li>What does Hosmer-Lemeshow’s test tells us about goodness of fit? And point out any issues with diagnostics by checking residual plots and cook’s distance plot. Do not remove influential points but just make comments on suspicious observations. <strong>Calculating Goodness of Fit Using Hosmer-Lemeshow’s Test</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hoslem.test</span>(stepwiseselectionsleep2<span class="sc">$</span>y, <span class="fu">fitted</span>(stepwiseselectionsleep2), <span class="at">g=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hosmer and Lemeshow goodness of fit (GOF) test
+
+data:  stepwiseselectionsleep2$y, fitted(stepwiseselectionsleep2)
+X-squared = 1.4406, df = 8, p-value = 0.9937</code></pre>
+</div>
+</div>
+<p><strong>Comments on Goodness of Fit</strong> H0: Our model is adequate H1: Our model is not adequate As we can see shown above, the Hosmer-Lemeshow’s Goodness of Fit Test contained a p-value of 0.9937, which is clearly above the significance level of 0.10, therefore we cannot reject our null hypothesis (H0), which means the model fits well and is considered to be adequate. Our variables, <strong>brainweight, totalsleep, sleepexposureindex, and predationindex</strong> these predictors have p-values of 0.0895, 0.0865, 0.0252, and 0.0265 are clearly below the significance level of 0.10; as a result there is a significant relationship between <strong>brainweight, totalsleep, sleepexposureindex, and predationindex</strong> and this means whether an animal species’ maximum lifespan will be at least 10 years.</p>
+<p><strong>Checking Residual Plots</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>residudaldeviance3<span class="ot">&lt;-</span><span class="fu">residuals</span>(stepwiseselectionsleep2, <span class="at">type =</span> <span class="st">"deviance"</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>residualpearson3<span class="ot">&lt;-</span><span class="fu">residuals</span>(stepwiseselectionsleep2, <span class="at">type =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>standardresidualdeviance3<span class="ot">&lt;-</span><span class="fu">residuals</span>(stepwiseselectionsleep2, <span class="at">type =</span> <span class="st">"deviance"</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(stepwiseselectionsleep2)) </span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>standardresidualpearson3 <span class="ot">&lt;-</span><span class="fu">residuals</span>(stepwiseselectionsleep2, <span class="at">type =</span> <span class="st">"pearson"</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">hatvalues</span>(stepwiseselectionsleep2))</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(standardresidualdeviance3[stepwiseselectionsleep2<span class="sc">$</span>model<span class="sc">$</span>maxlife10<span class="sc">==</span><span class="dv">0</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>,<span class="fl">3.5</span>), <span class="at">ylab =</span> <span class="st">"Standard Deviance Residuals"</span>, <span class="at">xlab =</span> <span class="st">"ID"</span>)</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(standardresidualdeviance3[stepwiseselectionsleep2<span class="sc">$</span>model<span class="sc">$</span>maxlife10<span class="sc">==</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(standardresidualpearson3[stepwiseselectionsleep2<span class="sc">$</span>model<span class="sc">$</span>maxlife10<span class="sc">==</span><span class="dv">0</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.5</span>,<span class="fl">3.5</span>), <span class="at">ylab =</span> <span class="st">"Standard Pearson Residuals"</span>, <span class="at">xlab =</span> <span class="st">"ID"</span>)</span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(standardresidualpearson3[stepwiseselectionsleep2<span class="sc">$</span>model<span class="sc">$</span>maxlife10<span class="sc">==</span><span class="dv">1</span>], <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="v2HW4_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Comments</strong> As we can see above, both the standard deviance and standard pearson residual plots, the points are distributed between 2 and -2. Since there is not a pattern in the distribution of the residuals, as a result the model assumptions of residuals having Bernoulli distribution and homoscedasticity is valid. In addition to this, the linearity assumption is not violated since there is not a systematic pattern in the plot.</p>
+<p><strong>Using Cook’s Distance Plot</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stepwiseselectionsleep2, <span class="at">which =</span> <span class="dv">4</span>, <span class="at">id.n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="v2HW4_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>influenceddiagnostics4 <span class="ot">=</span> <span class="fu">which</span>(<span class="fu">cooks.distance</span>(stepwiseselectionsleep2)<span class="sc">&gt;</span><span class="fl">0.25</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>influenceddiagnostics4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10 35 40 50 
+10 35 40 50 </code></pre>
+</div>
+</div>
+<p><strong>Comments</strong> As a result from Cook’s Distance Plot, we can see there are 4 influential points (observations 10, 35, 40, 50) made with a Cook’s Distance Plot greater than 0.25. We need to eliminate these influential points and refit the Model again.</p>
+<p><strong>Running Fit Logistic Regression Model</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>glmrefitsleep2 <span class="ot">=</span> <span class="fu">glm</span>(maxlife10 <span class="sc">~</span> brainweight <span class="sc">+</span> totalsleep <span class="sc">+</span> <span class="fu">as.factor</span>(predationindex) <span class="sc">+</span> <span class="fu">as.factor</span>(sleepexposureindex), </span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> sleepdata[<span class="sc">-</span>influenceddiagnostics4], <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Interpret what the model tells us about relationships between the predictors and the odds of a species’ maximum lifespan being at least 10 years. NOTE: For part (c), interpret the Odds Ratio for all covariates regardless of their significance. <strong>Final Model</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glmrefitsleep2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = maxlife10 ~ brainweight + totalsleep + as.factor(predationindex) + 
+    as.factor(sleepexposureindex), family = "binomial", data = sleepdata[-influenceddiagnostics4])
+
+Coefficients:
+                                 Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)                    -6.602e+00  4.864e+00  -1.357   0.1747  
+brainweight                     5.101e-02  5.084e-02   1.003   0.3157  
+totalsleep                      4.230e-01  2.647e-01   1.598   0.1100  
+as.factor(predationindex)2     -2.535e+00  1.960e+00  -1.293   0.1960  
+as.factor(predationindex)3     -2.512e+01  1.253e+04  -0.002   0.9984  
+as.factor(predationindex)4     -1.826e+01  6.795e+03  -0.003   0.9979  
+as.factor(predationindex)5     -5.264e+01  1.143e+04  -0.005   0.9963  
+as.factor(sleepexposureindex)2  4.998e+00  2.559e+00   1.953   0.0508 .
+as.factor(sleepexposureindex)3  3.636e+01  9.624e+03   0.004   0.9970  
+as.factor(sleepexposureindex)4  3.370e+01  1.037e+04   0.003   0.9974  
+as.factor(sleepexposureindex)5  7.341e+01  1.262e+04   0.006   0.9954  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 68.31  on 50  degrees of freedom
+Residual deviance: 15.88  on 40  degrees of freedom
+AIC: 37.88
+
+Number of Fisher Scoring iterations: 20</code></pre>
+</div>
+</div>
+<p><strong>Calculating Odds Ratio</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(glmrefitsleep2<span class="sc">$</span>coefficients),<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   (Intercept)                    brainweight 
+                  1.000000e-03                   1.052000e+00 
+                    totalsleep     as.factor(predationindex)2 
+                  1.527000e+00                   7.900000e-02 
+    as.factor(predationindex)3     as.factor(predationindex)4 
+                  0.000000e+00                   0.000000e+00 
+    as.factor(predationindex)5 as.factor(sleepexposureindex)2 
+                  0.000000e+00                   1.480500e+02 
+as.factor(sleepexposureindex)3 as.factor(sleepexposureindex)4 
+                  6.173141e+15                   4.332708e+14 
+as.factor(sleepexposureindex)5 
+                  7.603846e+31 </code></pre>
+</div>
+</div>
+<p><strong>Interpretation of Odds Ratio</strong> As we can see shown above, we make the conclusion that the odds that a species’ maximum lifespan will be at least 10 years increase by a factor of exp( 5.101e-02) = 1.052000e+00 with a one unit increase in brainweight when totalsleep, sleepexposureindex, and predationindex are held constant.</p>
+<p>The odds that a species’ maximum lifespan will be at least 10 years increase by a factor of exp(4.230e-01) = 1.527000e+00 with a one unit decrease in totalsleep when brainweight, sleepexposureindex, and predationindex are held constant.</p>
+<p>The odds that a species’ maximum lifespan will be at least 10 years decrease by a factor of exp(-2.535e+00) = 7.900000e-02 with a one unit increase in predationindex when totalsleep, brainweight, and sleepexposureindex are held constant.</p>
+<p>The odds that a species’ maximum lifespan will be at least 10 years increase by a factor of exp(-2.535e+00) = 1.480500e+02 with a one unit increase in sleepexposureindex when totalsleep, brainweight, and predationindex are held constant.</p>
+<p>Therefore as a result a species of an animal that has higher brainweight, has higher totalsleep, has a lower predationindex, and has a lower sleepexposureindex is more likely to have a lifespan of at least 10 years. In other words, an animal species with a heavier brain that gets more sleep, is least likely to be preyed upon, and sleeps in a less exposed area has a higher probability of having a lifespan of at least 10 years.</p>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
