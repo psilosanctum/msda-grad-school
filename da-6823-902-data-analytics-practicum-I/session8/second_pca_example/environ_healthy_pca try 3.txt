@@ -1,0 +1,31 @@
+libname mylib 'P:\';
+data myfactor;
+set mylib.emba;
+/* do the factor analysis - set eigenval rotate=varimax scree PCA */
+proc factor data = myfactor 
+maxiter=100
+method=principal
+mineigen=1
+rotate=varimax
+maxoter=100
+nfactors=2
+msa
+scree
+score
+print
+out=myscores;
+var 
+COMPANIES_HELP_CONSUMERS_ENVRNMN
+ENVIRONMENTALLY_SOUND_GOOD_FOR_B
+IMPT_OTHERS_SEE_ME_ENVRNMNTLLY_C
+MORE_LIKELY_PRCH_ENVRNMNTLLY_FRN
+
+
+
+
+EAT_FOODS_I_LIKE_REGARDLESS_OF_C
+I_OFTEN_SNACK_BETWEEN_MEALS
+I_FREQUENTLY_EAT_SWEETS;
+
+
+run;

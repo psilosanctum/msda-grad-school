@@ -1,0 +1,84 @@
+libname myemba 'P:\';
+data myvars;
+set myemba.emba1;
+proc factor data = myvars 
+maxiter=100
+method=principal
+mineigen=1
+rotate=varimax
+scree
+score
+print
+nfactors=8
+out=myscores;
+var 
+IMPORTANT_TO_RESPECT_CUSTOMS_AND
+I_AM_INTERESTED_IN_INTERNATIONAL
+I_AM_INTERESTED_IN_OTHER_CULTURE
+
+
+
+
+EAT_FOODS_I_LIKE_REGARDLESS_OF_C
+I_OFTEN_SNACK_BETWEEN_MEALS
+I_FREQUENTLY_EAT_SWEETS
+
+
+;
+
+
+run;
+   
+
+/* rename the factor variables */
+data clusready;
+set myscores;
+rename factor1 = culture;
+rename factor2 = junk_food;
+rename myid = resp_id;
+run;   
+
+proc fastclus data=clusready maxiter=100 maxclusters=2 out=finalclus;
+var 
+culture
+junk_food
+I_DO_THINGS_ON_THE_SPUR_OF_THE_M
+I_ENJOY_TAKING_RISKS;
+run;    
+
+              
+  proc fastclus data=clusready maxiter=100 maxclusters=3 out=finalclus;
+var 
+culture
+junk_food
+I_DO_THINGS_ON_THE_SPUR_OF_THE_M
+I_ENJOY_TAKING_RISKS;
+run;                                           
+
+proc fastclus data=clusready maxiter=100 maxclusters=4 out=finalclus;
+var 
+culture
+junk_food
+I_DO_THINGS_ON_THE_SPUR_OF_THE_M
+I_ENJOY_TAKING_RISKS;
+run;    
+
+proc fastclus data=clusready maxiter=100 maxclusters=5 out=finalclus;
+var 
+culture
+junk_food
+I_DO_THINGS_ON_THE_SPUR_OF_THE_M
+I_ENJOY_TAKING_RISKS;
+run;    
+
+proc fastclus data=clusready maxiter=100 maxclusters=6 out=finalclus;
+var 
+culture
+junk_food
+I_DO_THINGS_ON_THE_SPUR_OF_THE_M
+I_ENJOY_TAKING_RISKS;
+run;    
+
+                  
+
+         

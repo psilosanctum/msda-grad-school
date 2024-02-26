@@ -1,0 +1,22 @@
+libname mylib 'p:\';
+/* go get the combo file */
+data letscluster;
+set mylib.newcombo;
+proc fastclus data=letscluster maxclusters=2;
+var earlyadopt socialphone loser ad_receptivity;
+run;
+proc fastclus data=letscluster maxclusters=3;
+var earlyadopt socialphone loser ad_receptivity;
+run;
+proc fastclus data=letscluster maxclusters=4;
+var earlyadopt socialphone loser ad_receptivity;
+run;
+proc fastclus data=letscluster maxclusters=5;
+var earlyadopt socialphone loser ad_receptivity;
+run;
+proc fastclus data=letscluster maxclusters=6;
+var earlyadopt socialphone loser ad_receptivity;
+run;
+proc fastclus data=letscluster maxclusters=7;
+var earlyadopt socialphone loser ad_receptivity;
+run;

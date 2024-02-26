@@ -1,0 +1,32 @@
+libname mylib 'P:\';
+data myfactor;
+set mylib.sasclus;
+run;
+/* do the factor analysis - set eigenval rotate=varimax scree PCA */
+proc factor data = myfactor 
+maxiter=100
+method=principal
+mineigen=1
+rotate=varimax
+msa
+scree
+score
+print
+nfactors=2
+out=myscores;
+var first
+pay
+keep
+love
+friend
+connect
+express
+family;
+run;
+/* rename the factor variables */
+data myscores1;
+set myscores;
+rename factor1 = earlyadopt;
+rename factor2 = socialphone;
+rename my_id = resp_id;
+run;
