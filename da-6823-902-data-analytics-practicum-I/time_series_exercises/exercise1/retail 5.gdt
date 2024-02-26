@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gretldata SYSTEM "gretldata.dtd">
+
+<gretldata version="1.4" name="retail 5" frequency="7" startobs="2011-09-16" endobs="2011-10-21" type="time-series">
+<description>Data imported from Excel file 'retail 5.xlsx', 2020-10-15 15:10
+</description>
+<variables count="1">
+<variable name="sales"
+/>
+</variables>
+<observations count="36" labels="false">
+<obs>6976 </obs>
+<obs>27829 </obs>
+<obs>10725 </obs>
+<obs>10941 </obs>
+<obs>23484 </obs>
+<obs>14959 </obs>
+<obs>16211 </obs>
+<obs>16944 </obs>
+<obs>16100 </obs>
+<obs>21122 </obs>
+<obs>17086 </obs>
+<obs>36904 </obs>
+<obs>9590 </obs>
+<obs>29181 </obs>
+<obs>15166 </obs>
+<obs>8966 </obs>
+<obs>28973 </obs>
+<obs>43702 </obs>
+<obs>19581 </obs>
+<obs>32263 </obs>
+<obs>21222 </obs>
+<obs>19329 </obs>
+<obs>14948 </obs>
+<obs>21060 </obs>
+<obs>25157 </obs>
+<obs>26365 </obs>
+<obs>22009 </obs>
+<obs>8380 </obs>
+<obs>24652 </obs>
+<obs>18689 </obs>
+<obs>46161 </obs>
+<obs>31268 </obs>
+<obs>30431 </obs>
+<obs>7275 </obs>
+<obs>25405 </obs>
+<obs>20091 </obs>
+</observations>
+</gretldata>

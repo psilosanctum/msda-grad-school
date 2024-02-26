@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gretldata SYSTEM "gretldata.dtd">
+
+<gretldata version="1.4" name="retail 2" frequency="7" startobs="2011-03-15" endobs="2011-04-22" type="time-series">
+<description>Data imported from Excel file 'retail 2.xlsx', 2020-10-15 15:02
+</description>
+<variables count="1">
+<variable name="sales"
+/>
+</variables>
+<observations count="39" labels="false">
+<obs>8495 </obs>
+<obs>18414 </obs>
+<obs>13332 </obs>
+<obs>4989 </obs>
+<obs>13715 </obs>
+<obs>6918 </obs>
+<obs>4458 </obs>
+<obs>15767 </obs>
+<obs>10465 </obs>
+<obs>2741 </obs>
+<obs>16717 </obs>
+<obs>8918 </obs>
+<obs>12583 </obs>
+<obs>20589 </obs>
+<obs>13756 </obs>
+<obs>14165 </obs>
+<obs>10201 </obs>
+<obs>14884 </obs>
+<obs>11283 </obs>
+<obs>18157 </obs>
+<obs>13303 </obs>
+<obs>4408 </obs>
+<obs>13125 </obs>
+<obs>32413 </obs>
+<obs>19719 </obs>
+<obs>16237 </obs>
+<obs>17374 </obs>
+<obs>5660 </obs>
+<obs>13045 </obs>
+<obs>14763 </obs>
+<obs>8576 </obs>
+<obs>10356 </obs>
+<obs>9230 </obs>
+<obs>5526 </obs>
+<obs>13499 </obs>
+<obs>15121 </obs>
+<obs>18100 </obs>
+<obs>17401 </obs>
+<obs>12726 </obs>
+</observations>
+</gretldata>

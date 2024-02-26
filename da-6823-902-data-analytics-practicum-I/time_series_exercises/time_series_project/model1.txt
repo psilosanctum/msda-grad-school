@@ -1,0 +1,62 @@
+Function evaluations: 279
+Evaluations of gradient: 103
+
+Model 1: ARMAX, using observations 2015-01-03:2020-06-26 (T = 2002)
+Estimated using AS 197 (exact ML)
+Dependent variable: nat_demand
+Standard errors based on Hessian
+
+                       coefficient      std. error       z      p-value 
+  ----------------------------------------------------------------------
+  const                 15953.2         3008.81        5.302    1.14e-07 ***
+  phi_1                     0.360172       0.0411942   8.743    2.26e-18 ***
+  theta_1                   0.315096       0.0434238   7.256    3.98e-13 ***
+  T2M_toc                 −42.7056       144.778      −0.2950   0.7680  
+  QV2M_toc             341522          95154.4         3.589    0.0003   ***
+  TQL_toc               −8240.94        1365.43       −6.035    1.59e-09 ***
+  W2M_toc                 −11.0996        15.4877     −0.7167   0.4736  
+  T2M_san                 205.807        106.550       1.932    0.0534   *
+  QV2M_san               2124.46      123333           0.01723  0.9863  
+  TQL_san               −1389.43        1224.75       −1.134    0.2566  
+  W2M_san                  49.2936        31.9000      1.545    0.1223  
+  T2M_dav                 −18.2456       123.067      −0.1483   0.8821  
+  QV2M_dav            −113747         128364          −0.8861   0.3755  
+  TQL_dav                 526.611       1176.78        0.4475   0.6545  
+  W2M_dav                   2.09862       56.1996      0.03734  0.9702  
+  school                  635.954        182.988       3.475    0.0005   ***
+  Noholiday              4394.91         710.185       6.188    6.08e-10 ***
+  MartyrsDay             1781.73         893.042       1.995    0.0460   **
+  CarnivalSaturday       1889.10         975.004       1.938    0.0527   *
+  CarnivalSunday         −496.036       1077.57       −0.4603   0.6453  
+  CarnivalMonday          −88.9224      1088.65       −0.08168  0.9349  
+  CarnivalTuesday       −1149.74        1076.64       −1.068    0.2856  
+  AshWednesday           2845.77         975.895       2.916    0.0035   ***
+  HolyThursday           2755.57         978.331       2.817    0.0049   ***
+  GoodFriday             −405.381       1081.53       −0.3748   0.7078  
+  HolySaturday            439.005       1081.38        0.4060   0.6848  
+  ResurrectionSund~       263.775        978.272       0.2696   0.7874  
+  LaborDay               1402.38         898.691       1.560    0.1186  
+  FoundationofOldP~      4706.25         927.723       5.073    3.92e-07 ***
+  SeparationofPana~      1651.68        1019.95        1.619    0.1054  
+  FlagDay                1366.43        1107.01        1.234    0.2171  
+  PatrioticCommemo~      1013.93        1013.03        1.001    0.3169  
+  FirstCryofIndepe~      2054.88         927.594       2.215    0.0267   **
+  IndependenceofPa~      1739.39         927.798       1.875    0.0608   *
+  MothersDay             1185.05         933.529       1.269    0.2043  
+  ChristmasEve           3536.01         995.417       3.552    0.0004   ***
+  Christmas               612.178       1000.64        0.6118   0.5407  
+  NewYearsEve            3307.36         686.116       4.820    1.43e-06 ***
+
+Mean dependent var   28388.34   S.D. dependent var   2253.178
+Mean of innovations  0.998637   S.D. of innovations  1632.930
+R-squared            0.474528   Adjusted R-squared   0.464901
+Log-likelihood      −17652.00   Akaike criterion     35382.01
+Schwarz criterion    35600.48   Hannan-Quinn         35462.22
+
+                        Real  Imaginary    Modulus  Frequency
+  -----------------------------------------------------------
+  AR
+    Root  1           2.7765     0.0000     2.7765     0.0000
+  MA
+    Root  1          -3.1736     0.0000     3.1736     0.5000
+  -----------------------------------------------------------
