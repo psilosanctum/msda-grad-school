@@ -1,0 +1,314 @@
+options font = "sas monospace bold" 16;
+/* show sas where your raw data file is */
+filename bigrec "p:\fa15_data.txt"  lrecl = 65576;
+
+/*  read in raw data to temporary sas data set mytemp */
+data mytemp;
+infile bigrec;
+input 
+
+myid 1-7
+
+no_time_healthy_meal_aglo  4026                                                
+no_time_healthy_meal_agli  4045                                                 
+no_time_healthy_meal_neit  4083                                                                                        
+no_time_healthy_meal_dgli  4102                                                 
+no_time_healthy_meal_dglo  4121   
+                                              
+diet_is_healthy_aglo  4021
+diet_is_healthy_agli  4040
+diet_is_healthy_neit  4078
+diet_is_healthy_dgli  4097
+diet_is_healthy_dglo  4116
+
+try_eat_healthy_aglo  4030
+try_eat_healthy_agli  4049
+try_eat_healthy_neit  4087
+try_eat_healthy_dgli  4106
+try_eat_healthy_dglo  4125
+
+watch_calories_aglo   4023
+watch_calories_agli   4042
+watch_calories_neit   4080
+watch_calories_dgli   4099
+watch_calories_dglo   4118
+
+pers_resp_eco_aglo    4184
+pers_resp_eco_agli    4198
+pers_resp_eco_neit    4226
+pers_resp_eco_dgli    4240
+pers_resp_eco_dglo    4254
+
+import_see_me_eco_aglo  4185
+import_see_me_eco_agli  4199
+import_see_me_eco_neit  4227
+import_see_me_eco_dgli  4241
+import_see_me_eco_dglo  4255
+
+consc_effort_recycle_aglo  4189
+consc_effort_recycle_agli  4203
+consc_effort_recycle_neit  4231
+consc_effort_recycle_dgli  4245
+consc_effort_recycle_dglo  4259
+
+choose_eco_transport_aglo  4194
+choose_eco_transport_agli  4208
+choose_eco_transport_neit  4236
+choose_eco_transport_dgli  4250
+choose_eco_transport_dglo  4264
+
+import_attract_opp_sex_aglo  4627
+import_attract_opp_sex_agli  4704
+import_attract_opp_sex_neit  4858
+import_attract_opp_sex_dgli  4935
+import_attract_opp_sex_dglo  5012
+
+spend_time_family_aglo  4610
+spend_time_family_agli  4687
+spend_time_family_neit  4841
+spend_time_family_dgli  4918
+spend_time_family_dglo  4995
+
+gender_male    2383
+gender_female  2384
+
+coca_cola_classic  40103
+pepsi 40107
+
+american_idol  15139
+espn  9625
+
+ikea  43988 
+
+kfc  41650
+
+nike  42621;
+run;
+
+/* the above reads in the raw data from the data file -  now create five point scale variables */
+/* now before we create variables lets create formats so we know what each value will mean */
+proc format;
+
+value scales
+     1 = ‘disagree a lot’
+     2 = ‘disagree a little’
+     3 = ‘neither agree nor disagree’
+     4 = ‘agree a little’
+     5 = ‘agree a lot’;
+
+value yesno
+     0 = ‘no’
+     1 = ‘yes’;
+
+value gendresp
+     0 = "female"
+     1 = "male";
+
+run;
+
+/* create a new temp sas data set myvars by starting with the temp sas data set mytemp */
+/* then construct 5 point scales with if statements */
+
+data myvars;
+set mytemp; 
+  
+if no_time_healthy_meal_aglo  =1 then no_time_eat_healthy_scale = 5;
+if no_time_healthy_meal_agli  = 1 then no_time_eat_healthy_scale = 4; 
+if no_time_healthy_meal_neit  = 1 then no_time_eat_healthy_scale = 3;
+if no_time_healthy_meal_dgli  =1 then no_time_eat_healthy_scale = 2;
+if no_time_healthy_meal_dglo  = 1 then no_time_eat_healthy_scale = 1; 
+                                                
+if diet_is_healthy_aglo =1 then my_diet_healthy_scale=5;
+if diet_is_healthy_agli  =1 then my_diet_healthy_scale=4;
+if diet_is_healthy_neit =1 then my_diet_healthy_scale= 3;  
+if diet_is_healthy_dgli  =1 then my_diet_healthy_scale=2;
+if diet_is_healthy_dglo  =1 then my_diet_healthy_scale=1;                                       
+    
+if try_eat_healthy_aglo =1 then try_eat_healthy_scale=5;
+if try_eat_healthy_agli =1 then try_eat_healthy_scale=4; 
+if try_eat_healthy_neit =1 then try_eat_healthy_scale=3;
+if try_eat_healthy_dgli =1 then try_eat_healthy_scale=2;
+if try_eat_healthy_dglo =1 then try_eat_healthy_scale=1;  
+
+if watch_calories_aglo  =1 then watch_calories_scale=5;
+if watch_calories_agli  =1 then watch_calories_scale=4; 
+if watch_calories_neit  =1 then watch_calories_scale=3;  
+if watch_calories_dgli  =1 then watch_calories_scale=2;   
+if watch_calories_dglo  =1 then watch_calories_scale=1;
+
+if pers_resp_eco_aglo   =1 then pers_resp_eco_scale=5;   
+if pers_resp_eco_agli   =1 then pers_resp_eco_scale=4; 
+if pers_resp_eco_neit   =1 then pers_resp_eco_scale=3;  
+if pers_resp_eco_dgli   =1 then pers_resp_eco_scale=2;  
+if pers_resp_eco_dglo   =1 then pers_resp_eco_scale=1;
+
+if import_see_me_eco_aglo  =1 then import_see_me_eco_scale =5;  
+if import_see_me_eco_agli  =1 then import_see_me_eco_scale =4;
+if import_see_me_eco_neit  =1 then import_see_me_eco_scale =3;
+if import_see_me_eco_dgli  =1 then import_see_me_eco_scale =2;
+if import_see_me_eco_dglo  =1 then import_see_me_eco_scale =1; 
+
+if consc_effort_recycle_aglo =1 then consc_effort_recycle_scale=5; 
+if consc_effort_recycle_agli =1 then consc_effort_recycle_scale=4;
+if consc_effort_recycle_neit =1 then consc_effort_recycle_scale=3;
+if consc_effort_recycle_dgli =1 then consc_effort_recycle_scale=2;  
+if consc_effort_recycle_dglo =1 then consc_effort_recycle_scale=1;
+
+if choose_eco_transport_aglo =1 then choose_eco_transport_scale =5;
+if choose_eco_transport_agli =1 then choose_eco_transport_scale =4;
+if choose_eco_transport_neit =1 then choose_eco_transport_scale =3;
+if choose_eco_transport_dgli =1 then choose_eco_transport_scale =2; 
+if choose_eco_transport_dglo =1 then choose_eco_transport_scale =1;
+
+if import_attract_opp_sex_aglo =1 then import_attract_opp_sex_scale=5; 
+if import_attract_opp_sex_agli =1 then import_attract_opp_sex_scale=4;
+if import_attract_opp_sex_neit =1 then import_attract_opp_sex_scale=3;
+if import_attract_opp_sex_dgli =1 then import_attract_opp_sex_scale=2;
+if import_attract_opp_sex_dglo =1 then import_attract_opp_sex_scale=1;
+
+if spend_time_family_aglo =1 then spend_time_family_scale = 5;
+if spend_time_family_agli =1 then spend_time_family_scale = 4; 
+if spend_time_family_neit =1 then spend_time_family_scale = 3; 
+if spend_time_family_dgli =1 then spend_time_family_scale = 2;
+if spend_time_family_dglo =1 then spend_time_family_scale = 1;                                    
+
+/* now set up binary yes – no variables knowing that missing values get a zero and a 1 gets a 1 */
+
+if coca_cola_classic = .  then classic_coke = 0;
+if coca_cola_classic = 1 then classic_coke = 1;
+
+if pepsi = . then pepsi_classic = 0;
+if pepsi = 1 then pepsi_classic = 1;
+
+if espn = . then espn_sports = 0;
+if espn = 1 then espn_sports = 1;
+
+if ikea = . then ikea_furniture = 0;
+if ikea = 1 then ikea_furniture = 1;
+
+if kfc = . then kfc_chicken = 0;
+if kfc =1 then kfc_chicken = 1;
+
+if nike = . then nike_trainers = 0;
+if nike = 1 then nike_trainers = 1;
+
+if gender_female =1 then gender_resp = 0;
+if gender_male =1 then gender_resp = 1;
+
+/*  attach labels to variables */
+
+label no_time_eat_healthy_scale = "I have no time to eat healthy";
+
+label my_diet_healthy_scale = "my diet is healthy";
+
+label try_eat_healthy_scale = "I try to eat healthy";
+
+label watch_calories_scale = "I try to watch the calories I eat"; 
+
+label pers_resp_eco_scale = "I am personally responsible for the environment";
+
+label import_see_me_eco_scale = "its important for people to see me as eco conscious";
+
+label consc_effort_recycle_scale = "I make a conscious effort to recycle";
+
+label choose_eco_transport_scale = "I choose eco friendly transport";
+
+label import_attract_opp_sex_scale = "its important to be attractive to opposite sex";
+
+label spend_time_family_scale = "I like to spend time with my family";
+
+label classic_coke = "I drink coke classic most often";
+
+label pepsi_classic  = "I drink regular pepsi most often";
+
+label espn_sports = "watched espn last 7 days";
+
+label ikea_furniture = "shopped ikea last 3 months";
+
+label kfc_chicken = "fast food most often visited KFC";
+
+label nike_trainers = "shoes bought last 12 months";
+
+/* now attach the values for each of the variables using the format statement */
+
+format   
+no_time_eat_healthy_scale
+my_diet_healthy_scale
+try_eat_healthy_scale
+watch_calories_scale
+pers_resp_eco_scale
+pers_resp_eco_scale
+import_see_me_eco_scale
+consc_effort_recycle_scale
+choose_eco_transport_scale
+import_attract_opp_sex_scale
+spend_time_family_scale
+scales.
+
+coca_cola_classic 
+pepsi_classic 
+espn_sports  
+ikea_furniture  
+kfc_chicken  
+nike_trainers  
+yesno.
+
+gender_resp
+gendresp. ;
+
+run;
+
+proc factor data = myvars 
+maxiter=100
+method=principal
+mineigen=1
+rotate=varimax
+scree
+score
+print
+nfactors=8
+out=myscores;
+var 
+ /* no_time_eat_healthy_scale */
+my_diet_healthy_scale
+try_eat_healthy_scale
+watch_calories_scale
+pers_resp_eco_scale
+import_see_me_eco_scale
+/* consc_effort_recycle_scale */
+choose_eco_transport_scale;
+run;
+
+/* rename the factor variables */
+data clusready;
+set myscores;
+rename factor1 = healthy;
+rename factor2 = ecofriend;
+rename myid = resp_id;
+run;   
+proc hpclus data=clusready maxclusters=6
+noc=abc(b=20 minclusters=2 align=pca criterion=firstpeak);
+/* score puts CLUSTER variable in dataset and OUT= outputs the data set */
+score out=mycluster;
+/* here are the drivers for the HPCLUS cluster solution */
+input healthy
+ecofriend
+import_attract_opp_sex_scale
+spend_time_family_scale / level=interval;
+/* only the variables listed in the ID statement will be kept in the MYCLUSTER data set*/
+/* so be sure to put your id variable, drivers and descritpor variables in the ID statement */
+/* the drivers are earlyadopt socialphone loser ad_receptivity and the descriptors are coca_cola_classic 
+pepsi_classic 
+espn_sports  
+ikea_furniture  
+kfc_chicken  
+nike_trainers  */
+id resp_id 
+healthy ecofriend import_attract_opp_sex_scale spend_time_family_scale 
+coca_cola_classic 
+pepsi_classic 
+espn_sports  
+ikea_furniture  
+kfc_chicken  
+nike_trainers;
+run;                                        

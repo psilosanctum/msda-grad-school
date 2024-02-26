@@ -1,0 +1,12 @@
+libname mylib "P:\";
+data fetch;
+set mylib.emba1;
+proc logistic data=fetch;
+class  RESP_EMPSTATUS (ref=first) 
+fox_news_channel (ref=first) 
+THE_APPRENTICE__NBC_ (ref=first)
+ESPN_NEWS (ref=first) / param = ref;
+model RESP_EMPSTATUS = fox_news_channel 
+THE_APPRENTICE__NBC_ 
+espn_news resp_educ / link=glogit lackfit;
+run;

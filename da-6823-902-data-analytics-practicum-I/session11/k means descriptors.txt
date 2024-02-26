@@ -1,0 +1,122 @@
+libname myemba 'P:\';
+data myvars;
+set myemba.emba1;
+proc factor data = myvars 
+maxiter=100
+method=principal
+mineigen=1
+rotate=varimax
+scree
+score
+print
+nfactors=8
+out=myscores;
+var 
+ CAN_TELL_ABOUT_SOMEONE_BY_CAR_DR
+GET_MANY_OPTIONS_WHEN_I_BUY_A_CA
+KEEP_UP_ON_LATEST_ADVANCES_IN_AU
+MY_CAR_SHOULD_EXPRESS_MY_PERSONA
+OPTIONS_ON_A_CAR_IMPRESS_ME
+POSSESSIVE_ABOUT_MY_CAR
+
+DESIGNER_LABEL_IMPROVES_PERSON_S
+EVERY_SEASON_I_BUY_THE_LATEST_FA
+FASHION_MAGS_HELP_DETERMINE_CLOT
+LIKE_TO_MAKE_A_UNIQUE_FASHION_ST
+TOP_DESIGNERS_MAKE_QUALITY_CLOTH;
+
+run;
+   
+
+/* rename the factor variables */
+data clusready;
+set myscores;
+rename factor1 = impress_auto;
+rename factor2 = impress_clothes;
+rename myid = resp_id;
+run;   
+
+
+
+/* now let's do k means clustering using bracketed k=3 clusters */
+
+proc fastclus data=clusready maxiter=100 maxclusters=3;
+var 
+impress_auto
+impress_clothes
+I_M_VERY_HAPPY_WITH_MY_LIFE_AS_I
+I_USUALLY_CARRY_MANY__DEVICES_WI;
+run;                                           
+                                         
+/* now let's do k means clustering using bracketed k=4 clusters */
+
+proc fastclus data=clusready maxiter=100 maxclusters=4;
+var 
+impress_auto
+impress_clothes
+I_M_VERY_HAPPY_WITH_MY_LIFE_AS_I
+I_USUALLY_CARRY_MANY__DEVICES_WI;
+run;                                           
+
+/* now let's do k means clustering using bracketed k=5 clusters */
+
+proc fastclus data=clusready maxiter=100 maxclusters=5;
+var 
+impress_auto
+impress_clothes
+I_M_VERY_HAPPY_WITH_MY_LIFE_AS_I
+I_USUALLY_CARRY_MANY__DEVICES_WI;
+run;  
+
+/* now let's do k means clustering using bracketed k=6 clusters */
+
+proc fastclus data=clusready maxiter=100 maxclusters=6;
+var 
+impress_auto
+impress_clothes
+I_M_VERY_HAPPY_WITH_MY_LIFE_AS_I
+I_USUALLY_CARRY_MANY__DEVICES_WI;
+run;                                           
+                                         
+/* now let's do k means clustering using bracketed k=7 clusters */
+
+proc fastclus data=clusready maxiter=100 maxclusters=7;
+var 
+impress_auto
+impress_clothes
+I_M_VERY_HAPPY_WITH_MY_LIFE_AS_I
+I_USUALLY_CARRY_MANY__DEVICES_WI;
+run;     
+   
+/* we found k=6 as our first local maximum */
+/* so lets run it again and save the cluster file */
+proc fastclus data=clusready maxiter=100 maxclusters=6 out=cluster6;
+var 
+impress_auto
+impress_clothes
+I_M_VERY_HAPPY_WITH_MY_LIFE_AS_I
+I_USUALLY_CARRY_MANY__DEVICES_WI;
+run;                             
+                                   
+/* now we need to sort the data set by cluster to use the BY option in proc means */
+proc sort data=cluster6 out=clussort6;
+by cluster;
+run;
+
+/* now we can produce means for some descriptor variables */
+proc means data=clussort6;
+by cluster;
+var
+RESP_GENDER
+RESP_HISPANIC
+RESP_AGE
+RESP_EDUC
+AUTOMOTIVE_PRODUCTS
+BEST_BUY
+CNN__CABLE_NEWS_NETWORK_
+COCA_COLA_CLASSIC
+FOX_NEWS_CHANNEL
+TOP_DESIGNERS_MAKE_QUALITY_CLOTH
+VEHICLE_HANDLE_VERY_ROUGH_TERRAI
+REALLY_ENJOY_CLOTHES_SHOPPING;
+run;

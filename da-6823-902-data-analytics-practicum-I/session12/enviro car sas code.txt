@@ -1,0 +1,37 @@
+libname mylib "P:\";
+proc format;
+value myenviron
+1 = "negative attitude towards environment with car"
+2 = "neutral attitude towards environment with car"
+3 = "positive attitude towards environmentwith car";
+data fancy;
+set mylib.emba1;
+/* set up pro/con/neutral recycle */
+if CHOOSE_METHDS_OF_TRNSPRT_ENVRNMN < 3 then environcar =1;
+if CHOOSE_METHDS_OF_TRNSPRT_ENVRNMN =  3 then environcar=2;
+if CHOOSE_METHDS_OF_TRNSPRT_ENVRNMN > 3 then environcar=3;
+label environ = 'people attitude toward environment with car';
+format environcar myenviron.;
+/* check for multicollinearity */
+proc corr data=fancy;
+var 
+I_CONSIDER_MYSELF_A_SPIRITUAL_PE
+PEOPLE_HAVE_A_DUTY_TO_RECYCLE
+BUY_SAME_PRODUCTS_THAT_CELEBRITI;
+/* use proc discrim to do Box M test */
+proc discrim data=fancy pool=test;
+class environcar;
+var 
+I_CONSIDER_MYSELF_A_SPIRITUAL_PE
+PEOPLE_HAVE_A_DUTY_TO_RECYCLE
+BUY_SAME_PRODUCTS_THAT_CELEBRITI;
+/* do manova with tukey post hoc tests */
+proc glm data=fancy;
+class environcar;
+model 
+I_CONSIDER_MYSELF_A_SPIRITUAL_PE
+PEOPLE_HAVE_A_DUTY_TO_RECYCLE
+BUY_SAME_PRODUCTS_THAT_CELEBRITI = environcar;
+means environcar / dunenett hovtest;
+manova h=_all_ / printe printh;
+run;

@@ -1,0 +1,1816 @@
+From: "Saved by Internet Explorer 11"
+Subject: SAS Output
+Date: Thu, 13 Jan 2022 11:18:54 -0600
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file://W:\SAS_WORK\_TD6052_HORRDS13_\sashtml.htm
+X-MimeOLE: Produced By Microsoft MimeOLE
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><META content=3D"IE=3D5.0000" =
+http-equiv=3D"X-UA-Compatible">
+<TITLE>SAS Output</TITLE>
+<META name=3DGENERATOR content=3D"MSHTML 11.00.10570.1001">
+<META content=3D"text/html; charset=3Dwindows-1252" =
+http-equiv=3DContent-type>
+<STYLE type=3Dtext/css>.accessiblecaption {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.activelink {
+	COLOR: #800080
+}
+.aftercaption {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; PADDING-TOP: 4pt; =
+BORDER-SPACING: 0px; BACKGROUND-COLOR: #fafbfe
+}
+.batch {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 1px solid; FONT-FAMILY: 'SAS =
+Monospace', 'Courier New', Courier, monospace; BORDER-RIGHT: #c1c1c1 1px =
+solid; BORDER-COLLAPSE: separate; BORDER-BOTTOM: #c1c1c1 1px solid; =
+FONT-WEIGHT: normal; COLOR: #000000; PADDING-BOTTOM: 7px; FONT-STYLE: =
+normal; PADDING-TOP: 7px; PADDING-LEFT: 7px; BORDER-SPACING: 1px; =
+BORDER-LEFT: #c1c1c1 1px solid; PADDING-RIGHT: 7px; BACKGROUND-COLOR: =
+#fafbfe
+}
+.beforecaption {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BORDER-SPACING: =
+0px; BACKGROUND-COLOR: #fafbfe
+}
+.body {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; MARGIN-LEFT: =
+8px; BACKGROUND-COLOR: #fafbfe; MARGIN-RIGHT: 8px
+}
+.bodydate {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+WIDTH: 100%; VERTICAL-ALIGN: top; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; TEXT-ALIGN: right; BORDER-SPACING: 0px; =
+BACKGROUND-COLOR: #fafbfe
+}
+.bycontentfolder {
+	LIST-STYLE-TYPE: none; FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany =
+AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: =
+normal; MARGIN-LEFT: 6pt
+}
+.byline {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BORDER-SPACING: =
+0px; BACKGROUND-COLOR: #fafbfe
+}
+.bylinecontainer {
+	FONT-SIZE: x-small; BORDER-TOP: #000000 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #000000 0px solid; WIDTH: =
+100%; BORDER-BOTTOM: #000000 0px solid; FONT-WEIGHT: normal; COLOR: =
+#000000; FONT-STYLE: normal; BORDER-SPACING: 1px; BORDER-LEFT: #000000 =
+0px solid; BACKGROUND-COLOR: #fafbfe
+}
+.caption {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BORDER-SPACING: =
+0px; BACKGROUND-COLOR: #fafbfe
+}
+.cell {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.container {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.contentfolder {
+	LIST-STYLE-TYPE: none; FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany =
+AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: =
+normal; MARGIN-LEFT: 6pt
+}
+.contentitem {
+	LIST-STYLE-TYPE: none; FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany =
+AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: =
+normal; MARGIN-LEFT: 6pt
+}
+.contentproclabel {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.contentprocname {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.contents {
+	LIST-STYLE-TYPE: decimal; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; MARGIN-LEFT: 8px; BACKGROUND-COLOR: #fafbfe; =
+MARGIN-RIGHT: 8px
+}
+.contentsdate {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+WIDTH: 100%; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.contenttitle {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: italic; BACKGROUND-COLOR: =
+#fafbfe
+}
+.continued {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+WIDTH: 100%; FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; =
+BORDER-SPACING: 0px; BACKGROUND-COLOR: #fafbfe
+}
+.data {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #c1c1c1 1px solid; =
+BORDER-BOTTOM: #c1c1c1 1px solid; FONT-WEIGHT: normal; FONT-STYLE: =
+normal; BORDER-LEFT: #c1c1c1 0px solid; BACKGROUND-COLOR: #ffffff
+}
+.dataemphasis {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #c1c1c1 1px solid; =
+BORDER-BOTTOM: #c1c1c1 1px solid; FONT-WEIGHT: normal; FONT-STYLE: =
+normal; BORDER-LEFT: #c1c1c1 0px solid; BACKGROUND-COLOR: #ffffff
+}
+.dataemphasisfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #c1c1c1 1px solid; =
+BORDER-BOTTOM: #c1c1c1 1px solid; FONT-WEIGHT: normal; FONT-STYLE: =
+italic; BORDER-LEFT: #c1c1c1 0px solid; BACKGROUND-COLOR: #ffffff
+}
+.dataempty {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #c1c1c1 1px solid; =
+BORDER-BOTTOM: #c1c1c1 1px solid; FONT-WEIGHT: normal; FONT-STYLE: =
+normal; BORDER-LEFT: #c1c1c1 0px solid; BACKGROUND-COLOR: #ffffff
+}
+.datafixed {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 0px solid; FONT-FAMILY: =
+'Courier New', Courier; BORDER-RIGHT: #c1c1c1 1px solid; BORDER-BOTTOM: =
+#c1c1c1 1px solid; FONT-WEIGHT: normal; FONT-STYLE: normal; BORDER-LEFT: =
+#c1c1c1 0px solid; BACKGROUND-COLOR: #ffffff
+}
+.datastrong {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #c1c1c1 1px solid; =
+BORDER-BOTTOM: #c1c1c1 1px solid; FONT-WEIGHT: bold; COLOR: #000000; =
+FONT-STYLE: normal; BORDER-LEFT: #c1c1c1 0px solid; BACKGROUND-COLOR: =
+#ffffff
+}
+.datastrongfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #c1c1c1 1px solid; =
+BORDER-BOTTOM: #c1c1c1 1px solid; FONT-WEIGHT: bold; COLOR: #000000; =
+FONT-STYLE: normal; BORDER-LEFT: #c1c1c1 0px solid; BACKGROUND-COLOR: =
+#ffffff
+}
+.date {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+WIDTH: 100%; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.document {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+A:link {
+	COLOR: #0000ff
+}
+A:visited {
+	COLOR: #800080
+}
+A:active {
+	COLOR: #800080
+}
+.errorbanner {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.errorcontent {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.errorcontentfixed {
+	FONT-SIZE: x-small; FONT-FAMILY: 'Courier New', Courier; FONT-WEIGHT: =
+normal; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.extendedpage {
+	FONT-SIZE: x-small; BORDER-TOP: #000000 1pt solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #000000 1pt solid; =
+BORDER-BOTTOM: #000000 1pt solid; FONT-WEIGHT: normal; COLOR: #112277; =
+FONT-STYLE: italic; TEXT-ALIGN: center; BORDER-LEFT: #000000 1pt solid; =
+BACKGROUND-COLOR: #fafbfe
+}
+.fatalbanner {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.fatalcontent {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.fatalcontentfixed {
+	FONT-SIZE: x-small; FONT-FAMILY: 'Courier New', Courier; FONT-WEIGHT: =
+normal; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.folderaction {
+	LIST-STYLE-TYPE: none; FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany =
+AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: =
+normal; MARGIN-LEFT: 6pt
+}
+.footer {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.footeremphasis {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; =
+FONT-STYLE: italic; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.footeremphasisfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; =
+FONT-STYLE: italic; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.footerempty {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.footerfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier; BORDER-RIGHT: #b0b7bb 1px solid; BORDER-BOTTOM: =
+#b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: =
+normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: #edf2f9
+}
+.footerstrong {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.footerstrongfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.frame {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.graph {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 1px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #c1c1c1 1px solid; =
+BORDER-COLLAPSE: separate; BORDER-BOTTOM: #c1c1c1 1px solid; =
+FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; BORDER-SPACING: =
+1px; BORDER-LEFT: #c1c1c1 1px solid; BACKGROUND-COLOR: #fafbfe
+}
+.header {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.headeremphasis {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: italic; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#d8dbd3
+}
+.headeremphasisfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: italic; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#d8dbd3
+}
+.headerempty {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.headerfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier; BORDER-RIGHT: #b0b7bb 1px solid; BORDER-BOTTOM: =
+#b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: =
+normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: #edf2f9
+}
+.headersandfooters {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #000000; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#edf2f9
+}
+.headerstrong {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #000000; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#d8dbd3
+}
+.headerstrongfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #000000; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#d8dbd3
+}
+.heading1 {
+	FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.heading2 {
+	FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.heading3 {
+	FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.heading4 {
+	FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.heading5 {
+	FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.heading6 {
+	FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.index {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.indexaction {
+	LIST-STYLE-TYPE: none; FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany =
+AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: =
+normal; MARGIN-LEFT: 6pt
+}
+.indexitem {
+	LIST-STYLE-TYPE: none; FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany =
+AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: =
+normal; MARGIN-LEFT: 6pt
+}
+.indexprocname {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.indextitle {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: italic; BACKGROUND-COLOR: =
+#fafbfe
+}
+.layoutcontainer {
+	BORDER-TOP: #000000 0px solid; BORDER-RIGHT: #000000 0px solid; =
+BORDER-BOTTOM: #000000 0px solid; BORDER-SPACING: 30px; BORDER-LEFT: =
+#000000 0px solid
+}
+.layoutregion {
+	BORDER-TOP: #000000 0px solid; BORDER-RIGHT: #000000 0px solid; =
+BORDER-BOTTOM: #000000 0px solid; BORDER-SPACING: 30px; BORDER-LEFT: =
+#000000 0px solid
+}
+.linecontent {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #c1c1c1 1px solid; =
+BORDER-BOTTOM: #c1c1c1 1px solid; FONT-WEIGHT: normal; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #c1c1c1 0px solid; BACKGROUND-COLOR: =
+#fafbfe
+}
+.link {
+	COLOR: #0000ff
+}
+.list {
+	LIST-STYLE-TYPE: disc; FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany =
+AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: =
+normal; BACKGROUND-COLOR: #fafbfe
+}
+.list10 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.list2 {
+	LIST-STYLE-TYPE: circle; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.list3 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.list4 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.list5 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.list6 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.list7 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.list8 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.list9 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem {
+	LIST-STYLE-TYPE: disc; FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany =
+AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: =
+normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem10 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem2 {
+	LIST-STYLE-TYPE: circle; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem3 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem4 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem5 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem6 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem7 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem8 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.listitem9 {
+	LIST-STYLE-TYPE: square; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.note {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.notebanner {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.notecontent {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.notecontentfixed {
+	FONT-SIZE: x-small; FONT-FAMILY: 'Courier New', Courier; FONT-WEIGHT: =
+normal; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.output {
+	FONT-SIZE: x-small; BORDER-TOP: #c1c1c1 1px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #c1c1c1 1px solid; =
+BORDER-COLLAPSE: separate; BORDER-BOTTOM: #c1c1c1 1px solid; =
+FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; BORDER-SPACING: =
+1px; BORDER-LEFT: #c1c1c1 1px solid; BACKGROUND-COLOR: #fafbfe
+}
+.pageno {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+VERTICAL-ALIGN: top; FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: =
+normal; TEXT-ALIGN: right; BORDER-SPACING: 0px; BACKGROUND-COLOR: =
+#fafbfe
+}
+.pages {
+	LIST-STYLE-TYPE: decimal; FONT-SIZE: x-small; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; =
+FONT-STYLE: normal; MARGIN-LEFT: 8px; BACKGROUND-COLOR: #fafbfe; =
+MARGIN-RIGHT: 8px
+}
+.pagesdate {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+WIDTH: 100%; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.pagesitem {
+	LIST-STYLE-TYPE: none; FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany =
+AMT', Helvetica, Helv; FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: =
+normal; MARGIN-LEFT: 6pt
+}
+.pagesproclabel {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.pagesprocname {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.pagestitle {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: italic; BACKGROUND-COLOR: =
+#fafbfe
+}
+.paragraph {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #000000; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.parskip {
+	FONT-SIZE: x-small; BORDER-TOP: #000000 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #000000 0px solid; =
+BORDER-BOTTOM: #000000 0px solid; FONT-WEIGHT: bold; FONT-STYLE: normal; =
+BORDER-SPACING: 0px; BORDER-LEFT: #000000 0px solid
+}
+.prepage {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; TEXT-ALIGN: =
+left; BACKGROUND-COLOR: #fafbfe
+}
+.proctitle {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.proctitlefixed {
+	FONT-SIZE: x-small; FONT-FAMILY: 'Courier New', Courier, monospace; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.rowfooter {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowfooteremphasis {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; =
+FONT-STYLE: italic; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowfooteremphasisfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; =
+FONT-STYLE: italic; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowfooterempty {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowfooterfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier; BORDER-RIGHT: #b0b7bb 1px solid; BORDER-BOTTOM: =
+#b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: =
+normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: #edf2f9
+}
+.rowfooterstrong {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowfooterstrongfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowheader {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowheaderemphasis {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; =
+FONT-STYLE: italic; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowheaderemphasisfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; =
+FONT-STYLE: italic; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowheaderempty {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowheaderfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier; BORDER-RIGHT: #b0b7bb 1px solid; BORDER-BOTTOM: =
+#b0b7bb 1px solid; FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: =
+normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: #edf2f9
+}
+.rowheaderstrong {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.rowheaderstrongfixed {
+	FONT-SIZE: x-small; BORDER-TOP: #b0b7bb 0px solid; FONT-FAMILY: =
+'Courier New', Courier, monospace; BORDER-RIGHT: #b0b7bb 1px solid; =
+BORDER-BOTTOM: #b0b7bb 1px solid; FONT-WEIGHT: bold; COLOR: #112277; =
+FONT-STYLE: normal; BORDER-LEFT: #b0b7bb 0px solid; BACKGROUND-COLOR: =
+#edf2f9
+}
+.systemfooter {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemfooter10 {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemfooter2 {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemfooter3 {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemfooter4 {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemfooter5 {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemfooter6 {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemfooter7 {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemfooter8 {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemfooter9 {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.systemtitle {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systemtitle10 {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systemtitle2 {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systemtitle3 {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systemtitle4 {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systemtitle5 {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systemtitle6 {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systemtitle7 {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systemtitle8 {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systemtitle9 {
+	FONT-SIZE: small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.systitleandfootercontainer {
+	FONT-SIZE: x-small; BORDER-TOP: #000000 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #000000 0px solid; WIDTH: =
+100%; BORDER-BOTTOM: #000000 0px solid; FONT-WEIGHT: normal; COLOR: =
+#000000; FONT-STYLE: normal; BORDER-SPACING: 1px; BORDER-LEFT: #000000 =
+0px solid; BACKGROUND-COLOR: #fafbfe
+}
+.table {
+	BORDER-TOP: #c1c1c1 1px solid; BORDER-RIGHT: #c1c1c1 0px solid; =
+BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c1c1c1 0px solid; =
+BORDER-SPACING: 0px; BORDER-LEFT: #c1c1c1 1px solid
+}
+.top_stacked_value {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; PADDING-BOTTOM: =
+1px; BORDER-LEFT: 0px
+}
+.middle_stacked_value {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; PADDING-BOTTOM: =
+1px; PADDING-TOP: 1px; BORDER-LEFT: 0px
+}
+.bottom_stacked_value {
+	BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; PADDING-TOP: =
+1px; BORDER-LEFT: 0px
+}
+.titleandnotecontainer {
+	FONT-SIZE: x-small; BORDER-TOP: #000000 0px solid; FONT-FAMILY: Arial, =
+'Albany AMT', Helvetica, Helv; BORDER-RIGHT: #000000 0px solid; WIDTH: =
+100%; BORDER-BOTTOM: #000000 0px solid; FONT-WEIGHT: normal; COLOR: =
+#000000; FONT-STYLE: normal; BORDER-SPACING: 1px; BORDER-LEFT: #000000 =
+0px solid; BACKGROUND-COLOR: #fafbfe
+}
+.titlesandfooters {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.usertext {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.visitedlink {
+	COLOR: #800080
+}
+.warnbanner {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: bold; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: =
+#fafbfe
+}
+.warncontent {
+	FONT-SIZE: x-small; FONT-FAMILY: Arial, 'Albany AMT', Helvetica, Helv; =
+FONT-WEIGHT: normal; COLOR: #112277; FONT-STYLE: normal; =
+BACKGROUND-COLOR: #fafbfe
+}
+.warncontentfixed {
+	FONT-SIZE: x-small; FONT-FAMILY: 'Courier New', Courier; FONT-WEIGHT: =
+normal; COLOR: #112277; FONT-STYLE: normal; BACKGROUND-COLOR: #fafbfe
+}
+.l {
+	TEXT-ALIGN: left
+}
+.c {
+	TEXT-ALIGN: center
+}
+.r {
+	TEXT-ALIGN: right
+}
+.d {
+	TEXT-ALIGN: right
+}
+.j {
+	TEXT-ALIGN: justify
+}
+.t {
+	VERTICAL-ALIGN: top
+}
+.m {
+	VERTICAL-ALIGN: middle
+}
+.b {
+	VERTICAL-ALIGN: bottom
+}
+TD {
+	VERTICAL-ALIGN: top
+}
+TH {
+	VERTICAL-ALIGN: top
+}
+.stacked_cell {
+	PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px
+}
+</STYLE>
+
+<SCRIPT language=3Djavascript type=3Dtext/javascript>
+<!--=20
+function startup(){
+
+}
+function shutdown(){
+
+}
+
+//-->
+</SCRIPT>
+</HEAD>
+<BODY class=3Dbody onload=3Dstartup() onunload=3Dshutdown()>
+<SCRIPT language=3Djavascript type=3Dtext/javascript>
+<!--=20
+var _info =3D navigator.userAgent
+var _ie =3D (_info.indexOf("MSIE") > 0
+          && _info.indexOf("Win") > 0
+          && _info.indexOf("Windows 3.1") < 0);
+var _ie64 =3D _info.indexOf("x64") > 0
+
+//-->
+</SCRIPT>
+
+<DIV class=3Dbranch><A name=3DIDX></A>
+<TABLE class=3Dsystitleandfootercontainer cellSpacing=3D1 =
+cellPadding=3D1 rules=3Dnone=20
+width=3D"100%" summary=3D"Page Layout" border=3D0 frame=3Dvoid>
+  <TBODY>
+  <TR>
+    <TD class=3D"c systemtitle">The SAS =
+System</TD></TR></TBODY></TABLE><BR>
+<DIV class=3D"c proctitle">The HPCLUS Procedure</DIV>
+<P>
+<DIV>
+<DIV align=3Dcenter>
+<TABLE class=3Dtable borderColor=3D#c1c1c1 cellSpacing=3D0 =
+cellPadding=3D5 rules=3Dall=20
+summary=3D"Procedure HPClus: Performance Information" frame=3Dbox>
+  <COLGROUP>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3D"c b header" colSpan=3D2 scope=3Dcolgroup>Performance=20
+  Information</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Execution Mode</TH>
+    <TD class=3D"l data">Single-Machine</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Number of Threads</TH>
+    <TD class=3D"l data">4</TD></TR></TBODY></TABLE></DIV></DIV><BR><A =
+name=3DIDX1></A>
+<DIV>
+<DIV align=3Dcenter>
+<TABLE class=3Dtable borderColor=3D#c1c1c1 cellSpacing=3D0 =
+cellPadding=3D5 rules=3Dall=20
+summary=3D"Procedure HPClus: Data Access Information" frame=3Dbox>
+  <COLGROUP>
+  <COL></COLGROUP>
+  <COLGROUP>
+  <COL>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3D"c b header" colSpan=3D4 scope=3Dcolgroup>Data Access=20
+  Information</TH></TR>
+  <TR>
+    <TH class=3D"l b header" scope=3Dcol>Data</TH>
+    <TH class=3D"l b header" scope=3Dcol>Engine</TH>
+    <TH class=3D"l b header" scope=3Dcol>Role</TH>
+    <TH class=3D"l b header" scope=3Dcol>Path</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>WORK.MYKMODE</TH>
+    <TD class=3D"l data">V9</TD>
+    <TD class=3D"l data">Input</TD>
+    <TD class=3D"l data">On Client</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>WORK.OUT_HPCLUS1</TH>
+    <TD class=3D"l data">V9</TD>
+    <TD class=3D"l data">Output</TD>
+    <TD class=3D"l data">On Client</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>WORK.OUTSTAT</TH>
+    <TD class=3D"l data">V9</TD>
+    <TD class=3D"l data">Output</TD>
+    <TD class=3D"l data">On =
+Client</TD></TR></TBODY></TABLE></DIV></DIV><BR><A=20
+name=3DIDX2></A>
+<DIV>
+<DIV align=3Dcenter>
+<TABLE class=3Dtable borderColor=3D#c1c1c1 cellSpacing=3D0 =
+cellPadding=3D5 rules=3Dall=20
+summary=3D"Procedure HPClus: Model Information" frame=3Dbox>
+  <COLGROUP>
+  <COL></COLGROUP>
+  <COLGROUP>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3D"c b header" colSpan=3D2 scope=3Dcolgroup>Model=20
+  Information</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Maximum Iteration</TH>
+    <TD class=3D"l data">1000</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Stop Criterion</TH>
+    <TD class=3D"l data">Cluster Change</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Stop Criterion Value</TH>
+    <TD class=3D"l data">0</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Clusters</TH>
+    <TD class=3D"l data">8</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Seed Initialization</TH>
+    <TD class=3D"l data">12345</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Distance for Nominal =
+Variables</TH>
+    <TD class=3D"l =
+data">GlobalFreq</TD></TR></TBODY></TABLE></DIV></DIV><BR><A=20
+name=3DIDX3></A>
+<DIV>
+<DIV align=3Dcenter>
+<TABLE class=3Dtable borderColor=3D#c1c1c1 cellSpacing=3D0 =
+cellPadding=3D5 rules=3Dall=20
+summary=3D"Procedure HPClus: N Observations" frame=3Dbox>
+  <COLGROUP>
+  <COL></COLGROUP>
+  <COLGROUP>
+  <COL></COLGROUP>
+  <TBODY>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Number of Observations =
+Read</TH>
+    <TD class=3D"r data">25439</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>Number of Observations =
+Used</TH>
+    <TD class=3D"r =
+data">25439</TD></TR></TBODY></TABLE></DIV></DIV><BR><A=20
+name=3DIDX4></A>
+<DIV>
+<DIV align=3Dcenter>
+<TABLE class=3Dtable borderColor=3D#c1c1c1 cellSpacing=3D0 =
+cellPadding=3D5 rules=3Dall=20
+summary=3D"Procedure HPClus: Cluster Summary for Nominal Variables" =
+frame=3Dbox>
+  <COLGROUP>
+  <COL></COLGROUP>
+  <COLGROUP>
+  <COL>
+  <COL>
+  <COL>
+  <COL>
+  <COL>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3D"c b header" colSpan=3D8 scope=3Dcolgroup>Cluster =
+Summary for=20
+      Nominal Variables</TH></TR>
+  <TR>
+    <TH class=3D"r b header" rowSpan=3D2 scope=3Dcol>Cluster</TH>
+    <TH class=3D"r b header" rowSpan=3D2 scope=3Dcol>Frequency</TH>
+    <TH class=3D"c b header" colSpan=3D3 scope=3Dcolgroup>Distance from =
+Cluster=20
+      Centroid<BR>to Observation</TH>
+    <TH class=3D"r b header" rowSpan=3D2 scope=3Dcol>Sum=20
+      of<BR>Within<BR>Cluster<BR>Distance</TH>
+    <TH class=3D"r b header" rowSpan=3D2 =
+scope=3Dcol>Nearest<BR>Cluster</TH>
+    <TH class=3D"r b header" rowSpan=3D2=20
+      =
+scope=3Dcol>Distance<BR>to<BR>Nearest<BR>Cluster<BR>Centroid</TH></TR>
+  <TR>
+    <TH class=3D"r b header" scope=3Dcol>Maximum</TH>
+    <TH class=3D"r b header" scope=3Dcol>Minimum</TH>
+    <TH class=3D"r b header" scope=3Dcol>Average</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">15121</TD>
+    <TD class=3D"r data">0.0154</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">0.000576</TD>
+    <TD class=3D"r data">8.7072</TD>
+    <TD class=3D"r data">4</TD>
+    <TD class=3D"r data">0.000179</TD></TR>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>2</TH>
+    <TD class=3D"r data">997</TD>
+    <TD class=3D"r data">0.0141</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">0.00198</TD>
+    <TD class=3D"r data">1.9712</TD>
+    <TD class=3D"r data">1</TD>
+    <TD class=3D"r data">0.000944</TD></TR>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>3</TH>
+    <TD class=3D"r data">6605</TD>
+    <TD class=3D"r data">0.0163</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">0.000690</TD>
+    <TD class=3D"r data">4.5570</TD>
+    <TD class=3D"r data">1</TD>
+    <TD class=3D"r data">0.000179</TD></TR>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>4</TH>
+    <TD class=3D"r data">255</TD>
+    <TD class=3D"r data">0.0283</TD>
+    <TD class=3D"r data">0.000179</TD>
+    <TD class=3D"r data">0.00521</TD>
+    <TD class=3D"r data">1.3294</TD>
+    <TD class=3D"r data">4</TD>
+    <TD class=3D"r data">0.00362</TD></TR>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>5</TH>
+    <TD class=3D"r data">547</TD>
+    <TD class=3D"r data">0.0215</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">0.00246</TD>
+    <TD class=3D"r data">1.3450</TD>
+    <TD class=3D"r data">1</TD>
+    <TD class=3D"r data">0.00181</TD></TR>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>6</TH>
+    <TD class=3D"r data">1914</TD>
+    <TD class=3D"r data">0.0150</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">0.00114</TD>
+    <TD class=3D"r data">2.1768</TD>
+    <TD class=3D"r data">1</TD>
+    <TD class=3D"r =
+data">0.000459</TD></TR></TBODY></TABLE></DIV></DIV><BR><A=20
+name=3DIDX5></A>
+<DIV>
+<DIV align=3Dcenter>
+<TABLE class=3Dtable borderColor=3D#c1c1c1 cellSpacing=3D0 =
+cellPadding=3D5 rules=3Dall=20
+summary=3D"Procedure HPClus: Iteration Statistics" frame=3Dbox>
+  <COLGROUP>
+  <COL></COLGROUP>
+  <COLGROUP>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3D"c b header" colSpan=3D2 scope=3Dcolgroup>Iteration =
+Statistics</TH></TR>
+  <TR>
+    <TH class=3D"r b header" scope=3Dcol>Iteration<BR>Number</TH>
+    <TH class=3D"r b header" scope=3Dcol>Sum=20
+  of<BR>Within<BR>Cluster<BR>Distance</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">20.797983</TD></TR>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">20.374983</TD></TR>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>2</TH>
+    <TD class=3D"r data">20.086599</TD></TR>
+  <TR>
+    <TH class=3D"r rowheader" scope=3Drow>3</TH>
+    <TD class=3D"r =
+data">20.086599</TD></TR></TBODY></TABLE></DIV></DIV><BR><A=20
+name=3DIDX6></A>
+<DIV>
+<DIV align=3Dcenter>
+<TABLE class=3Dtable borderColor=3D#c1c1c1 cellSpacing=3D0 =
+cellPadding=3D5 rules=3Dall=20
+summary=3D"Procedure HPClus: Descriptive Statistics for Nominal =
+Variables"=20
+frame=3Dbox>
+  <COLGROUP>
+  <COL></COLGROUP>
+  <COLGROUP>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3D"c b header" colSpan=3D3 scope=3Dcolgroup>Descriptive =
+Statistics for=20
+      Nominal<BR>Variables</TH></TR>
+  <TR>
+    <TH class=3D"l b header" scope=3Dcol>Variable</TH>
+    <TH class=3D"l b header" scope=3Dcol>Level</TH>
+    <TH class=3D"r b header" scope=3Dcol>Frequency</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>ARBY_S</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24331</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">1108</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>BURGER_KING</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">22303</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">3136</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CARL_S_JR_</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24794</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">645</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CHECKERS</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">25163</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">276</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CHICK_FIL_A</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">23373</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">2066</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CHIPOTLE</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24284</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">1155</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CHURCH_S_FRIED_CHICKEN</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24981</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">458</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>DAIRY_QUEEN</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24254</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">1185</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>DEL_TACO</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24977</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">462</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>EL_POLLO_LOCO</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24936</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">503</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>FIVE_GUYS</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24874</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">565</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>IN_AND_OUT</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24633</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">806</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>KFC</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">23818</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">1621</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>MCDONALD_S</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">17165</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">8274</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>PANDA_EXPRESS</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24730</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">709</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>POPEYES</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24616</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">823</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>RED_ROBIN</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24406</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">1033</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>SONIC</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24617</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">822</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>STEAK_N_SHAKE</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">25041</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">398</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>TACO_BELL</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">23076</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">2363</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>WENDY_S</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">23031</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">2408</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>WHATABURGER</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">24498</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">941</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>WHITE_CASTLE</TH>
+    <TD class=3D"l data">0</TD>
+    <TD class=3D"r data">25133</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TD class=3D"l data">1</TD>
+    <TD class=3D"r data">306</TD></TR></TBODY></TABLE></DIV></DIV><BR><A =
+
+name=3DIDX7></A>
+<DIV>
+<DIV align=3Dcenter>
+<TABLE class=3Dtable borderColor=3D#c1c1c1 cellSpacing=3D0 =
+cellPadding=3D5 rules=3Dall=20
+summary=3D"Procedure HPClus: Within Cluster Frequencies for Nominal =
+Variables"=20
+frame=3Dbox>
+  <COLGROUP>
+  <COL>
+  <COL></COLGROUP>
+  <COLGROUP>
+  <COL>
+  <COL>
+  <COL>
+  <COL>
+  <COL>
+  <COL></COLGROUP>
+  <THEAD>
+  <TR>
+    <TH class=3D"c b header" colSpan=3D8 scope=3Dcolgroup>Within Cluster =
+Frequencies=20
+      for Nominal Variables</TH></TR>
+  <TR>
+    <TH class=3D"l b header" scope=3Dcol>Variable</TH>
+    <TH class=3D"l b header" scope=3Dcol>Level</TH>
+    <TH class=3D"r b header" scope=3Dcol>1</TH>
+    <TH class=3D"r b header" scope=3Dcol>2</TH>
+    <TH class=3D"r b header" scope=3Dcol>3</TH>
+    <TH class=3D"r b header" scope=3Dcol>4</TH>
+    <TH class=3D"r b header" scope=3Dcol>5</TH>
+    <TH class=3D"r b header" scope=3Dcol>6</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>ARBY_S</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">15121</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">6605</TD>
+    <TD class=3D"r data">220</TD>
+    <TD class=3D"r data">471</TD>
+    <TD class=3D"r data">1914</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">997</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">35</TD>
+    <TD class=3D"r data">76</TD>
+    <TD class=3D"r data">0</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>BURGER_KING</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">13898</TD>
+    <TD class=3D"r data">640</TD>
+    <TD class=3D"r data">5655</TD>
+    <TD class=3D"r data">184</TD>
+    <TD class=3D"r data">402</TD>
+    <TD class=3D"r data">1524</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">1223</TD>
+    <TD class=3D"r data">357</TD>
+    <TD class=3D"r data">950</TD>
+    <TD class=3D"r data">71</TD>
+    <TD class=3D"r data">145</TD>
+    <TD class=3D"r data">390</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CARL_S_JR_</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14790</TD>
+    <TD class=3D"r data">938</TD>
+    <TD class=3D"r data">6455</TD>
+    <TD class=3D"r data">228</TD>
+    <TD class=3D"r data">515</TD>
+    <TD class=3D"r data">1868</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">331</TD>
+    <TD class=3D"r data">59</TD>
+    <TD class=3D"r data">150</TD>
+    <TD class=3D"r data">27</TD>
+    <TD class=3D"r data">32</TD>
+    <TD class=3D"r data">46</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CHECKERS</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">15022</TD>
+    <TD class=3D"r data">955</TD>
+    <TD class=3D"r data">6557</TD>
+    <TD class=3D"r data">229</TD>
+    <TD class=3D"r data">520</TD>
+    <TD class=3D"r data">1880</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">99</TD>
+    <TD class=3D"r data">42</TD>
+    <TD class=3D"r data">48</TD>
+    <TD class=3D"r data">26</TD>
+    <TD class=3D"r data">27</TD>
+    <TD class=3D"r data">34</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CHICK_FIL_A</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14004</TD>
+    <TD class=3D"r data">826</TD>
+    <TD class=3D"r data">6200</TD>
+    <TD class=3D"r data">183</TD>
+    <TD class=3D"r data">429</TD>
+    <TD class=3D"r data">1731</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">1117</TD>
+    <TD class=3D"r data">171</TD>
+    <TD class=3D"r data">405</TD>
+    <TD class=3D"r data">72</TD>
+    <TD class=3D"r data">118</TD>
+    <TD class=3D"r data">183</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CHIPOTLE</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14484</TD>
+    <TD class=3D"r data">924</TD>
+    <TD class=3D"r data">6412</TD>
+    <TD class=3D"r data">226</TD>
+    <TD class=3D"r data">435</TD>
+    <TD class=3D"r data">1803</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">637</TD>
+    <TD class=3D"r data">73</TD>
+    <TD class=3D"r data">193</TD>
+    <TD class=3D"r data">29</TD>
+    <TD class=3D"r data">112</TD>
+    <TD class=3D"r data">111</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>CHURCH_S_FRIED_CHICKEN</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14928</TD>
+    <TD class=3D"r data">959</TD>
+    <TD class=3D"r data">6493</TD>
+    <TD class=3D"r data">205</TD>
+    <TD class=3D"r data">529</TD>
+    <TD class=3D"r data">1867</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">193</TD>
+    <TD class=3D"r data">38</TD>
+    <TD class=3D"r data">112</TD>
+    <TD class=3D"r data">50</TD>
+    <TD class=3D"r data">18</TD>
+    <TD class=3D"r data">47</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>DAIRY_QUEEN</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14679</TD>
+    <TD class=3D"r data">820</TD>
+    <TD class=3D"r data">6323</TD>
+    <TD class=3D"r data">185</TD>
+    <TD class=3D"r data">474</TD>
+    <TD class=3D"r data">1773</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">442</TD>
+    <TD class=3D"r data">177</TD>
+    <TD class=3D"r data">282</TD>
+    <TD class=3D"r data">70</TD>
+    <TD class=3D"r data">73</TD>
+    <TD class=3D"r data">141</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>DEL_TACO</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14875</TD>
+    <TD class=3D"r data">956</TD>
+    <TD class=3D"r data">6507</TD>
+    <TD class=3D"r data">234</TD>
+    <TD class=3D"r data">528</TD>
+    <TD class=3D"r data">1877</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">246</TD>
+    <TD class=3D"r data">41</TD>
+    <TD class=3D"r data">98</TD>
+    <TD class=3D"r data">21</TD>
+    <TD class=3D"r data">19</TD>
+    <TD class=3D"r data">37</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>EL_POLLO_LOCO</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14845</TD>
+    <TD class=3D"r data">977</TD>
+    <TD class=3D"r data">6493</TD>
+    <TD class=3D"r data">216</TD>
+    <TD class=3D"r data">530</TD>
+    <TD class=3D"r data">1875</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">276</TD>
+    <TD class=3D"r data">20</TD>
+    <TD class=3D"r data">112</TD>
+    <TD class=3D"r data">39</TD>
+    <TD class=3D"r data">17</TD>
+    <TD class=3D"r data">39</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>FIVE_GUYS</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">15121</TD>
+    <TD class=3D"r data">997</TD>
+    <TD class=3D"r data">6605</TD>
+    <TD class=3D"r data">237</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">1914</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">18</TD>
+    <TD class=3D"r data">547</TD>
+    <TD class=3D"r data">0</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>IN_AND_OUT</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14655</TD>
+    <TD class=3D"r data">967</TD>
+    <TD class=3D"r data">6411</TD>
+    <TD class=3D"r data">227</TD>
+    <TD class=3D"r data">492</TD>
+    <TD class=3D"r data">1881</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">466</TD>
+    <TD class=3D"r data">30</TD>
+    <TD class=3D"r data">194</TD>
+    <TD class=3D"r data">28</TD>
+    <TD class=3D"r data">55</TD>
+    <TD class=3D"r data">33</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>KFC</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14625</TD>
+    <TD class=3D"r data">772</TD>
+    <TD class=3D"r data">6138</TD>
+    <TD class=3D"r data">176</TD>
+    <TD class=3D"r data">431</TD>
+    <TD class=3D"r data">1676</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">496</TD>
+    <TD class=3D"r data">225</TD>
+    <TD class=3D"r data">467</TD>
+    <TD class=3D"r data">79</TD>
+    <TD class=3D"r data">116</TD>
+    <TD class=3D"r data">238</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>MCDONALD_S</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">15121</TD>
+    <TD class=3D"r data">523</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">113</TD>
+    <TD class=3D"r data">289</TD>
+    <TD class=3D"r data">1119</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">474</TD>
+    <TD class=3D"r data">6605</TD>
+    <TD class=3D"r data">142</TD>
+    <TD class=3D"r data">258</TD>
+    <TD class=3D"r data">795</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>PANDA_EXPRESS</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14798</TD>
+    <TD class=3D"r data">945</TD>
+    <TD class=3D"r data">6454</TD>
+    <TD class=3D"r data">205</TD>
+    <TD class=3D"r data">488</TD>
+    <TD class=3D"r data">1840</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">323</TD>
+    <TD class=3D"r data">52</TD>
+    <TD class=3D"r data">151</TD>
+    <TD class=3D"r data">50</TD>
+    <TD class=3D"r data">59</TD>
+    <TD class=3D"r data">74</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>POPEYES</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14834</TD>
+    <TD class=3D"r data">962</TD>
+    <TD class=3D"r data">6407</TD>
+    <TD class=3D"r data">114</TD>
+    <TD class=3D"r data">486</TD>
+    <TD class=3D"r data">1813</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">287</TD>
+    <TD class=3D"r data">35</TD>
+    <TD class=3D"r data">198</TD>
+    <TD class=3D"r data">141</TD>
+    <TD class=3D"r data">61</TD>
+    <TD class=3D"r data">101</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>RED_ROBIN</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14583</TD>
+    <TD class=3D"r data">953</TD>
+    <TD class=3D"r data">6319</TD>
+    <TD class=3D"r data">236</TD>
+    <TD class=3D"r data">499</TD>
+    <TD class=3D"r data">1816</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">538</TD>
+    <TD class=3D"r data">44</TD>
+    <TD class=3D"r data">286</TD>
+    <TD class=3D"r data">19</TD>
+    <TD class=3D"r data">48</TD>
+    <TD class=3D"r data">98</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>SONIC</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14800</TD>
+    <TD class=3D"r data">942</TD>
+    <TD class=3D"r data">6452</TD>
+    <TD class=3D"r data">56</TD>
+    <TD class=3D"r data">516</TD>
+    <TD class=3D"r data">1851</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">321</TD>
+    <TD class=3D"r data">55</TD>
+    <TD class=3D"r data">153</TD>
+    <TD class=3D"r data">199</TD>
+    <TD class=3D"r data">31</TD>
+    <TD class=3D"r data">63</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>STEAK_N_SHAKE</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14985</TD>
+    <TD class=3D"r data">934</TD>
+    <TD class=3D"r data">6510</TD>
+    <TD class=3D"r data">221</TD>
+    <TD class=3D"r data">519</TD>
+    <TD class=3D"r data">1872</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">136</TD>
+    <TD class=3D"r data">63</TD>
+    <TD class=3D"r data">95</TD>
+    <TD class=3D"r data">34</TD>
+    <TD class=3D"r data">28</TD>
+    <TD class=3D"r data">42</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>TACO_BELL</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14198</TD>
+    <TD class=3D"r data">745</TD>
+    <TD class=3D"r data">5966</TD>
+    <TD class=3D"r data">152</TD>
+    <TD class=3D"r data">427</TD>
+    <TD class=3D"r data">1588</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">923</TD>
+    <TD class=3D"r data">252</TD>
+    <TD class=3D"r data">639</TD>
+    <TD class=3D"r data">103</TD>
+    <TD class=3D"r data">120</TD>
+    <TD class=3D"r data">326</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>WENDY_S</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">15121</TD>
+    <TD class=3D"r data">718</TD>
+    <TD class=3D"r data">6605</TD>
+    <TD class=3D"r data">173</TD>
+    <TD class=3D"r data">414</TD>
+    <TD class=3D"r data">0</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">279</TD>
+    <TD class=3D"r data">0</TD>
+    <TD class=3D"r data">82</TD>
+    <TD class=3D"r data">133</TD>
+    <TD class=3D"r data">1914</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>WHATABURGER</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">14647</TD>
+    <TD class=3D"r data">971</TD>
+    <TD class=3D"r data">6442</TD>
+    <TD class=3D"r data">44</TD>
+    <TD class=3D"r data">524</TD>
+    <TD class=3D"r data">1870</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">474</TD>
+    <TD class=3D"r data">26</TD>
+    <TD class=3D"r data">163</TD>
+    <TD class=3D"r data">211</TD>
+    <TD class=3D"r data">23</TD>
+    <TD class=3D"r data">44</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>WHITE_CASTLE</TH>
+    <TH class=3D"l rowheader" scope=3Drow>0</TH>
+    <TD class=3D"r data">15035</TD>
+    <TD class=3D"r data">959</TD>
+    <TD class=3D"r data">6532</TD>
+    <TD class=3D"r data">224</TD>
+    <TD class=3D"r data">526</TD>
+    <TD class=3D"r data">1857</TD></TR>
+  <TR>
+    <TH class=3D"l rowheader" scope=3Drow>&nbsp;</TH>
+    <TH class=3D"l rowheader" scope=3Drow>1</TH>
+    <TD class=3D"r data">86</TD>
+    <TD class=3D"r data">38</TD>
+    <TD class=3D"r data">73</TD>
+    <TD class=3D"r data">31</TD>
+    <TD class=3D"r data">21</TD>
+    <TD=20
+class=3D"r =
+data">57</TD></TR></TBODY></TABLE></DIV></DIV><BR></DIV></BODY></HTML>

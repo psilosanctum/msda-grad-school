@@ -1,0 +1,265 @@
+libname mylib "Y:\";                            use libname nickname mylib to tell where to store and retrieve sas system files
+filename bigrec "Y:\fa100.txt"  lrecl = 65576;  use filename bigrec nickname to point sas at raw data file
+data mytemp;                                    create temporary sas data set named mytemp
+infile bigrec;                                  point sas to the raw data set file using nickname bigrec
+input my_id 1-7                                 read in variables
+first_agree_alot 6945
+first_agree_little 6962
+first_neither 6996
+first_disagree_little 7013
+first_disagree_alot 7030
+pay_agree_alot 6946
+pay_agree_little 6963
+pay_neither 6997
+pay_disagree_little 7014
+pay_diagree_alot 7031
+keep_up_agree_alot 6953
+keep_up_agree_little 6970
+keep_up_neither 7004
+keep_up_disagree_little 7021
+keep_up_disagree_alot 7038
+love_agree_alot 6954
+love_agree_little 6971
+love_agree_neither 7005
+love_disagree_little 7022
+love_disagree_alot 7039
+cell_friend_agree_alot 3852
+cell_friend_agree_little 3876
+cell_friend_neither 3924
+cell_friend_disagree_little 3948
+cell_friend_disagree_alot 3972
+cell_connect_agree_alot 3857
+cell_connect_agree_little 3881
+cell_connect_neither 3929
+cell_connect_disagree_little 3953
+cell_connect_disagree_alot 3977
+cell_express_agree_alot 3860
+cell_express_agree_little 3884
+cell_express_neither 3932
+cell_express_disagree_little 3956
+cell_express_disagree_alot 3980
+cell_family_agree_alot 3867
+cell_family_agree_little 3891
+cell_family_neither 3939
+cell_family_disagree_little 3963
+cell_family_disagree_alot 3987;	
+run;
+data mycalcs;                                              create new temporary sas system file named mycalcs
+set mytemp;                                                make a copy of data set mytemp to work on
+/* use an array to turn missing values to zeros */
+array missy(8,5)                                           create 2 dimensional array - 8 rows (one per variable) and 5 columns (one per choice)
+first_agree_alot                                           store variables read in from mytemp into array missy - don't screw up order!
+first_agree_little 
+first_neither 
+first_disagree_little 
+first_disagree_alot 
+pay_agree_alot 
+pay_agree_little
+pay_neither 
+pay_disagree_little
+pay_diagree_alot 
+keep_up_agree_alot 
+keep_up_agree_little 
+keep_up_neither 
+keep_up_disagree_little 
+keep_up_disagree_alot 
+love_agree_alot 
+love_agree_little 
+love_agree_neither 
+love_disagree_little 
+love_disagree_alot 
+cell_friend_agree_alot 
+cell_friend_agree_little 
+cell_friend_neither 
+cell_friend_disagree_little 
+cell_friend_disagree_alot 
+cell_connect_agree_alot 
+cell_connect_agree_little 
+cell_connect_neither 
+cell_connect_disagree_little 
+cell_connect_disagree_alot 
+cell_express_agree_alot 
+cell_express_agree_little 
+cell_express_neither 
+cell_express_disagree_little 
+cell_express_disagree_alot 
+cell_family_agree_alot 
+cell_family_agree_little 
+cell_family_neither 
+cell_family_disagree_little 
+cell_family_disagree_alot;
+/* now make missing values zeroes */
+do i = 1 to 8;                                                here is a nested do loop to set all missing values to zero
+do j = 1 to 5;                                                first index j loops 1 to 5, then i increments by 1 and j again loops 1 to 5
+if missy(i,j) = . then missy(i,j) = 0;
+end;                                                          notice the two end statements - every do statement needs a do statement                                         
+end;
+/* make array for 8 variable sums */              
+array mysum(8);	                                              make an array to store sum in.  You want sum to equal 1!
+/* sum up the vars and make no mark or > 1 mark missing*/
+/* now make each variable, being sure to ignore zeroes and > 1 */
+do k = 1 to 8;
+mysum(k) = missy(k,1)+ missy(k,2)+missy(k,3) + missy(k,4) + missy(k,5);        notice this makes 8 sums - one for each of the 8 variables
+end;
+/* now if the variable is not zero or > 1 create var */
+array myvar(8);                                                                 create new array that contains 5 points scale
+do m = 1 to 8;                                                                  
+if mysum(m) = 1 then                                                            check if sum = 1  = ok
+myvar(m) = (missy(m,1)*5) + (missy(m,2)*4)+ (missy(m,3)*3) + (missy(m,4))*2 + (missy(m,5)*1);      create 5 point scale
+else
+myvar(m) = .;                                                                   otherwise make 5 point scale variable missing
+end;
+/* now make the var names pretty again */                                        
+first = myvar(1);                                                       rename the variables so they make sense
+pay = myvar(2);
+keep = myvar(3);
+love = myvar(4);
+friend = myvar(5);
+connect = myvar(6);
+express = myvar(7);
+family = myvar(8);
+/* make sum variables available */
+mysum1=mysum(1);                                                        rename the sum variables so they make sense
+mysum2=mysum(2);
+mysum3=mysum(3);
+mysum4=mysum(4);
+mysum5=mysum(5);
+mysum6=mysum(6);
+mysum7=mysum(7);
+mysum8=mysum(8);
+run;
+/* check incidence of multiple check marks */
+proc freq data=mycalcs;                                                  print out the sums to check they = 1
+tables 
+mysum1
+mysum2
+mysum3
+mysum4
+mysum5
+mysum6
+mysum7
+mysum8;
+run;
+Proc freq data=mycalcs;                                                  print out the check box variables so we can check it worked
+Tables
+first_agree_alot 
+first_agree_little 
+first_neither 
+first_disagree_little 
+first_disagree_alot 
+pay_agree_alot 
+pay_agree_little 
+pay_neither 
+pay_disagree_little 
+pay_diagree_alot 
+keep_up_agree_alot 
+keep_up_agree_little 
+keep_up_neither 
+keep_up_disagree_little 
+keep_up_disagree_alot 
+love_agree_alot 
+love_agree_little 
+love_agree_neither 
+love_disagree_little 
+love_disagree_alot 
+cell_friend_agree_alot 
+cell_friend_agree_little 
+cell_friend_neither 
+cell_friend_disagree_little 
+cell_friend_disagree_alot 
+cell_connect_agree_alot 
+cell_connect_agree_little 
+cell_connect_neither 
+cell_connect_disagree_little 
+cell_connect_disagree_alot 
+cell_express_agree_alot 
+cell_express_agree_little 
+cell_express_neither 
+cell_express_disagree_little 
+cell_express_disagree_alot 
+cell_family_agree_alot 
+cell_family_agree_little
+cell_family_neither 
+cell_family_disagree_little 
+cell_family_disagree_alot ;	
+run;
+proc format;                                                                             make a pretty format for the scales and vars
+value myscale
+     1 = ‘disagree a lot’
+     2 = ‘disagree a little’
+     3 = ‘neither agree nor disagree’
+     4 = ‘agree a little’
+     5 = ‘agree a lot’;
+value yesno
+     0 = ‘no’
+     1 = ‘yes’;
+Run;
+/* do freqs for aggregated vars */
+proc freq data=mycalcs;                                            check the check box variable counts against the 5 points scale counts
+tables
+first_agree_alot 
+first_agree_little 
+first_neither 
+first_disagree_little 
+first_disagree_alot 
+pay_agree_alot 
+pay_agree_little
+pay_neither 
+pay_disagree_little
+pay_diagree_alot 
+keep_up_agree_alot 
+keep_up_agree_little 
+keep_up_neither 
+keep_up_disagree_little 
+keep_up_disagree_alot 
+love_agree_alot 
+love_agree_little 
+love_agree_neither 
+love_disagree_little 
+love_disagree_alot 
+cell_friend_agree_alot 
+cell_friend_agree_little 
+cell_friend_neither 
+cell_friend_disagree_little 
+cell_friend_disagree_alot 
+cell_connect_agree_alot 
+cell_connect_agree_little 
+cell_connect_neither 
+cell_connect_disagree_little 
+cell_connect_disagree_alot 
+cell_express_agree_alot 
+cell_express_agree_little 
+cell_express_neither 
+cell_express_disagree_little 
+cell_express_disagree_alot 
+cell_family_agree_alot 
+cell_family_agree_little 
+cell_family_neither 
+cell_family_disagree_little 
+cell_family_disagree_alot;
+format 
+first
+pay
+keep
+love
+friend
+connect
+express
+family myscale. ;
+run;
+/* now sniff new variables and compare - should be approx same as cell counts */
+proc freq data=mycalcs;                                                           ok so I did it again this is redundent...
+tables
+first
+pay
+keep
+love
+friend
+connect
+express
+family;
+run;
+/* save the data file out */
+data mylib.sasclus;                                                    notice the two part name - it is saving it out to your laptop
+set mycalcs;                                                           grab a copy of mycalcs to save
+run;

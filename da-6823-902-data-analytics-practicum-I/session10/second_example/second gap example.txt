@@ -1,0 +1,28 @@
+libname mylib 'p:\';
+data mygap;
+set mylib.emba1;
+proc hpclus data=mygap maxclusters=8
+noc=abc(b=30 minclusters=3 align=pca criterion=firstpeak);
+/* score puts CLUSTER variable in dataset and OUT= outputs the data set */
+score out=mycluster;
+/* here are the drivers for the HPCLUS cluster solution */
+input 
+BUY_SAME_PRODUCTS_THAT_CELEBRITI
+DESIGNER_LABEL_IMPROVES_PERSON_S
+ECO_FRIENDLY_PRODS_HIGHER_QUALIT
+I_AM_FRST_AMNG_MY_FRIENDS_TRY_NE
+I_ENJOY_TAKING_RISKS 
+/ level=interval;
+/* only the variables listed in the ID statement will be kept in the MYCLUSTER data set*/
+/* so be sure to put your id variable, drivers and descritpor variables in the ID statement */
+id myid 
+BUY_SAME_PRODUCTS_THAT_CELEBRITI
+DESIGNER_LABEL_IMPROVES_PERSON_S
+ECO_FRIENDLY_PRODS_HIGHER_QUALIT
+I_AM_FRST_AMNG_MY_FRIENDS_TRY_NE
+I_ENJOY_TAKING_RISKS 
+coca_cola_classic 
+pepsi 
+MCDONALD_S 
+NATIONAL_ENQUIRER;
+run;                                        

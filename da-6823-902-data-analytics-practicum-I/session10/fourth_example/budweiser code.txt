@@ -1,0 +1,96 @@
+libname mylib "P:\";
+data mytemp;
+set mylib.emba1;
+run;
+
+proc hpclus data=mytemp maxclusters=6
+noc=abc(b=20 minclusters=2 align=pca criterion=globalpeak);
+/* score puts CLUSTER variable in dataset and OUT= outputs the data set */
+score out=mycluster;
+/* here are the drivers for the HPCLUS cluster solution */
+input 
+
+BUY_FROM_COMPANIES_SPONSOR_SPORT
+CAN_TELL_ABOUT_SOMEONE_BY_CAR_DR
+
+I_OFTEN_SNACK_BETWEEN_MEALS
+
+
+LIKE_TO_ENJOY_LIFE_DON_T_WORRY_F
+
+SALTED_SNACKS_ARE_MY_FAVORITE_SN
+THERES_LITTLE_I_CAN_DO_TO_CHANGE
+
+
+
+
+ / level=interval;
+/* only the variables listed in the ID statement will be kept in the MYCLUSTER data set*/
+/* so be sure to put your id variable, drivers and descritpor variables in the ID statement */
+/* the drivers are earlyadopt socialphone loser ad_receptivity and the descriptors are coca_cola_classic */
+id myid 
+resp_gender
+resp_age
+resp_educ
+resp_marstat
+resp_hispanic
+BUY_FROM_COMPANIES_SPONSOR_SPORT
+CAN_TELL_ABOUT_SOMEONE_BY_CAR_DR
+I_ENJOY_TAKING_RISKS
+I_OFTEN_SNACK_BETWEEN_MEALS
+IMPORTANT_TO_BE_ATTRACTIVE_OPPOS
+LIKE_TO_DRIVE_FASTER_THAN_NORMAL
+LIKE_TO_ENJOY_LIFE_DON_T_WORRY_F
+OPTIONS_ON_A_CAR_IMPRESS_ME
+SALTED_SNACKS_ARE_MY_FAVORITE_SN
+THERES_LITTLE_I_CAN_DO_TO_CHANGE
+COLLEGE_FOOTBALL_REGULAR_SEASON
+CMT__COUNTRY_MUSIC_TELEVISION_
+DALLAS_COWBOYS_CHEERLEADERS
+DOMINO_S_PIZZA
+DUCK_DYNASTY
+ESPN
+FIELD___STREAM
+FISHING___HUNTING
+FOX_NEWS_CHANNEL
+BUDWEISER
+COORS
+MICHELOB
+MILLER_HIGH_LIFE ;
+run;   
+proc contents data=mycluster;
+run; 
+proc sort data=mycluster out=mysort;
+by _CLUSTER_ID_ ;
+proc means data=mysort;
+by _CLUSTER_ID_;
+var
+resp_gender
+resp_age
+resp_educ
+resp_marstat
+resp_hispanic
+BUY_FROM_COMPANIES_SPONSOR_SPORT
+CAN_TELL_ABOUT_SOMEONE_BY_CAR_DR
+I_ENJOY_TAKING_RISKS
+I_OFTEN_SNACK_BETWEEN_MEALS
+IMPORTANT_TO_BE_ATTRACTIVE_OPPOS
+LIKE_TO_DRIVE_FASTER_THAN_NORMAL
+LIKE_TO_ENJOY_LIFE_DON_T_WORRY_F
+OPTIONS_ON_A_CAR_IMPRESS_ME
+SALTED_SNACKS_ARE_MY_FAVORITE_SN
+THERES_LITTLE_I_CAN_DO_TO_CHANGE
+COLLEGE_FOOTBALL_REGULAR_SEASON
+CMT__COUNTRY_MUSIC_TELEVISION_
+DALLAS_COWBOYS_CHEERLEADERS
+DOMINO_S_PIZZA
+DUCK_DYNASTY
+ESPN
+FIELD___STREAM
+FISHING___HUNTING
+FOX_NEWS_CHANNEL
+BUDWEISER
+COORS
+MICHELOB
+MILLER_HIGH_LIFE ;
+run;

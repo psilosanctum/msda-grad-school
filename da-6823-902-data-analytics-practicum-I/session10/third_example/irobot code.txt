@@ -1,0 +1,61 @@
+libname mylib "P:\";
+data mytemp;
+set mylib.emba1;
+run;
+
+proc hpclus data=mytemp maxclusters=6
+noc=abc(b=20 minclusters=2 align=pca criterion=firstpeak);
+/* score puts CLUSTER variable in dataset and OUT= outputs the data set */
+score out=mycluster;
+/* here are the drivers for the HPCLUS cluster solution */
+input 
+DON_T_LIKE_TO_DO_ANY_FORM_OF_HOU
+LIKE_TO_KEEP_UP_WITH_THE_LATEST_
+TOO_BSY_TO_TAKE_CARE_OF_MYSELF_A
+WORTH_PAYING_EXTRA_FOR_QUALITY_G
+ / level=interval;
+/* only the variables listed in the ID statement will be kept in the MYCLUSTER data set*/
+/* so be sure to put your id variable, drivers and descritpor variables in the ID statement */
+/* the drivers are earlyadopt socialphone loser ad_receptivity and the descriptors are coca_cola_classic */
+id myid 
+resp_gender
+resp_age
+resp_educ
+resp_marstat
+resp_hispanic
+DON_T_LIKE_TO_DO_ANY_FORM_OF_HOU
+EXPECT_ADVERTISING_TO_BE_ENTERTA
+INTERNET_CHANGE_HOW_I_SHOP_FOR_P
+LIKE_TO_KEEP_UP_WITH_THE_LATEST_
+TOO_BSY_TO_TAKE_CARE_OF_MYSELF_A
+WORTH_PAYING_EXTRA_FOR_QUALITY_G
+MYTHBUSTERS
+PLAYSTATION_4 
+SCIENCE_FICTION
+SHARK_TANK 
+DISCOVERY_CHANNEL;  
+run;   
+proc contents data=mycluster;
+run; 
+proc sort data=mycluster out=mysort;
+by _CLUSTER_ID_ ;
+proc means data=mysort;
+by _CLUSTER_ID_;
+var
+resp_gender
+resp_age
+resp_educ
+resp_marstat
+resp_hispanic
+DON_T_LIKE_TO_DO_ANY_FORM_OF_HOU
+EXPECT_ADVERTISING_TO_BE_ENTERTA
+INTERNET_CHANGE_HOW_I_SHOP_FOR_P
+LIKE_TO_KEEP_UP_WITH_THE_LATEST_
+TOO_BSY_TO_TAKE_CARE_OF_MYSELF_A
+WORTH_PAYING_EXTRA_FOR_QUALITY_G
+MYTHBUSTERS
+PLAYSTATION_4 
+SCIENCE_FICTION
+SHARK_TANK 
+DISCOVERY_CHANNEL;  
+run;
