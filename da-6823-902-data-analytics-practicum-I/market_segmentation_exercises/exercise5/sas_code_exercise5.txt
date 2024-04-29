@@ -307,10 +307,12 @@ RENAME factor2 = environconscious;
 RENAME my_id = resp_id;
 RUN;
 
-PROC HPCLUS DATA=myscores1 maxclusters=8 MAXITER=100 NOC=abc(b=20 minclusters=2 align=PCA criterion=GLOBALPEAK);
+PROC HPCLUS DATA=myscores1 maxclusters=6 MAXITER=100 NOC=abc(b=20 minclusters=2 align=PCA criterion=firstpeak);
 
 SCORE out=mycluster;
 INPUT
+onlineshopper
+environconscious
 clothes_last_long_time
 buy_clothes_dont_need
 attractive_to_others
@@ -321,7 +323,7 @@ ID myid
 clothes_last_long_time 
 buy_clothes_dont_need 
 attractive_to_others 
-disc_clothes_good 
+disc_clothes_good
 dress_to_please_myself 
 purchase_online_safe 
 buy_online 
