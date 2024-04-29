@@ -1,0 +1,423 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;\f1\fmodern\fcharset0 CourierNewPS-BoldMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue255;\red128\green0\blue128;\red8\green114\blue109;
+\red0\green0\blue128;\red27\green122\blue27;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c100000;\csgenericrgb\c50196\c0\c50196;\csgenericrgb\c3137\c44706\c42745;
+\csgenericrgb\c0\c0\c50196;\csgenericrgb\c10588\c47843\c10588;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs22 \cf2 LIBNAME\cf0  mylib \cf3 "P:\\"\cf0 ;\
+\cf2 FILENAME\cf0  bigrec \cf3 "P:\\fa15_data.txt"\cf0   \cf2 LRECL\cf0  = 
+\f1\b \cf4 65576
+\f0\b0 \cf0 ;\
+
+\f1\b \cf5 DATA
+\f0\b0 \cf0  mytemp;\
+\cf2 INFILE\cf0  bigrec;\
+\cf2 INPUT\cf0  \
+myid 
+\f1\b \cf4 1
+\f0\b0 \cf0 -
+\f1\b \cf4 11
+\f0\b0 \cf0 \
+clothes_last_long_time_aglo 
+\f1\b \cf4 3411
+\f0\b0 \cf0  \
+clothes_last_long_time_agli 
+\f1\b \cf4 3438
+\f0\b0 \cf0 \
+clothes_last_long_time_neit 
+\f1\b \cf4 3492
+\f0\b0 \cf0 \
+clothes_last_long_time_dgli 
+\f1\b \cf4 3519
+\f0\b0 \cf0 \
+clothes_last_long_time_dglo 
+\f1\b \cf4 3546
+\f0\b0 \cf0 \
+\
+buy_clothes_dont_need_aglo 
+\f1\b \cf4 3417
+\f0\b0 \cf0  \
+buy_clothes_dont_need_agli 
+\f1\b \cf4 3444
+\f0\b0 \cf0 \
+buy_clothes_dont_need_neit 
+\f1\b \cf4 3498
+\f0\b0 \cf0 \
+buy_clothes_dont_need_dgli 
+\f1\b \cf4 3525
+\f0\b0 \cf0 \
+buy_clothes_dont_need_dglo 
+\f1\b \cf4 3552
+\f0\b0 \cf0 \
+\
+attractive_to_others_aglo 
+\f1\b \cf4 3412
+\f0\b0 \cf0  \
+attractive_to_others_agli 
+\f1\b \cf4 3439
+\f0\b0 \cf0 \
+attractive_to_others_neit 
+\f1\b \cf4 3493
+\f0\b0 \cf0 \
+attractive_to_others_dgli 
+\f1\b \cf4 3520
+\f0\b0 \cf0 \
+attractive_to_others_dglo 
+\f1\b \cf4 3547
+\f0\b0 \cf0 \
+\
+disc_clothes_good_aglo 
+\f1\b \cf4 3421
+\f0\b0 \cf0  \
+disc_clothes_good_agli 
+\f1\b \cf4 3448
+\f0\b0 \cf0 \
+disc_clothes_good_neit 
+\f1\b \cf4 3502
+\f0\b0 \cf0 \
+disc_clothes_good_dgli 
+\f1\b \cf4 3529
+\f0\b0 \cf0 \
+disc_clothes_good_dglo 
+\f1\b \cf4 3556
+\f0\b0 \cf0 \
+\
+dress_to_please_myself_aglo 
+\f1\b \cf4 3431
+\f0\b0 \cf0  \
+dress_to_please_myself_agli 
+\f1\b \cf4 3458
+\f0\b0 \cf0 \
+dress_to_please_myself_neit 
+\f1\b \cf4 3512
+\f0\b0 \cf0 \
+dress_to_please_myself_dgli 
+\f1\b \cf4 3539
+\f0\b0 \cf0 \
+dress_to_please_myself_dglo 
+\f1\b \cf4 3566
+\f0\b0 \cf0 \
+\
+adidas_brand 
+\f1\b \cf4 42607
+\f0\b0 \cf0 \
+nike_brand  
+\f1\b \cf4 42621
+\f0\b0 \cf0 \
+new_balance_brand  
+\f1\b \cf4 42620
+\f0\b0 \cf0  \
+amazon_ecom  
+\f1\b \cf4 44789
+\f0\b0 \cf0 \
+instagram_social  
+\f1\b \cf4 8902
+\f0\b0 \cf0 \
+espn_sports  
+\f1\b \cf4 9031
+\f0\b0 \cf0 ;\
+
+\f1\b \cf5 RUN
+\f0\b0 \cf0 ;\
+\cf6 /* the above reads in the raw data from the data file -  now create five point scale variables */\cf0 \
+\cf6 /* now before we create variables lets create formats so we know what each value will mean */\cf0 \
+
+\f1\b \cf5 PROC
+\f0\b0 \cf0  
+\f1\b \cf5 FORMAT
+\f0\b0 \cf0 ;\
+\cf2 VALUE\cf0  myscale\
+     
+\f1\b \cf4 1
+\f0\b0 \cf0  = \cf3 "disagree a lot"\cf0 \
+     
+\f1\b \cf4 2
+\f0\b0 \cf0  = \cf3 "disagree a little"\cf0 \
+     
+\f1\b \cf4 3
+\f0\b0 \cf0  = \cf3 "neither agree nor disagree"\cf0 \
+     
+\f1\b \cf4 4
+\f0\b0 \cf0  = \cf3 "agree a little"\cf0 \
+     
+\f1\b \cf4 5
+\f0\b0 \cf0  = \cf3 "agree a lot"\cf0 ;\
+\cf2 VALUE\cf0  yesno\
+     
+\f1\b \cf4 0
+\f0\b0 \cf0  = \cf3 "no"\cf0 \
+     
+\f1\b \cf4 1
+\f0\b0 \cf0  = \cf3 "yes"\cf0 ;\
+
+\f1\b \cf5 RUN
+\f0\b0 \cf0 ;\
+\cf6 /* do that by creating a new temp sas data set myvars by starting with the temp sas data set mytemp */\cf0 \
+
+\f1\b \cf5 DATA
+\f0\b0 \cf0  myvars;\
+\cf2 SET\cf0  mytemp;\
+\cf2 IF\cf0  clothes_last_long_time_dglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  clothes_last_long_time = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;                                                  \
+\cf2 IF\cf0  clothes_last_long_time_dgli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  clothes_last_long_time = 
+\f1\b \cf4 2
+\f0\b0 \cf0 ;                                             \
+\cf2 IF\cf0  clothes_last_long_time_neit = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  clothes_last_long_time = 
+\f1\b \cf4 3
+\f0\b0 \cf0 ;                                                  \
+\cf2 IF\cf0  clothes_last_long_time_agli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  clothes_last_long_time = 
+\f1\b \cf4 4
+\f0\b0 \cf0 ;                                                  \
+\cf2 IF\cf0  clothes_last_long_time_aglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  clothes_last_long_time = 
+\f1\b \cf4 5
+\f0\b0 \cf0 ;     \
+\
+\cf2 IF\cf0  buy_clothes_dont_need_dglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  buy_clothes_dont_need = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;                                                 \
+\cf2 IF\cf0  buy_clothes_dont_need_dgli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  buy_clothes_dont_need = 
+\f1\b \cf4 2
+\f0\b0 \cf0 ;                                                \
+\cf2 IF\cf0  buy_clothes_dont_need_neit = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  buy_clothes_dont_need = 
+\f1\b \cf4 3
+\f0\b0 \cf0 ;    \
+\cf2 IF\cf0  buy_clothes_dont_need_agli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  buy_clothes_dont_need = 
+\f1\b \cf4 4
+\f0\b0 \cf0 ;                                                 \
+\cf2 IF\cf0  buy_clothes_dont_need_aglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  buy_clothes_dont_need = 
+\f1\b \cf4 5
+\f0\b0 \cf0 ;\
+\
+\cf2 IF\cf0  attractive_to_others_dglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  attractive_to_others = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;                                                 \
+\cf2 IF\cf0  attractive_to_others_dgli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  attractive_to_others = 
+\f1\b \cf4 2
+\f0\b0 \cf0 ;                                                \
+\cf2 IF\cf0  attractive_to_others_neit = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  attractive_to_others = 
+\f1\b \cf4 3
+\f0\b0 \cf0 ;    \
+\cf2 IF\cf0  attractive_to_others_agli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  attractive_to_others = 
+\f1\b \cf4 4
+\f0\b0 \cf0 ;                                                 \
+\cf2 IF\cf0  attractive_to_others_aglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  attractive_to_others = 
+\f1\b \cf4 5
+\f0\b0 \cf0 ;\
+\
+\cf2 IF\cf0  disc_clothes_good_dglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  disc_clothes_good = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;                                                 \
+\cf2 IF\cf0  disc_clothes_good_dgli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  disc_clothes_good = 
+\f1\b \cf4 2
+\f0\b0 \cf0 ;                                                \
+\cf2 IF\cf0  disc_clothes_good_neit = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  disc_clothes_good = 
+\f1\b \cf4 3
+\f0\b0 \cf0 ;    \
+\cf2 IF\cf0  disc_clothes_good_agli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  disc_clothes_good = 
+\f1\b \cf4 4
+\f0\b0 \cf0 ;                                                 \
+\cf2 IF\cf0  disc_clothes_good_aglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  disc_clothes_good = 
+\f1\b \cf4 5
+\f0\b0 \cf0 ;\
+\
+\cf2 IF\cf0  dress_to_please_myself_dglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  dress_to_please_myself = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;                                                 \
+\cf2 IF\cf0  dress_to_please_myself_dgli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  dress_to_please_myself = 
+\f1\b \cf4 2
+\f0\b0 \cf0 ;                                                \
+\cf2 IF\cf0  dress_to_please_myself_neit = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  dress_to_please_myself = 
+\f1\b \cf4 3
+\f0\b0 \cf0 ;    \
+\cf2 IF\cf0  dress_to_please_myself_agli = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  dress_to_please_myself = 
+\f1\b \cf4 4
+\f0\b0 \cf0 ;                                                 \
+\cf2 IF\cf0  dress_to_please_myself_aglo = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  dress_to_please_myself = 
+\f1\b \cf4 5
+\f0\b0 \cf0 ;   \
+ \
+\
+\cf6 /* now set up binary yes ? no variables knowing that missing values get a zero and a 1 gets a 1 */\cf0 \
+\cf2 IF\cf0  adidas_brand = 
+\f1\b \cf4 .
+\f0\b0 \cf0   \cf2 THEN\cf0  adidas = 
+\f1\b \cf4 0
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  adidas_brand = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  adidas = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  nike_brand = 
+\f1\b \cf4 .
+\f0\b0 \cf0  \cf2 THEN\cf0  nike = 
+\f1\b \cf4 0
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  nike_brand = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  nike = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  new_balance_brand = 
+\f1\b \cf4 .
+\f0\b0 \cf0  \cf2 THEN\cf0  new_balance = 
+\f1\b \cf4 0
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  new_balance_brand = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  new_balance = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  amazon_ecom = 
+\f1\b \cf4 .
+\f0\b0 \cf0  \cf2 THEN\cf0  amazon = 
+\f1\b \cf4 0
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  amazon_ecom = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  amazon = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  instagram_social = 
+\f1\b \cf4 .
+\f0\b0 \cf0  \cf2 THEN\cf0  instagram = 
+\f1\b \cf4 0
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  instagram_social = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  instagram = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  espn_sports = 
+\f1\b \cf4 .
+\f0\b0 \cf0  \cf2 THEN\cf0  espn = 
+\f1\b \cf4 0
+\f0\b0 \cf0 ;\
+\cf2 IF\cf0  espn_sports = 
+\f1\b \cf4 1
+\f0\b0 \cf0  \cf2 THEN\cf0  espn = 
+\f1\b \cf4 1
+\f0\b0 \cf0 ;\
+\
+\cf2 LABEL\cf0  clothes_last_long_time = \cf3 'I make my clothes last a long time.'\cf0 ;\
+\cf2 LABEL\cf0  buy_clothes_dont_need = \cf3 'Often buy clothes I dont really need.'\cf0 ;\
+\cf2 LABEL\cf0  attractive_to_others = \cf3 'Important to look attractive to others.'\cf0 ;\
+\cf2 LABEL\cf0  disc_clothes_good = \cf3 'Clothes at disc dept just as good as dept.'\cf0 ;\
+\cf2 LABEL\cf0  dress_to_please_myself = \cf3 'Dress to please myself.'\cf0 ;\
+\
+\cf6 /* now attach the values for each of the variables using the proc format labels */\cf0 \
+\cf2 FORMAT\cf0  clothes_last_long_time buy_clothes_dont_need attractive_to_others disc_clothes_good dress_to_please_myself  \cf4 myscale.\cf0 \
+	   adidas nike new_balance amazon instagram espn \cf4 yesno.\cf0  ;\
+
+\f1\b \cf5 RUN
+\f0\b0 \cf0 ;\
+\cf6 /* now run freqs to check your work */\cf0 \
+
+\f1\b \cf5 PROC
+\f0\b0 \cf0  
+\f1\b \cf5 FREQ
+\f0\b0 \cf0  \cf2 DATA\cf0  = myvars;\
+\cf2 TABLES\cf0 \
+clothes_last_long_time_dglo\
+clothes_last_long_time_dgli\
+clothes_last_long_time_neit\
+clothes_last_long_time_agli\
+clothes_last_long_time_aglo\
+\
+buy_clothes_dont_need_dglo\
+buy_clothes_dont_need_dgli\
+buy_clothes_dont_need_neit\
+buy_clothes_dont_need_agli\
+buy_clothes_dont_need_aglo\
+\
+\
+attractive_to_others_dglo\
+attractive_to_others_dgli\
+attractive_to_others_neit\
+attractive_to_others_agli\
+attractive_to_others_aglo\
+\
+disc_clothes_good_dglo\
+disc_clothes_good_dgli\
+disc_clothes_good_neit\
+disc_clothes_good_agli\
+disc_clothes_good_aglo\
+\
+dress_to_please_myself_dglo\
+dress_to_please_myself_dgli\
+dress_to_please_myself_neit\
+dress_to_please_myself_agli\
+dress_to_please_myself_aglo\
+\
+clothes_last_long_time\
+buy_clothes_dont_need\
+attractive_to_others\
+disc_clothes_good\
+dress_to_please_myself\
+\
+adidas\
+nike\
+new_balance\
+amazon\
+instagram\
+espn;\
+
+\f1\b \cf5 RUN
+\f0\b0 \cf0 ; \
+\
+}

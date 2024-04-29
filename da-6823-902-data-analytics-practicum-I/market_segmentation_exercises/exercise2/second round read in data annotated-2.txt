@@ -1,0 +1,93 @@
+libname mylib "P:\";                               libname is how you point to a directory where permanent sas files are found      
+filename bigrec "P:\fa15_data.txt"  lrecl = 65576;     filename is how you point sas at a raw data file
+data mytemp;                                       here is how you create a temporary sas data set for analysis
+infile bigrec;                                     file tells sas that here comes a description of a record called bigrec
+input                                              input tells sas that coming next are the variables that you want to read in and their col #s
+myid 1-7                                           here is the respondent ID in columns 1-7 you should always read this field in!
+used_car_dgli  3749                                Here is the variable  a used car is just as good as a new car - car used_car disagree a little                 
+used_car_neit  3713                                Here is the variable used_car neither agree nor disagree              
+used_car_agli  3641                                Here is the variable used_car agree a little                  
+used_car_aglo  3605                                Here is the variable used_car agree a lot                   
+used_car_anya  3677                                dont use this - it's "any agree"                 
+used_car_anyd  3821                                dont use this - its "any disgree"                 
+used_car_dglo  3785                                here is the variable used_car disagree a lot                 
+no_time_healthy_meal_agli  4045                    Same idea for no time to eat healthy food variable...                             
+no_time_healthy_meal_aglo  4026                                                 
+no_time_healthy_meal_anya  4064                                                 
+no_time_healthy_meal_anyd  4140                                                 
+no_time_healthy_meal_dgli  4102                                                 
+no_time_healthy_meal_dglo  4121                                                 
+no_time_healthy_meal_neit  4083     
+coca_cola_classic  40103                           here we have a variable that is a simple yes/no
+espn  9625                                         here we have a variable that is a simple yes/no
+ikea  43988                                        here we have a variable that is a simple yes/no
+kfc  41650                                         here we have a variable that is a simple yes/no
+nike  42621;                                       here we have a variable that is a simple yes/no
+run;                                               the RUN statement says to sas "hey run the stuff above?"
+/* the above reads in the raw data from the data file -  now create five point scale variables */
+/* now before we create variables lets create formats so we know what each value will mean */
+proc format;                                       here is a proc format statement that labels the values of the variables
+value myscale                                      create a labeling scheme that can be used across as many variables as you want
+     1 = "disagree a lot"
+     2 = "disagree a little"
+     3 = "neither agree nor disagree"
+     4 = "agree a little"
+     5 = "agree a lot";                            note the semicolon saying "next statement please!"
+value yesno                                        let's label the yes no variables as well
+     0 = "no"
+     1 = "yes";
+run;
+/* do that by creating a new temp sas data set myvars by starting with the temp sas data set mytemp */
+data myvars;                                       let's create another temporary sas data set and call it myvars
+set mytemp;                                        grab the temporary sas data set called mytemp
+if used_car_dglo  = 1 then used_car_good =1;       now let's combine each of the five scale variables into one happy variable with 5 values                                           
+if used_car_dgli   = 1 then used_car_good = 2;                                             
+if used_car_neit = 1 then used_car_good = 3;                                                  
+if used_car_agli = 1 then used_car_good = 4;                                                  
+if used_car_aglo = 1 then used_car_good = 5;     
+if no_time_healthy_meal_dglo  = 1 then no_time_eat_healthy = 1;      let's do the same here                                           
+if no_time_healthy_meal_dgli  =1 then no_time_eat_healthy = 2;                                                
+if no_time_healthy_meal_neit  = 1 then no_time_eat_healthy = 3;    
+if no_time_healthy_meal_agli  = 1 then no_time_eat_healthy = 4;                                                 
+if no_time_healthy_meal_aglo  =1 then no_time_eat_healthy = 5;  
+/* now set up binary yes – no variables knowing that missing values get a zero and a 1 gets a 1 */
+if coca_cola_classic = .  then classic_coke = 0;                      let's make proper binary variables out these yes / no variables
+if coca_cola_classic = 1 then classic_coke = 1;
+if espn = . then espn_sports = 0;
+if espn = 1 then espn_sports = 1;
+if ikea = . then ikea_furniture = 0;
+if ikea = 1 then ikea_furniture = 1;
+if kfc = . then kfc_chicken = 0;
+if kfc =1 then kfc_chicken = 1;
+if nike = . then nike_trainers = 0;
+if nike = 1 then nike_trainers = 1;
+label used_car_good 'a used car is as good as a new car';       Label the variable
+label no_time_eat_healthy 'I do not have time to eat a healthy meal';   label the variable
+/* now attach the values for each of the variables using the proc format labels */
+format   used_car_good    no_time_eat_healthy  myscale.                            this attaches the label myscale to the two variables
+                coca_cola_classic  espn_sports  ikea_furniture  kfc_chicken  nike_trainers  yesno. ;  same here.  NOTE THE PERIOD AFTER THE LABEL NAME!
+run;                                                   let's run the stuff we just coded
+/* now run freqs to check your work */
+proc freq data = myvars;                               now lets use PROC FREQ to get frequencies of our variables and check them!
+tables
+used_car_dglo                                               
+used_car_dgli                                            
+used_car_neit                                            
+used_car_agli                                              
+used_car_aglo    
+no_time_healthy_meal_dglo                                                 
+no_time_healthy_meal_dgli                                                
+no_time_healthy_meal_neit     
+no_time_healthy_meal_agli                                               
+no_time_healthy_meal_aglo
+used_car_good
+no_time_eat_healthy
+classic_coke 
+espn_sports  
+ikea_furniture  
+kfc_chicken  
+nike_trainers;
+run ;                                                 run the PROC FREQ procedure!
+
+
+                                               
