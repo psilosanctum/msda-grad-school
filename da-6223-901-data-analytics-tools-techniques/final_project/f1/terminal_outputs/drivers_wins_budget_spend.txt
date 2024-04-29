@@ -1,0 +1,25 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:            annual_wins   R-squared:                       0.206
+Model:                            OLS   Adj. R-squared:                  0.197
+Method:                 Least Squares   F-statistic:                     24.33
+Date:                Sat, 27 Apr 2024   Prob (F-statistic):           3.49e-06
+Time:                        19:16:18   Log-Likelihood:                -216.57
+No. Observations:                  96   AIC:                             437.1
+Df Residuals:                      94   BIC:                             442.3
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -1.1882      0.517     -2.300      0.024      -2.214      -0.162
+x1             0.0087      0.002      4.933      0.000       0.005       0.012
+==============================================================================
+Omnibus:                       55.385   Durbin-Watson:                   0.646
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              177.212
+Skew:                           2.054   Prob(JB):                     3.30e-39
+Kurtosis:                       8.237   Cond. No.                         634.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

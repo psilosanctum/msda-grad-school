@@ -1,0 +1,622 @@
+1713934482818	geckodriver	INFO	Listening on 127.0.0.1:62756
+1713934483093	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileNY7O4q"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934483666	Marionette	INFO	Marionette enabled
+2024-04-23 23:54:44.170 plugin-container[40604:1726650] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:54:44.172 plugin-container[40604:1726650] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+2024-04-23 23:54:44.189 plugin-container[40604:1726650] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:54:44.189 plugin-container[40604:1726650] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:54:44.190 plugin-container[40604:1726653] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:54:44.190 plugin-container[40604:1726653] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713934484245	Marionette	INFO	Listening on port 62763
+WebDriver BiDi listening on ws://127.0.0.1:62757
+Read port: 62763
+1713934484659	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:62757/devtools/browser/22157c2c-f748-49d6-ab26-76f7ae55e0be
+2024-04-24 04:54:46.728 plugin-container[40607:1726802] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:54:46.728 plugin-container[40607:1726802] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:54:46.734 plugin-container[40607:1726802] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:54:46.734 plugin-container[40607:1726802] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:54:46.735 plugin-container[40607:1726837] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:54:46.735 plugin-container[40607:1726837] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713934515513	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1713934534625	geckodriver	INFO	Listening on 127.0.0.1:62803
+1713934535138	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileiHwBte"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934535748	Marionette	INFO	Marionette enabled
+2024-04-23 23:55:36.150 plugin-container[40718:1727638] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:55:36.151 plugin-container[40718:1727638] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:55:36.158 plugin-container[40718:1727638] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:55:36.158 plugin-container[40718:1727638] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:55:36.158 plugin-container[40718:1727646] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:55:36.159 plugin-container[40718:1727646] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934536258	Marionette	INFO	Listening on port 62810
+WebDriver BiDi listening on ws://127.0.0.1:62804
+Read port: 62810
+1713934536624	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:62804/devtools/browser/8ccc0b62-2fa0-48b0-b7fb-5091ba982403
+2024-04-24 04:55:38.753 plugin-container[40722:1727806] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:55:38.753 plugin-container[40722:1727806] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:55:38.758 plugin-container[40722:1727806] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:55:38.758 plugin-container[40722:1727806] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:55:38.759 plugin-container[40722:1727820] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:55:38.759 plugin-container[40722:1727820] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713934545308	Marionette	INFO	Stopped listening on port 62810
+JavaScript error: resource:///modules/sessionstore/SessionStore.sys.mjs, line 3773: TypeError: this._windows[aWindow.__SSi] is undefined
+1713934646837	geckodriver	INFO	Listening on 127.0.0.1:62861
+1713934647353	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofilexYMsGN"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934647752	Marionette	INFO	Marionette enabled
+2024-04-23 23:57:28.041 plugin-container[40828:1728888] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:57:28.042 plugin-container[40828:1728888] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:57:28.047 plugin-container[40828:1728888] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:57:28.047 plugin-container[40828:1728888] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:57:28.047 plugin-container[40828:1728886] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:57:28.047 plugin-container[40828:1728886] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934648133	Marionette	INFO	Listening on port 62867
+WebDriver BiDi listening on ws://127.0.0.1:62862
+Read port: 62867
+1713934648491	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:62862/devtools/browser/726ab8dc-5474-4fc3-aeb3-c8b37a277c6f
+2024-04-24 04:57:30.653 plugin-container[40831:1729051] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:57:30.653 plugin-container[40831:1729051] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:57:30.658 plugin-container[40831:1729051] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:57:30.658 plugin-container[40831:1729051] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:57:30.659 plugin-container[40831:1729048] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:57:30.659 plugin-container[40831:1729048] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713934658958	Marionette	INFO	Stopped listening on port 62867
+1713934660073	geckodriver	INFO	Listening on 127.0.0.1:62904
+1713934660585	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileU9ynav"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934660998	Marionette	INFO	Marionette enabled
+2024-04-23 23:57:41.377 plugin-container[40884:1729406] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:57:41.379 plugin-container[40884:1729406] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:57:41.389 plugin-container[40884:1729406] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:57:41.390 plugin-container[40884:1729406] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:57:41.393 plugin-container[40884:1729408] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:57:41.393 plugin-container[40884:1729408] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934661473	Marionette	INFO	Listening on port 62910
+WebDriver BiDi listening on ws://127.0.0.1:62905
+Read port: 62910
+1713934661944	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:62905/devtools/browser/85e6a438-10c1-4a12-bf55-d92c8748c398
+2024-04-24 04:57:44.150 plugin-container[40887:1729580] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:57:44.150 plugin-container[40887:1729580] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:57:44.157 plugin-container[40887:1729580] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:57:44.157 plugin-container[40887:1729580] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:57:44.157 plugin-container[40887:1729640] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:57:44.158 plugin-container[40887:1729640] nil host used in call to allowsAnyHTTPSCertificateForHost:
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1713934701517	geckodriver	INFO	Listening on 127.0.0.1:62950
+1713934702033	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofilepVBXZC"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934702433	Marionette	INFO	Marionette enabled
+2024-04-23 23:58:22.725 plugin-container[40977:1730234] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:58:22.726 plugin-container[40977:1730234] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:58:22.731 plugin-container[40977:1730234] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:58:22.731 plugin-container[40977:1730234] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:58:22.731 plugin-container[40977:1730236] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:58:22.731 plugin-container[40977:1730236] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934702807	Marionette	INFO	Listening on port 62956
+WebDriver BiDi listening on ws://127.0.0.1:62951
+Read port: 62956
+1713934703151	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:62951/devtools/browser/41c69791-8084-465b-8581-03807bb5e1ee
+2024-04-24 04:58:25.239 plugin-container[40980:1730409] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:58:25.240 plugin-container[40980:1730409] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:58:25.255 plugin-container[40980:1730409] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:58:25.255 plugin-container[40980:1730409] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:58:25.256 plugin-container[40980:1730429] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:58:25.256 plugin-container[40980:1730429] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713934712912	Marionette	INFO	Stopped listening on port 62956
+1713934714041	geckodriver	INFO	Listening on 127.0.0.1:62986
+1713934714552	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofilefat4Qa"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934714956	Marionette	INFO	Marionette enabled
+2024-04-23 23:58:35.301 plugin-container[41033:1730764] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:58:35.302 plugin-container[41033:1730764] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:58:35.320 plugin-container[41033:1730764] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:58:35.320 plugin-container[41033:1730764] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:58:35.321 plugin-container[41033:1730769] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:58:35.321 plugin-container[41033:1730769] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934715415	Marionette	INFO	Listening on port 62992
+WebDriver BiDi listening on ws://127.0.0.1:62987
+Read port: 62992
+1713934715958	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+1713934772824	geckodriver	INFO	Listening on 127.0.0.1:63008
+1713934773341	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileikqBt2"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934773732	Marionette	INFO	Marionette enabled
+2024-04-23 23:59:34.023 plugin-container[41117:1731472] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:59:34.024 plugin-container[41117:1731472] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:59:34.029 plugin-container[41117:1731472] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:59:34.029 plugin-container[41117:1731472] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:59:34.029 plugin-container[41117:1731484] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:59:34.029 plugin-container[41117:1731484] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934774103	Marionette	INFO	Listening on port 63014
+WebDriver BiDi listening on ws://127.0.0.1:63009
+Read port: 63014
+1713934774456	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63009/devtools/browser/3f664372-daae-4fb8-8cc1-8e18fcb0d298
+2024-04-24 04:59:36.526 plugin-container[41120:1731647] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:59:36.526 plugin-container[41120:1731647] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:59:36.531 plugin-container[41120:1731647] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:59:36.531 plugin-container[41120:1731647] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:59:36.531 plugin-container[41120:1731660] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:59:36.531 plugin-container[41120:1731660] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713934784399	Marionette	INFO	Stopped listening on port 63014
+1713934785511	geckodriver	INFO	Listening on 127.0.0.1:63050
+1713934786024	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofilebOh8wh"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934786427	Marionette	INFO	Marionette enabled
+2024-04-23 23:59:46.728 plugin-container[41174:1732032] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:59:46.728 plugin-container[41174:1732032] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:59:46.733 plugin-container[41174:1732032] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:59:46.733 plugin-container[41174:1732032] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:59:46.734 plugin-container[41174:1732041] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:59:46.734 plugin-container[41174:1732041] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934786806	Marionette	INFO	Listening on port 63056
+WebDriver BiDi listening on ws://127.0.0.1:63051
+Read port: 63056
+1713934787153	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63051/devtools/browser/3334bfa3-6837-4a5f-a218-031d3e523033
+2024-04-24 04:59:49.255 plugin-container[41177:1732194] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:59:49.256 plugin-container[41177:1732194] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:59:49.272 plugin-container[41177:1732194] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:59:49.272 plugin-container[41177:1732194] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 04:59:49.273 plugin-container[41177:1732209] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 04:59:49.273 plugin-container[41177:1732209] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713934795595	Marionette	INFO	Stopped listening on port 63056
+1713934796812	geckodriver	INFO	Listening on 127.0.0.1:63086
+1713934797325	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileSO2OuN"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934797721	Marionette	INFO	Marionette enabled
+2024-04-23 23:59:58.009 plugin-container[41230:1732533] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:59:58.010 plugin-container[41230:1732533] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:59:58.015 plugin-container[41230:1732533] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:59:58.015 plugin-container[41230:1732533] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-23 23:59:58.015 plugin-container[41230:1732536] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-23 23:59:58.015 plugin-container[41230:1732536] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934798090	Marionette	INFO	Listening on port 63092
+WebDriver BiDi listening on ws://127.0.0.1:63087
+Read port: 63092
+1713934798439	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63087/devtools/browser/919457e6-aab2-4f5a-ab95-f81c9f22d077
+2024-04-24 05:00:00.549 plugin-container[41233:1732726] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:00:00.549 plugin-container[41233:1732726] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:00:00.553 plugin-container[41233:1732726] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:00:00.553 plugin-container[41233:1732726] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:00:00.553 plugin-container[41233:1732738] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:00:00.553 plugin-container[41233:1732738] nil host used in call to allowsAnyHTTPSCertificateForHost:
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1713934938686	geckodriver	INFO	Listening on 127.0.0.1:63190
+1713934939203	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofilewIn5ge"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934939792	Marionette	INFO	Marionette enabled
+2024-04-24 00:02:20.200 plugin-container[41327:1734113] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:02:20.201 plugin-container[41327:1734113] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:02:20.206 plugin-container[41327:1734113] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:02:20.206 plugin-container[41327:1734113] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:02:20.206 plugin-container[41327:1734115] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:02:20.206 plugin-container[41327:1734115] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934940277	Marionette	INFO	Listening on port 63196
+WebDriver BiDi listening on ws://127.0.0.1:63191
+Read port: 63196
+1713934940630	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63191/devtools/browser/ebec8de4-9101-4e8c-aaeb-0f7a5a030cb4
+2024-04-24 05:02:22.465 plugin-container[41330:1734277] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:02:22.465 plugin-container[41330:1734277] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:02:22.470 plugin-container[41330:1734277] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:02:22.471 plugin-container[41330:1734277] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:02:22.471 plugin-container[41330:1734276] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:02:22.471 plugin-container[41330:1734276] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713934950260	Marionette	INFO	Stopped listening on port 63196
+1713934951445	geckodriver	INFO	Listening on 127.0.0.1:63230
+1713934951956	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileMbmb87"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934952452	Marionette	INFO	Marionette enabled
+2024-04-24 00:02:32.742 plugin-container[41383:1734627] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:02:32.742 plugin-container[41383:1734627] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:02:32.747 plugin-container[41383:1734627] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:02:32.747 plugin-container[41383:1734627] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:02:32.747 plugin-container[41383:1734634] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:02:32.747 plugin-container[41383:1734634] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934952823	Marionette	INFO	Listening on port 63236
+WebDriver BiDi listening on ws://127.0.0.1:63231
+Read port: 63236
+1713934953169	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63231/devtools/browser/196b4135-5c78-4d8a-9400-1c124cbc544a
+2024-04-24 05:02:35.021 plugin-container[41386:1734801] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:02:35.021 plugin-container[41386:1734801] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:02:35.027 plugin-container[41386:1734801] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:02:35.027 plugin-container[41386:1734801] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:02:35.027 plugin-container[41386:1734814] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:02:35.027 plugin-container[41386:1734814] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713934961392	Marionette	INFO	Stopped listening on port 63236
+JavaScript warning: https://en.wikipedia.org/w/load.php?lang=en&modules=ext.cite.referencePreviews%7Cext.math.popup%7Cext.popups.images%2Cmain&skin=vector-2022&version=spwc0, line 45: Script terminated by timeout at:
+l/</<@https://en.wikipedia.org/w/load.php?lang=en&modules=ext.cite.referencePreviews%7Cext.math.popup%7Cext.popups.images%2Cmain&skin=vector-2022&version=spwc0:45:302
+
+1713934962700	geckodriver	INFO	Listening on 127.0.0.1:63273
+1713934963212	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileiCYlbz"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713934963798	Marionette	INFO	Marionette enabled
+2024-04-24 00:02:44.210 plugin-container[41440:1735154] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:02:44.210 plugin-container[41440:1735154] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:02:44.216 plugin-container[41440:1735154] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:02:44.216 plugin-container[41440:1735154] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:02:44.216 plugin-container[41440:1735166] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:02:44.216 plugin-container[41440:1735166] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713934964284	Marionette	INFO	Listening on port 63279
+WebDriver BiDi listening on ws://127.0.0.1:63274
+Read port: 63279
+1713934964659	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+1713935048610	geckodriver	INFO	Listening on 127.0.0.1:63306
+1713935049123	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofilegRSMfm"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713935049531	Marionette	INFO	Marionette enabled
+2024-04-24 00:04:09.802 plugin-container[41529:1736121] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:04:09.803 plugin-container[41529:1736121] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:04:09.808 plugin-container[41529:1736121] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:04:09.808 plugin-container[41529:1736121] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:04:09.808 plugin-container[41529:1736130] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:04:09.808 plugin-container[41529:1736130] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713935049886	Marionette	INFO	Listening on port 63312
+WebDriver BiDi listening on ws://127.0.0.1:63307
+Read port: 63312
+1713935050238	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63307/devtools/browser/2eb872b7-ba54-4d18-aba0-7b92d1859178
+2024-04-24 05:04:12.330 plugin-container[41532:1736296] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:04:12.330 plugin-container[41532:1736296] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:04:12.334 plugin-container[41532:1736296] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:04:12.334 plugin-container[41532:1736296] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:04:12.334 plugin-container[41532:1736323] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:04:12.334 plugin-container[41532:1736323] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713935059971	Marionette	INFO	Stopped listening on port 63312
+1713935061128	geckodriver	INFO	Listening on 127.0.0.1:63355
+1713935061641	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileRDnq0S"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713935062065	Marionette	INFO	Marionette enabled
+2024-04-24 00:04:22.359 plugin-container[41585:1736653] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:04:22.359 plugin-container[41585:1736653] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:04:22.365 plugin-container[41585:1736653] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:04:22.366 plugin-container[41585:1736653] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:04:22.366 plugin-container[41585:1736658] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:04:22.366 plugin-container[41585:1736658] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713935062464	Marionette	INFO	Listening on port 63361
+WebDriver BiDi listening on ws://127.0.0.1:63356
+Read port: 63361
+1713935062813	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+1713935103817	geckodriver	INFO	Listening on 127.0.0.1:63386
+1713935104331	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofilelUqx0r"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713935104740	Marionette	INFO	Marionette enabled
+2024-04-24 00:05:05.029 plugin-container[41672:1737326] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:05:05.029 plugin-container[41672:1737326] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:05:05.033 plugin-container[41672:1737326] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:05:05.033 plugin-container[41672:1737326] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:05:05.034 plugin-container[41672:1737334] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:05:05.034 plugin-container[41672:1737334] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713935105106	Marionette	INFO	Listening on port 63392
+WebDriver BiDi listening on ws://127.0.0.1:63387
+Read port: 63392
+1713935105555	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63387/devtools/browser/1359d274-e0b4-4e3f-a956-59c1b796bd73
+2024-04-24 05:05:07.665 plugin-container[41675:1737519] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:05:07.665 plugin-container[41675:1737519] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:05:07.672 plugin-container[41675:1737519] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:05:07.672 plugin-container[41675:1737519] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:05:07.673 plugin-container[41675:1737498] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:05:07.673 plugin-container[41675:1737498] nil host used in call to allowsAnyHTTPSCertificateForHost:
+JavaScript error: resource://gre/modules/PrivateBrowsingUtils.sys.mjs, line 19: TypeError: aWindow is null
+JavaScript warning: https://en.wikipedia.org/w/load.php?lang=en&modules=codex-search-styles%2Cjquery%2Coojs%2Csite%7Cext.centralNotice.bannerHistoryLogger%2CchoiceData%2Cdisplay%2CgeoIP%2CimpressionDiet%2CkvStore%2ClargeBannerLimit%2ClegacySupport%2CstartUp%7Cext.centralauth.ForeignApi%2Ccentralautologin%7Cext.checkUser.clientHints%7Cext.cite.ux-enhancements%7Cext.cx.eventlogging.campaigns%7Cext.cx.model%7Cext.cx.uls.quick.actions%7Cext.echo.centralauth%7Cext.eventLogging%2CnavigationTiming%2Cpopups%2CwikimediaEvents%7Cext.growthExperiments.SuggestedEditSession%7Cext.uls.common%2Cinterface%2Cpreferences%2Cwebfonts%7Cext.urlShortener.toolbar%7Cjquery.client%2CmakeCollapsible%2CtextSelection%7Cjquery.uls.data%7Cmediawiki.ForeignApi%2CString%2CTitle%2CUri%2Capi%2Cbase%2Ccldr%2Ccookie%2Cexperiments%2CjqueryMsg%2Clanguage%2Crouter%2Cstorage%2Ctoc%2Cuser%2Cutil%2CvisibleTimeout%7Cmediawiki.ForeignApi.core%7Cmediawiki.editfont.styles%7Cmediawiki.libs.pluralruleparser%7Cmediawiki.page.media%2Cready%7Cmediawiki.page.watch.ajax%7Cmmv.bootstrap%2Chead%7Cmmv.bootstrap.autostart%7Cmw.cx.SiteMapper%7Coojs-ui.styles.icons-interactions%7Cskins.vector.clientPreferences%2Cjs%7Cskins.vector.icons.js%7Cwikibase.client.vector-2022&skin=vector-2022&version=1jo54, line 272: Script terminated by timeout at:
+ext.eventLogging/BackgroundQueue.js/BackgroundQueue/queue.flush@https://en.wikipedia.org/w/load.php?lang=en&modules=codex-search-styles%2Cjquery%2Coojs%2Csite%7Cext.centralNotice.bannerHistoryLogger%2CchoiceData%2Cdisplay%2CgeoIP%2CimpressionDiet%2CkvStore%2ClargeBannerLimit%2ClegacySupport%2CstartUp%7Cext.centralauth.ForeignApi%2Ccentralautologin%7Cext.checkUser.clientHints%7Cext.cite.ux-enhancements%7Cext.cx.eventlogging.campaigns%7Cext.cx.model%7Cext.cx.uls.quick.actions%7Cext.echo.centralauth%7Cext.eventLogging%2CnavigationTiming%2Cpopups%2CwikimediaEvents%7Cext.growthExperiments.SuggestedEditSession%7Cext.uls.common%2Cinterface%2Cpreferences%2Cwebfonts%7Cext.urlShortener.toolbar%7Cjquery.client%2CmakeCollapsible%2CtextSelection%7Cjquery.uls.data%7Cmediawiki.ForeignApi%2CString%2CTitle%2CUri%2Capi%2Cbase%2Ccldr%2Ccookie%2Cexperiments%2CjqueryMsg%2Clanguage%2Crouter%2Cstorage%2Ctoc%2Cuser%2Cutil%2CvisibleTimeout%7Cmediawiki.ForeignApi.core%7Cmediawiki.editfont.styles%7Cmediawiki.libs.pluralruleparser%7Cmediawiki.page.media%2Cready%7Cmediawiki.page.watch.ajax%7Cmmv.bootstrap%2Chead%7Cmmv.bootstrap.autostart%7Cmw.cx.SiteMapper%7Coojs-ui.styles.icons-interactions%7Cskins.vector.clientPreferences%2Cjs%7Cskins.vector.icons.js%7Cwikibase.client.vector-2022&skin=vector-2022&version=1jo54:272:511
+ext.eventLogging/BackgroundQueue.js/BackgroundQueue/<@https://en.wikipedia.org/w/load.php?lang=en&modules=codex-search-styles%2Cjquery%2Coojs%2Csite%7Cext.centralNotice.bannerHistoryLogger%2CchoiceData%2Cdisplay%2CgeoIP%2CimpressionDiet%2CkvStore%2ClargeBannerLimit%2ClegacySupport%2CstartUp%7Cext.centralauth.ForeignApi%2Ccentralautologin%7Cext.checkUser.clientHints%7Cext.cite.ux-enhancements%7Cext.cx.eventlogging.campaigns%7Cext.cx.model%7Cext.cx.uls.quick.actions%7Cext.echo.centralauth%7Cext.eventLogging%2CnavigationTiming%2Cpopups%2CwikimediaEvents%7Cext.growthExperiments.SuggestedEditSession%7Cext.uls.common%2Cinterface%2Cpreferences%2Cwebfonts%7Cext.urlShortener.toolbar%7Cjquery.client%2CmakeCollapsible%2CtextSelection%7Cjquery.uls.data%7Cmediawiki.ForeignApi%2CString%2CTitle%2CUri%2Capi%2Cbase%2Ccldr%2Ccookie%2Cexperiments%2CjqueryMsg%2Clanguage%2Crouter%2Cstorage%2Ctoc%2Cuser%2Cutil%2CvisibleTimeout%7Cmediawiki.ForeignApi.core%7Cmediawiki.editfont.styles%7Cmediawiki.libs.pluralruleparser%7Cmediawiki.page.media%2Cready%7Cmediawiki.page.watch.ajax%7Cmmv.bootstrap%2Chead%7Cmmv.bootstrap.autostart%7Cmw.cx.SiteMapper%7Coojs-ui.styles.icons-interactions%7Cskins.vector.clientPreferences%2Cjs%7Cskins.vector.icons.js%7Cwikibase.client.vector-2022&skin=vector-2022&version=1jo54:272:585
+
+1713935128295	Marionette	INFO	Stopped listening on port 63392
+1713935145868	geckodriver	INFO	Listening on 127.0.0.1:63434
+1713935146384	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofilesw23UC"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713935146793	Marionette	INFO	Marionette enabled
+2024-04-24 00:05:47.089 plugin-container[41760:1738295] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:05:47.089 plugin-container[41760:1738295] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:05:47.094 plugin-container[41760:1738295] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:05:47.094 plugin-container[41760:1738295] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:05:47.095 plugin-container[41760:1738308] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:05:47.095 plugin-container[41760:1738308] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713935147165	Marionette	INFO	Listening on port 63440
+WebDriver BiDi listening on ws://127.0.0.1:63435
+Read port: 63440
+1713935147667	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63435/devtools/browser/b8fdbb70-f537-4cff-89cb-b2b29ffc76e3
+2024-04-24 05:05:49.753 plugin-container[41763:1738462] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:05:49.754 plugin-container[41763:1738462] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:05:49.785 plugin-container[41763:1738462] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:05:49.785 plugin-container[41763:1738462] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:05:49.786 plugin-container[41763:1738461] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:05:49.786 plugin-container[41763:1738461] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713935157299	Marionette	INFO	Stopped listening on port 63440
+1713935158401	geckodriver	INFO	Listening on 127.0.0.1:63471
+1713935158920	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileRAba3p"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713935159441	Marionette	INFO	Marionette enabled
+2024-04-24 00:05:59.944 plugin-container[41816:1738787] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:05:59.944 plugin-container[41816:1738787] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:05:59.954 plugin-container[41816:1738787] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:05:59.954 plugin-container[41816:1738787] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:05:59.958 plugin-container[41816:1738798] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:05:59.958 plugin-container[41816:1738798] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713935160035	Marionette	INFO	Listening on port 63477
+WebDriver BiDi listening on ws://127.0.0.1:63472
+Read port: 63477
+1713935160297	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63472/devtools/browser/5001c126-b1e5-4c5c-98de-9ee375c5ee11
+2024-04-24 05:06:02.795 plugin-container[41819:1738963] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:06:02.795 plugin-container[41819:1738963] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:06:02.801 plugin-container[41819:1738963] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:06:02.801 plugin-container[41819:1738963] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:06:02.802 plugin-container[41819:1738997] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:06:02.802 plugin-container[41819:1738997] nil host used in call to allowsAnyHTTPSCertificateForHost:
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1713935287129	geckodriver	INFO	Listening on 127.0.0.1:63518
+1713935287647	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/s3/h2qfnwzs63b1k1xft79tdnfw0000gn/T/rust_mozprofileOWxfKO"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1713935288229	Marionette	INFO	Marionette enabled
+2024-04-24 00:08:08.552 plugin-container[41912:1740086] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:08:08.552 plugin-container[41912:1740086] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:08:08.557 plugin-container[41912:1740086] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:08:08.557 plugin-container[41912:1740086] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 00:08:08.557 plugin-container[41912:1740088] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 00:08:08.557 plugin-container[41912:1740088] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Warning: unrecognized command line flag" "-remote-allow-hosts"
+1713935288629	Marionette	INFO	Listening on port 63524
+WebDriver BiDi listening on ws://127.0.0.1:63519
+Read port: 63524
+1713935288986	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63519/devtools/browser/626c5498-fc5a-4cf8-b58b-fdc97bcaaf49
+2024-04-24 05:08:10.803 plugin-container[41915:1740246] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:08:10.803 plugin-container[41915:1740246] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:08:10.808 plugin-container[41915:1740246] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:08:10.808 plugin-container[41915:1740246] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-24 05:08:10.808 plugin-container[41915:1740257] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-24 05:08:10.808 plugin-container[41915:1740257] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1713935298661	Marionette	INFO	Stopped listening on port 63524
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+1714225593606	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+console.error: services.settings: 
+  Message: AbortError: IndexedDB: blocklists/gfx getLastModified() IndexedDB:  execute() A request was aborted, for example through a call to IDBTransaction.abort.
+console.error: services.settings: 
+  Message: AbortError: IndexedDB: blocklists/addons-bloomfilters getLastModified() IndexedDB:  execute() A request was aborted, for example through a call to IDBTransaction.abort.
+console.error: (new AbortError("IndexedDB: main/nimbus-desktop-experiments getLastModified() IndexedDB:  execute() A request was aborted, for example through a call to IDBTransaction.abort.", "resource://services-settings/IDBHelpers.sys.mjs", 16))
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: (new AbortError("IndexedDB: main/url-classifier-skip-urls getLastModified() IndexedDB:  execute() A request was aborted, for example through a call to IDBTransaction.abort.", "resource://services-settings/IDBHelpers.sys.mjs", 16))
+console.error: (new AbortError("IndexedDB: main/translations-models getLastModified() IndexedDB:  execute() A request was aborted, for example through a call to IDBTransaction.abort.", "resource://services-settings/IDBHelpers.sys.mjs", 16))
+JavaScript error: https://www.sas.com/etc/designs/saswww/global-header-min.js, line 1: ReferenceError: jQuery is not defined
+JavaScript error: https://www.sas.com/etc/clientlibs/sas/user_profile.min.1692807853391.js, line 5: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.googletagmanager.com/gtm.js?id=GTM-PWTVHH, line 155: uncaught exception: [object Object]
+JavaScript error: https://dev.visualwebsiteoptimizer.com/analysis/4.0/opa-ad3bd7a67c6b13e9c2792e875c29cb8f.js, line 1: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-Z7MSTXQ65E&l=dataLayer&cx=c, line 614: Script terminated by timeout at:
+aa.th@https://www.googletagmanager.com/gtag/js?id=G-Z7MSTXQ65E&l=dataLayer&cx=c:614:42
+get@https://www.googletagmanager.com/gtag/js?id=G-Z7MSTXQ65E&l=dataLayer&cx=c:612:119
+stop@https://www.googletagmanager.com/gtag/js?id=G-Z7MSTXQ65E&l=dataLayer&cx=c:612:87
+aa.Ck/c/<@https://www.googletagmanager.com/gtag/js?id=G-Z7MSTXQ65E&l=dataLayer&cx=c:612:412
+
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+JavaScript warning: https://www.google.com/xjs/_/js/k=xjs.s.en_US.w2Fs9gTPVGM.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAhASCAAAAKAYAgAEAAAAAAABDAAAMASAAUwEqBBCQgACAIYCCAH7-EwAAAAAIAAAAARMAAADABQCEABAEAAACAAAAFAAAAAAAAAAAAADgAAH0AwAAAAAAAAAAAEDABMEPAAQAACH4QAgAAAEAAADkAXgeMByk9gAAAAAAAAAAAAAAApAgmAPSHxAABAAAAAAAAAAAAABAKp24PAQASA/d=1/ed=1/dg=2/rs=ACT90oGOQtYkHUEt2_qhGSlF3KxBpR-hQw/ee=ALeJib:B8gLwd;AfeaP:TkrAjf;Afksuc:wMx0R;BMxAGc:E5bFse;BgS6mb:fidj5d;BjwMce:cXX2Wb;CxXAWb:YyRLvc;DM55c:imLrKe;DULqB:RKfG5c;Dkk6ge:wJqrrd;DpcR3d:zL72xf;EABSZ:MXZt9d;ESrPQc:mNTJvc;EVNhjf:pw70Gc;EmZ2Bf:zr1jrb;EnlcNd:WeHg4;Erl4fe:FloWmf,FloWmf;F9mqte:UoRcbe;Fmv9Nc:O1Tzwc;G0KhTb:LIaoZ;G6wU6e:hezEbd;GleZL:J1A7Od;HMDDWe:G8QUdb;HqeXPd:cmbnH;IBADCc:RYquRb;IoGlCf:b5lhvb;IsdWVc:qzxzOb;JXS8fb:Qj0suc;JbMT3:M25sS;JsbNhc:Xd8iUd;KOxcK:OZqGte;KQzWid:ZMKkN;KcokUb:KiuZBf;KeeMUb:HiPxjc;KpRAue:Tia57b;LBgRLc:XVMNvd;LEikZe:byfTOb,lsjVmc;LsNahb:ucGLNb;Me32dd:MEeYgc;NPKaK:PVlQOd;NSEoX:lazG7b;Np8Qkd:Dpx6qc;Nyt6ic:jn2sGd;OgagBe:cNTe0;Oj465e:KG2eXe,KG2eXe;OohIYe:mpEAQb;Pjplud:EEDORb,PoEs9b;PqHfGe:im2cZe;Q1Ow7b:x5CSu;Q6C5kf:pfdZCe;QGR0gd:Mlhmy;R2kc8b:ALJqWb;R4IIIb:QWfeKf;R9Ulx:CR7Ufe;RDNBlf:zPRCJb;SLtqO:Kh1xYe;SMDL4c:fTfGO,fTfGO;SNUn3:ZwDk9d,x8cHvb;ShpF6e:N0pvGc;TxfV6d:YORN0b;U96pRd:FsR04;UDrY1c:eps46d;UVmjEd:EesRsb;UyG7Kb:wQd0G;V2HTTe:RolTY;VGRfx:VFqbr;VN6jIc:ddQyuf;VOcgDe:YquhTb;VsAqSb:PGf2Re;VxQ32b:k0XsBb;WCEKNd:I46Hvd;WDGyFe:jcVOxd;Wfmdue:g3MJlb;XUezZ:sa7lqb;YV5bee:IvPZ6d;YkQtAf:rx8ur;ZMvdv:PHFPjb;ZWEUA:afR4Cf;a56pNe:JEfCwb;aAJE9c:WHW6Ef;aZ61od:arTwJ;bDXwRe:UsyOtc;bFZ6gf:RsDQqe;bcPXSc:gSZLJb;cEt90b:ws9Tlc;cFTWae:gT8qnd;coJ8e:KvoW8;dIoSBb:ZgGg9b;dLlj2:Qqt3Gf;daB6be:lMxGPd;dtl0hd:lLQWFe;eBAeSb:Ck63tb;eBZ5Nd:VruDBd;eHDfl:ofjVkb;eO3lse:nFClrf;fWLTFc:TVBJbf;g8nkx:U4MzKc;gaub4:TN6bMe;gtVSi:ekUOYd;h3MYod:cEt90b;hK67qb:QWEO5b;heHB1:sFczq;hjRo6e:F62sG;hsLsYc:Vl118;iFQyKf:QIhFr,vfuNJf;imqimf:jKGL2e;io8t5d:sgY6Zb;jY0zg:Q6tNgc;k2Qxcb:XY51pe;kCQyJ:ueyPK;kMFpHd:OTA3Ae;kbAm9d:MkHyGd;lkq0A:JyBE3e;nAFL3:NTMZac,s39S4;oGtAuc:sOXFj;oSUNyd:fTfGO,fTfGO;oUlnpc:RagDlc;okUaUd:wItadb;p2tIDb:tp1Cx;pKJiXd:VCenhc;pNsl2d:j9Yuyc;pXdRYb:JKoKVe;pj82le:mg5CW;qGV2uc:HHi04c;qZx2Fc:j0xrE;qaS3gd:yiLg6e;qavrXe:zQzcXe;qddgKe:d7YSfd,x4FYXe;rQSrae:C6D5Fc;sP4Vbe:VwDzFe;sTsDMc:kHVSUb;tH4IIe:Ymry6;tosKvd:ZCqP3;trZL0b:qY8PFe;uY49fb:COQbmf;uknmt:GkPrzb;uuQkY:u2V3ud;vGrMZ:lPJJ0c;vfVwPd:lcrkwe;w3bZCb:ZPGaIb;w4rSdf:XKiZ9;w9w86d:dt4g2b;wQlYve:aLUfP;wR5FRb:TtcOte;wV5Pjc:L8KGxe;whEZac:F4AmNb;xBbsrc:NEW1Qc;xbe2wc:uRMPBc;yGxLoc:FmAr0c;yxTchf:KUM7Z;z97YGf:oug9te;zOsCQe:Ko78Df;zaIgPb:Qtpxbd/m=attn,cdos,gwc,hsm,jsa,mb4ZUb,d,csi,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl, line 455: Script terminated by timeout at:
+b@https://www.google.com/xjs/_/js/k=xjs.s.en_US.w2Fs9gTPVGM.O/am=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAhASCAAAAKAYAgAEAAAAAAABDAAAMASAAUwEqBBCQgACAIYCCAH7-EwAAAAAIAAAAARMAAADABQCEABAEAAACAAAAFAAAAAAAAAAAAADgAAH0AwAAAAAAAAAAAEDABMEPAAQAACH4QAgAAAEAAADkAXgeMByk9gAAAAAAAAAAAAAAApAgmAPSHxAABAAAAAAAAAAAAABAKp24PAQASA/d=1/ed=1/dg=2/rs=ACT90oGOQtYkHUEt2_qhGSlF3KxBpR-hQw/ee=ALeJib:B8gLwd;AfeaP:TkrAjf;Afksuc:wMx0R;BMxAGc:E5bFse;BgS6mb:fidj5d;BjwMce:cXX2Wb;CxXAWb:YyRLvc;DM55c:imLrKe;DULqB:RKfG5c;Dkk6ge:wJqrrd;DpcR3d:zL72xf;EABSZ:MXZt9d;ESrPQc:mNTJvc;EVNhjf:pw70Gc;EmZ2Bf:zr1jrb;EnlcNd:WeHg4;Erl4fe:FloWmf,FloWmf;F9mqte:UoRcbe;Fmv9Nc:O1Tzwc;G0KhTb:LIaoZ;G6wU6e:hezEbd;GleZL:J1A7Od;HMDDWe:G8QUdb;HqeXPd:cmbnH;IBADCc:RYquRb;IoGlCf:b5lhvb;IsdWVc:qzxzOb;JXS8fb:Qj0suc;JbMT3:M25sS;JsbNhc:Xd8iUd;KOxcK:OZqGte;KQzWid:ZMKkN;KcokUb:KiuZBf;KeeMUb:HiPxjc;KpRAue:Tia57b;LBgRLc:XVMNvd;LEikZe:byfTOb,lsjVmc;LsNahb:ucGLNb;Me32dd:MEeYgc;NPKaK:PVlQOd;NSEoX:lazG7b;Np8Qkd:Dpx6qc;Nyt6ic:jn2sGd;OgagBe:cNTe0;Oj465e:KG2eXe,KG2eXe;OohIYe:mpEAQb;Pjplud:EEDORb,PoEs9b;PqHfGe:im2cZe;Q1Ow7b:x5CSu;Q6C5kf:pfdZCe;QGR0gd:Mlhmy;R2kc8b:ALJqWb;R4IIIb:QWfeKf;R9Ulx:CR7Ufe;RDNBlf:zPRCJb;SLtqO:Kh1xYe;SMDL4c:fTfGO,fTfGO;SNUn3:ZwDk9d,x8cHvb;ShpF6e:N0pvGc;TxfV6d:YORN0b;U96pRd:FsR04;UDrY1c:eps46d;UVmjEd:EesRsb;UyG7Kb:wQd0G;V2HTTe:RolTY;VGRfx:VFqbr;VN6jIc:ddQyuf;VOcgDe:YquhTb;VsAqSb:PGf2Re;VxQ32b:k0XsBb;WCEKNd:I46Hvd;WDGyFe:jcVOxd;Wfmdue:g3MJlb;XUezZ:sa7lqb;YV5bee:IvPZ6d;YkQtAf:rx8ur;ZMvdv:PHFPjb;ZWEUA:afR4Cf;a56pNe:JEfCwb;aAJE9c:WHW6Ef;aZ61od:arTwJ;bDXwRe:UsyOtc;bFZ6gf:RsDQqe;bcPXSc:gSZLJb;cEt90b:ws9Tlc;cFTWae:gT8qnd;coJ8e:KvoW8;dIoSBb:ZgGg9b;dLlj2:Qqt3Gf;daB6be:lMxGPd;dtl0hd:lLQWFe;eBAeSb:Ck63tb;eBZ5Nd:VruDBd;eHDfl:ofjVkb;eO3lse:nFClrf;fWLTFc:TVBJbf;g8nkx:U4MzKc;gaub4:TN6bMe;gtVSi:ekUOYd;h3MYod:cEt90b;hK67qb:QWEO5b;heHB1:sFczq;hjRo6e:F62sG;hsLsYc:Vl118;iFQyKf:QIhFr,vfuNJf;imqimf:jKGL2e;io8t5d:sgY6Zb;jY0zg:Q6tNgc;k2Qxcb:XY51pe;kCQyJ:ueyPK;kMFpHd:OTA3Ae;kbAm9d:MkHyGd;lkq0A:JyBE3e;nAFL3:NTMZac,s39S4;oGtAuc:sOXFj;oSUNyd:fTfGO,fTfGO;oUlnpc:RagDlc;okUaUd:wItadb;p2tIDb:tp1Cx;pKJiXd:VCenhc;pNsl2d:j9Yuyc;pXdRYb:JKoKVe;pj82le:mg5CW;qGV2uc:HHi04c;qZx2Fc:j0xrE;qaS3gd:yiLg6e;qavrXe:zQzcXe;qddgKe:d7YSfd,x4FYXe;rQSrae:C6D5Fc;sP4Vbe:VwDzFe;sTsDMc:kHVSUb;tH4IIe:Ymry6;tosKvd:ZCqP3;trZL0b:qY8PFe;uY49fb:COQbmf;uknmt:GkPrzb;uuQkY:u2V3ud;vGrMZ:lPJJ0c;vfVwPd:lcrkwe;w3bZCb:ZPGaIb;w4rSdf:XKiZ9;w9w86d:dt4g2b;wQlYve:aLUfP;wR5FRb:TtcOte;wV5Pjc:L8KGxe;whEZac:F4AmNb;xBbsrc:NEW1Qc;xbe2wc:uRMPBc;yGxLoc:FmAr0c;yxTchf:KUM7Z;z97YGf:oug9te;zOsCQe:Ko78Df;zaIgPb:Qtpxbd/m=attn,cdos,gwc,hsm,jsa,mb4ZUb,d,csi,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl:455:40
+
+JavaScript warning: https://www.youtube.com/s/player/652ba3a2/www-embed-player.vflset/www-embed-player.js, line 1858: Script terminated by timeout at:
+Zw@https://www.youtube.com/s/player/652ba3a2/www-embed-player.vflset/www-embed-player.js:1858:198
+ix@https://www.youtube.com/s/player/652ba3a2/www-embed-player.vflset/www-embed-player.js:1876:29
+m.R@https://www.youtube.com/s/player/652ba3a2/www-embed-player.vflset/www-embed-player.js:1878:18
+F.prototype.dispose@https://www.youtube.com/s/player/652ba3a2/www-embed-player.vflset/www-embed-player.js:245:73
+Zw/b.destroy@https://www.youtube.com/s/player/652ba3a2/www-embed-player.vflset/www-embed-player.js:1860:24
+Ax@https://www.youtube.com/s/player/652ba3a2/www-embed-player.vflset/www-embed-player.js:1893:296
+@https://www.youtube.com/s/player/652ba3a2/www-embed-player.vflset/www-embed-player.js:1902:137
+Sk/<@https://www.youtube.com/s/player/652ba3a2/www-embed-player.vflset/www-embed-player.js:885:63
+
+2024-04-27 14:35:05.964 plugin-container[44734:1808980] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-27 14:35:05.964 plugin-container[44734:1808980] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-27 14:35:05.973 plugin-container[44734:1808980] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-27 14:35:05.973 plugin-container[44734:1808980] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2024-04-27 14:35:05.974 plugin-container[44734:1809043] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2024-04-27 14:35:05.974 plugin-container[44734:1809043] nil host used in call to allowsAnyHTTPSCertificateForHost:
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 0: Successfully compiled asm.js code (total compilation time 1ms)
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 32: WebGL context was lost.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 32: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 32: WebGL context was lost.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 0: Successfully compiled asm.js code (total compilation time 1ms)
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 32: WebGL context was lost.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 32: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 32: WebGL context was lost.
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://account.proton.me."
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 0: Successfully compiled asm.js code (total compilation time 1ms)
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 32: WebGL context was lost.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 32: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 32: WebGL context was lost.
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 0: Successfully compiled asm.js code (total compilation time 1ms)
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 32: WebGL context was lost.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 32: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 32: WebGL context was lost.
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://account.proton.me."
+JavaScript error: https://mail.proton.me/assets/index.86b044c0.js?v=5.0.38.7, line 7: Error: Cross-storage unsupported
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 0: Successfully compiled asm.js code (total compilation time 1ms)
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 32: WebGL context was lost.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 32: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=unauth, line 32: WebGL context was lost.
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 0: Successfully compiled asm.js code (total compilation time 1ms)
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 32: WebGL context was lost.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 32: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://account-api.proton.me/challenge/v4/html?Type=0&Name=login, line 32: WebGL context was lost.
+JavaScript error: resource://gre/modules/LoginManagerChild.sys.mjs, line 118: NS_NOINTERFACE: Component returned failure code: 0x80004002 (NS_NOINTERFACE) [nsIWebProgress.DOMWindow]
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+JavaScript error: https://mail.proton.me/assets/index.3dfc33db.js?v=5.0.39.6, line 7: Error: Cross-storage unsupported
+console.error: "Problem getting stored prefs for TopSites"
+JavaScript error: , line 0: uncaught exception: null
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year, line 46: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://static-redesign.cnbcfm.com/dist/main-fd02b0a18a71849960d3.js, line 16: NS_ERROR_FILE_NOT_FOUND
+JavaScript warning: https://z.moatads.com/nbcuyieldheader7581548001/moatheader.js, line 313: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://ak.sail-horizon.com/spm/spm.v1.min.js, line 2: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript error: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 2 > injectedScript, line 50: NS_ERROR_FILE_NOT_FOUND: 
+JavaScript warning: https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 324 > injectedScript, line 2: Script terminated by timeout at:
+nrWrapper@https://www.cnbc.com/2023/11/16/f1-spending-cap-made-racing-teams-more-investable.html#:~:text=The%20budget%20cap%20%E2%80%94%20set%20at,that%20in%20a%20given%20year line 324 > injectedScript:2:19122
+
+JavaScript warning: https://static-redesign.cnbcfm.com/dist/main-fd02b0a18a71849960d3.js, line 2: Script terminated by timeout at:
+64933/c/<@https://static-redesign.cnbcfm.com/dist/main-fd02b0a18a71849960d3.js:2:35035
+
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-12C4XGRHJ7, line 193: Script terminated by timeout at:
+z@https://www.googletagmanager.com/gtag/js?id=G-12C4XGRHJ7:193:1330
+aA@https://www.googletagmanager.com/gtag/js?id=G-12C4XGRHJ7:540:134
+bA/<@https://www.googletagmanager.com/gtag/js?id=G-12C4XGRHJ7:540:111
+
+1714235479282	Marionette	INFO	Stopped listening on port 62763
+console.error: (new AbortError("A request was aborted, for example through a call to IDBTransaction.abort.", (void 0)))
+JavaScript error: , line 0: AbortError: A request was aborted, for example through a call to IDBTransaction.abort.
+JavaScript error: , line 0: uncaught exception: null
+JavaScript error: , line 0: uncaught exception: null
