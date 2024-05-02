@@ -1,5 +1,6 @@
 from pandas import read_excel, set_option, read_csv
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import numpy as np
 from numpy import unique, array
 set_option('display.max_columns', None)
@@ -19,6 +20,7 @@ def team_annual_wins_time_series():
             y_plot.append(new_df['annual_wins'].to_numpy())
             list_label.append(new_df['name'].to_numpy())
 
+    fig, ax = plt.subplots(1,1)
     plt.figure(figsize=(15,10))
     x = x_plot[0]
     y = y_plot[0]
@@ -36,11 +38,16 @@ def team_annual_wins_time_series():
     y = y_plot[3]
     label = list_label[3]
     plt.plot(x, y, label=label[0])
+    plt.gca().xaxis.set_major_locator(ticker.MultipleLocator(1))
     plt.legend(loc='upper left')
     plt.xlabel('Year')
     plt.ylabel('Wins')
     plt.title('Team Wins Over Time')
+    # plt.savefig('screenshots/team_wins_over_time.png')
     plt.show()
+    plt.close()
+
+# team_annual_wins_time_series()
 
 def top_10_drivers_time_series():
     df = read_excel('data/processed/top_10_drivers_time_series.xlsx')
@@ -104,6 +111,8 @@ def top_10_drivers_time_series():
     plt.ylabel('Wins')
     plt.title('Team Wins Over Time')
     plt.show()
+
+# top_10_drivers_time_series()
 
 def drivers_teams_annual_wins_comparison_time_series():
     df = read_excel('data/processed/driver_and_team_annual_wins_time_series.xlsx')
@@ -174,6 +183,7 @@ def drivers_teams_annual_wins_comparison_time_series():
         final_list.append(res)
     # print(final_list[0][0]['hamilton']['x'])
     # print(final_list[0][0]['hamilton']['y'])
+    
 
     plt.figure(figsize=(15,10))
     x = final_list[0][0]['hamilton']['team_year']
@@ -194,11 +204,16 @@ def drivers_teams_annual_wins_comparison_time_series():
     x = array([2013])
     y = array([1])
     plt.scatter(x,y,color="black", s=100)
+    plt.gca().xaxis.set_major_locator(ticker.MultipleLocator(1))
+    plt.gca().yaxis.set_major_locator(ticker.MultipleLocator(1))
     plt.legend()
     plt.xlabel('Year')
     plt.ylabel('Wins')
     plt.title('Driver\'s Win Contribution')
+    plt.savefig('screenshots/drivers_win_contribution.png')
     plt.show()
+
+# drivers_teams_annual_wins_comparison_time_series()
 
 def stacked_bar_chart_budget_spend():
     df = read_csv('data/raw/budget_spend.csv')

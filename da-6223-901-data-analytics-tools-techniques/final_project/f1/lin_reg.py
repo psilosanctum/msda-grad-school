@@ -180,7 +180,7 @@ def regression_avg_lap_time_budget_spend():
 
 def drivers_wins_budget_spend():
     df = read_excel('data/processed/drivers_wins_budget_spend_regression.xlsx')
-    const_df = read_csv('data/processed/constructors.csv')
+    const_df = read_csv('data/raw/constructors.csv')
     merged_df = merge(df, const_df, on=['constructorId'])
     # print(merged_df)
     y = merged_df['annual_wins'].astype(float)
@@ -260,12 +260,12 @@ def drivers_wins_budget_spend():
     plt.gca().text(0.05, 0.95, text, transform=plt.gca().transAxes, fontsize=14, verticalalignment='top')
     plt.xlabel('Team\'s Annual Spend (millions)')
     plt.ylabel('Wins')
-    plt.title('Wins vs. Annual Spend')
-    # plt.savefig('driver_wins_budget_spend_regression.png')
-    # plt.show()
+    plt.title('Driver Wins vs. Annual Spend')
+    plt.savefig('driver_wins_budget_spend_regression.png')
+    plt.show()
     # plt.close()
 
 # regression_wins_budget_spend()
 # regression_avg_lap_time_budget_spend()
-# drivers_wins_budget_spend()
+drivers_wins_budget_spend()
 
