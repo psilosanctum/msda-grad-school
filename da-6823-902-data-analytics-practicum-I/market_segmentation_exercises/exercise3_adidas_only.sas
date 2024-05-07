@@ -219,7 +219,7 @@ MSA
 SCREE
 SCORE
 PRINT
-NFACTORS=2
+NFACTORS=10
 OUT=myscores;
 VAR purchase_online_safe 
 buy_online 

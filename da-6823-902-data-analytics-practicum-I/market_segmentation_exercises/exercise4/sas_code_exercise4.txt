@@ -94,6 +94,17 @@ dress_to_please_myself_neit 3512
 dress_to_please_myself_dgli 3539
 dress_to_please_myself_dglo 3566
 
+nike_brand 42621
+new_balance_brand 42620
+gender_male 2382
+gender_female 2384
+race_white 2420
+race_black 2421
+race_asian 2422
+race_other 2423
+brand_amazon 44789
+brand_instagram 8902
+brand_espn 9031
 adidas_brand 42607;
 RUN;
 /* the above reads in the raw data from the data file -  now create five point scale variables */
@@ -205,8 +216,33 @@ IF dress_to_please_myself_aglo = 1 THEN dress_to_please_myself = 5;
 IF adidas_brand = .  THEN adidas = 0;
 IF adidas_brand = 1 THEN adidas = 1;
 
-FORMAT clothes_last_long_time buy_clothes_dont_need attractive_to_others disc_clothes_good dress_to_please_myself purchase_online_safe buy_online use_devices_for_deal hear_products_email internet_chnge_shop environ_friendly recycle_prods environ_good_business environ_personal_ob comp_help_cons_env myscale.
-	   adidas yesno. ;
+IF nike_brand = .  THEN nike = 0;
+IF nike_brand = 1 THEN nike = 1;
+IF new_balance_brand = .  THEN new_balance = 0;
+IF new_balance_brand = 1 THEN new_balance = 1;
+
+IF gender_female = .  THEN female = 0;
+IF gender_female = 1 THEN female = 1;
+IF gender_male = .  THEN male = 0;
+IF gender_male = 1 THEN male = 1;
+
+IF race_white = .  THEN white = 0;
+IF race_white = 1 THEN white = 1;
+IF race_black = .  THEN black = 0;
+IF race_black = 1 THEN black = 1;
+IF race_asian = .  THEN asian = 0;
+IF race_asian = 1 THEN asian = 1;
+IF race_other = .  THEN other = 0;
+IF race_other = 1 THEN other = 1;
+
+IF brand_amazon = .  THEN amazon = 0;
+IF brand_amazon = 1 THEN amazon = 1;
+IF brand_instagram = .  THEN instagram = 0;
+IF brand_instagram = 1 THEN instagram = 1;
+IF brand_espn = .  THEN espn = 0;
+IF brand_espn = 1 THEN espn = 1;
+
+FORMAT clothes_last_long_time buy_clothes_dont_need attractive_to_others disc_clothes_good dress_to_please_myself purchase_online_safe buy_online use_devices_for_deal hear_products_email internet_chnge_shop environ_friendly recycle_prods environ_good_business environ_personal_ob comp_help_cons_env myscale. adidas nike new_balance female male white black asian other amazon instagram espn yesno. ;
 
 RUN;
 
