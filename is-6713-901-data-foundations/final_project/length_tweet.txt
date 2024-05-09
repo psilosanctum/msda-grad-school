@@ -1,0 +1,14 @@
+Validation F1: 0.6423
+Micro Precision: 0.6460
+Micro Recall: 0.6460
+Micro F1: 0.6460
+Macro Precision: 0.6523
+Macro Recall: 0.6241
+Macro F1: 0.6174 
+
+Micro Precision: 0.6716
+Micro Recall: 0.6716
+Micro F1: 0.6716
+Macro Precision: 0.6667
+Macro Recall: 0.6407
+Macro F1: 0.6407

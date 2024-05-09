@@ -1,0 +1,14 @@
+Micro Precision: 0.9130
+Micro Recall: 0.9130
+Micro F1: 0.9130
+Macro Precision: 0.7922
+Macro Recall: 0.5632
+Macro F1: 0.5881
+Micro Precision: 0.8955
+Micro Recall: 0.8955
+Micro F1: 0.8955
+Macro Precision: 0.7515
+Macro Recall: 0.5626
+Macro F1: 0.5831
+Best Score: 0.9051356589147286
+Best Params: {'clf__C': 1.0, 'skb__k': 'all', 'vec__ngram_range': (1, 2)}

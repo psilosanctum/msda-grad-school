@@ -1,0 +1,19 @@
+{'There': 29, 'computer': 71, 'used': 235, 'The': 28, 'use': 234, 'power': 183, 'money': 161, 'amp': 41, 'For': 12, 'make': 153, 'Also': 4, 'Google': 13, 'sure': 219, 'don': 87, 'live': 142, 'If': 14, 'stop': 214, 'just': 131, 'll': 143, 'My': 20, 'phone': 177, 'number': 167, 'Just': 19, 'try': 231, 'time': 228, 'got': 105, 'away': 47, 'And': 5, 'people': 175, 'right': 193, 'Facebook': 10, 'https': 120, 'www': 246, 'google': 104, 'com': 64, 'aren': 46, 'pretty': 184, 'thing': 224, 'way': 239, 'You': 36, 'But': 9, 'days': 78, 'paying': 174, 'probably': 185, 'youâ': 249, 'business': 57, 'day': 77, 'Iâ': 18, 'person': 176, 'actually': 39, 'need': 163, 'link': 138, 'org': 170, 'case': 60, 'times': 229, 'things': 225, 'Yeah': 35, 'itâ': 128, 'went': 242, 'maybe': 156, 'Fiber': 11, 'hours': 117, 'type': 233, 'San': 24, 'Antonio': 6, 'think': 226, 'gt': 110, 'One': 22, 'best': 51, 've': 237, 'seen': 205, 'needs': 164, 'home': 116, 'It': 16, 'didn': 81, 'company': 69, 'shit': 208, 'gov': 106, 'little': 141, 'local': 144, 'That': 27, 'better': 52, 'problem': 186, 'come': 65, 'place': 178, 'good': 103, 'want': 238, 'education': 91, 'having': 112, 'like': 136, 'talking': 220, 'care': 59, 'years': 248, 'trying': 232, 'say': 200, 'big': 53, 'far': 96, 'work': 243, 'At': 7, 'really': 190, 'We': 32, 'year': 247, 'covid': 75, 'free': 100, 'hard': 111, 'bad': 48, 'lot': 151, 'pay': 173, '20': 1, 'wrong': 245, 'left': 133, 'media': 158, 'social': 210, 'tech': 221, 'point': 180, 'companies': 68, 'making': 154, 'long': 147, 'fast': 97, 'does': 84, 'know': 132, 'This': 31, 'going': 102, 'past': 172, 'school': 202, 'isn': 125, 'jobs': 130, 'tell': 223, 'food': 99, 'security': 204, 'government': 107, 'doing': 86, 'Itâ': 17, 'new': 165, 'page': 171, 'website': 240, 'maps': 155, '10': 0, 'source': 211, 'ago': 40, 'Austin': 8, 'internet': 124, 'end': 92, 'great': 108, 'technology': 222, 'facebook': 95, 'definitely': 79, 'experience': 94, 'look': 148, 'life': 135, 'run': 195, 'car': 58, 'So': 25, 'high': 115, 'start': 212, 'open': 169, 'They': 30, 'Texas': 26, 'Not': 21, 'state': 213, 'based': 49, 'apps': 43, 'getting': 101, 'looking': 149, 'help': 114, 'week': 241, 'love': 152, 'area': 44, 'places': 179, 'SA': 23, 'store': 215, 'location': 145, 'believe': 50, 'In': 15, 'areas': 45, 'issue': 126, 'did': 80, 'using': 236, 'check': 61, 'able': 38, 'job': 129, 'took': 230, 'said': 197, 'city': 63, 'old': 168, 'stuff': 216, 'http': 119, 'information': 123, 'support': 218, 'working': 244, 'app': 42, 'search': 203, 'idea': 122, 'house': 118, 'couple': 74, 'doesn': 85, 'donâ': 88, 'didnâ': 82, 'iPhone': 121, 'month': 162, 'mean': 157, 'events': 93, 'heard': 113, 'fiber': 98, 'news': 166, 'service': 206, 'data': 76, 'san': 198, 'issues': 127, 'set': 207, 'different': 83, 'sanantonio': 199, 'list': 139, 'Your': 37, 'comment': 66, 'consider': 72, 'contact': 73, 'message': 159, 'removal': 192, 'bot': 55, 'subreddit': 217, 'compose': 70, 'questions': 188, 'public': 187, 'looks': 150, 'quite': 189, 'small': 209, 'bit': 54, 'line': 137, 'When': 34, 'build': 56, 'easy': 90, 'room': 194, 'post': 182, 'possible': 181, 'let': 134, 'mind': 160, 'lol': 146, 'AT': 3, 'saying': 201, 'cities': 62, 'What': 33, 'literally': 140, 'group': 109, 'reddit': 191, 'comments': 67, 'running': 196, 'thought': 227, '30': 2, 'downtown': 89}
+Validation F1: 0.6891
+Micro Precision: 0.6770
+Micro Recall: 0.6770
+Micro F1: 0.6770
+Macro Precision: 0.6735
+Macro Recall: 0.6681
+Macro F1: 0.6690 
+
+Test_Predictions
+Y    121
+N     80
+Name: count, dtype: int64
+Micro Precision: 0.7214
+Micro Recall: 0.7214
+Micro F1: 0.7214
+Macro Precision: 0.7135
+Macro Recall: 0.7103
+Macro F1: 0.7116
