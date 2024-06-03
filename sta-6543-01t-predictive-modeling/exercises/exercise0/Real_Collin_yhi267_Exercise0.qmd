@@ -1,0 +1,118 @@
+---
+title: "Exercise 0"
+author: "Collin Real (yhi267)"
+format: html
+output: pdf_document
+---
+
+## Import package, access the studentdata from package, and show part of the data.
+```{r}
+library(LearnBayes)
+data(studentdata)
+attach(studentdata)
+head(studentdata)
+``` 
+### 1a) Construct a histogram of this variable using the hist command in R. 
+```{r}
+hist(studentdata$Dvds, 
+     main="DVDs Owned by Students - Histogram", 
+     xlab="Total DVDs", 
+     ylab="Frequency", 
+     col="blue", 
+     border="black")
+```
+### 1b) Summarize this variable using the summary command in R. 
+```{r}
+summary(studentdata$Dvds)
+```
+### 1c) Use the table command in R to construct a frequency table of the individual values of Dvds that were observed. If one constructs a barplot of these tabled values using the command `barplot(table(Dvds),col='red')` one will see that particular response values are very popular. Is there any explanation for these popular values for the number of DVDs owned? 
+```{r}
+table(studentdata$Dvds)
+```
+```{r}
+barplot(table(studentdata$Dvds), 
+        main = 'Dvds Owned By Students - Barplot', 
+        xlab ='DVDs Count', 
+        ylab = 'Student Count', 
+        col = 'blue', 
+        border = 'black')
+```
+**1c) Explanation:** There are significant spikes in student count at intervals of 5 & 10, indicating that many students in the survey might not have inputted their exact DVD counts, but rather an estimate. 
+
+### Question 2a) Construct parallel boxplots of the heights using the Gender variable.
+```{r}
+boxplot(Height ~ Gender, 
+        data = studentdata, 
+        main = "Heights by Gender - Boxplot", 
+        xlab = "Gender", 
+        ylab = "Height (inches)", 
+        col = c("blue", "green"))
+```
+
+### Question 2b) If one assigns the boxplot output to a variable `output=boxplot(Height~Gender)` then output is a list that contains statistics used in constructing the boxplots. Print output to see the statistics that are stored. 
+```{r}
+output = boxplot(Height ~ Gender)
+print(output)
+```
+### Question 2c) On average, how much taller are male students than female students?
+```{r}
+avg_male_height = mean(Height[Gender == "male"], 
+                       na.rm = TRUE)
+avg_female_height = mean(Height[Gender == "female"], 
+                         na.rm = TRUE)
+height_diff = avg_male_height - avg_female_height
+
+print(paste0("Male height: ", 
+             round(avg_male_height, 
+                   digits = 2), 
+             " inches."))
+print(paste0("Female height: ", 
+             round(avg_female_height, 
+                   digits = 2), 
+             " inches."))
+print(paste0("On average, male students are ", 
+             round(height_diff, 
+                   digits = 2), 
+             " inches taller than females."))
+```
+
+### Question 3a) Construct a scatterplot of ToSleep and WakeUp. 
+```{r}
+plot(ToSleep, WakeUp, 
+     xlab = "Sleep Time", 
+     ylab = "WakeUp Time", 
+     main = "ToSleep and WakeUp - Scatterplot",
+     pch = 19, 
+     col = "blue")
+```
+### Question 3b) Find a least-squares fit to these data using the lm command and then place the least-squares fit on the scatterplot using the abline command.
+```{r}
+# Plot ToSleep and WakeUp on a scatterplot
+plot(ToSleep, WakeUp, 
+     xlab = "Sleep Time", 
+     ylab = "WakeUp Time", 
+     main = "ToSleep and WakeUp - Scatterplot",
+     pch = 19,
+     col = "blue")
+
+# Find a least-squares fit
+fit = lm(WakeUp ~ ToSleep)
+
+# Display the summary
+summary(fit)
+
+# Add the least-squares fit line to the scatterplot
+abline(fit, col = "black", lwd = 2)
+```
+
+
+
+
+
+
+
+
+
+
+
+
