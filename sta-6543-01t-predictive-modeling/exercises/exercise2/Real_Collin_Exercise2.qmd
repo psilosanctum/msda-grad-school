@@ -1,0 +1,174 @@
+---
+title: "Exercise 2"
+author: "Collin Real"
+format: pdf
+execute:
+  warning: false
+  error: false
+---
+
+### Import Libraries/Data
+```{r}
+library(mlbench) 
+library(dplyr)
+library(e1071)
+library(kernlab)
+library(AppliedPredictiveModeling)
+library(caret)
+library(ggplot2)
+library(tidyverse)
+library(corrplot)
+data(Glass)
+```
+
+### Data Structure
+```{r}
+str(Glass)
+```
+{{< pagebreak >}}
+### Descriptive Statistics
+```{r}
+summary(Glass)
+```
+{{< pagebreak >}}
+### Variable Skewness - Calculated
+```{r}
+# Skewness between -1 amd 1 is excellent, between -2 and 2 is acceptable, values beyond -2 and 2 considered non-normal
+RI_ = Glass$RI
+Na_ = Glass$Na
+Mg_ = Glass$Mg
+Al_ = Glass$Al
+Si_ = Glass$Si
+K_ = Glass$K
+Ca_ = Glass$Ca
+Ba_ = Glass$Ba
+Fe_ = Glass$Fe
+
+paste0('RI: ', skewness(RI_))
+paste0('Na: ', skewness(Na_))
+paste0('Mg: ', skewness(Mg_))
+paste0('Al: ', skewness(Al_))
+paste0('Si: ', skewness(Si_))
+paste0('K: ', skewness(K_))
+paste0('Ca: ', skewness(Ca_))
+paste0('Ba: ', skewness(Ba_))
+paste0('Fe: ', skewness(Fe_))
+```
+{{< pagebreak >}}
+### Box Plots
+```{r}
+Glass %>%
+  select_if(is.numeric) %>%
+  gather() %>%
+  ggplot(aes(value)) +
+  geom_boxplot(color='black', fill='steelblue') +
+  facet_wrap(~key, scales = 'free') +
+  ggtitle(("Numerical Predictors - Box Plots")) + 
+  theme_minimal()
+```
+{{< pagebreak >}}
+### Histogram Plots 
+```{r}
+Glass %>%
+  select_if(is.numeric) %>%
+  gather() %>%
+  ggplot(aes(value)) +
+  geom_histogram(color='black', fill='steelblue') +
+  facet_wrap(~key, scales = 'free') +
+  ggtitle(("Numerical Predictors - Histograms")) + 
+  theme_minimal()
+```
+{{< pagebreak >}}
+### Heatmap Correlation
+```{r}
+Glass %>%
+  select_if(is.numeric) %>%
+  cor() %>%
+  corrplot(method = "square", title = 'Correlation Heatmap of Numerical Predictors')
+```
+{{< pagebreak >}}
+### Scatterplot Correlation 
+```{r}
+plot(~Na+Mg+Al+Si+K+Ca+Ba+Fe, 
+     data=Glass, 
+     main="Investigate Potential Variable Correlation", 
+     col='blue', 
+     bg='lightblue', 
+     pch = 21)
+```
+
+### Question A) & B)
+To explore the predictor variables, I created boxplots, histograms, scatterplots, and a heatmap to understand the distributions and relationships among the predictor variables to gain a better understanding. There are outliers in our dataset for variables Ca, Fe, K, and Na. Variables Ba, Ca, Fe, and K are skewed to the right, indicating that we might improve our classification model by applying a transformation.
+{{< pagebreak >}}
+
+### Question C)
+Since we identified skewness in variables Ba, Ca, Fe, and K, we applied a BoxCox transformation to each variable. After reviewing the distribution plots of our transformed variables, we concluded that the transformation was only slightly effective for the Ca variable. See the below outputs comparing the histogram plots between the original and transformed data for each variable.
+
+### Make transformations on 3 skewed variables: K, Ca, and Ba
+```{r}
+transform_Ca <- BoxCoxTrans(Glass$Ca)
+log_Ca <- predict(transform_Ca, Glass$Ca)
+#hist(log_Ca)
+#log_Ca
+
+transform_Ba <- BoxCoxTrans(Glass$Ba)
+log_Ba <- predict(transform_Ba, Glass$Ba)
+#hist(log_Ba)
+#log_Ba
+
+transform_Fe <- BoxCoxTrans(Glass$Fe)
+log_Fe <- predict(transform_Fe, Glass$Fe)
+#hist(log_Fe)
+#log_Fe
+
+transform_K <- BoxCoxTrans(Glass$K)
+log_K <- predict(transform_K, Glass$K)
+#hist(log_K)
+#log_K
+```
+
+```{r}
+par(mfrow = c(1, 2))
+ca = hist(Glass$Ca)
+text(ca$mids,ca$counts,labels=ca$counts, adj=c(0.5, -0.5))
+hist(log_Ca)
+
+par(mfrow = c(1, 2))
+ba = hist(Glass$Ba)
+text(ba$mids,ba$counts,labels=ba$counts, adj=c(0.5, -0.5))
+hist(log_Ba)
+
+par(mfrow = c(1, 2))
+fe = hist(Glass$Fe)
+text(fe$mids,fe$counts,labels=fe$counts, adj=c(0.5, -0.5))
+hist(log_Fe)
+
+par(mfrow = c(1, 2))
+k = hist(Glass$K)
+text(k$mids,k$counts,labels=k$counts, adj=c(0.5, -0.5))
+hist(log_K)
+```
+{{< pagebreak >}}
+### Question 4)
+
+```{r}
+set.seed(231) 
+sigDist <- sigest(Type~ ., data = Glass, frac = 1)
+sigDist 
+```
+
+```{r}
+svmTuneGrid <- data.frame(sigma = as.vector(sigDist)[1], C = 2^(-2:10)) 
+svmTuneGrid 
+```
+
+```{r}
+set.seed(1056) 
+#It may take a while to run
+svmFit <- train(Type~ ., data = Glass, method = "svmRadial",
+preProc = c("center", "scale"),tuneGrid = svmTuneGrid,
+trControl = trainControl(method = "repeatedcv", repeats = 5))
+
+plot(svmFit, scales = list(x = list(log = 2)))
+```
+

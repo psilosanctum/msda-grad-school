@@ -128,3 +128,4 @@ cars2011$mars <- predict(marsFit, cars2011)
 postResample(pred = cars2011$lm1,  obs = cars2011$FE)
 postResample(pred = cars2011$lm2,  obs = cars2011$FE)
 postResample(pred = cars2011$mars, obs = cars2011$FE)
+
