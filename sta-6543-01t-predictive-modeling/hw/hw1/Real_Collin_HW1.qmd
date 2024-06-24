@@ -1,0 +1,235 @@
+---
+title: 'HW1'
+author: 'Collin Real (yhi267)'
+format:
+    html:
+        theme: cyborg
+execute: 
+  warning: false
+  error: false
+---
+# Problem 1 - Boston housing dataset
+
+## Import package and load Boston dataset
+```{r}
+library(MASS)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(corrplot)
+library(epiDisplay)
+library(mice)
+library(caret)
+library(dlookr)
+```
+
+```{r}
+data(Boston)
+```
+
+
+## Boston dataset data dictionary
+```{r}
+ ?Boston
+```
+
+```{r}
+nrow(Boston)
+ncol(Boston)
+```
+
+
+#### 1a) How many rows are in this Boston data set? How many columns? What do the rows and columns represent?
+**Rows:** 506 <br/>
+**Columns:** 14 <br/>
+**Column descriptions:** <br/>
+&emsp; **crim** - per capita crime rate by town. <br/>
+&emsp; **zn** - proportion of residential land zoned for lots over 25,000 sq.ft. <br/>
+&emsp; **indus** - proportion of non-retail business acres per town. <br/>
+&emsp; **chas** - Charles River dummy variable (= 1 if tract bounds river; 0 otherwise). <br/>
+&emsp; **nox** - nitrogen oxides concentration (parts per 10 million). <br/>
+&emsp; **rm** - average number of rooms per dwelling. <br/>
+&emsp; **age** - proportion of owner-occupied units built prior to 1940. <br/>
+&emsp; **dis** - weighted mean of distances to five Boston employment centres. <br/>
+&emsp; **rad** - index of accessibility to radial highways. <br/>
+&emsp; **tax** - full-value property-tax rate per $10,000. <br/>
+&emsp; **ptratio** - pupil-teacher ratio by town. <br/>
+&emsp; **black** - 1000(Bk−0.63)&sup2; Bk is the proportion of blacks by town. <br/>
+&emsp; **lstat** - lower status of the population (percent). <br/>
+&emsp; **medv** - median value of owner-occupied homes in $1000s. <br/>
+
+#### 1b) Make some pairwise scatterplots of the predictors (columns) in this data set. Describe your findings. 
+```{r}
+str(Boston)
+```
+
+```{r}
+Boston$chas = as.numeric(Boston$chas)
+Boston$rad = as.numeric(Boston$rad)
+converted_dtypes = str(subset(Boston, select = c("chas", "rad")))
+```
+
+```{r}
+pairs(Boston,
+      pch = 21,
+      col = 'blue',
+      bg = 'lightblue',
+      gap = 0,
+      labels = colnames(Boston),
+      )
+```
+```{r}
+corrplot(round(cor(Boston),2),
+         diag = TRUE,
+         sig.level = 0.5,
+         method = "pie",
+         insig = "blank",
+         tl.col = "black",
+         tl.srt = 45,
+         type = "upper")
+```
+The scatter and correlation plot help illustrate correlations between two predictors. Our plots identified that predictor indus has been strong positive correlations with other predictors, such as nox, age, rad, tax, and lstat. They also identified that chas has pretty much no correlation to any of the other predictors. Other than these findings, there seems to be no other strong patterns between the relationships of two variables.
+### 1c) Are any of the predictors associated with per capita crime rate? If so, explain the relationship. 
+```{r}
+cor(Boston$crim, Boston[-1])
+```
+Predictors with a strong positive correlation with per capita crime rate are rad (index of accessibility to radial highways) and tax (property tax rate > $10,000). Moderate positive correlations can be seen for variables indus, nox, age, and lstat. Moderate negative correlations: dis, black, and medv.
+### 1d) Do any of the census tracts of Boston appear to have particularly high crime rates? Tax rates? Comment on the range of each predictor. 
+
+```{r}
+cat("Range crime rates:\n")
+range(Boston$crim)
+cat("Range tax rates:\n")
+range(Boston$tax)
+```
+
+```{r}
+high_crime_suburbs <- subset(Boston, crim > 40)
+cat("Suburbs with high crime rates:\n")
+high_crime_suburbs
+
+high_tax_suburbs <- subset(Boston, tax > 600)
+cat("Suburbs with high tax rates:\n")
+high_tax_suburbs
+```
+### 1e) How many of the census tracts in this data set bound the Charles river?
+```{r}
+charles_river_suburbs <- sum(Boston$chas == 1)
+cat("Number of suburbs bound to Charles River:", charles_river_suburbs, "\n")
+charles_river_suburbs
+```
+
+### 1f) What is the median pupil-teacher ratio among the towns in this data set? 
+```{r}
+median_ptratio <- median(Boston$ptratio)
+cat("Median pupil-teacher ratio:", median_ptratio, "\n")
+median_ptratio
+```
+
+# Problem 2 - Soybean data
+
+### Import packages and data
+```{r}
+library(mlbench)
+data(Soybean)
+```
+```{r}
+str(Soybean)
+```
+#### 2a)	Investigate the frequency distributions for the categorical predictors. Are any of the distributions degenerate in the ways discussed earlier in this chapter?
+```{r}
+for (i in 1:35) {
+  predictor <- Soybean[, i]
+  predictor_info <- tab1(predictor,
+                         main = colnames(Soybean[i]),
+                         sort.group = "decreasing",
+                         cum.percent = TRUE,
+                         )
+  print(predictor_info)
+}
+```
+Problematic distributions can be seen for variables: int.discolor, leaf.malf, leaf.mild, leaves, lodging, mycelium, mold.growth, roots, sclerotia, seed.discolor, seed.size, and shriveling. Many of these variables only have two factors that is dominated by a single factor.
+
+#### 2b) Roughly 18 % of the data are missing. Are there particular predictors that are more likely to be missing? Is the pattern of missing data related to the classes? 
+```{r}
+Soybean %>% 
+  plot_na_intersect(only_na = TRUE, typographic = TRUE, n_intersacts = 7)
+```
+34 variables have missing data. Hail, server, seed.tmt, and lodging are all missing from the 121 incomplete cases. These predictors are more likely to be missing. In 55 cases, we identified that the first 16 variables are missing from left to right, indicating a potential pattern of missing data related to classes. 
+
+```{r}
+
+missing_total <- colSums(is.na(Soybean))
+missing_total
+missing_pct <- missing_total / nrow(Soybean) * 100
+missing_pct
+sorted_missing <- sort(missing_pct, decreasing = TRUE)
+sorted_missing
+missing_preds <- names(sorted_missing)[sorted_missing > 0]
+missing_preds
+```
+
+#### 2c) Develop a strategy for handling missing data, either by eliminating predictors or imputation.
+To handle missing data, my strategy would drop variables with degenerate distributions and impute missing values using the k-nearest neighbors algorithm. The algorithm would determine what observations are normally grouped together based on complete observations in the dataset. 
+
+# Problem 3 - Oil dataset
+### Import Data
+```{r}
+data(oil)
+```
+
+### Examine data structure
+```{r}
+str(oilType)
+```
+### Oil Type data table
+```{r}
+table(oilType)
+```
+
+#### 3a) Use the sample function in base R to create a completely random sample of 60 oils. How closely do the frequencies of the random sample match the original samples? Repeat this procedure several times of understand the variation in the sampling process. 
+
+```{r}
+samp1 <- sample(oilType, 60, replace = FALSE, prob = NULL)
+table(samp1)
+```
+
+```{r}
+samp2 <- sample(oilType, 60, replace = FALSE, prob = NULL)
+table(samp2)
+```
+
+```{r}
+samp3 <- sample(oilType, 60, replace = FALSE, prob = NULL)
+table(samp3)
+```
+
+```{r}
+samp4 <- sample(oilType, 60, replace = FALSE, prob = NULL)
+table(samp4)
+```
+The sampling function produces accurate random samples, and the frequencies of these samples closely match the original, but there is some minor variation that is insignificant. 
+
+#### 3b) Use the caret package function createDataPartition to create a stratified random sample. How does this compare to completely random samples? 
+
+```{r}
+set.seed(318)
+strat_samp <- createDataPartition(oilType, p = .70, times = 20)
+strat_samp <- lapply(strat_samp, function(x, y) table(y[x]), y = oilType)
+head(strat_samp, 3)
+```
+This sampling technique allocates the equal samples to each class for every round of sampling to minimize the variance of each sample.
+
+#### 3c) With such a small samples size, what are the options for determining performance of the model? Should a test set be used? 
+Leave one out cross validation is the best option for assessing the performance of a model when the dataset is small and unbalanced. This method uses every data point as a test set once with the rest as the training set. This provides the same number of performance estimates as data points that can be averaged to get a more precise measure. This method uses a test set.
+
+#### 3d) Try different samples sizes and accuracy rates to understand the trade-off between the uncertainty in the results, the model performance, and the test set size.
+```{r}
+binom.test(20, 76)
+binom.test(45, 76)
+binom.test(15, 76)
+```
+As we increase the number of sample sizes, the accuracy of our model increases. The width of our 95% confidence interval and our p-value also increases, indicating that more samples can decrease the significance of our predictor.
+
+#### 4) Briefly discuss what is the bias-variance tradeoff in statistics and predictive modeling. 
+Bias and variance are the two main components of prediction errors in a model. Bias errors are the difference between a model's predictions and actual values. These errors arise when the model does not adequately learn the patterns of our data. The model is oversimplified and not accounting for all features, underfitting the data. Variance errors occur when the model memorizes the data rather than learn, causing the target function's estimate to substantially change with different training data. The model fails to make generalizations about data it hasn't seen, overfitting the data. The bias-variance trade-off is the attempt to balance between errors caused from bias vs. variance.
