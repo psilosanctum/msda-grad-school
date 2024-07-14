@@ -1,0 +1,120 @@
+---
+title: 'Midterm'
+author: 'Collin Real (yhi267)'
+format:
+    html:
+        theme: cyborg
+execute: 
+  warning: false
+  error: false
+---
+
+## Section I - True (T) or False (F) (20 Points)
+1. 
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+
+## Section II - Free Response Questions (25 Points)
+### Problem 1 (Total: 15 Points)
+#### Explain whether each scenario is a classification or regression problem, and indicate whether we are most interested in inference or prediction. Finally, provide n and p.
+#### 1a) We collect a set of data on the top 500 firms in the US. For each firm we record profit, number of employees, industry, and the CEO salary. We are interested in understanding which factors affect CEO salary. (5 Points)
+Since CEO salary is a continuous variable, this is a **regression** problem. The focus is on **inference** because we want to understand the relationship between CEO salary and the other variables. The number of observations (**n**) is 500 (i.e., the top 500 firms) and the number of features (**p**) is 3 (i.e., profit, number of employees, and industry).
+
+#### 1b) We are considering launching a new product and wish to know whether it will be a success or a failure. We collect data on 20 similar products that were previously launched. For each product we have recorded whether it was a success or failure, price charged for the product, marketing budget, competition price, and ten other variables. (5 Points)
+
+
+#### 1c) We are interested in predicting the % change in the USD/Euro exchange rate in relation to the weekly changes in the world stock markets. Hence we collect weekly data for all of 2012. For each week we record the % change in the USD/Euro, the % change in the US market, the % change in the British market, and the % change in the German market. (5 Points)
+
+### Problem 2 (Total: 10 Points)
+#### In this class, we discussed the bias-variance trade-off. Answer the following questions.
+#### 2a) Provide a sketch of typical (squared) bias, variance, training error, test error curves, on a single plot, as we go from less flexible statistical learning methods towards more flexible approaches. The x-axis should represent the amount of flexibility in the method, and the y-axis should represent the values for each curve. There should be four curves. Make sure to label each one.
+
+
+#### 2b) Briefly explain why each of the four curves has the shape displayed in part (a).
+
+
+## Section III - Coding Questions (55 Points)
+### Problem 3 (Total: 18 Points - 3 points each)
+#### This exercise involves the Auto data set studied in the lab. Make sure that the missing values have been removed from the data. We may start R and use these commands to load the data:
+
+```{r}
+library(ISLR)
+data('Auto')
+Auto 
+```
+
+#### 3a) Which of the predictors are quantitative, and which are qualitative?
+
+
+#### 3b) What is the range of each quantitative predictor? You can answer this using the range() function.
+
+
+#### 3c) What is the mean and standard deviation of each quantitative predictor?
+
+
+#### 3d) Now remove the 20th through 80th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?
+
+
+#### 3e) Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.
+
+
+#### 3f) Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting mpg? Justify your answer.
+
+### Problem 4 (Total: 15 Points)
+#### We will predict the number of applications received using the other variables in the College data set available in the R package ISLR, which can be accessed as follows.
+
+```{r}
+library(ISLR)
+data(College)
+#data basic information
+head(College)
+dim(College)
+# The column Apps is the response variable, and others may be treated as predictors.
+#For instance, for linear regression model in R, you may use
+lm(Apps~.,data=College)
+```
+
+#### 4a) Appropriately split the data set into a training set (80%) and a test set (20%). [3 points]
+
+
+#### 4b) Fit a support vector machine (SVM) model with the radial basis function function model using least squares on the training set. Clearly report the test error obtained. [3 points]
+
+
+#### 4c) Fit a neural network model on the training set by creating an appropriate grid for tuning parameters. Clearly report the test error obtained. [3 points]
+
+
+#### 4d) Fit a Multivariate Adaptive Regression Splines (MARS) model on the training set with tuning parameters chosen by cross-validation. Clearly report the test error obtained, along with the importance of each predictor. estimates. [3 points]
+
+
+#### 4e) Comment on the results obtained. Is there much difference among the test errors resulting from these three nonparametric approaches? [3 points]
+
+### Problem 5 (Total: 22 Points)
+#### A chemical manufacturing process for a pharmaceutical product was discussed in Sect. 1.4 of the textbook. In this problem, the objective is to understand the relationship between biological measurements of the raw materials (predictors), measurements of the manufacturing process (predictors), and the response of product yield. Biological predictors cannot be changed but can be used to assess the quality of the raw material before processing. On the other hand, manufacturing process predictors can be changed in the manufacturing process. Improving product yield by 1% will boost revenue by approximately one hundred thousand dollars per batch. We may start R and use these commands to load the data:
+
+```{r}
+library(AppliedPredictiveModeling)
+data("ChemicalManufacturingProcess")
+```
+
+#### The matrix processPredictors contains the 57 predictors (12 describing the input biological material and 45 describing the process predictors) for the 176 manufacturing runs. yield contains the percent yield for each run.
+
+#### 5a) A small percentage of cells in the predictor set contain missing values. Use an appropriate imputation function to fill in these missing values. [3 points]
+
+
+#### 5b) Split the data into a training and a test set, pre-process the data, and build at least four different models from Chapter 6. For those models with tuning parameters (e.g., ENET), what are the optimal values of the tuning parameter(s)? [8 points]
+
+
+#### 5c) Which model has the best predictive ability? Is any model significantly better or worse than the others? You need to conduct a hypothesis testing to justify your choice if necessary. [5 points]
+
+
+#### 5d) Which predictors are most important in the model you have trained? Do either the biological or process predictors dominate the list [3 points]
+
+
+#### 5e) Explore the relationships between each of the top predictors and the response. How could this information be helpful in improving yield in future runs of the manufacturing process? [3 points]
