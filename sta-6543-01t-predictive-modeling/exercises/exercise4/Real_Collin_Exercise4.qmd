@@ -1,0 +1,126 @@
+---
+title: "Exercise 4"
+author: "Collin Real (yhi267)"
+format: html
+execute: 
+  warning: false
+  error: false
+---
+
+## Import Libraries
+```{r}
+library(mlbench)
+library(caret)
+library(earth)
+library(e1071)
+library(nnet)
+```
+
+## Generate training/test datasets, visualize and pre-process data
+```{r}
+# Set seed for reproducibility
+set.seed(200)
+
+# Training Data
+training_data <- mlbench.friedman1(200, sd = 1)
+training_data$x <- data.frame(training_data$x)
+
+# Visualize
+featurePlot(training_data$x, training_data$y)
+
+# Test Data
+test_data <- mlbench.friedman1(5000, sd = 1)
+test_data$x <- data.frame(test_data$x)
+
+# Center and Scale Data
+pre_process_data <- preProcess(training_data$x, method = c("center", "scale"))
+train_transformed <- predict(pre_process_data, training_data$x)
+test_transformed <- predict(pre_process_data, test_data$x)
+```
+
+## k-Nearest Neighbors (kNN):
+```{r}
+set.seed(200)
+knn_model <- train(training_data$x,
+                  training_data$y,
+                  method = "knn", 
+                  preProc = c("center", "scale"), 
+                  tuneLength = 10)
+knn_predictions <- predict(knn_model, newdata = test_data$x)
+knn_results <- postResample(pred = knn_predictions, obs = test_data$y)
+knn_model
+```
+
+## Multivariate Adaptive Regression Splines (MARS):
+```{r}
+set.seed(200)
+mars_model <- train(training_data$x,
+                   training_data$y,
+                   method = "earth",
+                   preProc = c("center", "scale"),
+                   tuneLength = 10)
+mars_predictions <- predict(mars_model, newdata = test_data$x)
+mars_results <- postResample(pred = mars_predictions, obs = test_data$y)
+mars_model
+```
+
+## Neural Network
+```{r}
+set.seed(200)
+neural_network_model <- train(training_data$x,
+                   training_data$y,
+                   method = "nnet",
+                   preProc = c("center", "scale"),
+                   tuneLength = 10,
+                   trace = FALSE,
+                   maxit = 1000)
+neural_network_predictions <- predict(neural_network_model, newdata = test_data$x)
+neural_network_results <- postResample(pred = neural_network_predictions, obs = test_data$y)
+neural_network_model
+```
+
+```{r}
+# Check for N/A values
+sum(is.na(training_data$x))
+sum(is.na(training_data$y))
+```
+
+## Support Vector Machines (SVM)
+```{r}
+set.seed(200)
+svm_model <- train(training_data$x,
+                  training_data$y,
+                  method = "svmRadial",
+                  preProc = c("center", "scale"),
+                  tuneLength = 10)
+svm_predictions <- predict(svm_model, newdata = test_data$x)
+svm_results <- postResample(pred = svm_predictions, obs = test_data$y)
+svm_model
+```
+
+k-Nearest Neighbors (kNN) Results:
+```{r}
+knn_results
+```
+
+Multivariate Adaptive Regression Splines (MARS) Results:
+```{r}
+mars_results
+```
+
+Neural Network Results:
+```{r}
+neural_network_results
+```
+
+Support Vector Machines (SVM) Results:
+```{r}
+svm_results
+```
+
+## MARS Model - Variable Importance
+```{r}
+varImp(mars_model)
+```
+## Model Performance Comparison
+The optimal k for the k-NN model is 15. The optimal nprune for the MARS model is 9. The optimal size is 1, and the optimal decay is 0 for the neural network model. The optimal C is 16, and the optimal σ is 0.063 for the SVM-RBF model. Given the above output results, the MARS model performed best with the highest R-squared of 0.871 and the lowest RMSE of 1.790. Upon inspection of the variable importance for the MARS model, we conclude the most informative predictors to be X1, X4, X2, X5, and X3 (descending order). The X6 predictor is not informative.
