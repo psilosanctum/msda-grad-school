@@ -46,26 +46,262 @@ Since CEO salary is a continuous variable, this is a **regression** problem. The
 
 ```{r}
 library(ISLR)
+library(dplyr)
+library(rlist)
+library(mlbench) 
+library(e1071)
+library(kernlab)
+library(AppliedPredictiveModeling)
+library(caret)
+library(ggplot2)
+library(tidyverse)
+library(corrplot)
 data('Auto')
-Auto 
+str(Auto)
+```
+
+```{r}
+# Convert numeric to factor: cylinders & origin
+Auto$cylinders <- as.factor(Auto$cylinders)
+Auto$origin <- as.factor(Auto$origin)
+
+# Verify updated data types
+str(Auto)
+```
+
+```{r}
+### Check for missing values
+Auto_missing_values <- sum(
+    is.na(
+        Auto
+    )
+)
+
+print(
+    paste0(
+        "Missing values: ", 
+        Auto_missing_values
+    )
+)
 ```
 
 #### 3a) Which of the predictors are quantitative, and which are qualitative?
+```{r}
+quant_preds <- colnames(
+    select_if(
+        Auto, 
+        is.numeric
+    )
+)
+qual_preds <- colnames(
+    select_if(
+        Auto, 
+        is.factor
+    )
+)
+```
+```{r}
+cat(
+    "Quantitative predictor(s): ", 
+    paste0(
+        quant_preds
+    ), 
+    sep = "\n"
+)
+cat(
+    'Qualititative predictor(s): ', 
+    paste0(
+        qual_preds
+    ), 
+    sep = "\n"
+)
+```
 
+```{r}
+# Create key values for dictionary for pretty printing 
+quant_preds_list <- list(
+    colnames(
+        select_if(
+            Auto, 
+            is.numeric
+        )
+    )
+)
+quant_preds_keys <- c()
+colon <- ": "
+for (pred in quant_preds_list) {
+    new_pred = paste(
+        pred, 
+        colon, 
+        sep = ""
+    )
+    quant_preds_keys = append(
+        quant_preds_keys, 
+        new_pred
+    )
+}
+names(quant_preds) <- cat(quant_preds_keys)
+```
 
 #### 3b) What is the range of each quantitative predictor? You can answer this using the range() function.
-
+```{r}
+quant_preds_range <- sapply(
+    Auto[, quant_preds], 
+    range
+)
+cat(
+    'Quantitative predictor ranges:', 
+    paste0(
+        quant_preds_keys,
+        quant_preds_range[1,], 
+        " - ", 
+        quant_preds_range[2,]
+    ),
+    sep = "\n"
+)
+```
 
 #### 3c) What is the mean and standard deviation of each quantitative predictor?
-
+```{r}
+quant_preds_mean <- round(
+    sapply(
+        Auto[, quant_preds], 
+        mean
+    ),
+    2
+)
+quant_preds_sd <- round(
+    sapply(
+        Auto[, quant_preds], 
+        sd
+    ),
+    2
+)
+cat(
+    'Quantitative predictor means:', 
+    paste0(
+        quant_preds_keys, 
+        quant_preds_mean
+    ), 
+    sep = "\n"
+)
+cat(
+    'Quantitative predictor standard deviations:', 
+    paste0(
+        quant_preds_keys, 
+        quant_preds_sd
+    ), 
+    sep = "\n"
+)
+```
 
 #### 3d) Now remove the 20th through 80th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?
+```{r}
+subset_Auto <- Auto[-c(20:80), ]
+range_Auto_subset <- sapply(
+    subset_Auto[, quant_preds], 
+    range
+)
+mean_Auto_subset <- round(
+    sapply(
+    subset_Auto[, quant_preds], 
+    mean
+    ),
+    2
+)
+sd_Auto_subset <- round(
+    sapply(
+    subset_Auto[, quant_preds], 
+    sd
+    ),
+    2
+)
+```
 
+```{r}
+cat(
+    'Quantitative predictor subset ranges:', 
+    paste0(
+        quant_preds_keys,
+        range_Auto_subset[1,], 
+        " - ", 
+        range_Auto_subset[2,]
+    ),
+    sep = "\n"
+)
+cat(
+    'Quantitative predictor subset means:', 
+    paste0(
+        quant_preds_keys, 
+        mean_Auto_subset
+    ), 
+    sep = "\n"
+)
+cat(
+    'Quantitative predictor subset standard deviations:', 
+    paste0(
+        quant_preds_keys, 
+        sd_Auto_subset
+    ), 
+    sep = "\n"
+)
+```
 
 #### 3e) Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.
 
+#### Scatterplot Correlation
+```{r}
+plot(~mpg+displacement+horsepower+weight+acceleration+year,
+    data=Auto,
+    main="Investigate Potential Variable Correlation", 
+    col='blue', 
+    bg='lightblue', 
+    pch = 21)
+```
+
+#### Heatmap Correlation
+```{r}
+Auto %>%
+  select_if(is.numeric) %>%
+  cor() %>%
+  corrplot(
+    method = "number", 
+    title = 'Correlation Heatmap of Numerical Predictors',
+    type = 'upper')
+```
+
+#### Box Plots
+```{r}
+Auto %>%
+  select_if(is.numeric) %>%
+  gather() %>%
+  ggplot(aes(value)) +
+  geom_boxplot(color='black', fill='steelblue') +
+  facet_wrap(~key, scales = 'free') +
+  ggtitle(("Numerical Predictors - Box Plots")) + 
+  theme_minimal()
+```
+
+#### Histogram Plots
+```{r}
+Auto %>%
+  select_if(is.numeric) %>%
+  gather() %>%
+  ggplot(aes(value)) +
+  geom_histogram(color='black', fill='steelblue') +
+  facet_wrap(~key, scales = 'free') +
+  ggtitle(("Numerical Predictors - Histograms")) + 
+  theme_minimal()
+```
+
+**Comments on predictor relationships:** Based on our scatterplots and heatmap, mpg has a strong negative relationship with displacement, horsepower, and weight as well as a moderate positive relationship with year. Horsepower has a moderately strong negative relationship with acceleration, and a strong positive relationship with weight. Displacement has a strong positive relationship with horsepower and weight, and a moderate negative relationship with acceleration.
 
 #### 3f) Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting mpg? Justify your answer.
+The correlation coefficients for variables displacement, horsepower, and weight are -0.81, -0.78, and -0.83, respectively. Since the magnitudes of these coefficients fall between the range -0.9 and -0.7, these variables have a strong negative correlation with mpg:
+    - As engine displacement (inches) increases, the car gets less mpg.
+    - As horsepower increases, mpg decreases.
+    - As vehicle weight increases (lbs), mpg decreases.
+Addtionally, mpg has a moderate positive correlation (coeff = 0.58) with the model year of the vehicle, indicating that newer cars get better gas mileage. Considering our observations, these four variables might serve as useful predictors for building a model to predict mpg.
 
 ### Problem 4 (Total: 15 Points)
 #### We will predict the number of applications received using the other variables in the College data set available in the R package ISLR, which can be accessed as follows.
