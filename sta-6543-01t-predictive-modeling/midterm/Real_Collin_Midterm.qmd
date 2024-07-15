@@ -11,9 +11,9 @@ execute:
 
 ## Section I - True (T) or False (F) (20 Points)
 1. **False:** Principal Component Regression is unsupervised learning.
-2. **False:** Collinearity increases the standard errors associated with the coefficients, causing them to worsen.
+2. **False:** Collinearity increases the errors associated with the coefficients, causing them to worsen.
 3. **False:** R-squared of 0 means the model explains none of the variation in response Y, not -1.
-4. **False:** If the number of predictors is > the number of observations, there is no longer a unique least squares coefficient estimate.
+4. **False:** If the number of predictors is > the number of observations, unique least squares coefficient estimate is eliminated.
 5. **True**
 6. **True**
 7. **True**
@@ -39,10 +39,10 @@ Since the percentage change in the USD/Euro exchange rate is a continuous variab
 ![Statistical learning methods flexibility sketch](sketch_2a.png)
 
 #### 2b) Briefly explain why each of the four curves has the shape displayed in part (a).
-**Squared bias:** Since more complex models can fit the training data better, this curve begins high and decreases as complexity increases. High squared bias means the model is too simple and underfitting the data, not identifying the underlying patterns.
-**Variance:** Measures the difference between the model's predictions and actual values. Variance increases as the model becomes more complex due to random noise captured from the data, causing underfitting.
-**Training Error:** Complex models fit the training data extremely well leading to lower training errors. As the model becomes simpler, the training error increases because simpler models cannot capture all of the data's complexity.
-**Test Error:** The total sum of squared bias, variance, and irreducible error. The curve is U-shaped: starting high for simple models resulting from high bias, decreasing to a minimum, then increasing for models with high complexity due to higher variance.
+**Squared bias:** Since more complex models can fit the training data better, this curve begins high and decreases as complexity increases. High squared bias means the model is too simple and underfitting the data, not identifying the underlying patterns. <br/>
+**Variance:** Measures the difference between the model's predictions and actual values. Variance increases as the model becomes more complex due to random noise captured from the data, causing underfitting. <br/>
+**Training Error:** Complex models fit the training data extremely well leading to lower training errors. As the model becomes simpler, the training error increases because simpler models cannot capture all of the data's complexity. <br/>
+**Test Error:** The curve is U-shaped: starting high for simple models resulting from high bias, decreasing to a minimum, then increasing for models with high complexity due to higher variance. <br/>
 
 ## Section III - Coding Questions (55 Points)
 ### Problem 3 (Total: 18 Points - 3 points each)
@@ -87,12 +87,15 @@ print(
 
 #### 3a) Which of the predictors are quantitative, and which are qualitative?
 ```{r}
+# Quantitative predictors
 quant_preds <- colnames(
     select_if(
         Auto, 
         is.numeric
     )
 )
+
+# Qualitative predictors
 qual_preds <- colnames(
     select_if(
         Auto, 
@@ -197,11 +200,16 @@ cat(
 
 #### 3d) Now remove the 20th through 80th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?
 ```{r}
+# Create subset dataset, removing 20th through 80th observations
 subset_Auto <- Auto[-c(20:80), ]
+
+# Calucate new range
 range_Auto_subset <- sapply(
     subset_Auto[, quant_preds], 
     range
 )
+
+# Calucate new mean
 mean_Auto_subset <- round(
     sapply(
     subset_Auto[, quant_preds], 
@@ -209,6 +217,8 @@ mean_Auto_subset <- round(
     ),
     2
 )
+
+# Calucate new standard deviation
 sd_Auto_subset <- round(
     sapply(
     subset_Auto[, quant_preds], 
@@ -421,7 +431,6 @@ library(AppliedPredictiveModeling)
 library(ggplot2)
 library(dplyr)
 library(caret)
-library(RANN)
 library(e1071)
 data("ChemicalManufacturingProcess")
 ```
@@ -529,6 +538,8 @@ cat("P-value for ENET vs. PLS:", enet_pls_t_test$p.value)
 cat("P-value for ENET vs. PCR:", enet_pcr_t_test$p.value)
 ```
 
+**Since our ENET model has the lowest test error, it has the best predictive ability among our four models; however, the results from our hypothesis testing indicate that there is no significant difference between the predictive abilities of our models (i.e., all p-values were greater than the significance level 0.05, so we do not reject the null hypothessis).**
+
 #### 5d) Which predictors are most important in the model you have trained? Do either the biological or process predictors dominate the list [3 points]
 ```{r}
 # Variable Importance - ENET
@@ -539,7 +550,7 @@ top_preds <- rownames(variable_importance$importance)[order(variable_importance$
 cat("Top 10 predictors: ", paste0(top_preds), sep = "\n")
 ```
 
-**The top 10 predictors indicate that the majority are process rather than biological predictors.**
+**The top 10 predictors (listed above) indicate that the majority are process rather than biological predictors.**
 
 #### 5e) Explore the relationships between each of the top predictors and the response. How could this information be helpful in improving yield in future runs of the manufacturing process? [3 points]
 
@@ -549,3 +560,5 @@ for (pred in top_preds) {
   abline(lm(train_resp ~ train_transformed[, pred]), col = "red")
 }
 ```
+
+**The relationships between our top predictors and the response variable (Yield) indicate that the process predictors are pretty evenly split between positive and negative linear relationships. By identifying these relationships between individual predictors and the response variable, the manufacturers have the opportunity to optimize their processes and potentially increase Yield.**
