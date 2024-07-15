@@ -10,16 +10,16 @@ execute:
 ---
 
 ## Section I - True (T) or False (F) (20 Points)
-1. 
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
-10.
+1. **False:** Principal Component Regression is unsupervised learning.
+2. **False:** Collinearity increases the standard errors associated with the coefficients, causing them to worsen.
+3. **False:** R-squared of 0 means the model explains none of the variation in response Y, not -1.
+4. **False:** If the number of predictors is > the number of observations, there is no longer a unique least squares coefficient estimate.
+5. **True**
+6. **True**
+7. **True**
+8. **True**
+9. **False:** OLS cannot be used.
+10. **False:** Last name is Wang, first name is Min.
 
 ## Section II - Free Response Questions (25 Points)
 ### Problem 1 (Total: 15 Points)
@@ -36,10 +36,13 @@ Since the percentage change in the USD/Euro exchange rate is a continuous variab
 ### Problem 2 (Total: 10 Points)
 #### In this class, we discussed the bias-variance trade-off. Answer the following questions.
 #### 2a) Provide a sketch of typical (squared) bias, variance, training error, test error curves, on a single plot, as we go from less flexible statistical learning methods towards more flexible approaches. The x-axis should represent the amount of flexibility in the method, and the y-axis should represent the values for each curve. There should be four curves. Make sure to label each one.
-
+![Statistical learning methods flexibility sketch](sketch_2a.png)
 
 #### 2b) Briefly explain why each of the four curves has the shape displayed in part (a).
-
+**Squared bias:** Since more complex models can fit the training data better, this curve begins high and decreases as complexity increases. High squared bias means the model is too simple and underfitting the data, not identifying the underlying patterns.
+**Variance:** Measures the difference between the model's predictions and actual values. Variance increases as the model becomes more complex due to random noise captured from the data, causing underfitting.
+**Training Error:** Complex models fit the training data extremely well leading to lower training errors. As the model becomes simpler, the training error increases because simpler models cannot capture all of the data's complexity.
+**Test Error:** The total sum of squared bias, variance, and irreducible error. The curve is U-shaped: starting high for simple models resulting from high bias, decreasing to a minimum, then increasing for models with high complexity due to higher variance.
 
 ## Section III - Coding Questions (55 Points)
 ### Problem 3 (Total: 18 Points - 3 points each)
