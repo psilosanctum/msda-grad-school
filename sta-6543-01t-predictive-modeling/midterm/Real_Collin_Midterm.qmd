@@ -28,9 +28,10 @@ execute:
 Since CEO salary is a continuous variable, this is a **regression** problem. The focus is on **inference** because we want to understand the relationship between CEO salary and the other variables. The number of observations (**n**) is 500 (i.e., the top 500 firms) and the number of features (**p**) is 3 (i.e., profit, number of employees, and industry).
 
 #### 1b) We are considering launching a new product and wish to know whether it will be a success or a failure. We collect data on 20 similar products that were previously launched. For each product we have recorded whether it was a success or failure, price charged for the product, marketing budget, competition price, and ten other variables. (5 Points)
-
+Since the outcome is a categorical variable, this is a **classification** problem. The focus is on **prediction** because we want to predict the outcome of a new product launch. The number of observations (**n**) is 20 (i.e., 20 products) and the number of features (**p**) is 13.
 
 #### 1c) We are interested in predicting the % change in the USD/Euro exchange rate in relation to the weekly changes in the world stock markets. Hence we collect weekly data for all of 2012. For each week we record the % change in the USD/Euro, the % change in the US market, the % change in the British market, and the % change in the German market. (5 Points)
+Since the percentage change in the USD/Euro exchange rate is a continuous variable, this is a **regression** problem. The focus is on **prediction** because we want to predict future changes in the rate. The number of observations (**n**) is 52 (i.e., 52 weeks of data) and the number of features (**p**) is 3.
 
 ### Problem 2 (Total: 10 Points)
 #### In this class, we discussed the bias-variance trade-off. Answer the following questions.
@@ -48,14 +49,10 @@ Since CEO salary is a continuous variable, this is a **regression** problem. The
 library(ISLR)
 library(dplyr)
 library(rlist)
-library(mlbench) 
-library(e1071)
-library(kernlab)
-library(AppliedPredictiveModeling)
-library(caret)
 library(ggplot2)
-library(tidyverse)
 library(corrplot)
+library(tidyr)
+library(caret)
 data('Auto')
 str(Auto)
 ```
@@ -308,6 +305,9 @@ Addtionally, mpg has a moderate positive correlation (coeff = 0.58) with the mod
 
 ```{r}
 library(ISLR)
+library(e1071)
+library(nnet)
+library(earth)
 data(College)
 #data basic information
 head(College)
@@ -318,39 +318,231 @@ lm(Apps~.,data=College)
 ```
 
 #### 4a) Appropriately split the data set into a training set (80%) and a test set (20%). [3 points]
-
+```{r}
+# Split the data
+set.seed(123)
+train_index <- createDataPartition(College$Apps, p = 0.8, list = FALSE)
+train_data <- College[train_index, ]
+test_data <- College[-train_index, ]
+```
 
 #### 4b) Fit a support vector machine (SVM) model with the radial basis function function model using least squares on the training set. Clearly report the test error obtained. [3 points]
+```{r}
+# Fit SVM-RBF model
+svm_mod <- svm(Apps ~ ., train_data, kernel = "radial")
 
+# Predict test data
+svm_preds <- predict(svm_mod, test_data)
+
+# Calcuate MSE (Mean Squared Error)
+svm_mse <- round(mean((svm_preds - test_data$Apps)^2),2)
+cat("SVM MSE:", paste0(svm_mse))
+```
 
 #### 4c) Fit a neural network model on the training set by creating an appropriate grid for tuning parameters. Clearly report the test error obtained. [3 points]
 
+```{r}
+# Neural network tuning grid
+grid_neural_network <- expand.grid(size = c(5, 10), decay = c(0.1, 0.5))
+
+# Fit neural network model
+set.seed(123)
+model_neural_network <- train(
+  Apps ~ ., 
+  data = train_data, 
+  method = "nnet", 
+  trControl = trainControl(method = "cv", number = 5), 
+  tuneGrid = grid_neural_network, 
+  trace = FALSE
+)
+
+# Predict test data
+preds_neural_network <- predict(model_neural_network, test_data)
+
+# Calculate the MSE
+neural_network_mse <- round(mean((preds_neural_network - test_data$Apps)^2),2)
+cat("Neural Network MSE:", paste0(neural_network_mse))
+```
 
 #### 4d) Fit a Multivariate Adaptive Regression Splines (MARS) model on the training set with tuning parameters chosen by cross-validation. Clearly report the test error obtained, along with the importance of each predictor. estimates. [3 points]
 
+```{r}
+# Fit MARS model with cross-validation
+set.seed(123)
+mars_mod <- train(
+  Apps ~ ., 
+  data = train_data, 
+  method = "earth", 
+  trControl = trainControl(method = "cv", number = 5),
+  tuneLength = 5
+)
+
+# Predict test data
+mars_preds <- predict(mars_mod, test_data)
+
+# Calculate the MSE
+mars_mse <- round(mean((mars_preds - test_data$Apps)^2),2)
+cat('MARS MSE:', paste0(mars_mse))
+
+# Variable importance
+variable_importance <- varImp(mars_mod)
+variable_importance
+```
 
 #### 4e) Comment on the results obtained. Is there much difference among the test errors resulting from these three nonparametric approaches? [3 points]
+#### SVM Results
+```{r}
+svm_mod
+cat("SVM MSE: ", svm_mse)
+```
+
+#### Neural Network Results
+```{r}
+model_neural_network
+cat("Neural Network MSE: ", neural_network_mse)
+```
+
+#### MARS Results
+```{r}
+mars_mod
+cat("MARS MSE: ", mars_mse)
+```
+
+**Conclusion:** There is much difference among the test errors resulting from these three nonparametric approaches. The neural network approach calculated the largest test error. Additionally, it did not calculate decent R-squared values. The MARS model had the second highest test error, but the model produced R-squared values greater than 85%, indicating that it explains the variance of the data well. The support vector machine with the radial basis function calculated the lowest test error.
 
 ### Problem 5 (Total: 22 Points)
 #### A chemical manufacturing process for a pharmaceutical product was discussed in Sect. 1.4 of the textbook. In this problem, the objective is to understand the relationship between biological measurements of the raw materials (predictors), measurements of the manufacturing process (predictors), and the response of product yield. Biological predictors cannot be changed but can be used to assess the quality of the raw material before processing. On the other hand, manufacturing process predictors can be changed in the manufacturing process. Improving product yield by 1% will boost revenue by approximately one hundred thousand dollars per batch. We may start R and use these commands to load the data:
 
 ```{r}
 library(AppliedPredictiveModeling)
+library(ggplot2)
+library(dplyr)
+library(caret)
+library(RANN)
+library(e1071)
 data("ChemicalManufacturingProcess")
 ```
 
 #### The matrix processPredictors contains the 57 predictors (12 describing the input biological material and 45 describing the process predictors) for the 176 manufacturing runs. yield contains the percent yield for each run.
 
 #### 5a) A small percentage of cells in the predictor set contain missing values. Use an appropriate imputation function to fill in these missing values. [3 points]
+```{r}
+# Identify missing values
+missing_vals <- sum(is.na(ChemicalManufacturingProcess))
+print(paste0("Pre-imputation missing values: ", missing_vals))
 
+# Impute missing values with k-NN
+pre_process <- preProcess(ChemicalManufacturingProcess, c("knnImpute"))
+df <- predict(pre_process, ChemicalManufacturingProcess)
+
+# Double check successful imputation (i.e., 0 missing values)
+impute_miss <- sum(is.na(pre_process))
+print(paste0("Post-imputation missing values: ", impute_miss))
+```
 
 #### 5b) Split the data into a training and a test set, pre-process the data, and build at least four different models from Chapter 6. For those models with tuning parameters (e.g., ENET), what are the optimal values of the tuning parameter(s)? [8 points]
+```{r}
+# Create variables to separate predictors and response
+proc_preds <- df[, -1]
+resp <- df[, 1]
 
+# Split the data
+train_index <- createDataPartition(resp, p = 0.8, list = FALSE)
+train_data <- proc_preds[train_index, ]
+train_resp <- resp[train_index]
+test_data <- proc_preds[-train_index, ]
+test_resp <- resp[-train_index]
+
+# Data normalization - center and scale
+pre_process_range <- preProcess(train_data, method = c("center", "scale"))
+train_transformed <- predict(pre_process_range, train_data)
+test_transformed <- predict(pre_process_range, test_data)
+
+# Create list for model training
+models <- list(
+  ENET = trainControl(method = "cv", number = 5), 
+  Ridge = trainControl(method = "cv", number = 5), 
+  PCR = trainControl(method = "cv", number = 5), 
+  PLS = trainControl(method = "cv", number = 5) 
+)
+
+# Tuning grids
+tuning_grids <- list(
+  ENET = expand.grid(alpha = seq(0, 1, length = 10), lambda = 10^seq(4, -4, length = 100)),
+  Ridge = expand.grid(alpha = 0, lambda = 10^seq(4, -4, length = 100)),
+  PLS = expand.grid(ncomp = 1:10)
+)
+
+# Train the four models
+set.seed(123)
+enet_mod <- train(train_transformed, train_resp, method = "glmnet", trControl = models$ENET, tuneGrid = tuning_grids$ENET)
+ridge_mod <- train(train_transformed, train_resp, method = "glmnet", trControl = models$Ridge, tuneGrid = tuning_grids$Ridge)
+pls_mod <- train(train_transformed, train_resp, method = "pls", trControl = models$PLS, tuneGrid = tuning_grids$PLS)
+pcr_mod <- train(train_transformed, train_resp, method = "pcr", trControl = models$PCR, tuneGrid = tuning_grids$PLS)
+
+# Optimal tuning parameters
+enet_mod$bestTune
+ridge_mod$bestTune
+pls_mod$bestTune
+pcr_mod$bestTune
+```
 
 #### 5c) Which model has the best predictive ability? Is any model significantly better or worse than the others? You need to conduct a hypothesis testing to justify your choice if necessary. [5 points]
+```{r}
+# Predict test set
+enet_preds <- predict(enet_mod, test_transformed)
+ridge_preds <- predict(ridge_mod, test_transformed)
+pls_preds <- predict(pls_mod, test_transformed)
+pcr_preds <- predict(pcr_mod, test_transformed)
 
+# Calculate MSE (Mean Squared Error)
+test_err_enet <- mean((enet_preds - test_resp)^2)
+test_err_ridge <- mean((ridge_preds - test_resp)^2)
+test_err_pls <- mean((pls_preds - test_resp)^2)
+test_err_pcr <- mean((pcr_preds - test_resp)^2)
+
+# Print MSE
+cat("ENET Test Error: ", test_err_enet)
+cat("Ridge Test Error: ", test_err_ridge)
+cat("PLS Test Error: ", test_err_pls)
+cat("PCR Test Error: ", test_err_pcr)
+```
+
+```{r}
+# Calculate residuals for each model
+enet_res <- predict(enet_mod, test_transformed) - test_resp
+ridge_res <- predict(ridge_mod, test_transformed) - test_resp
+pls_res <- predict(pls_mod, test_transformed) - test_resp
+pcr_res <- predict(pcr_mod, test_transformed) - test_resp
+
+# Paired t-tests comparing ENET res with other models
+enet_ridge_t_test <- t.test(enet_res, ridge_res, paired = TRUE)
+enet_pls_t_test <- t.test(enet_res, pls_res, paired = TRUE)
+enet_pcr_t_test <- t.test(enet_res, pcr_res, paired = TRUE)
+
+# Print p-values of the t-tests
+cat("P-value for ENET vs. Ridge Regression:", enet_ridge_t_test$p.value)
+cat("P-value for ENET vs. PLS:", enet_pls_t_test$p.value)
+cat("P-value for ENET vs. PCR:", enet_pcr_t_test$p.value)
+```
 
 #### 5d) Which predictors are most important in the model you have trained? Do either the biological or process predictors dominate the list [3 points]
+```{r}
+# Variable Importance - ENET
+variable_importance <- varImp(enet_mod)
+plot(variable_importance, top = 10)
 
+top_preds <- rownames(variable_importance$importance)[order(variable_importance$importance[,1], decreasing = TRUE)[1:10]]
+cat("Top 10 predictors: ", paste0(top_preds), sep = "\n")
+```
+
+**The top 10 predictors indicate that the majority are process rather than biological predictors.**
 
 #### 5e) Explore the relationships between each of the top predictors and the response. How could this information be helpful in improving yield in future runs of the manufacturing process? [3 points]
+
+```{r}
+for (pred in top_preds) {
+  plot(train_transformed[, pred], train_resp, main = pred, xlab = pred, ylab = "Yield")
+  abline(lm(train_resp ~ train_transformed[, pred]), col = "red")
+}
+```
