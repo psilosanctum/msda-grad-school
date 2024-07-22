@@ -1,0 +1,150 @@
+---
+title: "Exercise 5"
+author: "Collin Real (yhi267)"
+format:
+    html: 
+        theme: cyborg
+execute: 
+  warning: false
+  error: false
+---
+
+## 8.1 - Recrease simulated data from Exercise 4
+```{r}
+library(mlbench)
+library(tidyverse)
+library(base)
+library(MASS)
+library(earth)
+library(AppliedPredictiveModeling)
+library(randomForest)
+library(caret)
+set.seed(200)
+simulated <- mlbench.friedman1(200, sd = 1)
+simulated <- cbind(simulated$x, simulated$y)
+simulated <- as.data.frame(simulated)
+colnames(simulated)[ncol(simulated)] <- "y"
+```
+
+#### a. Fit a random forest model to all of the predictors, then estimate the variable importance scores:
+
+```{r}
+model1 <- randomForest(y ~ ., data = simulated, importance = TRUE, ntree = 1000)
+rfImp1 <- varImp(model1, scale = FALSE)
+print(rfImp1)
+```
+
+#### Did the random forest model significantly use the uninformative predictors (V6 - V10)?
+
+```{r}
+rfImp1 %>% 
+  mutate (var = rownames(rfImp1)) %>%
+  ggplot(aes(Overall, reorder(var, Overall, sum), var)) + 
+  geom_col(fill = 'red', colour = 'black') + 
+  labs(title = 'Model 1 Variable Importance' , y = 'Variable')
+```
+
+** The cumulative bar graph above shows that V6-10 were not significantly used in our random forest model.**
+
+#### b. Now add an additional predictor that is highly correlated with one of the informative predictors. For example:
+
+```{r}
+simulated$duplicate1 <- simulated$V1 + rnorm(200) * .1
+cor(simulated$duplicate1, simulated$V1)
+```
+
+#### Fit another random forest model to these data. Did the importance score for V1 change? What happens when you add another predictor that is also highly correlated with V1?
+```{r}
+rf_model2 <- randomForest(y ~ ., data = simulated, importance = TRUE, ntree = 1000)
+rfImp2 <- varImp(rf_model2, scale = FALSE)
+print(rfImp2)
+```
+
+```{r}
+rfImp2 %>% 
+  mutate (var = rownames(rfImp2)) %>%
+  ggplot(aes(Overall, reorder(var, Overall, sum), var)) + 
+  geom_col(fill = 'red', colour = 'black') + 
+  labs(title = 'Model 2 Variable Importance' , y = 'Variable')
+```
+
+**The importance score for V1 decreased, but increased for the other variables when another highly correlated variable with V1 is added.**
+
+#### c. Use the cforest function in the party package to fit a random forest model using conditional inference trees. The party package function varimp can calculate predictor importance. The conditional argument of that function toggles between the traditional importance measure and the modified version. Do these importances show the same pattern as the traditional random forest model?
+```{r}
+library(partykit)
+library(party)
+
+# Fit cforest model
+set.seed(123)
+cf_model <- cforest(y ~ ., data = simulated, controls = cforest_unbiased(ntree = 1000))
+
+# Calculate variable importance
+cf_varimp <- varimp(cf_model, conditional = FALSE)
+print(cf_varimp)
+```
+
+```{r}
+# Calculate conditional variable importance
+cf_cond_varimp <- varimp(cf_model, conditional = TRUE)
+print(cf_cond_varimp)
+```
+
+```{r}
+rf_model3 <- cforest(y ~ ., data = simulated)
+rfImp3 <- varimp(rf_model3, conditional = TRUE) %>% as.data.frame()
+rfImp3 %>% 
+  rename(Overall = '.') %>%
+  mutate (var = rownames(rfImp3)) %>%
+  ggplot(aes(Overall, reorder(var, Overall, sum), var)) + 
+  geom_col(fill = 'red', colour = 'black') + 
+  labs(title = 'Model 3 Variable Importance' , y = 'Variable')
+```
+
+** The pattern of importance remains the same and V6-V10 remain unimportant.**
+
+#### d. Repeat this process with different tree models, such as boosted trees and Cubist. Does the same pattern occur?
+
+```{r}
+library(gbm)
+
+# Fit gbm model
+set.seed(123)
+gbm_model <- train(y ~ ., data = simulated, method = "gbm", trControl = trainControl(method = "cv"), verbose = FALSE)
+
+# Calculate variable importance
+gbm_varimp <- varImp(gbm_model, scale = FALSE)
+print(gbm_varimp)
+```
+
+```{r}
+library(Cubist)
+
+# Fit Cubist model
+set.seed(123)
+cubist_model <- train(y ~ ., data = simulated, method = "cubist", trControl = trainControl(method = "cv"))
+
+# Calculate variable importance
+cubist_varimp <- varImp(cubist_model, scale = FALSE)
+print(cubist_varimp)
+```
+
+```{r}
+gbm_plot <- gbm_varimp %>% 
+  ggplot(aes(Overall, reorder(var, Overall, sum), var)) + 
+  geom_col(fill = 'red', colour = 'black') + 
+  labs(title = 'Boosted Tree Variable Importance' , y = 'Variable')
+```
+```{r}
+cubist_plot <- cubist_varimp %>% 
+  ggplot(aes(Overall, reorder(var, Overall, sum), var)) + 
+  geom_col(fill = 'red', colour = 'black') + 
+  labs(title = 'Cubist Variable Importance' , y = 'Variable')
+```
+
+```{r}
+library(ggpubr)
+ggarrange(gbm_plot, cubist_plot)
+```
+
+**V1-V5 are both significant predictors in the boosted tree and cubist models, but their patterns of importance differ. The ranked order (most -> least important) for the boosted tree model is V4, V2, V1, V5, and V3. The ranked order for the Cubist model is V1, V2, V4, V3, and V5.**

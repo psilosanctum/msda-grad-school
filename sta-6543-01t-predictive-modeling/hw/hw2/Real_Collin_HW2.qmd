@@ -1,0 +1,373 @@
+---
+title: "Homework 2"
+author: "Collin Real (yhi267)"
+format:
+    html: 
+        theme: cyborg
+execute: 
+  warning: false
+  error: false
+---
+Reminder: All homework solutions must be written up independently, even though you are allowed to discuss with other students. You need to save your homework assignment in a pdf/html format and upload it with the R code (.R or .rmd) into the Canvas before 11:59pm CT on the due day. No late homework assignment will be graded in any circumstance.
+
+## Problem 1 (50 points): Infrared (IR) spectroscopy technology is used to determine the chemical makeup of a substance. The theory of IR spectroscopy holds that unique molecular structures absorb IR frequencies differently. In practice a spectrometer fires a series of IR frequencies into a sample material, and the device measures the absorbance of the sample at each individual frequency. This series of measurements creates a spectrum profile which can then be used to determine the chemical makeup of the sample material.
+
+A Tecator Infratec Food and Feed Analyzer instrument was used to analyze 215 samples of meat across 100 frequencies. A sample of these frequency profiles is displayed in Fig. 6.20. In addition to an IR profile, analytical chemistry determined the percent content of water, fat, and protein for each sample. If we can establish a predictive relationship between IR spectrum and fat content, then food scientists could predict a sample's fat content with IR instead of using analytical chemistry. This would provide costs savings, since analytical chemistry is a more expensive, time-consuming process.
+
+#### a. Start R and use these commands to load the data:
+```{r}
+library(caret)
+library(e1071)
+library(nnet)
+library(earth)
+library(kernlab)
+library(elasticnet)
+data(tecator)
+```
+
+```{r}
+?tecator
+```
+
+```{r}
+# Inspect the structure of absorp matrix
+str(absorp)
+```
+
+```{r}
+# Inspect the structure of endpoints matrix
+str(endpoints)
+```
+
+```{r}
+moisture <- endpoints[,1]
+fat <- endpoints[,2]
+protein <- endpoints[,3]
+```
+
+#### b. Split the data into a training and a test set the response of the percentage of protein, pre-process the data as appropriate.
+
+```{r}
+# Extract the protein data
+protein = endpoints[,3]
+colnames(absorp) <- paste0("V", 1:ncol(absorp))
+
+# Split the data
+set.seed(123)  # For reproducibility
+trainindex <- createDataPartition(protein, p = .8, 
+                                  list = FALSE, 
+                                  times = 1)
+traindata <- absorp[trainindex,]
+testdata <- absorp[-trainindex,]
+trainprotein <- protein[trainindex]
+testprotein <- protein[-trainindex]
+
+# Preprocess the data
+preProcValues <- preProcess(traindata, method = c("center", "scale"))
+traindataTransformed <- predict(preProcValues, traindata)
+testdataTransformed <- predict(preProcValues, testdata)
+```
+
+
+```{r}
+# Display the structure of the transformed data
+str(traindataTransformed)
+str(testdataTransformed)
+```
+
+#### c. Build at least three models described Chapter 6: ordinary least squares, PCR, PLS, Ridge, and ENET. For those models with tuning parameters, what are the optimal values of the tuning parameter(s)?
+
+### Principal Component Regression
+```{r}
+pcr <- train(traindataTransformed, trainprotein, method = "pcr",
+                   trControl = trainControl(method = "cv", number = 10),
+                   tuneLength = 10)
+
+best_pcr <- pcr$bestTune
+best_pcr
+```
+
+### Ordinary Least Squares
+```{r}
+ols <- train(traindataTransformed, trainprotein, method = "lm")
+summary(ols)
+```
+
+### Partial Least Squares
+```{r}
+pls <- train(traindataTransformed, trainprotein, method = "pls",
+                   trControl = trainControl(method = "cv", number = 10),
+                   tuneLength = 10)
+
+best_pls <- pls$bestTune
+best_pls
+```
+
+Based on the cross-validation, the optimal values of the tuning parameters for both PCR & PLS models is 10.
+
+#### Evaluate
+```{r}
+# Predictions
+ols_preds <- predict(ols, newdata = testdataTransformed)
+pcr_preds <- predict(pcr, newdata = testdataTransformed)
+pls_preds <- predict(pls, newdata = testdataTransformed)
+
+# Evaluation
+ols_res <- postResample(ols_preds, testprotein)
+pcr_res <- postResample(pcr_preds, testprotein)
+pls_res <- postResample(pls_preds, testprotein)
+
+# Display the results
+ols_res
+pcr_res
+pls_res
+```
+
+
+#### d. Build nonlinear models in Chapter 7: SVM, neural network, MARS, and KNN models. Since neural networks are especially sensitive to highly correlated predictors, does pre-processing using PCA help the model? For those models with tuning parameters, what are the optimal values of the tuning parameter(s)?
+
+```{r}
+pcaPreProc <- preProcess(traindata, method = c("center", "scale", "pca"))
+traindataPCA <- predict(pcaPreProc, traindata)
+testdataPCA <- predict(pcaPreProc, testdata)
+```
+
+### Support Vector Machine
+```{r}
+svm <- train(traindataTransformed, trainprotein, method = "svmRadial",
+                   trControl = trainControl(method = "cv", number = 10),
+                   tuneLength = 10)
+best_svm <- svm$bestTune
+print(best_svm)
+
+svm_preds <- predict(svm, newdata = testdataTransformed)
+svm_res <- postResample(svm_preds, testprotein)
+print(svm_res)
+```
+
+### Neural Network
+```{r}
+nn <- train(traindataPCA, trainprotein, method = "nnet",
+                  trControl = trainControl(method = "cv", number = 10),
+                  tuneLength = 10, trace = FALSE, linout = TRUE)
+best_nn <- nn$bestTune
+print(best_nn)
+
+nn_preds <- predict(nn, newdata = testdataPCA)
+nn_res <- postResample(nn_preds, testprotein)
+print(nn_res)
+```
+
+### Multivariate Adaptive Regression Splines
+```{r}
+mars <- train(traindataTransformed, trainprotein, method = "earth",
+                    trControl = trainControl(method = "cv", number = 10),
+                    tuneLength = 10)
+best_mars <- mars$bestTune
+print(best_mars)
+
+mars_preds <- predict(mars, newdata = testdataTransformed)
+mars_res <- postResample(mars_preds, testprotein)
+print(mars_res)
+```
+
+### k-Nearest Neighbors
+```{r}
+knn <- train(traindataTransformed, trainprotein, method = "knn",
+                   trControl = trainControl(method = "cv", number = 10),
+                   tuneLength = 10)
+best_knn <- knn$bestTune
+print(best_knn)
+
+knn_preds <- predict(knn, newdata = testdataTransformed)
+knn_res <- postResample(knn_preds, testprotein)
+print(knn_res)
+```
+
+### Optimal Tuning Parameters
+**Support Vector Machine** <br/>
+- sigma: 0.1316487 <br/>
+- C: 16 <br/>
+
+**Neural Network** <br/>
+- size: 3 <br/>
+- decay: 0.0002371374 <br/>
+
+**MARS** <br/>
+- nprune: 20 <br/>
+- degree: 1 <br/>
+
+**kNN** <br/>
+- k: 7 <br/>
+
+```{r}
+# Neural Network (without PCA)
+nn <- train(traindataTransformed, trainprotein, method = "nnet",
+                  trControl = trainControl(method = "cv", number = 10),
+                  tuneLength = 10, trace = FALSE, linout = TRUE)
+nn_preds <- predict(nn, newdata = testdataTransformed)
+nn_res <- postResample(nn_preds, testprotein)
+
+# Neural Network (with PCA)
+nn_pca <- train(traindataPCA, trainprotein, method = "nnet",
+                      trControl = trainControl(method = "cv", number = 10),
+                      tuneLength = 10, trace = FALSE, linout = TRUE)
+nn_pca_preds <- predict(nn_pca, newdata = testdataPCA)
+nn_pca_res <- postResample(nn_pca_preds, testprotein)
+cat("Without PCA:\n", nn_res)
+cat("With PCA:\n", nn_pca_res)
+```
+
+The neural network with PCA **performs worse** than the neural net without PCA. Without PCA, the model has a lower RMSE, higher R-squared, and lower MAE.
+
+#### e. Which model from parts c and d has the best predictive ability? Is any model significantly better or worse than the others?
+The **Partial Least Squares** model has the best predictive ability because it has the lowest RMSE and highest R-squared. In general, linear models performed better than nonlinear models.
+
+## Problem 2 (30 points): Developing a model to predict permeability (see Sect. 1.4 of the textbook) could save significant resources for a pharmaceutical company, while at the same time more rapidly identifying molecules that have a sufficient permeability to become a drug:
+
+#### a. Start R and use these commands to load the data
+
+```{r}
+# Load library and attach data
+library(AppliedPredictiveModeling)
+data(permeability)
+
+# Explore the data structure
+str(fingerprints)
+str(permeability)
+```
+
+#### b. The fingerprint predictors indicate the presence or absence of substructures of a molecule and are often sparse meaning that relatively few of the molecules contain each substructure. Filter out the predictors that have low frequencies using the nearZeroVar function from the caret package. How many predictors are left for modeling?
+
+```{r}
+dim(fingerprints)
+colnames(fingerprints) <- paste0("X", 1:ncol(fingerprints))
+
+# Identify near-zero variance predictors
+nzv <- nearZeroVar(fingerprints)
+
+# Filter near-zero variance predictors
+filtered_fingerprints <- fingerprints[, -nzv]
+
+remaining_predictors <- ncol(filtered_fingerprints)
+cat("Remaining predictors:", remaining_predictors)
+```
+
+#### c. Split the data into a training and a test set, pre-process the data, and tune a PLS model. How many latent variables are optimal and what is the corresponding resampled estimate of R2?
+
+```{r}
+permeability_df <- data.frame(filtered_fingerprints, permeability = permeability)
+
+# Split the data
+set.seed(123)
+trainindex <- createDataPartition(permeability_df$permeability, p = .8, 
+                                  list = FALSE, 
+                                  times = 1)
+traindata <- permeability_df[trainindex,]
+testdata <- permeability_df[-trainindex,]
+
+# Preprocess the data
+preProcValues <- preProcess(traindata, method = c("center", "scale"))
+traindataTransformed <- predict(preProcValues, traindata)
+testdataTransformed <- predict(preProcValues, testdata)
+
+# Fit PLS model
+pls <- train(permeability ~ ., data = traindataTransformed, method = "pls",
+                   trControl = trainControl(method = "cv", number = 10),
+                   tuneLength = 20)
+
+# Best tuning parameter
+best_pls <- pls$bestTune
+print("The number of latent variables that are optimal:")
+print(best_pls)
+
+# R-squared resampled estimate
+resampled_R2 <- max(pls$results$Rsquared)
+cat("The resampled estimate of R-squared is:", resampled_R2)
+```
+
+#### d. Predict the response for the test set. What is the test set estimate of R2?
+
+```{r}
+# Predict test set
+pls_preds <- predict(pls, newdata = testdataTransformed)
+
+# Calculate test set R-squared
+test_R2 <- R2(pls_preds, testdataTransformed$permeability)
+cat("The test set estimate of R-squared is:", test_R2)
+```
+
+#### e. Try building other models discussed in this chapter. Do any have better predictive performance?
+
+### Ridge Regression
+```{r}
+ridge <- train(permeability ~ ., data = traindataTransformed, method = "ridge",
+                     trControl = trainControl(method = "cv", number = 10),
+                     tuneLength = 20)
+ridge_preds <- predict(ridge, newdata = testdataTransformed)
+ridge_res <- postResample(ridge_preds, testdataTransformed$permeability)
+print(ridge_res)
+```
+
+### Lasso Regression
+```{r}
+lasso <- train(permeability ~ ., data = traindataTransformed, method = "lasso",
+                     trControl = trainControl(method = "cv", number = 10),
+                     tuneLength = 20)
+lasso_preds <- predict(lasso, newdata = testdataTransformed)
+lasso_res <- postResample(lasso_preds, testdataTransformed$permeability)
+print(lasso_res)
+```
+
+The **Lasso Regression** has better predictive performance with a lower RMSE and MAE; however, the amount of variance this model explains is significantly reduced.
+
+## Problem 3 (20 points): Return to the permeability problem outlined in Problem 2. Train several nonlinear regression models and evaluate the resampling and test set performance.
+#### a. Which nonlinear regression model that we learned in Chapter 7 gives the optimal resampling and test set performance?
+
+```{r}
+# SVM model
+svm <- train(permeability ~ ., data = traindataTransformed, method = "svmRadial",
+                   trControl = trainControl(method = "cv", number = 10),
+                   tuneLength = 10)
+best_svm <- svm$bestTune
+print(best_svm)
+svm_preds <- predict(svm, newdata = testdataTransformed)
+svm_res <- postResample(svm_preds, testdataTransformed$permeability)
+print(svm_res)
+
+# Neural Network model
+nn <- train(permeability ~ ., data = traindataTransformed, method = "nnet",
+                  trControl = trainControl(method = "cv", number = 10),
+                  tuneLength = 10, trace = FALSE, linout = TRUE)
+best_nn <- nn$bestTune
+print(best_nn)
+nn_preds <- predict(nn, newdata = testdataTransformed)
+nn_res <- postResample(nn_preds, testdataTransformed$permeability)
+print(nn_res)
+
+# MARS model
+mars <- train(permeability ~ ., data = traindataTransformed, method = "earth",
+                    trControl = trainControl(method = "cv", number = 10),
+                    tuneLength = 10)
+best_mars <- mars$bestTune
+print(best_mars)
+mars_preds <- predict(mars, newdata = testdataTransformed)
+mars_res <- postResample(mars_preds, testdataTransformed$permeability)
+print(mars_res)
+
+# KNN model
+knn <- train(permeability ~ ., data = traindataTransformed, method = "knn",
+                   trControl = trainControl(method = "cv", number = 10),
+                   tuneLength = 10)
+best_knn <- knn$bestTune
+print(best_knn)
+knn_preds <- predict(knn, newdata = testdataTransformed)
+knn_res <- postResample(knn_preds, testdataTransformed$permeability)
+print(knn_res)
+```
+
+#### b. Do any of the nonlinear models outperform the optimal linear model you previously developed in Problem 2? If so, what might this tell you about the underlying relationship between the predictors and the response?
+The SVM model has a lower RMSE and MAE, indicating it has better predictive ability, but is unable to explain as much of the variance as the PLS model. The SVM model should be used if accuracy is the priority of the study, and the PLS model should be used for better understanding the overall relationships in the data.
+
+#### c. Would you recommend any of the models you have developed to replace the permeability laboratory experiment?
+I would recommend the SVM model as a replacement for the permeability lab experiment due to its enhanced predictive ability. I'm more interested in the model's predictive power rather than its ability to explain the variance/relationships in the dataset.

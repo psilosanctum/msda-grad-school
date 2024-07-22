@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Collin Real (yhi267)">
+
+<title>Homework 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Real_Collin_HW2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Real_Collin_HW2_files/libs/quarto-html/quarto.js"></script>
+<script src="Real_Collin_HW2_files/libs/quarto-html/popper.min.js"></script>
+<script src="Real_Collin_HW2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Real_Collin_HW2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Real_Collin_HW2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Real_Collin_HW2_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Real_Collin_HW2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Real_Collin_HW2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Real_Collin_HW2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Homework 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Collin Real (yhi267) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Reminder: All homework solutions must be written up independently, even though you are allowed to discuss with other students. You need to save your homework assignment in a pdf/html format and upload it with the R code (.R or .rmd) into the Canvas before 11:59pm CT on the due day. No late homework assignment will be graded in any circumstance.</p>
+<section id="problem-1-50-points-infrared-ir-spectroscopy-technology-is-used-to-determine-the-chemical-makeup-of-a-substance.-the-theory-of-ir-spectroscopy-holds-that-unique-molecular-structures-absorb-ir-frequencies-differently.-in-practice-a-spectrometer-fires-a-series-of-ir-frequencies-into-a-sample-material-and-the-device-measures-the-absorbance-of-the-sample-at-each-individual-frequency.-this-series-of-measurements-creates-a-spectrum-profile-which-can-then-be-used-to-determine-the-chemical-makeup-of-the-sample-material." class="level2">
+<h2 class="anchored" data-anchor-id="problem-1-50-points-infrared-ir-spectroscopy-technology-is-used-to-determine-the-chemical-makeup-of-a-substance.-the-theory-of-ir-spectroscopy-holds-that-unique-molecular-structures-absorb-ir-frequencies-differently.-in-practice-a-spectrometer-fires-a-series-of-ir-frequencies-into-a-sample-material-and-the-device-measures-the-absorbance-of-the-sample-at-each-individual-frequency.-this-series-of-measurements-creates-a-spectrum-profile-which-can-then-be-used-to-determine-the-chemical-makeup-of-the-sample-material.">Problem 1 (50 points): Infrared (IR) spectroscopy technology is used to determine the chemical makeup of a substance. The theory of IR spectroscopy holds that unique molecular structures absorb IR frequencies differently. In practice a spectrometer fires a series of IR frequencies into a sample material, and the device measures the absorbance of the sample at each individual frequency. This series of measurements creates a spectrum profile which can then be used to determine the chemical makeup of the sample material.</h2>
+<p>A Tecator Infratec Food and Feed Analyzer instrument was used to analyze 215 samples of meat across 100 frequencies. A sample of these frequency profiles is displayed in Fig. 6.20. In addition to an IR profile, analytical chemistry determined the percent content of water, fat, and protein for each sample. If we can establish a predictive relationship between IR spectrum and fat content, then food scientists could predict a sample’s fat content with IR instead of using analytical chemistry. This would provide costs savings, since analytical chemistry is a more expensive, time-consuming process.</p>
+<section id="a.-start-r-and-use-these-commands-to-load-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="a.-start-r-and-use-these-commands-to-load-the-data">a. Start R and use these commands to load the data:</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(earth)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kernlab)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elasticnet)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(tecator)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>?tecator</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the structure of absorp matrix</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(absorp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:215, 1:100] 2.62 2.83 2.58 2.82 2.79 ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the structure of endpoints matrix</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(endpoints)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:215, 1:3] 60.5 46 71 72.8 58.3 44 44 69.3 61.4 61.4 ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>moisture <span class="ot">&lt;-</span> endpoints[,<span class="dv">1</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fat <span class="ot">&lt;-</span> endpoints[,<span class="dv">2</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>protein <span class="ot">&lt;-</span> endpoints[,<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="b.-split-the-data-into-a-training-and-a-test-set-the-response-of-the-percentage-of-protein-pre-process-the-data-as-appropriate." class="level4">
+<h4 class="anchored" data-anchor-id="b.-split-the-data-into-a-training-and-a-test-set-the-response-of-the-percentage-of-protein-pre-process-the-data-as-appropriate.">b. Split the data into a training and a test set the response of the percentage of protein, pre-process the data as appropriate.</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the protein data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>protein <span class="ot">=</span> endpoints[,<span class="dv">3</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(absorp) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"V"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(absorp))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>trainindex <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(protein, <span class="at">p =</span> .<span class="dv">8</span>, </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">list =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">times =</span> <span class="dv">1</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>traindata <span class="ot">&lt;-</span> absorp[trainindex,]</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> absorp[<span class="sc">-</span>trainindex,]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>trainprotein <span class="ot">&lt;-</span> protein[trainindex]</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>testprotein <span class="ot">&lt;-</span> protein[<span class="sc">-</span>trainindex]</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Preprocess the data</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>preProcValues <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(traindata, <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"scale"</span>))</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>traindataTransformed <span class="ot">&lt;-</span> <span class="fu">predict</span>(preProcValues, traindata)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>testdataTransformed <span class="ot">&lt;-</span> <span class="fu">predict</span>(preProcValues, testdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the structure of the transformed data</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(traindataTransformed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:174, 1:100] -0.6089 -0.0256 -0.11 0.378 1.0692 ...
+ - attr(*, "dimnames")=List of 2
+  ..$ : NULL
+  ..$ : chr [1:100] "V1" "V2" "V3" "V4" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(testdataTransformed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:41, 1:100] -0.52406 0.00276 0.42899 -0.74749 1.19644 ...
+ - attr(*, "dimnames")=List of 2
+  ..$ : NULL
+  ..$ : chr [1:100] "V1" "V2" "V3" "V4" ...</code></pre>
+</div>
+</div>
+</section>
+<section id="c.-build-at-least-three-models-described-chapter-6-ordinary-least-squares-pcr-pls-ridge-and-enet.-for-those-models-with-tuning-parameters-what-are-the-optimal-values-of-the-tuning-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="c.-build-at-least-three-models-described-chapter-6-ordinary-least-squares-pcr-pls-ridge-and-enet.-for-those-models-with-tuning-parameters-what-are-the-optimal-values-of-the-tuning-parameters">c.&nbsp;Build at least three models described Chapter 6: ordinary least squares, PCR, PLS, Ridge, and ENET. For those models with tuning parameters, what are the optimal values of the tuning parameter(s)?</h4>
+</section>
+<section id="principal-component-regression" class="level3">
+<h3 class="anchored" data-anchor-id="principal-component-regression">Principal Component Regression</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pcr <span class="ot">&lt;-</span> <span class="fu">train</span>(traindataTransformed, trainprotein, <span class="at">method =</span> <span class="st">"pcr"</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>best_pcr <span class="ot">&lt;-</span> pcr<span class="sc">$</span>bestTune</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>best_pcr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ncomp
+10    10</code></pre>
+</div>
+</div>
+</section>
+<section id="ordinary-least-squares" class="level3">
+<h3 class="anchored" data-anchor-id="ordinary-least-squares">Ordinary Least Squares</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="fu">train</span>(traindataTransformed, trainprotein, <span class="at">method =</span> <span class="st">"lm"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = .outcome ~ ., data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.11284 -0.12785  0.00793  0.15999  0.67158 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.766e+01  3.179e-02 555.541  &lt; 2e-16 ***
+V1           8.609e+01  5.605e+02   0.154  0.87834    
+V2          -1.749e+03  9.905e+02  -1.766  0.08163 .  
+V3           3.692e+03  1.850e+03   1.996  0.04966 *  
+V4          -6.752e+03  3.094e+03  -2.182  0.03233 *  
+V5           8.175e+03  3.764e+03   2.172  0.03310 *  
+V6          -3.714e+03  3.318e+03  -1.119  0.26670    
+V7           2.669e+03  2.177e+03   1.226  0.22418    
+V8          -1.906e+03  1.379e+03  -1.382  0.17111    
+V9           3.186e+02  1.073e+03   0.297  0.76725    
+V10         -9.548e+02  1.383e+03  -0.690  0.49224    
+V11          3.468e+02  2.045e+03   0.170  0.86578    
+V12         -3.593e+03  3.345e+03  -1.074  0.28634    
+V13          3.744e+03  4.232e+03   0.885  0.37915    
+V14          2.795e+02  3.769e+03   0.074  0.94110    
+V15         -2.370e+03  2.588e+03  -0.916  0.36266    
+V16          3.428e+03  1.715e+03   1.999  0.04932 *  
+V17         -6.081e+02  1.330e+03  -0.457  0.64896    
+V18         -1.456e+03  1.292e+03  -1.127  0.26360    
+V19         -1.762e+03  1.986e+03  -0.888  0.37766    
+V20          1.394e+03  3.473e+03   0.401  0.68943    
+V21          6.063e+03  4.473e+03   1.355  0.17946    
+V22         -1.142e+04  5.038e+03  -2.266  0.02643 *  
+V23          7.375e+03  4.151e+03   1.777  0.07980 .  
+V24         -1.115e+03  2.902e+03  -0.384  0.70189    
+V25          7.596e+02  1.828e+03   0.415  0.67902    
+V26         -1.796e+03  1.281e+03  -1.403  0.16497    
+V27          1.384e+03  1.492e+03   0.928  0.35664    
+V28         -1.156e+03  1.743e+03  -0.664  0.50908    
+V29          1.356e+03  2.775e+03   0.489  0.62650    
+V30         -1.739e+03  4.246e+03  -0.409  0.68341    
+V31          2.116e+03  4.805e+03   0.440  0.66094    
+V32         -1.584e+03  4.259e+03  -0.372  0.71095    
+V33          1.715e+03  3.087e+03   0.556  0.58022    
+V34         -2.526e+03  2.286e+03  -1.105  0.27266    
+V35          2.679e+03  1.645e+03   1.628  0.10779    
+V36         -2.148e+03  1.530e+03  -1.403  0.16475    
+V37          2.559e+03  1.764e+03   1.451  0.15116    
+V38         -2.874e+03  2.169e+03  -1.325  0.18926    
+V39         -5.259e+02  2.737e+03  -0.192  0.84819    
+V40          4.406e+03  4.126e+03   1.068  0.28911    
+V41         -4.284e+03  5.258e+03  -0.815  0.41793    
+V42         -2.015e+03  5.252e+03  -0.384  0.70230    
+V43          7.425e+03  4.576e+03   1.623  0.10895    
+V44         -1.422e+03  3.352e+03  -0.424  0.67265    
+V45         -6.595e+03  2.678e+03  -2.463  0.01615 *  
+V46          4.926e+03  1.690e+03   2.915  0.00472 ** 
+V47         -2.558e+02  8.422e+02  -0.304  0.76219    
+V48         -1.671e+03  1.133e+03  -1.475  0.14455    
+V49          6.236e+02  1.786e+03   0.349  0.72798    
+V50          1.332e+03  2.112e+03   0.631  0.53032    
+V51         -4.386e+02  3.090e+03  -0.142  0.88751    
+V52         -1.528e+03  3.947e+03  -0.387  0.69969    
+V53          3.140e+03  3.987e+03   0.787  0.43356    
+V54         -4.351e+03  3.294e+03  -1.321  0.19064    
+V55          4.241e+03  2.606e+03   1.627  0.10800    
+V56         -3.263e+03  1.871e+03  -1.743  0.08546 .  
+V57          1.952e+03  1.493e+03   1.308  0.19501    
+V58         -4.492e+02  1.225e+03  -0.367  0.71501    
+V59         -3.681e+02  1.134e+03  -0.325  0.74648    
+V60          2.471e+02  1.040e+03   0.238  0.81284    
+V61         -4.492e+02  9.326e+02  -0.482  0.63148    
+V62          1.181e+03  9.943e+02   1.188  0.23863    
+V63         -2.407e+03  1.374e+03  -1.752  0.08400 .  
+V64          3.116e+03  2.145e+03   1.453  0.15045    
+V65         -2.128e+03  3.362e+03  -0.633  0.52871    
+V66          8.902e+02  4.479e+03   0.199  0.84302    
+V67         -1.546e+03  4.768e+03  -0.324  0.74672    
+V68          1.968e+03  4.214e+03   0.467  0.64185    
+V69          4.016e+02  3.163e+03   0.127  0.89931    
+V70         -3.330e+03  2.158e+03  -1.543  0.12710    
+V71          4.407e+03  1.671e+03   2.637  0.01020 *  
+V72         -3.167e+03  1.591e+03  -1.991  0.05024 .  
+V73          1.841e+03  1.404e+03   1.312  0.19378    
+V74          4.641e+02  1.388e+03   0.334  0.73901    
+V75         -4.377e+02  1.384e+03  -0.316  0.75271    
+V76         -2.393e+03  1.395e+03  -1.716  0.09044 .  
+V77          2.372e+03  1.213e+03   1.956  0.05435 .  
+V78          1.430e+02  1.474e+03   0.097  0.92301    
+V79         -2.026e+03  1.486e+03  -1.364  0.17681    
+V80         -4.792e+02  1.874e+03  -0.256  0.79893    
+V81          3.413e+03  2.007e+03   1.701  0.09326 .  
+V82         -5.212e+03  2.302e+03  -2.264  0.02651 *  
+V83          2.575e+03  2.695e+03   0.956  0.34238    
+V84          3.497e+03  2.793e+03   1.252  0.21454    
+V85         -6.831e+03  2.840e+03  -2.406  0.01868 *  
+V86          6.149e+03  3.292e+03   1.868  0.06578 .  
+V87         -7.247e+02  3.759e+03  -0.193  0.84768    
+V88         -4.792e+03  3.655e+03  -1.311  0.19394    
+V89          4.867e+03  3.314e+03   1.468  0.14629    
+V90         -1.926e+02  3.962e+03  -0.049  0.96137    
+V91          2.546e+03  4.534e+03   0.562  0.57609    
+V92         -7.643e+03  3.876e+03  -1.972  0.05241 .  
+V93          3.946e+03  2.992e+03   1.319  0.19131    
+V94          1.661e+03  2.703e+03   0.614  0.54082    
+V95         -3.567e+03  2.278e+03  -1.566  0.12177    
+V96          3.306e+03  2.038e+03   1.622  0.10910    
+V97         -1.749e+03  2.069e+03  -0.845  0.40070    
+V98          1.383e+03  1.878e+03   0.737  0.46375    
+V99         -2.236e+03  1.775e+03  -1.260  0.21158    
+V100         1.132e+03  8.290e+02   1.366  0.17629    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4194 on 73 degrees of freedom
+Multiple R-squared:  0.992, Adjusted R-squared:  0.9811 
+F-statistic: 90.77 on 100 and 73 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="partial-least-squares" class="level3">
+<h3 class="anchored" data-anchor-id="partial-least-squares">Partial Least Squares</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pls <span class="ot">&lt;-</span> <span class="fu">train</span>(traindataTransformed, trainprotein, <span class="at">method =</span> <span class="st">"pls"</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>best_pls <span class="ot">&lt;-</span> pls<span class="sc">$</span>bestTune</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>best_pls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ncomp
+10    10</code></pre>
+</div>
+</div>
+<p>Based on the cross-validation, the optimal values of the tuning parameters for both PCR &amp; PLS models is 10.</p>
+<section id="evaluate" class="level4">
+<h4 class="anchored" data-anchor-id="evaluate">Evaluate</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictions</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ols_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(ols, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>pcr_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(pcr, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>pls_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(pls, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluation</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>ols_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(ols_preds, testprotein)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>pcr_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(pcr_preds, testprotein)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>pls_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(pls_preds, testprotein)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the results</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>ols_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+1.1510006 0.8744041 0.7897741 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pcr_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+0.7985893 0.9242419 0.6548281 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pls_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+0.7353164 0.9379046 0.5888808 </code></pre>
+</div>
+</div>
+</section>
+<section id="d.-build-nonlinear-models-in-chapter-7-svm-neural-network-mars-and-knn-models.-since-neural-networks-are-especially-sensitive-to-highly-correlated-predictors-does-pre-processing-using-pca-help-the-model-for-those-models-with-tuning-parameters-what-are-the-optimal-values-of-the-tuning-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="d.-build-nonlinear-models-in-chapter-7-svm-neural-network-mars-and-knn-models.-since-neural-networks-are-especially-sensitive-to-highly-correlated-predictors-does-pre-processing-using-pca-help-the-model-for-those-models-with-tuning-parameters-what-are-the-optimal-values-of-the-tuning-parameters">d.&nbsp;Build nonlinear models in Chapter 7: SVM, neural network, MARS, and KNN models. Since neural networks are especially sensitive to highly correlated predictors, does pre-processing using PCA help the model? For those models with tuning parameters, what are the optimal values of the tuning parameter(s)?</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pcaPreProc <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(traindata, <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"pca"</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>traindataPCA <span class="ot">&lt;-</span> <span class="fu">predict</span>(pcaPreProc, traindata)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>testdataPCA <span class="ot">&lt;-</span> <span class="fu">predict</span>(pcaPreProc, testdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="support-vector-machine" class="level3">
+<h3 class="anchored" data-anchor-id="support-vector-machine">Support Vector Machine</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>svm <span class="ot">&lt;-</span> <span class="fu">train</span>(traindataTransformed, trainprotein, <span class="at">method =</span> <span class="st">"svmRadial"</span>,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>best_svm <span class="ot">&lt;-</span> svm<span class="sc">$</span>bestTune</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(best_svm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      sigma  C
+7 0.1316487 16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>svm_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>svm_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(svm_preds, testprotein)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(svm_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+1.6514511 0.6796184 1.1385809 </code></pre>
+</div>
+</div>
+</section>
+<section id="neural-network" class="level3">
+<h3 class="anchored" data-anchor-id="neural-network">Neural Network</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>nn <span class="ot">&lt;-</span> <span class="fu">train</span>(traindataPCA, trainprotein, <span class="at">method =</span> <span class="st">"nnet"</span>,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">tuneLength =</span> <span class="dv">10</span>, <span class="at">trace =</span> <span class="cn">FALSE</span>, <span class="at">linout =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>best_nn <span class="ot">&lt;-</span> nn<span class="sc">$</span>bestTune</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(best_nn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   size        decay
+13    3 0.0002371374</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>nn_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(nn, <span class="at">newdata =</span> testdataPCA)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>nn_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(nn_preds, testprotein)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nn_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+2.5493629 0.2341758 2.2361913 </code></pre>
+</div>
+</div>
+</section>
+<section id="multivariate-adaptive-regression-splines" class="level3">
+<h3 class="anchored" data-anchor-id="multivariate-adaptive-regression-splines">Multivariate Adaptive Regression Splines</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mars <span class="ot">&lt;-</span> <span class="fu">train</span>(traindataTransformed, trainprotein, <span class="at">method =</span> <span class="st">"earth"</span>,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>best_mars <span class="ot">&lt;-</span> mars<span class="sc">$</span>bestTune</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(best_mars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nprune degree
+8     20      1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mars_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(mars, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>mars_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(mars_preds, testprotein)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mars_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+0.8360361 0.9164617 0.6599512 </code></pre>
+</div>
+</div>
+</section>
+<section id="k-nearest-neighbors" class="level3">
+<h3 class="anchored" data-anchor-id="k-nearest-neighbors">k-Nearest Neighbors</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>knn <span class="ot">&lt;-</span> <span class="fu">train</span>(traindataTransformed, trainprotein, <span class="at">method =</span> <span class="st">"knn"</span>,</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>best_knn <span class="ot">&lt;-</span> knn<span class="sc">$</span>bestTune</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(best_knn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  k
+2 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>knn_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(knn, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>knn_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(knn_preds, testprotein)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(knn_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+2.1325705 0.4868149 1.7132404 </code></pre>
+</div>
+</div>
+</section>
+<section id="optimal-tuning-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="optimal-tuning-parameters">Optimal Tuning Parameters</h3>
+<p><strong>Support Vector Machine</strong> <br> - sigma: 0.1316487 <br> - C: 16 <br></p>
+<p><strong>Neural Network</strong> <br> - size: 3 <br> - decay: 0.0002371374 <br></p>
+<p><strong>MARS</strong> <br> - nprune: 20 <br> - degree: 1 <br></p>
+<p><strong>kNN</strong> <br> - k: 7 <br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Neural Network (without PCA)</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>nn <span class="ot">&lt;-</span> <span class="fu">train</span>(traindataTransformed, trainprotein, <span class="at">method =</span> <span class="st">"nnet"</span>,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">tuneLength =</span> <span class="dv">10</span>, <span class="at">trace =</span> <span class="cn">FALSE</span>, <span class="at">linout =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>nn_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(nn, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>nn_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(nn_preds, testprotein)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Neural Network (with PCA)</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>nn_pca <span class="ot">&lt;-</span> <span class="fu">train</span>(traindataPCA, trainprotein, <span class="at">method =</span> <span class="st">"nnet"</span>,</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tuneLength =</span> <span class="dv">10</span>, <span class="at">trace =</span> <span class="cn">FALSE</span>, <span class="at">linout =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>nn_pca_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(nn_pca, <span class="at">newdata =</span> testdataPCA)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>nn_pca_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(nn_pca_preds, testprotein)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Without PCA:</span><span class="sc">\n</span><span class="st">"</span>, nn_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Without PCA:
+ 0.5119102 0.9686138 0.4026765</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"With PCA:</span><span class="sc">\n</span><span class="st">"</span>, nn_pca_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>With PCA:
+ 2.432218 0.3148997 1.922737</code></pre>
+</div>
+</div>
+<p>The neural network with PCA <strong>performs worse</strong> than the neural net without PCA. Without PCA, the model has a lower RMSE, higher R-squared, and lower MAE.</p>
+<section id="e.-which-model-from-parts-c-and-d-has-the-best-predictive-ability-is-any-model-significantly-better-or-worse-than-the-others" class="level4">
+<h4 class="anchored" data-anchor-id="e.-which-model-from-parts-c-and-d-has-the-best-predictive-ability-is-any-model-significantly-better-or-worse-than-the-others">e. Which model from parts c and d has the best predictive ability? Is any model significantly better or worse than the others?</h4>
+<p>The <strong>Partial Least Squares</strong> model has the best predictive ability because it has the lowest RMSE and highest R-squared. In general, linear models performed better than nonlinear models.</p>
+</section>
+</section>
+</section>
+<section id="problem-2-30-points-developing-a-model-to-predict-permeability-see-sect.-1.4-of-the-textbook-could-save-significant-resources-for-a-pharmaceutical-company-while-at-the-same-time-more-rapidly-identifying-molecules-that-have-a-sufficient-permeability-to-become-a-drug" class="level2">
+<h2 class="anchored" data-anchor-id="problem-2-30-points-developing-a-model-to-predict-permeability-see-sect.-1.4-of-the-textbook-could-save-significant-resources-for-a-pharmaceutical-company-while-at-the-same-time-more-rapidly-identifying-molecules-that-have-a-sufficient-permeability-to-become-a-drug">Problem 2 (30 points): Developing a model to predict permeability (see Sect. 1.4 of the textbook) could save significant resources for a pharmaceutical company, while at the same time more rapidly identifying molecules that have a sufficient permeability to become a drug:</h2>
+<section id="a.-start-r-and-use-these-commands-to-load-the-data-1" class="level4">
+<h4 class="anchored" data-anchor-id="a.-start-r-and-use-these-commands-to-load-the-data-1">a. Start R and use these commands to load the data</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load library and attach data</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AppliedPredictiveModeling)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(permeability)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the data structure</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(fingerprints)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:165, 1:1107] 0 0 0 0 0 0 0 0 0 0 ...
+ - attr(*, "dimnames")=List of 2
+  ..$ : chr [1:165] "1" "2" "3" "4" ...
+  ..$ : chr [1:1107] "X1" "X2" "X3" "X4" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(permeability)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:165, 1] 12.52 1.12 19.41 1.73 1.68 ...
+ - attr(*, "dimnames")=List of 2
+  ..$ : chr [1:165] "1" "2" "3" "4" ...
+  ..$ : chr "permeability"</code></pre>
+</div>
+</div>
+</section>
+<section id="b.-the-fingerprint-predictors-indicate-the-presence-or-absence-of-substructures-of-a-molecule-and-are-often-sparse-meaning-that-relatively-few-of-the-molecules-contain-each-substructure.-filter-out-the-predictors-that-have-low-frequencies-using-the-nearzerovar-function-from-the-caret-package.-how-many-predictors-are-left-for-modeling" class="level4">
+<h4 class="anchored" data-anchor-id="b.-the-fingerprint-predictors-indicate-the-presence-or-absence-of-substructures-of-a-molecule-and-are-often-sparse-meaning-that-relatively-few-of-the-molecules-contain-each-substructure.-filter-out-the-predictors-that-have-low-frequencies-using-the-nearzerovar-function-from-the-caret-package.-how-many-predictors-are-left-for-modeling">b. The fingerprint predictors indicate the presence or absence of substructures of a molecule and are often sparse meaning that relatively few of the molecules contain each substructure. Filter out the predictors that have low frequencies using the nearZeroVar function from the caret package. How many predictors are left for modeling?</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(fingerprints)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  165 1107</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fingerprints) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"X"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(fingerprints))</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify near-zero variance predictors</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>nzv <span class="ot">&lt;-</span> <span class="fu">nearZeroVar</span>(fingerprints)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter near-zero variance predictors</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>filtered_fingerprints <span class="ot">&lt;-</span> fingerprints[, <span class="sc">-</span>nzv]</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>remaining_predictors <span class="ot">&lt;-</span> <span class="fu">ncol</span>(filtered_fingerprints)</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Remaining predictors:"</span>, remaining_predictors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Remaining predictors: 388</code></pre>
+</div>
+</div>
+</section>
+<section id="c.-split-the-data-into-a-training-and-a-test-set-pre-process-the-data-and-tune-a-pls-model.-how-many-latent-variables-are-optimal-and-what-is-the-corresponding-resampled-estimate-of-r2" class="level4">
+<h4 class="anchored" data-anchor-id="c.-split-the-data-into-a-training-and-a-test-set-pre-process-the-data-and-tune-a-pls-model.-how-many-latent-variables-are-optimal-and-what-is-the-corresponding-resampled-estimate-of-r2">c.&nbsp;Split the data into a training and a test set, pre-process the data, and tune a PLS model. How many latent variables are optimal and what is the corresponding resampled estimate of R2?</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>permeability_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(filtered_fingerprints, <span class="at">permeability =</span> permeability)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>trainindex <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(permeability_df<span class="sc">$</span>permeability, <span class="at">p =</span> .<span class="dv">8</span>, </span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">list =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">times =</span> <span class="dv">1</span>)</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>traindata <span class="ot">&lt;-</span> permeability_df[trainindex,]</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>testdata <span class="ot">&lt;-</span> permeability_df[<span class="sc">-</span>trainindex,]</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Preprocess the data</span></span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>preProcValues <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(traindata, <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"scale"</span>))</span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>traindataTransformed <span class="ot">&lt;-</span> <span class="fu">predict</span>(preProcValues, traindata)</span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>testdataTransformed <span class="ot">&lt;-</span> <span class="fu">predict</span>(preProcValues, testdata)</span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit PLS model</span></span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>pls <span class="ot">&lt;-</span> <span class="fu">train</span>(permeability <span class="sc">~</span> ., <span class="at">data =</span> traindataTransformed, <span class="at">method =</span> <span class="st">"pls"</span>,</span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tuneLength =</span> <span class="dv">20</span>)</span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Best tuning parameter</span></span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>best_pls <span class="ot">&lt;-</span> pls<span class="sc">$</span>bestTune</span>
+<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The number of latent variables that are optimal:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The number of latent variables that are optimal:"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(best_pls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  ncomp
+8     8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R-squared resampled estimate</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>resampled_R2 <span class="ot">&lt;-</span> <span class="fu">max</span>(pls<span class="sc">$</span>results<span class="sc">$</span>Rsquared)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"The resampled estimate of R-squared is:"</span>, resampled_R2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The resampled estimate of R-squared is: 0.5496288</code></pre>
+</div>
+</div>
+</section>
+<section id="d.-predict-the-response-for-the-test-set.-what-is-the-test-set-estimate-of-r2" class="level4">
+<h4 class="anchored" data-anchor-id="d.-predict-the-response-for-the-test-set.-what-is-the-test-set-estimate-of-r2">d.&nbsp;Predict the response for the test set. What is the test set estimate of R2?</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict test set</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>pls_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(pls, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate test set R-squared</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>test_R2 <span class="ot">&lt;-</span> <span class="fu">R2</span>(pls_preds, testdataTransformed<span class="sc">$</span>permeability)</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"The test set estimate of R-squared is:"</span>, test_R2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The test set estimate of R-squared is: 0.3729547</code></pre>
+</div>
+</div>
+</section>
+<section id="e.-try-building-other-models-discussed-in-this-chapter.-do-any-have-better-predictive-performance" class="level4">
+<h4 class="anchored" data-anchor-id="e.-try-building-other-models-discussed-in-this-chapter.-do-any-have-better-predictive-performance">e. Try building other models discussed in this chapter. Do any have better predictive performance?</h4>
+</section>
+<section id="ridge-regression" class="level3">
+<h3 class="anchored" data-anchor-id="ridge-regression">Ridge Regression</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>ridge <span class="ot">&lt;-</span> <span class="fu">train</span>(permeability <span class="sc">~</span> ., <span class="at">data =</span> traindataTransformed, <span class="at">method =</span> <span class="st">"ridge"</span>,</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tuneLength =</span> <span class="dv">20</span>)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>ridge_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(ridge, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>ridge_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(ridge_preds, testdataTransformed<span class="sc">$</span>permeability)</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ridge_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+0.7921829 0.4007391 0.5682279 </code></pre>
+</div>
+</div>
+</section>
+<section id="lasso-regression" class="level3">
+<h3 class="anchored" data-anchor-id="lasso-regression">Lasso Regression</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>lasso <span class="ot">&lt;-</span> <span class="fu">train</span>(permeability <span class="sc">~</span> ., <span class="at">data =</span> traindataTransformed, <span class="at">method =</span> <span class="st">"lasso"</span>,</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">tuneLength =</span> <span class="dv">20</span>)</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>lasso_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(lasso, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>lasso_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(lasso_preds, testdataTransformed<span class="sc">$</span>permeability)</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lasso_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+0.6835848 0.3617548 0.4443482 </code></pre>
+</div>
+</div>
+<p>The <strong>Lasso Regression</strong> has better predictive performance with a lower RMSE and MAE; however, the amount of variance this model explains is significantly reduced.</p>
+</section>
+</section>
+<section id="problem-3-20-points-return-to-the-permeability-problem-outlined-in-problem-2.-train-several-nonlinear-regression-models-and-evaluate-the-resampling-and-test-set-performance." class="level2">
+<h2 class="anchored" data-anchor-id="problem-3-20-points-return-to-the-permeability-problem-outlined-in-problem-2.-train-several-nonlinear-regression-models-and-evaluate-the-resampling-and-test-set-performance.">Problem 3 (20 points): Return to the permeability problem outlined in Problem 2. Train several nonlinear regression models and evaluate the resampling and test set performance.</h2>
+<section id="a.-which-nonlinear-regression-model-that-we-learned-in-chapter-7-gives-the-optimal-resampling-and-test-set-performance" class="level4">
+<h4 class="anchored" data-anchor-id="a.-which-nonlinear-regression-model-that-we-learned-in-chapter-7-gives-the-optimal-resampling-and-test-set-performance">a. Which nonlinear regression model that we learned in Chapter 7 gives the optimal resampling and test set performance?</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SVM model</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>svm <span class="ot">&lt;-</span> <span class="fu">train</span>(permeability <span class="sc">~</span> ., <span class="at">data =</span> traindataTransformed, <span class="at">method =</span> <span class="st">"svmRadial"</span>,</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>best_svm <span class="ot">&lt;-</span> svm<span class="sc">$</span>bestTune</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(best_svm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        sigma  C
+7 0.001635739 16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>svm_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>svm_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(svm_preds, testdataTransformed<span class="sc">$</span>permeability)</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(svm_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+0.6559098 0.4872192 0.4199596 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Neural Network model</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>nn <span class="ot">&lt;-</span> <span class="fu">train</span>(permeability <span class="sc">~</span> ., <span class="at">data =</span> traindataTransformed, <span class="at">method =</span> <span class="st">"nnet"</span>,</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">tuneLength =</span> <span class="dv">10</span>, <span class="at">trace =</span> <span class="cn">FALSE</span>, <span class="at">linout =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>best_nn <span class="ot">&lt;-</span> nn<span class="sc">$</span>bestTune</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(best_nn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  size      decay
+8    1 0.01778279</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>nn_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(nn, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>nn_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(nn_preds, testdataTransformed<span class="sc">$</span>permeability)</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nn_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+0.7979915 0.2768253 0.5537823 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MARS model</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>mars <span class="ot">&lt;-</span> <span class="fu">train</span>(permeability <span class="sc">~</span> ., <span class="at">data =</span> traindataTransformed, <span class="at">method =</span> <span class="st">"earth"</span>,</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>best_mars <span class="ot">&lt;-</span> mars<span class="sc">$</span>bestTune</span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(best_mars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nprune degree
+1      2      1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>mars_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(mars, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>mars_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(mars_preds, testdataTransformed<span class="sc">$</span>permeability)</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mars_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+0.7232002 0.2541716 0.5483070 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># KNN model</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>knn <span class="ot">&lt;-</span> <span class="fu">train</span>(permeability <span class="sc">~</span> ., <span class="at">data =</span> traindataTransformed, <span class="at">method =</span> <span class="st">"knn"</span>,</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>best_knn <span class="ot">&lt;-</span> knn<span class="sc">$</span>bestTune</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(best_knn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  k
+3 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>knn_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(knn, <span class="at">newdata =</span> testdataTransformed)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>knn_res <span class="ot">&lt;-</span> <span class="fu">postResample</span>(knn_preds, testdataTransformed<span class="sc">$</span>permeability)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(knn_res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     RMSE  Rsquared       MAE 
+0.7236208 0.2436855 0.4910987 </code></pre>
+</div>
+</div>
+</section>
+<section id="b.-do-any-of-the-nonlinear-models-outperform-the-optimal-linear-model-you-previously-developed-in-problem-2-if-so-what-might-this-tell-you-about-the-underlying-relationship-between-the-predictors-and-the-response" class="level4">
+<h4 class="anchored" data-anchor-id="b.-do-any-of-the-nonlinear-models-outperform-the-optimal-linear-model-you-previously-developed-in-problem-2-if-so-what-might-this-tell-you-about-the-underlying-relationship-between-the-predictors-and-the-response">b. Do any of the nonlinear models outperform the optimal linear model you previously developed in Problem 2? If so, what might this tell you about the underlying relationship between the predictors and the response?</h4>
+<p>The SVM model has a lower RMSE and MAE, indicating it has better predictive ability, but is unable to explain as much of the variance as the PLS model. The SVM model should be used if accuracy is the priority of the study, and the PLS model should be used for better understanding the overall relationships in the data.</p>
+</section>
+<section id="c.-would-you-recommend-any-of-the-models-you-have-developed-to-replace-the-permeability-laboratory-experiment" class="level4">
+<h4 class="anchored" data-anchor-id="c.-would-you-recommend-any-of-the-models-you-have-developed-to-replace-the-permeability-laboratory-experiment">c.&nbsp;Would you recommend any of the models you have developed to replace the permeability laboratory experiment?</h4>
+<p>I would recommend the SVM model as a replacement for the permeability lab experiment due to its enhanced predictive ability. I’m more interested in the model’s predictive power rather than its ability to explain the variance/relationships in the dataset.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
