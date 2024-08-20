@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Collin Real (yhi267)">
+
+<title>Homework 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Real_Collin_HW3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Real_Collin_HW3_files/libs/quarto-html/quarto.js"></script>
+<script src="Real_Collin_HW3_files/libs/quarto-html/popper.min.js"></script>
+<script src="Real_Collin_HW3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Real_Collin_HW3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Real_Collin_HW3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Real_Collin_HW3_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Real_Collin_HW3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Real_Collin_HW3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Real_Collin_HW3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Homework 3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Collin Real (yhi267) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Reminder: All homework solutions must be written up independently, even though you are allowed to discuss with other students. You need to save your homework assignment in a pdf/html format and upload it with the R code (.R or .rmd) into the Canvas before 11:59pm CT on the due day. No late homework assignment will be graded in any circumstance.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest) </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet) </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modeldata)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ranger)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="problem-1-25-points" class="level1">
+<h1>Problem 1 (25 points):</h1>
+<p>In Homework 1, Problem 3, we described a data set which contained 96 oil samples each from one of seven types of oils (pumpkin, sunflower, peanut, olive, soybean, rapeseed, and corn). Gas chromatography was performed on each sample and the percentage of each type of 7 fatty acids was determined. We would like to use these data to build a model that predicts the type of oil based on a sample’s fatty acid percentages. These data can be found in the caret package using data(oil). The oil types are contained in a factor variable called oilType. The types are pumpkin (coded as A), sunflower (B), peanut (C), olive (D), soybean (E), rapeseed (F) and corn (G). In R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>?oil</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(oil)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(oilType)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Factor w/ 7 levels "A","B","C","D",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(oilType)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>oilType
+ A  B  C  D  E  F  G 
+37 26  3  7 11 10  2 </code></pre>
+</div>
+</div>
+<ol type="a">
+<li>Given the classification imbalance in oil Type, describe how you would create a training and testing set.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>oil_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(fattyAcids)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>oil_data<span class="sc">$</span>oilType <span class="ot">&lt;-</span> oilType</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>train_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(oil_data<span class="sc">$</span>oilType, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> oil_data[train_index, ]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> oil_data[<span class="sc">-</span>train_index, ]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>preProcValues <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(train_data[,<span class="sc">-</span><span class="fu">ncol</span>(train_data)], <span class="at">method =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"scale"</span>))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>train_data[,<span class="sc">-</span><span class="fu">ncol</span>(train_data)] <span class="ot">&lt;-</span> <span class="fu">predict</span>(preProcValues, train_data[,<span class="sc">-</span><span class="fu">ncol</span>(train_data)])</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>test_data[,<span class="sc">-</span><span class="fu">ncol</span>(test_data)] <span class="ot">&lt;-</span> <span class="fu">predict</span>(preProcValues, test_data[,<span class="sc">-</span><span class="fu">ncol</span>(test_data)])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">classProbs =</span> <span class="cn">TRUE</span>, <span class="at">summaryFunction =</span> multiClassSummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(train_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Palmitic    Stearic      Oleic   Linoleic  Linolenic Eicosanoic Eicosenoic 
+         0          0          0          0          0          0          0 
+   oilType 
+         0 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>train_data_clean <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(train_data)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>preProcess_missing <span class="ot">&lt;-</span> <span class="fu">preProcess</span>(train_data, <span class="at">method =</span> <span class="st">'medianImpute'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>train_data_clean <span class="ot">&lt;-</span> <span class="fu">predict</span>(preProcess_missing, train_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li><p>Which classification statistic would you choose to optimize for this problem and why? When the classes are imbalanced, I would optimize the F1 score.</p></li>
+<li><p>Split the data into a training and a testing set, pre-process the data, and build models and tune them via resampling described in Chapter 12. Clearly list the models under consideration and the corresponding tuning parameters of the models.</p></li>
+</ol>
+<ul>
+<li>k-Nearest Neighbors (k-NN):</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>knn_model <span class="ot">&lt;-</span> <span class="fu">train</span>(oilType <span class="sc">~</span> ., <span class="at">data =</span> train_data_clean, <span class="at">method =</span> <span class="st">"knn"</span>, <span class="at">trControl =</span> ctrl, <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>knn_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>k-Nearest Neighbors 
+
+70 samples
+ 7 predictor
+ 7 classes: 'A', 'B', 'C', 'D', 'E', 'F', 'G' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 62, 61, 62, 65, 63, 62, ... 
+Resampling results across tuning parameters:
+
+  k   Accuracy   Kappa    
+   5  0.9375000  0.9195499
+   7  0.9138889  0.8913839
+   9  0.8902778  0.8606707
+  11  0.8500000  0.7986789
+  13  0.8333333  0.7649739
+  15  0.8208333  0.7493668
+  17  0.7629365  0.6623458
+  19  0.7629365  0.6633254
+  21  0.7179365  0.5943018
+  23  0.7054365  0.5779753
+
+Accuracy was used to select the optimal model using the largest value.
+The final value used for the model was k = 5.</code></pre>
+</div>
+</div>
+<p>k-Nearest Neighbors (kNN)</p>
+<ul>
+<li><p>Best k: 5</p></li>
+<li><p>Accuracy: 0.9375</p></li>
+<li><p>Kappa: 0.9195499</p></li>
+<li><p>Support Vector Machine (SVM):</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>svm_model <span class="ot">&lt;-</span> <span class="fu">train</span>(oilType <span class="sc">~</span> ., <span class="at">data =</span> train_data_clean, <span class="at">method =</span> <span class="st">"svmRadial"</span>, <span class="at">trControl =</span> ctrl, <span class="at">tuneLength =</span> <span class="dv">10</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>svm_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Support Vector Machines with Radial Basis Function Kernel 
+
+70 samples
+ 7 predictor
+ 7 classes: 'A', 'B', 'C', 'D', 'E', 'F', 'G' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 62, 61, 62, 65, 63, 62, ... 
+Resampling results across tuning parameters:
+
+  C       Accuracy   Kappa    
+    0.25  0.8573810  0.8067221
+    0.50  0.9263889  0.9070702
+    1.00  0.9500000  0.9378462
+    2.00  0.9750000  0.9686154
+    4.00  0.9638889  0.9550595
+    8.00  0.9638889  0.9550595
+   16.00  0.9638889  0.9550595
+   32.00  0.9638889  0.9550595
+   64.00  0.9638889  0.9550595
+  128.00  0.9638889  0.9550595
+
+Tuning parameter 'sigma' was held constant at a value of 0.1001887
+Accuracy was used to select the optimal model using the largest value.
+The final values used for the model were sigma = 0.1001887 and C = 2.</code></pre>
+</div>
+</div>
+<p>Support Vector Machines (SVM):</p>
+<ul>
+<li><p>sigma = 0.1001887</p></li>
+<li><p>C = 2</p></li>
+<li><p>Accuracy: 0.975</p></li>
+<li><p>Kappa: 0.9686154</p></li>
+<li><p>Random Forest:</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>rf_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">mtry =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">ncol</span>(train_data) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">6</span>))  <span class="co"># Adjust the length.out to the desired number of values</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">&lt;-</span> <span class="fu">train</span>(oilType <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">"rf"</span>, <span class="at">trControl =</span> ctrl, <span class="at">tuneGrid =</span> rf_grid)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>rf_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Random Forest 
+
+70 samples
+ 7 predictor
+ 7 classes: 'A', 'B', 'C', 'D', 'E', 'F', 'G' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 62, 61, 62, 65, 63, 62, ... 
+Resampling results across tuning parameters:
+
+  mtry  Accuracy  Kappa    
+  1.0   0.9625    0.9523009
+  2.2   0.9750    0.9679487
+  3.4   0.9750    0.9679487
+  4.6   0.9550    0.9405111
+  5.8   0.9550    0.9405111
+  7.0   0.9550    0.9405111
+
+Accuracy was used to select the optimal model using the largest value.
+The final value used for the model was mtry = 2.2.</code></pre>
+</div>
+</div>
+<p>Random Forest</p>
+<ul>
+<li>mtry: 2.2</li>
+<li>Accuracy: 0.975</li>
+<li>Kappa: 0.9679487</li>
+</ul>
+<p>Support Vector Machines performs the best with an accuracy of 97.50% and a Kappa of 0.9686.</p>
+<ol start="4" type="a">
+<li>Of the models presented in this chapter, which performs best on these data? Which oil type does the model most accurately predict? Least accurately predict?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate predictions for each model</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>knn_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(knn_model, test_data)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>svm_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm_model, test_data)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>rf_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf_model, test_data)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create confusion matrices</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>knn_cm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(knn_pred, test_data<span class="sc">$</span>oilType)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>svm_cm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(svm_pred, test_data<span class="sc">$</span>oilType)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>rf_cm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(rf_pred, test_data<span class="sc">$</span>oilType)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print confusion matrices</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(knn_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  A  B  C  D  E  F  G
+         A 10  0  0  0  0  0  0
+         B  1  7  0  0  0  0  0
+         C  0  0  0  0  0  0  0
+         D  0  0  0  2  0  0  0
+         E  0  0  0  0  3  0  0
+         F  0  0  0  0  0  3  0
+         G  0  0  0  0  0  0  0
+
+Overall Statistics
+                                         
+               Accuracy : 0.9615         
+                 95% CI : (0.8036, 0.999)
+    No Information Rate : 0.4231         
+    P-Value [Acc &gt; NIR] : 7.058e-09      
+                                         
+                  Kappa : 0.9467         
+                                         
+ Mcnemar's Test P-Value : NA             
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E Class: F
+Sensitivity            0.9091   1.0000       NA  1.00000   1.0000   1.0000
+Specificity            1.0000   0.9474        1  1.00000   1.0000   1.0000
+Pos Pred Value         1.0000   0.8750       NA  1.00000   1.0000   1.0000
+Neg Pred Value         0.9375   1.0000       NA  1.00000   1.0000   1.0000
+Prevalence             0.4231   0.2692        0  0.07692   0.1154   0.1154
+Detection Rate         0.3846   0.2692        0  0.07692   0.1154   0.1154
+Detection Prevalence   0.3846   0.3077        0  0.07692   0.1154   0.1154
+Balanced Accuracy      0.9545   0.9737       NA  1.00000   1.0000   1.0000
+                     Class: G
+Sensitivity                NA
+Specificity                 1
+Pos Pred Value             NA
+Neg Pred Value             NA
+Prevalence                  0
+Detection Rate              0
+Detection Prevalence        0
+Balanced Accuracy          NA</code></pre>
+</div>
+</div>
+<p>kNN:</p>
+<ul>
+<li>Accuracy: 0.9615</li>
+<li>Kappa: 0.9467</li>
+<li>Class A, B, D, E, and F are good</li>
+<li>Class C, and G have no predictions</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(svm_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  A  B  C  D  E  F  G
+         A 10  0  0  0  0  0  0
+         B  1  7  0  0  0  0  0
+         C  0  0  0  0  0  0  0
+         D  0  0  0  2  0  0  0
+         E  0  0  0  0  3  0  0
+         F  0  0  0  0  0  3  0
+         G  0  0  0  0  0  0  0
+
+Overall Statistics
+                                         
+               Accuracy : 0.9615         
+                 95% CI : (0.8036, 0.999)
+    No Information Rate : 0.4231         
+    P-Value [Acc &gt; NIR] : 7.058e-09      
+                                         
+                  Kappa : 0.9467         
+                                         
+ Mcnemar's Test P-Value : NA             
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E Class: F
+Sensitivity            0.9091   1.0000       NA  1.00000   1.0000   1.0000
+Specificity            1.0000   0.9474        1  1.00000   1.0000   1.0000
+Pos Pred Value         1.0000   0.8750       NA  1.00000   1.0000   1.0000
+Neg Pred Value         0.9375   1.0000       NA  1.00000   1.0000   1.0000
+Prevalence             0.4231   0.2692        0  0.07692   0.1154   0.1154
+Detection Rate         0.3846   0.2692        0  0.07692   0.1154   0.1154
+Detection Prevalence   0.3846   0.3077        0  0.07692   0.1154   0.1154
+Balanced Accuracy      0.9545   0.9737       NA  1.00000   1.0000   1.0000
+                     Class: G
+Sensitivity                NA
+Specificity                 1
+Pos Pred Value             NA
+Neg Pred Value             NA
+Prevalence                  0
+Detection Rate              0
+Detection Prevalence        0
+Balanced Accuracy          NA</code></pre>
+</div>
+</div>
+<p>SVM:</p>
+<ul>
+<li>Accuracy: 0.9615</li>
+<li>Kappa: 0.9467</li>
+<li>Class A, B, D, E, and F are predicted well</li>
+<li>Class C and G have no predictions.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rf_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  A  B  C  D  E  F  G
+         A 11  0  0  0  0  0  0
+         B  0  7  0  0  0  0  0
+         C  0  0  0  0  0  0  0
+         D  0  0  0  2  0  0  0
+         E  0  0  0  0  3  0  0
+         F  0  0  0  0  0  3  0
+         G  0  0  0  0  0  0  0
+
+Overall Statistics
+                                     
+               Accuracy : 1          
+                 95% CI : (0.8677, 1)
+    No Information Rate : 0.4231     
+    P-Value [Acc &gt; NIR] : 1.936e-10  
+                                     
+                  Kappa : 1          
+                                     
+ Mcnemar's Test P-Value : NA         
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E Class: F
+Sensitivity            1.0000   1.0000       NA  1.00000   1.0000   1.0000
+Specificity            1.0000   1.0000        1  1.00000   1.0000   1.0000
+Pos Pred Value         1.0000   1.0000       NA  1.00000   1.0000   1.0000
+Neg Pred Value         1.0000   1.0000       NA  1.00000   1.0000   1.0000
+Prevalence             0.4231   0.2692        0  0.07692   0.1154   0.1154
+Detection Rate         0.4231   0.2692        0  0.07692   0.1154   0.1154
+Detection Prevalence   0.4231   0.2692        0  0.07692   0.1154   0.1154
+Balanced Accuracy      1.0000   1.0000       NA  1.00000   1.0000   1.0000
+                     Class: G
+Sensitivity                NA
+Specificity                 1
+Pos Pred Value             NA
+Neg Pred Value             NA
+Prevalence                  0
+Detection Rate              0
+Detection Prevalence        0
+Balanced Accuracy          NA</code></pre>
+</div>
+</div>
+<p>Random Forest:</p>
+<ul>
+<li>Accuracy: 1.0000</li>
+<li>Kappa: 1.0000</li>
+<li>Class A, B, D, E, F are perfect.</li>
+</ul>
+<p>Conclusion: <br> Random Forest which has perfect accuracy and Kappa. Across all models the most accurate class is A (in terms of class). The least accurate class are Class C and G.</p>
+</section>
+<section id="problem-2-25-points" class="level1">
+<h1>Problem 2 (25 points):</h1>
+<p>Use the fatty acid data from Problem 1 above.</p>
+<ol type="a">
+<li>Use the same data splitting approach (if any) and pre-processing steps that you did Problem 1. Using the same classification statistic as before, build models described in Chapter 13: Nonlinear Classification Models for these data. Which model has the best predictive ability? How does this optimal model’s performance compare to the best linear model’s performance?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ctrl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>tune_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">sigma =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>), </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">32</span>, <span class="dv">64</span>, <span class="dv">128</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>svm_model <span class="ot">&lt;-</span> <span class="fu">train</span>(oilType <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">"svmRadial"</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> ctrl, <span class="at">tuneGrid =</span> tune_grid)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(svm_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Support Vector Machines with Radial Basis Function Kernel 
+
+70 samples
+ 7 predictor
+ 7 classes: 'A', 'B', 'C', 'D', 'E', 'F', 'G' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 62, 61, 62, 65, 63, 62, ... 
+Resampling results across tuning parameters:
+
+  sigma  C       Accuracy   Kappa    
+  0.01     0.25  0.3811905  0.0000000
+  0.01     0.50  0.4498016  0.1246638
+  0.01     1.00  0.7907143  0.7077263
+  0.01     2.00  0.9277778  0.9069784
+  0.01     4.00  0.9388889  0.9245806
+  0.01     8.00  0.9388889  0.9245806
+  0.01    16.00  0.9638889  0.9547692
+  0.01    32.00  0.9638889  0.9547692
+  0.01    64.00  0.9638889  0.9547692
+  0.01   128.00  0.9638889  0.9547692
+  0.05     0.25  0.7379365  0.6237136
+  0.05     0.50  0.9152778  0.8903510
+  0.05     1.00  0.9388889  0.9240000
+  0.05     2.00  0.9388889  0.9240000
+  0.05     4.00  0.9750000  0.9686154
+  0.05     8.00  0.9638889  0.9550595
+  0.05    16.00  0.9638889  0.9550595
+  0.05    32.00  0.9638889  0.9550595
+  0.05    64.00  0.9638889  0.9550595
+  0.05   128.00  0.9638889  0.9550595
+  0.10     0.25  0.8573810  0.8067221
+  0.10     0.50  0.9263889  0.9070702
+  0.10     1.00  0.9500000  0.9378462
+  0.10     2.00  0.9750000  0.9686154
+  0.10     4.00  0.9638889  0.9550595
+  0.10     8.00  0.9638889  0.9550595
+  0.10    16.00  0.9638889  0.9550595
+  0.10    32.00  0.9638889  0.9550595
+  0.10    64.00  0.9638889  0.9550595
+  0.10   128.00  0.9638889  0.9550595
+  0.20     0.25  0.8916667  0.8580089
+  0.20     0.50  0.9250000  0.9042889
+  0.20     1.00  0.9375000  0.9209163
+  0.20     2.00  0.9513889  0.9384427
+  0.20     4.00  0.9513889  0.9384427
+  0.20     8.00  0.9513889  0.9387330
+  0.20    16.00  0.9513889  0.9387330
+  0.20    32.00  0.9513889  0.9387330
+  0.20    64.00  0.9513889  0.9387330
+  0.20   128.00  0.9513889  0.9387330
+
+Accuracy was used to select the optimal model using the largest value.
+The final values used for the model were sigma = 0.1 and C = 2.</code></pre>
+</div>
+</div>
+<p>Support Vector Machines (SVM):</p>
+<ul>
+<li>sigma = 0.1</li>
+<li>C = 2</li>
+<li>Accuracy: 0.9277778</li>
+<li>Kappa: 0.9069784</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>svm_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm_model, test_data)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>svm_cm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(svm_pred, test_data<span class="sc">$</span>oilType)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(svm_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  A  B  C  D  E  F  G
+         A 10  0  0  0  0  0  0
+         B  1  7  0  0  0  0  0
+         C  0  0  0  0  0  0  0
+         D  0  0  0  2  0  0  0
+         E  0  0  0  0  3  0  0
+         F  0  0  0  0  0  3  0
+         G  0  0  0  0  0  0  0
+
+Overall Statistics
+                                         
+               Accuracy : 0.9615         
+                 95% CI : (0.8036, 0.999)
+    No Information Rate : 0.4231         
+    P-Value [Acc &gt; NIR] : 7.058e-09      
+                                         
+                  Kappa : 0.9467         
+                                         
+ Mcnemar's Test P-Value : NA             
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E Class: F
+Sensitivity            0.9091   1.0000       NA  1.00000   1.0000   1.0000
+Specificity            1.0000   0.9474        1  1.00000   1.0000   1.0000
+Pos Pred Value         1.0000   0.8750       NA  1.00000   1.0000   1.0000
+Neg Pred Value         0.9375   1.0000       NA  1.00000   1.0000   1.0000
+Prevalence             0.4231   0.2692        0  0.07692   0.1154   0.1154
+Detection Rate         0.3846   0.2692        0  0.07692   0.1154   0.1154
+Detection Prevalence   0.3846   0.3077        0  0.07692   0.1154   0.1154
+Balanced Accuracy      0.9545   0.9737       NA  1.00000   1.0000   1.0000
+                     Class: G
+Sensitivity                NA
+Specificity                 1
+Pos Pred Value             NA
+Neg Pred Value             NA
+Prevalence                  0
+Detection Rate              0
+Detection Prevalence        0
+Balanced Accuracy          NA</code></pre>
+</div>
+</div>
+<p>SVM Matrix: - Accuracy : 0.9615<br>
+- Kappa : 0.9467 - High accuracy for classes A, B, D, E, and F. - Classes C, G are not predictable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>gbm_model <span class="ot">&lt;-</span> <span class="fu">train</span>(oilType <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">"gbm"</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> ctrl, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gbm_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Stochastic Gradient Boosting 
+
+70 samples
+ 7 predictor
+ 7 classes: 'A', 'B', 'C', 'D', 'E', 'F', 'G' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 62, 61, 62, 65, 63, 62, ... 
+Resampling results across tuning parameters:
+
+  interaction.depth  n.trees  Accuracy  Kappa    
+  1                   50      0.9425    0.9248248
+  1                  100      0.9425    0.9251265
+  1                  150      0.9425    0.9251265
+  2                   50      0.9425    0.9248248
+  2                  100      0.9425    0.9251265
+  2                  150      0.9425    0.9251265
+  3                   50      0.9300    0.9087999
+  3                  100      0.9425    0.9251265
+  3                  150      0.9425    0.9251265
+
+Tuning parameter 'shrinkage' was held constant at a value of 0.1
+
+Tuning parameter 'n.minobsinnode' was held constant at a value of 10
+Accuracy was used to select the optimal model using the largest value.
+The final values used for the model were n.trees = 50, interaction.depth =
+ 1, shrinkage = 0.1 and n.minobsinnode = 10.</code></pre>
+</div>
+</div>
+<p>GBM Model: - n.trees = 50 - interaction.depth = 1 - shrinkage = 0.1 - n.minobsinnode = 10 - Accuracy: 0.9425 - Kappa: 0.9248248</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>gbm_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(gbm_model, test_data)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>gbm_cm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(gbm_pred, test_data<span class="sc">$</span>oilType)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gbm_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  A  B  C  D  E  F  G
+         A 11  0  0  0  0  0  0
+         B  0  7  0  0  0  0  0
+         C  0  0  0  0  0  0  0
+         D  0  0  0  2  0  0  0
+         E  0  0  0  0  3  0  0
+         F  0  0  0  0  0  3  0
+         G  0  0  0  0  0  0  0
+
+Overall Statistics
+                                     
+               Accuracy : 1          
+                 95% CI : (0.8677, 1)
+    No Information Rate : 0.4231     
+    P-Value [Acc &gt; NIR] : 1.936e-10  
+                                     
+                  Kappa : 1          
+                                     
+ Mcnemar's Test P-Value : NA         
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E Class: F
+Sensitivity            1.0000   1.0000       NA  1.00000   1.0000   1.0000
+Specificity            1.0000   1.0000        1  1.00000   1.0000   1.0000
+Pos Pred Value         1.0000   1.0000       NA  1.00000   1.0000   1.0000
+Neg Pred Value         1.0000   1.0000       NA  1.00000   1.0000   1.0000
+Prevalence             0.4231   0.2692        0  0.07692   0.1154   0.1154
+Detection Rate         0.4231   0.2692        0  0.07692   0.1154   0.1154
+Detection Prevalence   0.4231   0.2692        0  0.07692   0.1154   0.1154
+Balanced Accuracy      1.0000   1.0000       NA  1.00000   1.0000   1.0000
+                     Class: G
+Sensitivity                NA
+Specificity                 1
+Pos Pred Value             NA
+Neg Pred Value             NA
+Prevalence                  0
+Detection Rate              0
+Detection Prevalence        0
+Balanced Accuracy          NA</code></pre>
+</div>
+</div>
+<p>GBM Matrix:</p>
+<ul>
+<li>Accuracy : 1</li>
+<li>Kappa : 1</li>
+<li>High accuracy for classes A, B, D, E, and F.</li>
+<li>Classes C, G are not predictable.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>nn_model <span class="ot">&lt;-</span> <span class="fu">train</span>(oilType <span class="sc">~</span> ., <span class="at">data =</span> train_data, <span class="at">method =</span> <span class="st">"nnet"</span>,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">trControl =</span> ctrl, <span class="at">tuneLength =</span> <span class="dv">5</span>, <span class="at">linout =</span> <span class="cn">TRUE</span>, <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nn_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Neural Network 
+
+70 samples
+ 7 predictor
+ 7 classes: 'A', 'B', 'C', 'D', 'E', 'F', 'G' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 62, 61, 62, 65, 63, 62, ... 
+Resampling results across tuning parameters:
+
+  size  decay  Accuracy   Kappa    
+  1     0e+00  0.7385317  0.6383084
+  1     1e-04  0.7191667  0.6065154
+  1     1e-03  0.7701587  0.6728330
+  1     1e-02  0.7396032  0.6430604
+  1     1e-01  0.6308730  0.4573382
+  3     0e+00  0.8877778  0.8516943
+  3     1e-04  0.9388889  0.9233333
+  3     1e-03  0.9763889  0.9699375
+  3     1e-02  0.9638889  0.9547692
+  3     1e-01  0.9513889  0.9400000
+  5     0e+00  0.9750000  0.9679487
+  5     1e-04  0.9563889  0.9429915
+  5     1e-03  0.9638889  0.9550595
+  5     1e-02  0.9638889  0.9547692
+  5     1e-01  0.9513889  0.9387813
+  7     0e+00  0.9638889  0.9534872
+  7     1e-04  0.9638889  0.9541026
+  7     1e-03  0.9763889  0.9707692
+  7     1e-02  0.9763889  0.9707692
+  7     1e-01  0.9763889  0.9707692
+  9     0e+00  0.9300000  0.9105798
+  9     1e-04  0.9763889  0.9710595
+  9     1e-03  0.9763889  0.9710595
+  9     1e-02  0.9763889  0.9707692
+  9     1e-01  0.9763889  0.9710595
+
+Accuracy was used to select the optimal model using the largest value.
+The final values used for the model were size = 3 and decay = 0.001.</code></pre>
+</div>
+</div>
+<p>Neural Network (NN):</p>
+<ul>
+<li>size = 3</li>
+<li>decay = 0.001</li>
+<li>Accuracy: 0.9638889<br>
+-Kappa: 0.9547692</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>nn_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(nn_model, test_data)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>nn_cm <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(nn_pred, test_data<span class="sc">$</span>oilType)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nn_cm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction  A  B  C  D  E  F  G
+         A 11  0  0  0  0  0  0
+         B  0  7  0  0  0  0  0
+         C  0  0  0  0  0  0  0
+         D  0  0  0  1  0  0  0
+         E  0  0  0  0  3  0  0
+         F  0  0  0  0  0  3  0
+         G  0  0  0  1  0  0  0
+
+Overall Statistics
+                                         
+               Accuracy : 0.9615         
+                 95% CI : (0.8036, 0.999)
+    No Information Rate : 0.4231         
+    P-Value [Acc &gt; NIR] : 7.058e-09      
+                                         
+                  Kappa : 0.9465         
+                                         
+ Mcnemar's Test P-Value : NA             
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E Class: F
+Sensitivity            1.0000   1.0000       NA  0.50000   1.0000   1.0000
+Specificity            1.0000   1.0000        1  1.00000   1.0000   1.0000
+Pos Pred Value         1.0000   1.0000       NA  1.00000   1.0000   1.0000
+Neg Pred Value         1.0000   1.0000       NA  0.96000   1.0000   1.0000
+Prevalence             0.4231   0.2692        0  0.07692   0.1154   0.1154
+Detection Rate         0.4231   0.2692        0  0.03846   0.1154   0.1154
+Detection Prevalence   0.4231   0.2692        0  0.03846   0.1154   0.1154
+Balanced Accuracy      1.0000   1.0000       NA  0.75000   1.0000   1.0000
+                     Class: G
+Sensitivity                NA
+Specificity           0.96154
+Pos Pred Value             NA
+Neg Pred Value             NA
+Prevalence            0.00000
+Detection Rate        0.00000
+Detection Prevalence  0.03846
+Balanced Accuracy          NA</code></pre>
+</div>
+</div>
+<p>Nueral Network Matrix: - Accuracy : 0.9615 - Kappa : 0.9465 - High accuracy for classes A, B, D, E, and F. - Classes C, and G do not perform well.</p>
+<p>Conclusion: The Random forest model outperforms all the other models, almost having a perfect score; however, SVM is the best model.</p>
+<ol start="2" type="a">
+<li>Would you infer that the data have nonlinear separation boundaries based on this comparison?</li>
+</ol>
+<p>Model performance and the confusion matrices suggests that the data has nonlinear separation boundaries due to the fact that the random forest model has a perfect accuracy and kappa, and nonlinear models performed well.</p>
+<ol start="3" type="a">
+<li>Which oil type does the optimal model most accurately predict? Least accurately predict?</li>
+</ol>
+<p>Stochastic Gradient Boosting had perfect classification, but missing class predictions (C and G). Support Vector Machines (SVM) and Neural Network both achieved high accuracy. SVM and Neural Network have a more realistic performance reflecting slight misclassification.</p>
+</section>
+<section id="problem-3-25-points" class="level1">
+<h1>Problem 3 (25 points):</h1>
+<p>The “churn” data set was developed to predict telecom customer churn based on information about their account. The data files state that the data are “artificial based on claims similar to real world.” The data consist of 19 predictors related to the customer account, such as the number of customer service calls, the area code, and the number of minutes. The outcome is whether the customer churned:</p>
+<ol type="a">
+<li>Start R and use these commands to load the data</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mlc_churn) </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mlc_churn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [5,000 × 20] (S3: tbl_df/tbl/data.frame)
+ $ state                        : Factor w/ 51 levels "AK","AL","AR",..: 17 36 32 36 37 2 20 25 19 50 ...
+ $ account_length               : int [1:5000] 128 107 137 84 75 118 121 147 117 141 ...
+ $ area_code                    : Factor w/ 3 levels "area_code_408",..: 2 2 2 1 2 3 3 2 1 2 ...
+ $ international_plan           : Factor w/ 2 levels "no","yes": 1 1 1 2 2 2 1 2 1 2 ...
+ $ voice_mail_plan              : Factor w/ 2 levels "no","yes": 2 2 1 1 1 1 2 1 1 2 ...
+ $ number_vmail_messages        : int [1:5000] 25 26 0 0 0 0 24 0 0 37 ...
+ $ total_day_minutes            : num [1:5000] 265 162 243 299 167 ...
+ $ total_day_calls              : int [1:5000] 110 123 114 71 113 98 88 79 97 84 ...
+ $ total_day_charge             : num [1:5000] 45.1 27.5 41.4 50.9 28.3 ...
+ $ total_eve_minutes            : num [1:5000] 197.4 195.5 121.2 61.9 148.3 ...
+ $ total_eve_calls              : int [1:5000] 99 103 110 88 122 101 108 94 80 111 ...
+ $ total_eve_charge             : num [1:5000] 16.78 16.62 10.3 5.26 12.61 ...
+ $ total_night_minutes          : num [1:5000] 245 254 163 197 187 ...
+ $ total_night_calls            : int [1:5000] 91 103 104 89 121 118 118 96 90 97 ...
+ $ total_night_charge           : num [1:5000] 11.01 11.45 7.32 8.86 8.41 ...
+ $ total_intl_minutes           : num [1:5000] 10 13.7 12.2 6.6 10.1 6.3 7.5 7.1 8.7 11.2 ...
+ $ total_intl_calls             : int [1:5000] 3 3 5 7 3 6 7 6 4 5 ...
+ $ total_intl_charge            : num [1:5000] 2.7 3.7 3.29 1.78 2.73 1.7 2.03 1.92 2.35 3.02 ...
+ $ number_customer_service_calls: int [1:5000] 1 1 0 2 3 0 3 0 1 0 ...
+ $ churn                        : Factor w/ 2 levels "yes","no": 2 2 2 2 2 2 2 2 2 2 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>?mlc_churn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Explore the data by visualizing the relationship between the predictors and the outcome. Are there important features of the predictor data themselves, such as between-predictor correlations or degenerate distributions? Can functions of more than one predictor be used to model the data more effectively?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mlc_churn, <span class="fu">aes</span>(<span class="at">x =</span> account_length)) <span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Account Length"</span>, <span class="at">x =</span> <span class="st">"Account Length"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Real_Collin_HW3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mlc_churn, <span class="fu">aes</span>(<span class="at">x =</span> number_customer_service_calls)) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Density of Customer Service Calls"</span>, <span class="at">x =</span> <span class="st">"Number of Customer Service Calls"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Real_Collin_HW3_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mlc_churn, <span class="fu">aes</span>(<span class="at">x =</span> churn, <span class="at">y =</span> account_length, <span class="at">fill =</span> churn)) <span class="sc">+</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Account Length by Churn Status"</span>, <span class="at">x =</span> <span class="st">"Churn"</span>, <span class="at">y =</span> <span class="st">"Account Length"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Real_Collin_HW3_files/figure-html/unnamed-chunk-22-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mlc_churn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "state"                         "account_length"               
+ [3] "area_code"                     "international_plan"           
+ [5] "voice_mail_plan"               "number_vmail_messages"        
+ [7] "total_day_minutes"             "total_day_calls"              
+ [9] "total_day_charge"              "total_eve_minutes"            
+[11] "total_eve_calls"               "total_eve_charge"             
+[13] "total_night_minutes"           "total_night_calls"            
+[15] "total_night_charge"            "total_intl_minutes"           
+[17] "total_intl_calls"              "total_intl_charge"            
+[19] "number_customer_service_calls" "churn"                        </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>num_vars <span class="ot">&lt;-</span> mlc_churn <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">one_of</span>(<span class="st">"churn"</span>)) <span class="co"># Exclude the `churn` column</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(num_vars, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(corr_matrix, <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">tl.cex =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Real_Collin_HW3_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mlc_churn, <span class="fu">aes</span>(<span class="at">x =</span> area_code, <span class="at">fill =</span> churn)) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of Churn by Area Code"</span>, <span class="at">x =</span> <span class="st">"Area Code"</span>, <span class="at">y =</span> <span class="st">"Proportion"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Real_Collin_HW3_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Split the data into a training and a testing set, pre-process the data if appropriate.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(mlc_churn, <span class="at">prop =</span> <span class="fl">0.7</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(split)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">testing</span>(split)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(churn <span class="sc">~</span> ., <span class="at">data =</span> train_data) <span class="sc">%&gt;%</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_normalize</span>(<span class="fu">all_numeric</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>(<span class="at">training =</span> train_data, <span class="at">retain =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>train_prepped <span class="ot">&lt;-</span> <span class="fu">bake</span>(recipe, <span class="at">new_data =</span> train_data)</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>test_prepped <span class="ot">&lt;-</span> <span class="fu">bake</span>(recipe, <span class="at">new_data =</span> test_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="a">
+<li>Try building other models discussed in this chapter. Do any have better predictive performance?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(churn_no <span class="sc">~</span> ., <span class="at">data =</span> train_prepped, <span class="at">method =</span> <span class="st">"class"</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>tree_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree_model, <span class="at">newdata =</span> test_prepped, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>tree_preds <span class="ot">&lt;-</span> <span class="fu">factor</span>(tree_preds, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>))</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>test_churn <span class="ot">&lt;-</span> <span class="fu">factor</span>(test_prepped<span class="sc">$</span>churn_no, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>))</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>tree_metrics <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(tree_preds, test_churn)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tree_metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction    0    1
+         0  142   22
+         1   64 1272
+                                          
+               Accuracy : 0.9427          
+                 95% CI : (0.9297, 0.9539)
+    No Information Rate : 0.8627          
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+                                          
+                  Kappa : 0.7353          
+                                          
+ Mcnemar's Test P-Value : 9.818e-06       
+                                          
+            Sensitivity : 0.68932         
+            Specificity : 0.98300         
+         Pos Pred Value : 0.86585         
+         Neg Pred Value : 0.95210         
+             Prevalence : 0.13733         
+         Detection Rate : 0.09467         
+   Detection Prevalence : 0.10933         
+      Balanced Accuracy : 0.83616         
+                                          
+       'Positive' Class : 0               
+                                          </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>rf_model <span class="ot">&lt;-</span> <span class="fu">ranger</span>(churn_no <span class="sc">~</span> ., <span class="at">data =</span> train_prepped, <span class="at">classification =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>rf_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(rf_model, <span class="at">data =</span> test_prepped)<span class="sc">$</span>predictions</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>rf_preds <span class="ot">&lt;-</span> <span class="fu">factor</span>(rf_preds, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>))</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>test_churn <span class="ot">&lt;-</span> <span class="fu">factor</span>(test_prepped<span class="sc">$</span>churn_no, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>))</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>rf_metrics <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(rf_preds, test_churn)</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rf_metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction    0    1
+         0  152    6
+         1   54 1288
+                                          
+               Accuracy : 0.96            
+                 95% CI : (0.9488, 0.9693)
+    No Information Rate : 0.8627          
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+                                          
+                  Kappa : 0.8129          
+                                          
+ Mcnemar's Test P-Value : 1.298e-09       
+                                          
+            Sensitivity : 0.7379          
+            Specificity : 0.9954          
+         Pos Pred Value : 0.9620          
+         Neg Pred Value : 0.9598          
+             Prevalence : 0.1373          
+         Detection Rate : 0.1013          
+   Detection Prevalence : 0.1053          
+      Balanced Accuracy : 0.8666          
+                                          
+       'Positive' Class : 0               
+                                          </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>svm_model <span class="ot">&lt;-</span> <span class="fu">svm</span>(churn_no <span class="sc">~</span> ., <span class="at">data =</span> train_prepped, <span class="at">kernel =</span> <span class="st">"linear"</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>svm_preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(svm_model, <span class="at">newdata =</span> test_prepped)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>svm_preds <span class="ot">&lt;-</span> <span class="fu">factor</span>(svm_preds, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>))</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>test_churn <span class="ot">&lt;-</span> <span class="fu">factor</span>(test_prepped<span class="sc">$</span>churn_no, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"1"</span>))</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>svm_metrics <span class="ot">&lt;-</span> <span class="fu">confusionMatrix</span>(svm_preds, test_churn)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(svm_metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction 0 1
+         0 0 0
+         1 0 0
+                                  
+               Accuracy : NaN     
+                 95% CI : (NA, NA)
+    No Information Rate : NA      
+    P-Value [Acc &gt; NIR] : NA      
+                                  
+                  Kappa : NaN     
+                                  
+ Mcnemar's Test P-Value : NA      
+                                  
+            Sensitivity :  NA     
+            Specificity :  NA     
+         Pos Pred Value :  NA     
+         Neg Pred Value :  NA     
+             Prevalence : NaN     
+         Detection Rate : NaN     
+   Detection Prevalence : NaN     
+      Balanced Accuracy :  NA     
+                                  
+       'Positive' Class : 0       
+                                  </code></pre>
+</div>
+</div>
+<p>Recommendations: Random Forest: Recommended for predicting customer churn. It has the highest accuracy and balanced accuracy, so it is the most reliable. Decision Tree: Performs well. It could be considered if a simpler model is preferred. SVM Model: Performed poorly. Might be necessary to experiment with different parameters/tuning.</p>
+</section>
+<section id="problem-4-25-points" class="level1">
+<h1>Problem 4 (25 points):</h1>
+<p>Use the fatty acid data from Problem 3 above.</p>
+<ol type="a">
+<li>Use the same data splitting approach (if any) and pre-processing steps that you did in Problem 3.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(fattyAcids, <span class="at">prop =</span> <span class="fl">0.7</span>)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(split)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">testing</span>(split)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(Palmitic <span class="sc">~</span> ., <span class="at">data =</span> train_data) <span class="sc">%&gt;%</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_normalize</span>(<span class="fu">all_numeric</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>(<span class="at">training =</span> train_data, <span class="at">retain =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>train_prepped <span class="ot">&lt;-</span> <span class="fu">bake</span>(recipe, <span class="at">new_data =</span> train_data)</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>test_prepped <span class="ot">&lt;-</span> <span class="fu">bake</span>(recipe, <span class="at">new_data =</span> test_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li>Fit a few basic trees to the training set.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">train</span>(Palmitic <span class="sc">~</span> ., <span class="at">data =</span> train_prepped, <span class="at">method =</span> <span class="st">"rpart"</span>,</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>))</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tree_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CART 
+
+67 samples
+ 6 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 61, 59, 60, 60, 60, 62, ... 
+Resampling results across tuning parameters:
+
+  cp          RMSE       Rsquared   MAE      
+  0.01269014  0.4343674  0.8293833  0.3239018
+  0.03634568  0.4755753  0.7887882  0.3522876
+  0.41822619  0.8435007  0.3796150  0.6447531
+
+RMSE was used to select the optimal model using the smallest value.
+The final value used for the model was cp = 0.01269014.</code></pre>
+</div>
+</div>
+<p>Summary of Model Selection:</p>
+<ul>
+<li>cp: 0.01269014</li>
+<li>RMSE: 0.4344</li>
+<li>R-squared: 0.8294</li>
+<li>MAE: 0.3239</li>
+</ul>
+<ol start="3" type="a">
+<li>Does bagging improve the performance of the trees? What about boosting?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>bag_model <span class="ot">&lt;-</span> <span class="fu">train</span>(Palmitic <span class="sc">~</span> ., <span class="at">data =</span> train_prepped, <span class="at">method =</span> <span class="st">"treebag"</span>,</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>))</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(bag_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Bagged CART 
+
+67 samples
+ 6 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 61, 59, 60, 60, 60, 62, ... 
+Resampling results:
+
+  RMSE       Rsquared   MAE      
+  0.4737903  0.8053511  0.3563861</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>bag_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(bag_model, <span class="at">newdata =</span> test_prepped)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>true_values <span class="ot">&lt;-</span> test_prepped<span class="sc">$</span>Palmitic</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>bag_rmse <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((true_values <span class="sc">-</span> bag_pred)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>bag_mae <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(true_values <span class="sc">-</span> bag_pred))</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>bag_r2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="fu">sum</span>((true_values <span class="sc">-</span> bag_pred)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>((true_values <span class="sc">-</span> <span class="fu">mean</span>(true_values))<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Reported Bagged CART Metrics:</p>
+<p>RMSE: 0.4738 R-squared: 0.8054 MAE: 0.3564</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>boost_model <span class="ot">&lt;-</span> <span class="fu">train</span>(Palmitic <span class="sc">~</span> ., <span class="at">data =</span> train_prepped, <span class="at">method =</span> <span class="st">"gbm"</span>,</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(boost_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Stochastic Gradient Boosting 
+
+67 samples
+ 6 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 61, 59, 60, 60, 60, 62, ... 
+Resampling results across tuning parameters:
+
+  interaction.depth  n.trees  RMSE       Rsquared   MAE      
+  1                   50      0.6626056  0.6237379  0.5423409
+  1                  100      0.6362505  0.6624431  0.5116362
+  1                  150      0.6165107  0.6822524  0.5015556
+  2                   50      0.6364163  0.6691804  0.5231758
+  2                  100      0.5842062  0.7173840  0.4729791
+  2                  150      0.5624239  0.7326215  0.4603205
+  3                   50      0.6417222  0.6786888  0.5130903
+  3                  100      0.6176002  0.6811174  0.4895127
+  3                  150      0.5818666  0.7215028  0.4630890
+
+Tuning parameter 'shrinkage' was held constant at a value of 0.1
+
+Tuning parameter 'n.minobsinnode' was held constant at a value of 10
+RMSE was used to select the optimal model using the smallest value.
+The final values used for the model were n.trees = 150, interaction.depth =
+ 2, shrinkage = 0.1 and n.minobsinnode = 10.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>boost_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(boost_model, <span class="at">newdata =</span> test_prepped)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>boost_rmse <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((true_values <span class="sc">-</span> boost_pred)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>boost_mae <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(true_values <span class="sc">-</span> boost_pred))</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>boost_r2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="fu">sum</span>((true_values <span class="sc">-</span> boost_pred)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>((true_values <span class="sc">-</span> <span class="fu">mean</span>(true_values))<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Stochastic Gradient Boosting: - (n.trees): 150 - (interaction.depth): 2 - (shrinkage): 0.1 (constant) - (n.minobsinnode): 10 (constant) - RMSE: 0.5819 - R-squared: 0.7215 - MAE: 0.4631</p>
+<ol start="4" type="a">
+<li>Which model has better performance, and what are the corresponding tuning parameters?</li>
+</ol>
+<p>The Decision Tree model has the lowest RMSE, indicating the best performance in terms of prediction accuracy.The Boosting model achieves the highest R-squared value, suggesting it explains the variance best.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

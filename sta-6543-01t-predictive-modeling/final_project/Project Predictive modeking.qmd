@@ -1,0 +1,493 @@
+---
+title: "Pima Indians Diabetes Database"
+author: "Joaquin, Leo, Seth, Collin"
+format: docx
+---
+
+#  Introduction and Background
+
+# 1. Introduction and Background
+
+**Nature of the Analysis**: The objective is to predict the onset of diabetes in Pima Indians based on various medical details.
+
+**Goal**: Develop and compare predictive models to determine the presence of diabetes.
+
+**Description of Analysis Methods**: We will use various predictive modeling techniques, including logistic regression, decision trees, random forests, support vector machines, k-nearest neighbors, neural networks, and multivariate adaptive regression splines (MARS).
+
+
+```{r}
+# Load necessary libraries
+library(tidyverse)
+library(caret)
+library(randomForest)
+library(e1071)
+library(nnet)
+library(MASS)
+library(earth)
+library(corrplot)
+
+# Load the data
+data <- read.csv("diabetes.csv")
+```
+
+
+# 2. Data Structure
+
+Data Description: The dataset includes medical predictor variables and one target variable, Outcome. Predictor variables include the number of pregnancies, BMI, insulin level, age, etc.
+
+Columns: Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age, Outcome.
+
+Data Collection: The data was collected from the National Institute of Diabetes and Digestive and Kidney Diseases. It consists of medical records of females at least 21 years old of Pima Indian heritage.
+
+```{r}
+# Check the column names
+colnames(data)
+```
+
+```{r}
+# Get a summary of the data
+summary(data)
+```
+
+```{r}
+# Check for missing values
+sum(is.na(data))
+```
+
+
+
+
+# 3. Statistical Learning Methods
+
+Methods Overview: We'll use the following methods, each chosen for its suitability in binary classification problems.
+
+- Logistic Regression
+- Decision Trees
+- Random Forests
+- Support Vector Machine
+- k-Nearest Neighbors
+- Neural Network
+- Multivariate Adaptive Regression Splines (MARS)
+
+Evaluation Metrics: We'll evaluate model performance using accuracy, precision, recall, F1-score, and AUC-ROC.
+
+
+
+```{r}
+# Ensure the Outcome column remains as factor
+data$Outcome <- as.factor(data$Outcome)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 4. Analysis Results
+
+Data Preprocessing
+
+Normalization: Normalizing the data to improve model performance.
+
+```{r}
+# Normalize the data (excluding the Outcome column)
+data_scaled <- data
+data_scaled[,-9] <- scale(data[,-9])
+```
+
+
+
+Exploratory Data Analysis (EDA)
+
+Visualizations: To understand the data distribution and relationships.
+
+```{r}
+# Visualize data distributions
+ggplot(data, aes(x = Glucose)) + geom_histogram(binwidth = 10) + theme_minimal() + labs(title="Distribution of Glucose Levels")
+ggplot(data, aes(x = Age, fill = Outcome)) + geom_histogram(binwidth = 5, position = "dodge") + theme_minimal() + labs(title="Age Distribution by Outcome")
+
+# Correlation matrix
+correlation_matrix <- cor(data[,-9])
+corrplot(correlation_matrix, method = "circle")
+
+```
+
+Histogram:
+
+- Overall Shape: The histogram shows a roughly bell-shaped distribution, indicating that most glucose levels cluster around a central value with fewer occurrences as you move away from the center. This suggests that glucose levels follow a normal distribution.
+
+- Central Tendency: The peak of the histogram is around the 100 mg/dL mark, which suggests that most individuals in the dataset have glucose levels near this value.
+
+- Spread: The range of glucose levels is from 0 to over 200 mg/dL. Most data points lie between 50 and 150 mg/dL.
+
+- Outliers: There are a few data points at the lower end (close to 0) and at the higher end (over 200). These could be considered outliers and might require further investigation.
+
+
+
+Bar Plot: Age Distribution by Outcome:
+
+- Age Groups: The x-axis represents age groups in bins of 5 years. The y-axis represents the count of individuals within each age group.
+
+- Red (0): Non-diabetic individuals; Blue (1): Diabetic individuals
+
+- Age Distribution: Most individuals, both diabetic and non-diabetic, are younger, specifically in the 20-25 age range. As age increases, the count of individuals in each age group decreases.
+
+
+
+key insights: 
+
+- Glucose Levels: Most individuals have glucose levels centered around 100 mg/dL, with a spread indicating a normal distribution but with potential outliers at the extremes.
+
+- Age and Outcome: Younger individuals are more likely to be non-diabetic, while the proportion of diabetics increases with age. This trend suggests that age might be a significant factor in the onset of diabetes.
+
+
+
+
+
+Model Training and Evaluation
+
+Data Splitting: Split the data into training and testing sets.
+
+```{r}
+# Split the data into training and testing sets
+set.seed(123)
+trainIndex <- createDataPartition(data$Outcome, p = .8, list = FALSE)
+dataTrain <- data[trainIndex,]
+dataTest <- data[-trainIndex,]
+
+# Ensure the Outcome column remains as factor
+dataTrain$Outcome <- factor(dataTrain$Outcome)
+dataTest$Outcome <- factor(dataTest$Outcome)
+```
+
+
+
+Logistic Regression
+
+```{r}
+# Logistic Regression
+log_model <- glm(Outcome ~ ., data = dataTrain, family = binomial)
+log_pred <- predict(log_model, dataTest, type = "response")
+log_pred_class <- ifelse(log_pred > 0.5, 1, 0)
+
+# Convert predictions to factor
+log_pred_class <- factor(log_pred_class, levels = c(0, 1))
+
+# Evaluate model using confusion matrix
+confusion_matrix <- confusionMatrix(log_pred_class, dataTest$Outcome)
+print(confusion_matrix)
+
+# Compute MAE, RMSE, and R-squared
+mae <- mean(abs(log_pred - as.numeric(dataTest$Outcome) - 1))
+rmse <- sqrt(mean((log_pred - (as.numeric(dataTest$Outcome) - 1))^2))
+rsq <- 1 - (sum((log_pred - (as.numeric(dataTest$Outcome) - 1))^2) / 
+            sum((mean(as.numeric(dataTest$Outcome) - 1) - (as.numeric(dataTest$Outcome) - 1))^2))
+```
+Confusion Matrix:
+
+True Negatives (TN): 91
+False Positives (FP): 21
+False Negatives (FN): 9
+True Positives (TP): 32
+
+Performance Metrics:
+
+Accuracy: 0.8039 (80.39% of the predictions are correct)
+Kappa: 0.5426 (moderate agreement between predicted and observed classifications)
+Sensitivity (Recall): 0.9100 (91% of actual positives were correctly identified)
+Specificity: 0.6038 (60.38% of actual negatives were correctly identified)
+Positive Predictive Value: 0.8125 (81.25% of predicted positives are actual positives)
+Negative Predictive Value: 0.7805 (78.05% of predicted negatives are actual negatives)
+Balanced Accuracy: 0.7569 (average of sensitivity and specificity)
+
+
+```{r}
+cat("Mean Absolute Error (MAE): ", mae, "\n")
+cat("Root Mean Squared Error (RMSE): ", rmse, "\n")
+cat("R-squared: ", rsq, "\n")
+```
+
+- MAE (Mean Absolute Error): 2.001603 (mean of absolute differences between predictions and actual outcomes)
+
+- RMSE (Root Mean Squared Error): 0.3633682 (square root of the average of squared differences between predictions and actual outcomes)
+
+- R-squared: 0.4168223 (proportion of variance explained by the model)
+
+
+
+
+
+Random Forest
+
+```{r}
+# Split the data into training and testing sets
+set.seed(123)
+trainIndex <- createDataPartition(data$Outcome, p = .8, list = FALSE, times = 1)
+dataTrain <- data[trainIndex,]
+dataTest <- data[-trainIndex,]
+
+# Ensure the Outcome column remains as factor
+dataTrain$Outcome <- factor(dataTrain$Outcome)
+dataTest$Outcome <- factor(dataTest$Outcome)
+
+# Random Forest
+rf_model <- randomForest(Outcome ~ ., data = dataTrain, ntree = 100)
+rf_pred <- predict(rf_model, dataTest)
+
+# Ensure levels of predicted and actual values match
+rf_pred <- factor(rf_pred, levels = levels(dataTest$Outcome))
+
+# Evaluate model using confusion matrix
+confusion_matrix_rf <- confusionMatrix(rf_pred, dataTest$Outcome)
+print(confusion_matrix_rf)
+
+# Convert rf_pred to numeric for regression metrics
+rf_pred_numeric <- as.numeric(rf_pred) - 1
+actual_outcome_numeric <- as.numeric(dataTest$Outcome) - 1
+
+# Compute MAE, RMSE, and R-squared
+mae_rf <- mean(abs(rf_pred_numeric - actual_outcome_numeric))
+rmse_rf <- sqrt(mean((rf_pred_numeric - actual_outcome_numeric)^2))
+rsq_rf <- 1 - (sum((rf_pred_numeric - actual_outcome_numeric)^2) / 
+               sum((mean(actual_outcome_numeric) - actual_outcome_numeric)^2))
+```
+
+Confusion Matrix:
+
+TN: 92
+FP: 20
+FN: 8
+TP: 33
+
+
+Performance Metrics:
+
+Accuracy: 0.817 (81.7% of the predictions are correct)
+Kappa: 0.5731 (moderate agreement between predicted and observed classifications)
+Sensitivity: 0.9200 (92% of actual positives were correctly identified)
+Specificity: 0.6226 (62.26% of actual negatives were correctly identified)
+Positive Predictive Value: 0.8214 (82.14% of predicted positives are actual positives)
+Negative Predictive Value: 0.8049 (80.49% of predicted negatives are actual negatives)
+Balanced Accuracy: 0.7713 (average of sensitivity and specificity)
+
+
+
+```{r}
+cat("Mean Absolute Error (MAE): ", mae_rf, "\n")
+cat("Root Mean Squared Error (RMSE): ", rmse_rf, "\n")
+cat("R-squared: ", rsq_rf, "\n")
+```
+
+MAE: 0.1830065
+RMSE: 0.4277926
+R-squared: 0.1916981
+
+
+
+
+
+Support Vector Machine
+
+```{r}
+# Split the data into training and testing sets
+set.seed(123)
+trainIndex <- createDataPartition(data$Outcome, p = .8, list = FALSE, times = 1)
+dataTrain <- data[trainIndex,]
+dataTest <- data[-trainIndex,]
+
+# Ensure the Outcome column remains as factor
+dataTrain$Outcome <- factor(dataTrain$Outcome)
+dataTest$Outcome <- factor(dataTest$Outcome)
+
+# Support Vector Machine
+svm_model <- svm(Outcome ~ ., data = dataTrain, kernel = "linear", cost = 1, scale = TRUE)
+svm_pred <- predict(svm_model, dataTest)
+
+# Ensure levels of predicted and actual values match
+svm_pred <- factor(svm_pred, levels = levels(dataTest$Outcome))
+
+# Evaluate model using confusion matrix
+confusion_matrix_svm <- confusionMatrix(svm_pred, dataTest$Outcome)
+print(confusion_matrix_svm)
+
+# Convert svm_pred to numeric for regression metrics
+svm_pred_numeric <- as.numeric(svm_pred) - 1
+actual_outcome_numeric <- as.numeric(dataTest$Outcome) - 1
+
+# Compute MAE, RMSE, and R-squared
+mae_svm <- mean(abs(svm_pred_numeric - actual_outcome_numeric))
+rmse_svm <- sqrt(mean((svm_pred_numeric - actual_outcome_numeric)^2))
+rsq_svm <- 1 - (sum((svm_pred_numeric - actual_outcome_numeric)^2) / 
+               sum((mean(actual_outcome_numeric) - actual_outcome_numeric)^2))
+```
+
+Confusion Matrix:
+
+TN: 91
+FP: 21
+FN: 9
+TP: 32
+Performance Metrics:
+
+Accuracy: 0.8039
+Kappa: 0.5426
+Sensitivity: 0.9100
+Specificity: 0.6038
+Positive Predictive Value: 0.8125
+Negative Predictive Value: 0.7805
+Balanced Accuracy: 0.7569
+
+
+
+
+```{r}
+cat("Mean Absolute Error (MAE): ", mae_svm, "\n")
+cat("Root Mean Squared Error (RMSE): ", rmse_svm, "\n")
+cat("R-squared: ", rsq_svm, "\n")
+```
+
+Regression Metrics:
+
+MAE: 0.1960784
+RMSE: 0.4428074
+R-squared: 0.1339623
+
+
+
+Multivariate Adaptive Regression Splines (MARS)
+
+```{r}
+# Split the data into training and testing sets
+set.seed(123)
+trainIndex <- createDataPartition(data$Outcome, p = .8, list = FALSE, times = 1)
+dataTrain <- data[trainIndex,]
+dataTest <- data[-trainIndex,]
+
+# Ensure the Outcome column remains as factor
+dataTrain$Outcome <- factor(dataTrain$Outcome)
+dataTest$Outcome <- factor(dataTest$Outcome)
+
+# Multivariate Adaptive Regression Splines (MARS)
+mars_model <- earth(Outcome ~ ., data = dataTrain)
+mars_pred <- predict(mars_model, dataTest)
+
+# Convert predictions to factor
+mars_pred_class <- ifelse(mars_pred > 0.5, 1, 0)
+mars_pred_class <- factor(mars_pred_class, levels = c(0, 1))
+
+# Evaluate model using confusion matrix
+confusion_matrix_mars <- confusionMatrix(mars_pred_class, dataTest$Outcome)
+print(confusion_matrix_mars)
+
+# Convert mars_pred to numeric for regression metrics
+mars_pred_numeric <- as.numeric(mars_pred_class) - 1
+actual_outcome_numeric <- as.numeric(dataTest$Outcome) - 1
+
+# Compute MAE, RMSE, and R-squared
+mae_mars <- mean(abs(mars_pred_numeric - actual_outcome_numeric))
+rmse_mars <- sqrt(mean((mars_pred_numeric - actual_outcome_numeric)^2))
+rsq_mars <- 1 - (sum((mars_pred_numeric - actual_outcome_numeric)^2) / 
+                 sum((mean(actual_outcome_numeric) - actual_outcome_numeric)^2))
+```
+
+Confusion Matrix:
+
+TN: 92
+FP: 19
+FN: 8
+TP: 34
+Performance Metrics:
+
+Accuracy: 0.8235 (82.35% of the predictions are correct)
+Kappa: 0.5903 (moderate agreement between predicted and observed classifications)
+Sensitivity: 0.9200
+Specificity: 0.6415 (64.15% of actual negatives were correctly identified)
+Positive Predictive Value: 0.8288 (82.88% of predicted positives are actual positives)
+Negative Predictive Value: 0.8095 (80.95% of predicted negatives are actual negatives)
+Balanced Accuracy: 0.7808
+
+
+
+
+```{r}
+cat("Mean Absolute Error (MAE): ", mae_mars, "\n")
+cat("Root Mean Squared Error (RMSE): ", rmse_mars, "\n")
+cat("R-squared: ", rsq_mars, "\n")
+```
+
+Regression Metrics:
+
+MAE: 0.1764706
+RMSE: 0.420084
+R-squared: 0.220566
+
+
+
+k-Nearest Neighbors
+
+```{r}
+# k-Nearest Neighbors
+knn_model <- train(Outcome ~ ., data = dataTrain, method = "knn", tuneLength = 5)
+knn_pred <- predict(knn_model, dataTest)
+
+# Evaluate model using confusion matrix
+confusion_matrix_knn <- confusionMatrix(knn_pred, dataTest$Outcome)
+print(confusion_matrix_knn)
+
+# Convert knn_pred to numeric for regression metrics
+knn_pred_numeric <- as.numeric(knn_pred) - 1
+actual_outcome_numeric <- as.numeric(dataTest$Outcome) - 1
+
+# Compute MAE, RMSE, and R-squared
+mae_knn <- mean(abs(knn_pred_numeric - actual_outcome_numeric))
+rmse_knn <- sqrt(mean((knn_pred_numeric - actual_outcome_numeric)^2))
+rsq_knn <- 1 - (sum((knn_pred_numeric - actual_outcome_numeric)^2) / 
+                sum((mean(actual_outcome_numeric) - actual_outcome_numeric)^2))
+```
+
+Confusion Matrix:
+
+TN: 92
+FP: 23
+FN: 8
+TP: 30
+Performance Metrics:
+
+Accuracy: 0.7974 (79.74% of the predictions are correct)
+Kappa: 0.5207 (moderate agreement between predicted and observed classifications)
+Sensitivity: 0.9200
+Specificity: 0.5660 (56.60% of actual negatives were correctly identified)
+Positive Predictive Value: 0.8000 (80.00% of predicted positives are actual positives)
+Negative Predictive Value: 0.7895 (78.95% of predicted negatives are actual negatives)
+Balanced Accuracy: 0.7430
+
+
+```{r}
+cat("Mean Absolute Error (MAE): ", mae_knn, "\n")
+cat("Root Mean Squared Error (RMSE): ", rmse_knn, "\n")
+cat("R-squared: ", rsq_knn, "\n")
+```
+Regression Metrics:
+
+MAE: 0.2026144
+RMSE: 0.4501271
+R-squared: 0.1050943
+
+
+# Conclusions, Discussions, and Bibliography
+
+Best Model Overall: Random Forest has the highest accuracy (0.817) and a good balanced accuracy (0.7713). However, MARS also performs well with similar metrics but slightly better balanced accuracy and lower MAE.
+
+Model Comparison:
+
+Accuracy: Random Forest and MARS are the top performers.
+MAE & RMSE: Random Forest has the lowest MAE, while MARS has slightly better RMSE compared to the other models.
+R-squared: MARS has the highest R-squared among the models, suggesting it explains more variance in the predictions compared to the others.
+You might choose the Random Forest or MARS model depending on the importance you place on accuracy vs. interpretability or other factors like ease of use and computational efficiency.

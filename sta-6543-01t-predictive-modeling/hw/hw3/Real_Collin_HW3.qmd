@@ -1,0 +1,491 @@
+---
+title: "Homework 3"
+author: "Collin Real (yhi267)"
+format:
+    html: 
+        theme: cyborg
+execute: 
+  warning: false
+  error: false
+---
+
+Reminder: All homework solutions must be written up independently, even though you are allowed to discuss with other students. You need to save your homework assignment in a pdf/html format and upload it with the R code (.R or .rmd) into the Canvas before 11:59pm CT on the due day. No late homework assignment will be graded in any circumstance. 
+
+```{r}
+# Load necessary libraries
+library(caret)
+library(tidyverse)
+library(e1071) 
+library(randomForest) 
+library(nnet) 
+library(modeldata)
+library(ggplot2)
+library(dplyr)
+library(corrplot)
+library(GGally)
+library(dplyr)
+library(rsample)
+library(recipes)
+library(rpart)
+library(ranger)
+```
+
+# Problem 1 (25 points):
+
+In Homework 1, Problem 3, we described a data set which contained 96 oil samples each from one of seven types of oils (pumpkin, sunflower, peanut, olive, soybean, rapeseed, and corn). Gas chromatography was performed on each sample and the percentage of each type of 7 fatty acids was determined. We would like to use these data to build a model that predicts the type of oil based on a sample’s fatty acid percentages. These data can be found in the caret package using data(oil). The oil types are contained in a factor variable called oilType. The types are pumpkin (coded as A), sunflower (B), peanut (C), olive (D), soybean (E), rapeseed (F) and corn (G). In R
+
+
+```{r}
+# Load the data
+?oil
+data(oil)
+```
+
+```{r}
+str(oilType)
+```
+
+```{r}
+table(oilType)
+```
+
+a)	Given the classification imbalance in oil Type, describe how you would create a training and testing set.
+
+```{r}
+set.seed(123)
+
+oil_data <- as.data.frame(fattyAcids)
+oil_data$oilType <- oilType
+
+train_index <- createDataPartition(oil_data$oilType, p = 0.7, list = FALSE)
+train_data <- oil_data[train_index, ]
+test_data <- oil_data[-train_index, ]
+
+preProcValues <- preProcess(train_data[,-ncol(train_data)], method = c("center", "scale"))
+train_data[,-ncol(train_data)] <- predict(preProcValues, train_data[,-ncol(train_data)])
+test_data[,-ncol(test_data)] <- predict(preProcValues, test_data[,-ncol(test_data)])
+
+ctrl <- trainControl(method = "cv", number = 10, classProbs = TRUE, summaryFunction = multiClassSummary)
+```
+
+```{r}
+colSums(is.na(train_data))
+train_data_clean <- na.omit(train_data)
+
+preProcess_missing <- preProcess(train_data, method = 'medianImpute')
+train_data_clean <- predict(preProcess_missing, train_data)
+```
+
+
+b)	Which classification statistic would you choose to optimize for this problem and why?
+When the classes are imbalanced, I would optimize the F1 score.
+ 
+c)	Split the data into a training and a testing set, pre-process the data, and build models and tune them via resampling described in Chapter 12. Clearly list the models under consideration and the corresponding tuning parameters of the models. 
+
+- k-Nearest Neighbors (k-NN):
+
+```{r}
+set.seed(123)
+ctrl <- trainControl(method = "cv", number = 10)
+knn_model <- train(oilType ~ ., data = train_data_clean, method = "knn", trControl = ctrl, tuneLength = 10)
+knn_model
+```
+k-Nearest Neighbors (kNN)
+
+- Best k: 5
+- Accuracy: 0.9375
+- Kappa: 0.9195499
+
+- Support Vector Machine (SVM):
+
+```{r}
+set.seed(123)
+svm_model <- train(oilType ~ ., data = train_data_clean, method = "svmRadial", trControl = ctrl, tuneLength = 10)
+svm_model
+```
+
+Support Vector Machines (SVM): 
+
+- sigma = 0.1001887
+- C = 2
+- Accuracy: 0.975
+- Kappa: 0.9686154
+
+- Random Forest:
+
+```{r}
+set.seed(123)
+rf_grid <- expand.grid(mtry = seq(1, ncol(train_data) - 1, length.out = 6))  # Adjust the length.out to the desired number of values
+
+rf_model <- train(oilType ~ ., data = train_data, method = "rf", trControl = ctrl, tuneGrid = rf_grid)
+rf_model
+```
+
+Random Forest
+
+- mtry: 2.2
+- Accuracy: 0.975
+- Kappa: 0.9679487
+
+Support Vector Machines performs the best with an accuracy of 97.50% and a Kappa of 0.9686.
+
+d)	Of the models presented in this chapter, which performs best on these data? Which oil type does the model most accurately predict? Least accurately predict?
+
+```{r}
+# Generate predictions for each model
+knn_pred <- predict(knn_model, test_data)
+svm_pred <- predict(svm_model, test_data)
+rf_pred <- predict(rf_model, test_data)
+
+# Create confusion matrices
+knn_cm <- confusionMatrix(knn_pred, test_data$oilType)
+svm_cm <- confusionMatrix(svm_pred, test_data$oilType)
+rf_cm <- confusionMatrix(rf_pred, test_data$oilType)
+```
+
+```{r}
+# Print confusion matrices
+print(knn_cm)
+```
+
+kNN:
+
+- Accuracy: 0.9615
+- Kappa: 0.9467
+- Class A, B, D, E, and F are good
+- Class C, and G have no predictions
+
+
+
+```{r}
+print(svm_cm)
+```
+
+SVM:
+
+- Accuracy: 0.9615
+- Kappa: 0.9467
+- Class A, B, D, E, and F are predicted well
+- Class C and G have no predictions.
+
+
+
+```{r}
+print(rf_cm)
+```
+
+Random Forest:
+
+- Accuracy: 1.0000
+- Kappa: 1.0000
+- Class A, B, D, E, F are perfect.
+
+
+Conclusion: <br/>
+Random Forest which has perfect accuracy and Kappa. Across all models the most accurate class is A (in terms of class). The least accurate class are Class C and G.
+
+# Problem 2 (25 points): 
+
+Use the fatty acid data from Problem 1 above.
+
+a)	Use the same data splitting approach (if any) and pre-processing steps that you did Problem 1. Using the same classification statistic as before, build models described in Chapter 13: Nonlinear Classification Models for these data. Which model has the best predictive ability? How does this optimal model’s performance compare to the best linear model’s performance? 
+
+```{r}
+ctrl <- trainControl(method = "cv", number = 10)
+
+tune_grid <- expand.grid(sigma = c(0.01, 0.05, 0.1, 0.2), 
+                         C = c(0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128))
+```
+
+```{r}
+set.seed(123)
+svm_model <- train(oilType ~ ., data = train_data, method = "svmRadial",
+                   trControl = ctrl, tuneGrid = tune_grid)
+
+print(svm_model)
+```
+
+Support Vector Machines (SVM):
+
+- sigma = 0.1
+- C = 2
+- Accuracy: 0.9277778 
+- Kappa: 0.9069784
+
+
+```{r}
+svm_pred <- predict(svm_model, test_data)
+
+svm_cm <- confusionMatrix(svm_pred, test_data$oilType)
+print(svm_cm)
+```
+
+SVM Matrix:
+- Accuracy : 0.9615       
+- Kappa : 0.9467
+- High accuracy for classes A, B, D, E, and F.
+- Classes C, G are not predictable.
+
+
+```{r}
+set.seed(123) # for reproducibility
+gbm_model <- train(oilType ~ ., data = train_data, method = "gbm",
+                   trControl = ctrl, verbose = FALSE)
+print(gbm_model)
+```
+GBM Model: 
+- n.trees = 50
+- interaction.depth = 1
+- shrinkage = 0.1
+- n.minobsinnode = 10
+- Accuracy: 0.9425
+- Kappa: 0.9248248
+
+
+```{r}
+gbm_pred <- predict(gbm_model, test_data)
+gbm_cm <- confusionMatrix(gbm_pred, test_data$oilType)
+print(gbm_cm)
+```
+
+
+GBM Matrix:
+
+- Accuracy : 1 
+- Kappa : 1
+- High accuracy for classes A, B, D, E, and F.
+- Classes C, G are not predictable.
+
+```{r}
+set.seed(123)
+nn_model <- train(oilType ~ ., data = train_data, method = "nnet",
+                  trControl = ctrl, tuneLength = 5, linout = TRUE, trace = FALSE)
+print(nn_model)
+```
+
+Neural Network (NN):
+
+- size = 3
+- decay = 0.001
+- Accuracy: 0.9638889  
+-Kappa: 0.9547692
+
+
+
+```{r}
+nn_pred <- predict(nn_model, test_data)
+
+nn_cm <- confusionMatrix(nn_pred, test_data$oilType)
+print(nn_cm)
+```
+
+Nueral Network Matrix:
+- Accuracy : 0.9615 
+- Kappa : 0.9465
+- High accuracy for classes A, B, D, E, and F.
+- Classes C, and G do not perform well.
+
+Conclusion: The Random forest model outperforms all the other models, almost having a perfect score; however, SVM is the best model. 
+
+b)	Would you infer that the data have nonlinear separation boundaries based on this comparison? 
+
+Model performance and the confusion matrices suggests that the data has nonlinear separation boundaries due to the fact that the random forest model has a perfect accuracy and kappa, and nonlinear models performed well.
+
+
+c)	Which oil type does the optimal model most accurately predict? Least accurately predict?
+
+Stochastic Gradient Boosting had perfect classification, but missing class predictions (C and G). Support Vector Machines (SVM) and Neural Network both achieved high accuracy. SVM and Neural Network have a more realistic performance reflecting slight misclassification.
+
+# Problem 3 (25 points):
+
+The “churn” data set was developed to predict telecom customer churn based on information about their account. The data files state that the data are “artificial based on claims similar to real world.” The data consist of 19 predictors related to the customer account, such as the number of customer service calls, the area code, and the number of minutes. The outcome is whether the customer churned:
+
+a)	Start R and use these commands to load the data
+
+```{r}
+
+data(mlc_churn) 
+str(mlc_churn)
+?mlc_churn
+
+```
+
+b)	Explore the data by visualizing the relationship between the predictors and the outcome. Are there important features of the predictor data themselves, such as between-predictor correlations or degenerate distributions? Can functions of more than one predictor be used to model the data more effectively?
+
+
+```{r}
+ggplot(mlc_churn, aes(x = account_length)) +
+  geom_histogram(binwidth = 10, fill = "lightblue", color = "black") +
+  labs(title = "Distribution of Account Length", x = "Account Length", y = "Count")
+
+ggplot(mlc_churn, aes(x = number_customer_service_calls)) +
+  geom_density(fill = "lightblue") +
+  labs(title = "Density of Customer Service Calls", x = "Number of Customer Service Calls")
+
+ggplot(mlc_churn, aes(x = churn, y = account_length, fill = churn)) +
+  geom_boxplot() +
+  labs(title = "Account Length by Churn Status", x = "Churn", y = "Account Length")
+
+
+```
+
+```{r}
+colnames(mlc_churn)
+```
+
+```{r}
+num_vars <- mlc_churn %>%
+  select(where(is.numeric)) %>%
+  select(-one_of("churn")) # Exclude the `churn` column
+
+corr_matrix <- cor(num_vars, use = "pairwise.complete.obs")
+corrplot(corr_matrix, method = "color", tl.cex = 0.7)
+
+```
+
+
+```{r}
+ggplot(mlc_churn, aes(x = area_code, fill = churn)) +
+  geom_bar(position = "fill") +
+  labs(title = "Proportion of Churn by Area Code", x = "Area Code", y = "Proportion")
+```
+
+c)	Split the data into a training and a testing set, pre-process the data if appropriate.
+
+```{r}
+set.seed(123)
+split <- initial_split(mlc_churn, prop = 0.7)
+train_data <- training(split)
+test_data <- testing(split)
+
+recipe <- recipe(churn ~ ., data = train_data) %>%
+  step_normalize(all_numeric()) %>%
+  step_dummy(all_nominal()) %>%
+  prep(training = train_data, retain = TRUE)
+
+train_prepped <- bake(recipe, new_data = train_data)
+test_prepped <- bake(recipe, new_data = test_data)
+```
+
+
+d)	Try building other models discussed in this chapter. Do any have better predictive performance?
+
+```{r}
+tree_model <- rpart(churn_no ~ ., data = train_prepped, method = "class")
+tree_preds <- predict(tree_model, newdata = test_prepped, type = "class")
+tree_preds <- factor(tree_preds, levels = c("0", "1"))
+test_churn <- factor(test_prepped$churn_no, levels = c("0", "1"))
+
+tree_metrics <- confusionMatrix(tree_preds, test_churn)
+print(tree_metrics)
+```
+
+```{r}
+rf_model <- ranger(churn_no ~ ., data = train_prepped, classification = TRUE)
+rf_preds <- predict(rf_model, data = test_prepped)$predictions
+rf_preds <- factor(rf_preds, levels = c("0", "1"))
+
+test_churn <- factor(test_prepped$churn_no, levels = c("0", "1"))
+
+rf_metrics <- confusionMatrix(rf_preds, test_churn)
+print(rf_metrics)
+```
+
+```{r}
+svm_model <- svm(churn_no ~ ., data = train_prepped, kernel = "linear")
+svm_preds <- predict(svm_model, newdata = test_prepped)
+svm_preds <- factor(svm_preds, levels = c("0", "1"))
+
+test_churn <- factor(test_prepped$churn_no, levels = c("0", "1"))
+
+svm_metrics <- confusionMatrix(svm_preds, test_churn)
+print(svm_metrics)
+```
+
+
+
+Recommendations:
+Random Forest: Recommended for predicting customer churn. It has the highest accuracy and balanced accuracy, so it is the most reliable.
+Decision Tree: Performs well. It could be considered if a simpler model is preferred.
+SVM Model: Performed poorly. Might be necessary to experiment with different parameters/tuning.
+
+# Problem 4 (25 points):
+
+Use the fatty acid data from Problem 3 above.
+
+a)	Use the same data splitting approach (if any) and pre-processing steps that you did in Problem 3.
+
+```{r}
+set.seed(123)
+split <- initial_split(fattyAcids, prop = 0.7)
+train_data <- training(split)
+test_data <- testing(split)
+
+recipe <- recipe(Palmitic ~ ., data = train_data) %>%
+  step_normalize(all_numeric()) %>%
+  prep(training = train_data, retain = TRUE)
+
+train_prepped <- bake(recipe, new_data = train_data)
+test_prepped <- bake(recipe, new_data = test_data)
+```
+
+b)	Fit a few basic trees to the training set.
+
+```{r}
+set.seed(123)
+tree_model <- train(Palmitic ~ ., data = train_prepped, method = "rpart",
+                    trControl = trainControl(method = "cv", number = 10))
+
+print(tree_model)
+```
+Summary of Model Selection:
+
+- cp: 0.01269014
+- RMSE: 0.4344 
+- R-squared: 0.8294
+- MAE: 0.3239
+
+c)	Does bagging improve the performance of the trees? What about boosting?
+```{r}
+set.seed(123)
+bag_model <- train(Palmitic ~ ., data = train_prepped, method = "treebag",
+                   trControl = trainControl(method = "cv", number = 10))
+print(bag_model)
+
+bag_pred <- predict(bag_model, newdata = test_prepped)
+true_values <- test_prepped$Palmitic
+
+bag_rmse <- sqrt(mean((true_values - bag_pred)^2))
+bag_mae <- mean(abs(true_values - bag_pred))
+bag_r2 <- 1 - (sum((true_values - bag_pred)^2) / sum((true_values - mean(true_values))^2))
+```
+Reported Bagged CART Metrics:
+
+RMSE: 0.4738
+R-squared: 0.8054
+MAE: 0.3564
+
+
+```{r}
+set.seed(123)
+boost_model <- train(Palmitic ~ ., data = train_prepped, method = "gbm",
+                     trControl = trainControl(method = "cv", number = 10),
+                     verbose = FALSE)
+print(boost_model)
+boost_pred <- predict(boost_model, newdata = test_prepped)
+boost_rmse <- sqrt(mean((true_values - boost_pred)^2))
+boost_mae <- mean(abs(true_values - boost_pred))
+boost_r2 <- 1 - (sum((true_values - boost_pred)^2) / sum((true_values - mean(true_values))^2))
+```
+Stochastic Gradient Boosting: 
+- (n.trees): 150
+- (interaction.depth): 2
+- (shrinkage): 0.1 (constant)
+- (n.minobsinnode): 10 (constant)
+- RMSE: 0.5819
+- R-squared: 0.7215
+- MAE: 0.4631
+
+d)	Which model has better performance, and what are the corresponding tuning parameters?
+
+The Decision Tree model has the lowest RMSE, indicating the best performance in terms of prediction accuracy.The Boosting model achieves the highest R-squared value, suggesting it explains the variance best.

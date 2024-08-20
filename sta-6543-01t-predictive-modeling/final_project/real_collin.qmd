@@ -1,0 +1,188 @@
+---
+title: "Pima Indians Diabetes Database"
+author: "Joaquin, Leo, Seth, Collin"
+format: docx
+---
+
+
+```{r}
+# Load necessary library
+library(tidyverse)
+library(caret)
+# Load the dataset
+df <- read_csv("diabetes.csv")
+
+# View the first few rows of the dataset
+head(df)
+
+# Summary statistics
+summary(df)
+
+# Check for missing values
+colSums(is.na(df))
+```
+
+
+```{r}
+# Replace zeros with NA for specific columns
+columns_to_check <- c('Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI')
+df[columns_to_check] <- lapply(df[columns_to_check], function(x) ifelse(x == 0, NA, x))
+
+# Impute missing values using median for each column
+df <- df %>% mutate(across(all_of(columns_to_check), ~ ifelse(is.na(.), median(., na.rm = TRUE), .)))
+
+# Verify if any NA values remain
+colSums(is.na(df))
+
+# Summary of the dataset after imputation
+summary(df)
+
+# Plotting feature distributions
+feature_names <- names(df)[-ncol(df)] # Exclude Outcome column
+
+# Plot histograms for each feature
+plots <- lapply(feature_names, function(feature) {
+  ggplot(df, aes_string(x = feature)) +
+    geom_histogram(binwidth = 10, fill = 'skyblue', color = 'black') +
+    theme_minimal() +
+    labs(title = paste("Distribution of", feature), x = feature, y = "Frequency")
+})
+
+# Display the plots
+library(gridExtra)
+do.call(grid.arrange, c(plots, ncol = 2))
+```
+
+
+```{r}
+# Plot boxplots for each feature
+boxplots <- lapply(feature_names, function(feature) {
+  ggplot(df, aes_string(y = feature)) +
+    geom_boxplot(fill = 'skyblue', color = 'black') +
+    theme_minimal() +
+    labs(title = paste("Boxplot of", feature), y = feature)
+})
+
+# Display the boxplots
+do.call(grid.arrange, c(boxplots, ncol = 2))
+```
+
+```{r}
+library(corrplot)
+# Load necessary library for visualization
+library(GGally)
+
+# Pair plot for the dataset excluding the Outcome column
+ggpairs(df, columns = 1:8, aes(color = factor(Outcome)), upper = list(continuous = "cor"), lower = list(continuous = "smooth"))
+
+```
+
+
+```{r}
+library(tidyverse)
+library(caret)
+library(randomForest)
+library(nnet)
+```
+
+
+```{r}
+# Convert Outcome to a factor for classification
+df$Outcome <- as.factor(df$Outcome)
+
+# Split data into training and testing sets
+set.seed(123) # For reproducibility
+trainIndex <- createDataPartition(df$Outcome, p = .8, list = FALSE)
+train_data <- df[trainIndex, ]
+test_data <- df[-trainIndex, ]
+```
+
+
+```{r}
+# Logistic Regression model
+logistic_model <- glm(Outcome ~ ., data = train_data, family = binomial)
+summary(logistic_model)
+
+# Predictions and evaluation
+logistic_predictions <- predict(logistic_model, newdata = test_data, type = "response")
+logistic_pred_class <- ifelse(logistic_predictions > 0.5, 1, 0)
+confusionMatrix(as.factor(logistic_pred_class), test_data$Outcome)
+```
+
+
+```{r}
+# Random Forest model
+set.seed(123)
+rf_model <- randomForest(Outcome ~ ., data = train_data, ntree = 100)
+print(rf_model)
+
+# Predictions and evaluation
+rf_predictions <- predict(rf_model, newdata = test_data)
+confusionMatrix(rf_predictions, test_data$Outcome)
+```
+
+
+```{r}
+# SVM model training
+set.seed(123)
+svm_model <- svm(Outcome ~ ., data = train_data, kernel = "radial", cost = 1, scale = TRUE)
+
+# Predictions and evaluation
+svm_predictions <- predict(svm_model, newdata = test_data)
+conf_matrix <- confusionMatrix(svm_predictions, test_data$Outcome)
+
+# Print confusion matrix and model details
+print(conf_matrix)
+print(svm_model)
+```
+
+
+```{r}
+library(tidyverse)
+library(caret)
+library(e1071)
+library(pROC)
+library(ROCR)
+# You can define a function to print these metrics for each model
+evaluate_model <- function(predictions, true_labels, model_name) {
+  cm <- confusionMatrix(predictions, true_labels)
+  accuracy <- cm$overall['Accuracy']
+  precision <- cm$byClass['Pos Pred Value']
+  recall <- cm$byClass['Sensitivity']
+  f1 <- 2 * ((precision * recall) / (precision + recall))
+  auc <- roc(true_labels, as.numeric(predictions))$auc
+  
+  cat(paste("\nModel:", model_name))
+  cat(paste("\nAccuracy:", round(accuracy, 4)))
+  cat(paste("\nPrecision:", round(precision, 4)))
+  cat(paste("\nRecall:", round(recall, 4)))
+  cat(paste("\nF1-Score:", round(f1, 4)))
+  cat(paste("\nAUC:", round(auc, 4)))
+  cat("\n-----------------------------")
+}
+
+# Evaluate each model (replace with your actual predictions and true labels)
+evaluate_model(logistic_pred_class, test_data$Outcome, "Logistic Regression")
+evaluate_model(rf_predictions, test_data$Outcome, "Random Forest")
+evaluate_model(svm_predictions, test_data$Outcome, "SVM")
+
+```
+
+
+```{r}
+# For a model outputting probabilities, e.g., SVM with probabilities
+svm_probabilities <- attr(predict(svm_model, newdata = test_data, probability = TRUE), "probabilities")[,2]
+
+# Calculate the mean outcome
+mean_outcome <- mean(as.numeric(test_data$Outcome) - 1)
+
+# Calculate Total Sum of Squares (TSS)
+tss <- sum((as.numeric(test_data$Outcome) - 1 - mean_outcome) ^ 2)
+
+# Calculate Residual Sum of Squares (RSS)
+rss <- sum((as.numeric(test_data$Outcome) - 1 - svm_probabilities) ^ 2)
+
+# R-squared-like metric
+pseudo_r2 <- 1 - (rss / tss)
+print(paste("Pseudo R-squared-like metric:", round(pseudo_r2, 4)))
+```
