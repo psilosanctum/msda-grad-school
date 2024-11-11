@@ -1,0 +1,1296 @@
+---
+title: "Case Study, Dow Jones"
+author: "Leonel Salazar, Seth Harris, Joaquin Ramirez, Collin Real"
+format: docx
+---
+
+---
+title: "Dow Jones Case Study"
+author: "Leonel Salazar"
+format: docx
+---
+
+```{r}
+
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(gridExtra)
+
+```
+
+```{r}
+
+# Use the here function to construct the file path and import the dataset
+data <- read.csv(here("dow_jones_index.data.csv"), header = TRUE, sep = ",")
+
+head(data)
+
+
+str(data)
+
+```
+
+```{r}
+
+# Check for missing data or NA values in the dataset
+
+missing_data_summary <- colSums(is.na(data))
+missing_data_summary
+```
+
+```{r}
+
+# Remove rows with missing data and create a new dataset named data_clean
+data_clean <- na.omit(data)
+
+str(data_clean)
+```
+
+
+```{r}
+
+# Convert 'quarter' variable to a factor
+data_clean$quarter <- as.factor(data_clean$quarter)
+
+# Convert 'stock' variable to a factor
+data_clean$stock <- as.factor(data_clean$stock)
+
+# Convert 'date' variable to Date class format
+data_clean$date <- as.Date(data_clean$date, format = "%m/%d/%Y")
+
+# Remove non-numeric characters from 'open', 'high', 'low', and 'close' before converting to numeric
+data_clean$open <- as.numeric(gsub("[^0-9.]", "", data_clean$open))
+data_clean$high <- as.numeric(gsub("[^0-9.]", "", data_clean$high))
+data_clean$low <- as.numeric(gsub("[^0-9.]", "", data_clean$low))
+data_clean$close <- as.numeric(gsub("[^0-9.]", "", data_clean$close))
+
+# Convert 'volume' variable to numeric
+data_clean$volume <- as.numeric(gsub("[^0-9.]", "", data_clean$volume))
+
+# # Convert 'percent_change_price' to numeric by removing '%' and dividing by 100
+# data_clean$percent_change_price <- as.numeric(gsub("%", "", data_clean$percent_change_price)) / 100
+# 
+# Convert 'percent_change_volume_over_last_wk' to numeric by removing '%'
+data_clean$percent_change_volume_over_last_wk <- as.numeric(gsub("%", "", data_clean$percent_change_volume_over_last_wk))
+
+# Remove non-numeric characters from 'previous_weeks_volume', 'next_weeks_open', and 'next_weeks_close' before converting to numeric
+data_clean$previous_weeks_volume <- as.numeric(gsub("[^0-9.]", "", data_clean$previous_weeks_volume))
+data_clean$next_weeks_open <- as.numeric(gsub("[^0-9.]", "", data_clean$next_weeks_open))
+data_clean$next_weeks_close <- as.numeric(gsub("[^0-9.]", "", data_clean$next_weeks_close))
+
+# # Convert 'percent_change_next_weeks_price' to numeric by removing '%' and dividing by 100
+# data_clean$percent_change_next_weeks_price <- as.numeric(gsub("%", "", data_clean$percent_change_next_weeks_price)) / 100
+
+# Convert 'days_to_next_dividend' to numeric
+data_clean$days_to_next_dividend <- as.numeric(gsub("[^0-9.]", "", data_clean$days_to_next_dividend))
+
+
+
+str(data_clean)
+
+
+```
+
+
+
+
+```{r}
+# Define numeric variables including lagged variables
+
+# Define target variable and numeric predictors
+# Target variable: percent_change_next_weeks_price
+target_var <- "percent_change_next_weeks_price"
+
+
+numeric_vars <- c("open", "high", "low", "close", "volume", "percent_change_price", "percent_change_volume_over_last_wk", "previous_weeks_volume", "next_weeks_open", "next_weeks_close", "percent_change_next_weeks_price", "days_to_next_dividend", "lagged_close", "lagged_volume", "lagged_percent_change_price", "lagged_percent_change_volume", "lagged_days_to_next_dividend")
+
+```
+
+
+```{r}
+
+# Histogram for numerical variables 
+plots <- list()
+
+for (var in numeric_vars) {
+  if (is.numeric(data_clean[[var]])) {
+    binwidth_value <- (max(data_clean[[var]], na.rm = TRUE) - min(data_clean[[var]], na.rm = TRUE)) / 30
+    p <- ggplot(data_clean, aes(x = .data[[var]])) +
+      geom_histogram(binwidth = binwidth_value, fill = "skyblue", color = "black") +
+      ggtitle(paste("Histogram of", var)) +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, size = 10),
+        axis.text = element_text(size = 8),
+        axis.title = element_text(size = 9)
+      )
+    plots <- append(plots, list(p))
+  }
+}
+
+# Arrange histograms in a 2x2 grid layout
+n <- length(plots)
+for (i in seq(1, n, by = 4)) {
+  do.call(grid.arrange, c(plots[i:min(i+3, n)], ncol = 2, nrow = 2))
+}
+
+
+
+```
+
+
+
+```{r}
+
+# Boxplot for numerical variables 
+plots <- list()
+
+for (var in numeric_vars) {
+  if (is.numeric(data_clean[[var]])) {
+    p <- ggplot(data_clean, aes(y = .data[[var]])) +
+      geom_boxplot(fill = "pink", color = "black") +
+      ggtitle(paste("Boxplot of", var)) +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, size = 10),
+        axis.text = element_text(size = 8),
+        axis.title = element_text(size = 9)
+      )
+    plots <- append(plots, list(p))
+  }
+}
+
+# Arrange boxplots in a 2x2 grid layout
+n <- length(plots)
+for (i in seq(1, n, by = 4)) {
+  do.call(grid.arrange, c(plots[i:min(i+3, n)], ncol = 2, nrow = 2))
+}
+
+```
+
+
+```{r}
+
+# Scatterplot for numerical variables 
+# Set up scatterplots in a 1x2 grid using gridExtra::grid.arrange
+scatter_pairs <- combn(numeric_vars, 2, simplify = FALSE)
+plots <- list()
+
+for (pair in scatter_pairs) {
+  var_x <- pair[1]
+  var_y <- pair[2]
+  if (is.numeric(data_clean[[var_x]]) && is.numeric(data_clean[[var_y]])) {
+    p <- ggplot(data_clean, aes(x = .data[[var_x]], y = .data[[var_y]])) +
+      geom_point(alpha = 0.3, color = "blue", size = 1.5) +
+      ggtitle(paste("Scatterplot of", var_x, "vs", var_y)) +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, size = 10),
+        axis.text = element_text(size = 8),
+        axis.title = element_text(size = 9)
+      )
+    plots <- append(plots, list(p))
+  }
+}
+
+# Arrange scatterplots in a 1x2 grid layout
+n <- length(plots)
+for (i in seq(1, n, by = 2)) {
+  do.call(grid.arrange, c(plots[i:min(i+1, n)], ncol = 1, nrow = 2))
+}
+
+# Reset to default layout
+par(mfrow = c(1, 1))
+
+
+```
+
+```{r}
+
+
+# Correlation heatmap for numerical variables using ggplot2
+cor_data <- data_clean %>% select(where(is.numeric)) %>% cor(use = "complete.obs")
+cor_data_melt <- reshape2::melt(cor_data)
+
+p <- ggplot(cor_data_melt, aes(Var1, Var2, fill = value)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "blue", high = "orange", mid = "lightblue", midpoint = 0, limit = c(-1, 1), space = "Lab", name = "Correlation") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, size = 10, hjust = 1),
+    axis.text.y = element_text(size = 10),
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+    panel.grid = element_blank()
+  ) +
+  coord_fixed() +
+  ggtitle("Correlation Heatmap of Numerical Variables")
+print(p)
+
+
+
+```
+
+
+
+
+```{r}
+# Create lagged variables for the most correlated predictors
+# Target variable: percent_change_next_weeks_price
+# Select the most correlated features and create lagged versions
+data_lag <- data_clean %>%
+  arrange(stock, date) %>%
+  group_by(stock) %>%
+  mutate(
+    lagged_next_weeks_close = lag(next_weeks_close, n = 1),
+    lagged_next_weeks_open = lag(next_weeks_open, n = 1),
+    lagged_volume = lag(volume, n = 1),
+    lagged_percent_change_price = lag(percent_change_price, n = 1)
+  ) %>%
+  ungroup() %>%
+  select(stock, date, percent_change_next_weeks_price, lagged_next_weeks_close, lagged_next_weeks_open, lagged_volume, lagged_percent_change_price) %>%
+  na.omit()
+
+# Display the structure of the new dataset
+glimpse(data_lag)
+```
+
+
+```{r}
+# Combine data_clean and data_lag into a new dataset
+data_clean_lag <- data_clean %>%
+  left_join(data_lag, by = c("stock", "date"))
+
+
+# Remove the duplicate variable percent_change_next_weeks_price.y
+data_clean_lag <- data_clean_lag %>%
+  select(-percent_change_next_weeks_price.y)
+
+
+# Remove all rows with NA values
+data_clean_lag <- data_clean_lag %>%
+  drop_na()
+
+
+# Convert variables back to intended types
+data_clean_lag <- data_clean_lag %>%
+  mutate(across(where(is.double), as.numeric)) # Convert all doubles to numeric
+
+# Rename the column
+data_clean_lag <- data_clean_lag %>%
+  rename(percent_change_next_weeks_price = percent_change_next_weeks_price.x)
+
+# Verify the column name change
+colnames(data_clean_lag)
+
+
+str(data_clean_lag)
+
+```
+
+
+
+
+```{r}
+
+# Ensure the 'quarter' column is numeric (if not already)
+data_clean_lag$quarter <- as.numeric(data_clean_lag$quarter)
+
+# Split the data into training and testing sets
+train_data <- data_clean_lag %>% filter(quarter == 1)
+test_data <- data_clean_lag %>% filter(quarter == 2)
+
+# Check the size of the datasets
+cat("Training Data:", nrow(train_data), "rows\n")
+cat("Testing Data:", nrow(test_data), "rows\n")
+
+# Remove the 'quarter' predictor from both datasets
+train_data <- train_data %>% select(-quarter)
+test_data <- test_data %>% select(-quarter)
+
+
+```
+
+
+
+```{r}
+
+# Load necessary library
+library(caret)
+
+# Define the formula for the linear model
+target <- "percent_change_next_weeks_price"
+predictors <- colnames(train_data)[!(colnames(train_data) %in% c(target, "stock", "date"))]
+formula <- as.formula(paste(target, "~", paste(predictors, collapse = " + ")))
+
+# Fit the linear model
+lm_model <- lm(formula, data = train_data)
+
+# Display a summary of the model
+cat("Summary of the Linear Model:\n")
+print(summary(lm_model))
+
+# Make predictions on the test dataset
+test_predictions <- predict(lm_model, newdata = test_data)
+
+# Evaluate the model's performance
+library(Metrics)
+actuals <- test_data$percent_change_next_weeks_price
+mae <- mae(actuals, test_predictions)
+rmse <- rmse(actuals, test_predictions)
+r2 <- cor(actuals, test_predictions)^2
+
+# Convert actuals and predictions to binary (using median as threshold for classification purposes)
+threshold <- median(actuals, na.rm = TRUE)
+y_true <- ifelse(actuals > threshold, 1, 0)
+y_pred <- ifelse(test_predictions > threshold, 1, 0)
+
+# Calculate accuracy, precision, recall, and F1 score
+confusion_matrix <- confusionMatrix(factor(y_pred), factor(y_true), positive = "1")
+accuracy <- confusion_matrix$overall["Accuracy"]
+precision <- confusion_matrix$byClass["Pos Pred Value"]
+recall <- confusion_matrix$byClass["Sensitivity"]
+f1_score <- (2 * precision * recall) / (precision + recall)
+
+cat("\nModel Evaluation Metrics:\n")
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Root Mean Square Error (RMSE):", rmse, "\n")
+cat("R-squared:", r2, "\n")
+cat("Accuracy:", accuracy, "\n")
+cat("Precision:", precision, "\n")
+cat("Recall:", recall, "\n")
+cat("F1 Score:", f1_score, "\n")
+
+# Save the model metrics for later comparison
+linm_metrics <- data.frame(
+  Model = "Linear Regression",
+  MAE = mae,
+  RMSE = rmse,
+  R_squared = r2,
+  Accuracy = as.numeric(accuracy),
+  Precision = as.numeric(precision),
+  Recall = as.numeric(recall),
+  F1_Score = as.numeric(f1_score)
+)
+
+# Save metrics to a list for later comparison
+if (!exists("model_metrics_list")) {
+  model_metrics_list <- list()
+}
+model_metrics_list[['Linear Regression']] <- linm_metrics
+
+# Print and save model metrics for later comparison
+print(linm_metrics)
+
+
+# Plot Predictions vs Actual Values
+library(ggplot2)
+ggplot(data.frame(actual = actuals, predicted = test_predictions), aes(x = actual, y = predicted)) +
+  geom_point(alpha = 0.5, color = "blue") +
+  geom_abline(slope = 1, intercept = 0, color = "red") +
+  ggtitle("Predictions vs Actuals for Linear Model") +
+  xlab("Actual Values") +
+  ylab("Predicted Values") +
+  theme_minimal()
+
+
+
+```
+
+```{r}
+
+# Install required package if not already installed
+if (!require("randomForest")) install.packages("randomForest", dependencies = TRUE)
+library(randomForest)
+
+# Load necessary library
+library(caret)
+
+# Define the target variable and predictors
+target <- "percent_change_next_weeks_price"
+predictors <- colnames(train_data)[!(colnames(train_data) %in% c(target, "stock", "date"))]
+
+# Prepare the formula for random forest
+formula <- as.formula(paste(target, "~", paste(predictors, collapse = " + ")))
+
+# Train the Random Forest model
+set.seed(123)  # For reproducibility
+rf_model <- randomForest(
+  formula,
+  data = train_data,
+  ntree = 500,             # Number of trees
+  mtry = floor(sqrt(length(predictors))), # Number of variables randomly sampled as candidates at each split
+  importance = TRUE        # Calculate variable importance
+)
+
+# Print model summary
+cat("Summary of Random Forest Model:\n")
+print(rf_model)
+
+# Make predictions on the test dataset
+test_predictions <- predict(rf_model, newdata = test_data)
+
+# Evaluate the model's performance
+library(Metrics)
+actuals <- test_data$percent_change_next_weeks_price
+mae <- mae(actuals, test_predictions)
+rmse <- rmse(actuals, test_predictions)
+r2 <- cor(actuals, test_predictions)^2
+
+# Convert actuals and predictions to binary (using median as threshold for classification purposes)
+threshold <- median(actuals, na.rm = TRUE)
+y_true <- ifelse(actuals > threshold, 1, 0)
+y_pred <- ifelse(test_predictions > threshold, 1, 0)
+
+# Calculate accuracy, precision, recall, and F1 score
+confusion_matrix <- confusionMatrix(factor(y_pred), factor(y_true), positive = "1")
+accuracy <- confusion_matrix$overall["Accuracy"]
+precision <- confusion_matrix$byClass["Pos Pred Value"]
+recall <- confusion_matrix$byClass["Sensitivity"]
+f1_score <- (2 * precision * recall) / (precision + recall)
+
+cat("\nModel Evaluation Metrics:\n")
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Root Mean Square Error (RMSE):", rmse, "\n")
+cat("R-squared:", r2, "\n")
+cat("Accuracy:", accuracy, "\n")
+cat("Precision:", precision, "\n")
+cat("Recall:", recall, "\n")
+cat("F1 Score:", f1_score, "\n")
+
+# Save the model metrics for later comparison
+rf_metrics <- data.frame(
+  Model = "Random Forest",
+  MAE = mae,
+  RMSE = rmse,
+  R_squared = r2,
+  Accuracy = as.numeric(accuracy),
+  Precision = as.numeric(precision),
+  Recall = as.numeric(recall),
+  F1_Score = as.numeric(f1_score)
+)
+
+# Save metrics to a list for later comparison
+if (!exists("model_metrics_list")) {
+  model_metrics_list <- list()
+}
+model_metrics_list[['Random Forest']] <- rf_metrics
+
+# Print and save model metrics for later comparison
+print(rf_metrics)
+
+# Plot Predictions vs Actual Values
+library(ggplot2)
+ggplot(data.frame(actual = actuals, predicted = test_predictions), aes(x = actual, y = predicted)) +
+  geom_point(alpha = 0.5, color = "darkgreen") +
+  geom_abline(slope = 1, intercept = 0, color = "red") +
+  ggtitle("Predictions vs Actuals for Random Forest Model") +
+  xlab("Actual Values") +
+  ylab("Predicted Values") +
+  theme_minimal()
+
+# Plot Feature Importance
+importance_df <- data.frame(Feature = rownames(rf_model$importance), Importance = rf_model$importance[, 1])
+ggplot(importance_df, aes(x = reorder(Feature, Importance), y = Importance)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  coord_flip() +
+  ggtitle("Feature Importance in Random Forest Model") +
+  xlab("Features") +
+  ylab("Importance") +
+  theme_minimal()
+
+
+```
+```{r}
+
+# Install and load required package for decision trees
+if (!require("rpart")) install.packages("rpart", dependencies = TRUE)
+library(rpart)
+if (!require("rpart.plot")) install.packages("rpart.plot", dependencies = TRUE)
+library(rpart.plot)
+
+# Load necessary library
+library(caret)
+
+# Define the target variable and predictors
+target <- "percent_change_next_weeks_price"
+predictors <- colnames(train_data)[!(colnames(train_data) %in% c(target, "stock", "date"))]
+
+# Prepare the formula for decision tree
+formula <- as.formula(paste(target, "~", paste(predictors, collapse = " + ")))
+
+# Train the Decision Tree model
+set.seed(123)  # For reproducibility
+dt_model <- rpart(
+  formula,
+  data = train_data,
+  method = "anova",  # Since the target is continuous
+  control = rpart.control(cp = 0.01, minsplit = 20, maxdepth = 4)  # Adjust parameters for better readability
+)
+
+# Print model summary
+cat("Summary of Decision Tree Model:\n")
+print(dt_model)
+
+# Make predictions on the test dataset
+test_predictions <- predict(dt_model, newdata = test_data)
+
+# Evaluate the model's performance
+library(Metrics)
+actuals <- test_data$percent_change_next_weeks_price
+mae <- mae(actuals, test_predictions)
+rmse <- rmse(actuals, test_predictions)
+r2 <- cor(actuals, test_predictions)^2
+
+# Convert actuals and predictions to binary (using median as threshold for classification purposes)
+threshold <- median(actuals, na.rm = TRUE)
+y_true <- ifelse(actuals > threshold, 1, 0)
+y_pred <- ifelse(test_predictions > threshold, 1, 0)
+
+# Calculate accuracy, precision, recall, and F1 score
+confusion_matrix <- confusionMatrix(factor(y_pred), factor(y_true), positive = "1")
+accuracy <- confusion_matrix$overall["Accuracy"]
+precision <- confusion_matrix$byClass["Pos Pred Value"]
+recall <- confusion_matrix$byClass["Sensitivity"]
+f1_score <- (2 * precision * recall) / (precision + recall)
+
+cat("\nModel Evaluation Metrics:\n")
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Root Mean Square Error (RMSE):", rmse, "\n")
+cat("R-squared:", r2, "\n")
+cat("Accuracy:", accuracy, "\n")
+cat("Precision:", precision, "\n")
+cat("Recall:", recall, "\n")
+cat("F1 Score:", f1_score, "\n")
+
+# Save the model metrics for later comparison
+dt_metrics <- data.frame(
+  Model = "Decision Tree",
+  MAE = mae,
+  RMSE = rmse,
+  R_squared = r2,
+  Accuracy = as.numeric(accuracy),
+  Precision = as.numeric(precision),
+  Recall = as.numeric(recall),
+  F1_Score = as.numeric(f1_score)
+)
+
+# Save metrics to a list for later comparison
+if (!exists("model_metrics_list")) {
+  model_metrics_list <- list()
+}
+model_metrics_list[['Decision Tree']] <- dt_metrics
+
+# Print and save model metrics for later comparison
+print(dt_metrics)
+
+# Plot the Decision Tree
+rpart.plot(dt_model, type = 2, extra = 0, cex = 1.0, box.palette = "GnBu", fallen.leaves = TRUE)
+title("Decision Tree for Predicting Percent Change in Next Week's Price")
+
+
+# Optionally save the plot to a file with smaller text and balanced dimensions
+jpeg("decision_tree_plot_adjusted_cv2.jpg", width = 1200, height = 800, res = 150)
+rpart.plot(dt_model, type = 2, extra = 0, cex = 0.8, box.palette = "GnBu", fallen.leaves = TRUE)
+dev.off()
+
+```
+
+
+```{r}
+
+# Install and load required packages for lasso regression
+if (!require("glmnet")) install.packages("glmnet", dependencies = TRUE)
+library(glmnet)
+
+# Load necessary library
+library(caret)
+
+# Define the target variable and predictors
+target <- "percent_change_next_weeks_price"
+predictors <- colnames(train_data)[!(colnames(train_data) %in% c(target, "stock", "date"))]
+
+# Prepare the data for lasso regression
+x_train <- as.matrix(train_data[, predictors])
+y_train <- train_data[[target]]
+
+# Train the Lasso model using cross-validation to find the optimal lambda
+set.seed(123)  # For reproducibility
+lasso_cv <- cv.glmnet(x_train, y_train, alpha = 1, nfolds = 5)
+
+# Extract the best lambda value
+best_lambda <- lasso_cv$lambda.min
+
+# Train the final Lasso model with the optimal lambda
+lasso_model <- glmnet(x_train, y_train, alpha = 1, lambda = best_lambda)
+
+# Print model summary
+cat("Summary of Lasso Model:\n")
+print(lasso_model)
+
+# Make predictions on the test dataset
+x_test <- as.matrix(test_data[, predictors])
+test_predictions <- as.vector(predict(lasso_model, s = best_lambda, newx = x_test))
+
+# Evaluate the model's performance
+library(Metrics)
+actuals <- test_data$percent_change_next_weeks_price
+mae <- mae(actuals, test_predictions)
+rmse <- rmse(actuals, test_predictions)
+r2 <- cor(actuals, test_predictions)^2
+
+# Convert actuals and predictions to binary (using median as threshold for classification purposes)
+threshold <- median(actuals, na.rm = TRUE)
+y_true <- ifelse(actuals > threshold, 1, 0)
+y_pred <- ifelse(test_predictions > threshold, 1, 0)
+
+# Calculate accuracy, precision, recall, and F1 score
+confusion_matrix <- confusionMatrix(factor(y_pred), factor(y_true), positive = "1")
+accuracy <- confusion_matrix$overall["Accuracy"]
+precision <- confusion_matrix$byClass["Pos Pred Value"]
+recall <- confusion_matrix$byClass["Sensitivity"]
+f1_score <- (2 * precision * recall) / (precision + recall)
+
+cat("\nModel Evaluation Metrics:\n")
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Root Mean Square Error (RMSE):", rmse, "\n")
+cat("R-squared:", r2, "\n")
+cat("Accuracy:", accuracy, "\n")
+cat("Precision:", precision, "\n")
+cat("Recall:", recall, "\n")
+cat("F1 Score:", f1_score, "\n")
+
+# Save the model metrics for later comparison
+lasso_metrics <- data.frame(
+  Model = "Lasso Regression",
+  MAE = mae,
+  RMSE = rmse,
+  R_squared = r2,
+  Accuracy = as.numeric(accuracy),
+  Precision = as.numeric(precision),
+  Recall = as.numeric(recall),
+  F1_Score = as.numeric(f1_score)
+)
+
+# Save metrics to a list for later comparison
+if (!exists("model_metrics_list")) {
+  model_metrics_list <- list()
+}
+model_metrics_list[['Lasso Regression']] <- lasso_metrics
+
+# Print and save model metrics for later comparison
+print(lasso_metrics)
+
+
+# Plot Predictions vs Actual Values
+library(ggplot2)
+ggplot(data.frame(actual = actuals, predicted = test_predictions), aes(x = actual, y = predicted)) +
+  geom_point(alpha = 0.5, color = "purple") +
+  geom_abline(slope = 1, intercept = 0, color = "red") +
+  ggtitle("Predictions vs Actuals for Lasso Model") +
+  xlab("Actual Values") +
+  ylab("Predicted Values") +
+  theme_minimal()
+
+
+```
+
+
+
+```{r}
+
+# Install and load required packages for SVM
+if (!require("e1071")) install.packages("e1071", dependencies = TRUE)
+library(e1071)
+
+# Load necessary library
+library(caret)
+
+# Define the target variable and predictors
+target <- "percent_change_next_weeks_price"
+predictors <- colnames(train_data)[!(colnames(train_data) %in% c(target, "stock", "date"))]
+
+# Train an SVM Model
+# Prepare the data for SVM
+train_data_svm <- train_data
+train_data_svm[[target]] <- scale(train_data[[target]])
+
+# Train the SVM model using radial basis kernel
+set.seed(123)
+svm_model <- svm(as.formula(paste(target, "~", paste(predictors, collapse = " + "))), data = train_data_svm, kernel = "radial", cost = 1, scale = TRUE)
+
+# Make predictions on the test dataset using SVM
+x_test_svm <- test_data
+x_test_svm[[target]] <- scale(test_data[[target]])
+svm_predictions <- predict(svm_model, newdata = x_test_svm)
+
+# Evaluate the SVM model's performance
+actuals <- test_data$percent_change_next_weeks_price
+mae <- mae(actuals, svm_predictions)
+rmse <- rmse(actuals, svm_predictions)
+r2 <- cor(actuals, svm_predictions)^2
+
+# Convert actuals and predictions to binary (using median as threshold for classification purposes)
+threshold <- median(actuals, na.rm = TRUE)
+y_true <- ifelse(actuals > threshold, 1, 0)
+y_pred <- ifelse(svm_predictions > threshold, 1, 0)
+
+# Calculate accuracy, precision, recall, and F1 score
+confusion_matrix <- confusionMatrix(factor(y_pred), factor(y_true), positive = "1")
+accuracy <- confusion_matrix$overall["Accuracy"]
+precision <- confusion_matrix$byClass["Pos Pred Value"]
+recall <- confusion_matrix$byClass["Sensitivity"]
+f1_score <- (2 * precision * recall) / (precision + recall)
+
+cat("\nModel Evaluation Metrics:\n")
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Root Mean Square Error (RMSE):", rmse, "\n")
+cat("R-squared:", r2, "\n")
+cat("Accuracy:", accuracy, "\n")
+cat("Precision:", precision, "\n")
+cat("Recall:", recall, "\n")
+cat("F1 Score:", f1_score, "\n")
+
+# Save the model metrics for later comparison
+svm_metrics <- data.frame(
+  Model = "SVM",
+  MAE = mae,
+  RMSE = rmse,
+  R_squared = r2,
+  Accuracy = as.numeric(accuracy),
+  Precision = as.numeric(precision),
+  Recall = as.numeric(recall),
+  F1_Score = as.numeric(f1_score)
+)
+
+# Save metrics to a list for later comparison
+if (!exists("model_metrics_list")) {
+  model_metrics_list <- list()
+}
+model_metrics_list[['SVM']] <- svm_metrics
+
+# Print and save model metrics for later comparison
+print(svm_metrics)
+
+
+# Plot Predictions vs Actual Values for SVM
+library(ggplot2)
+ggplot(data.frame(actual = actuals, predicted = svm_predictions), aes(x = actual, y = predicted)) +
+  geom_point(alpha = 0.5, color = "green") +
+  geom_abline(slope = 1, intercept = 0, color = "red") +
+  ggtitle("Predictions vs Actuals for SVM Model") +
+  xlab("Actual Values") +
+  ylab("Predicted Values") +
+  theme_minimal()
+
+
+
+
+```
+```{r}
+
+# Install and load required packages for gradient boosting
+if (!require("xgboost")) install.packages("xgboost", dependencies = TRUE)
+if (!require("Metrics")) install.packages("Metrics", dependencies = TRUE)
+library(xgboost)
+library(Metrics)
+
+# Load necessary library
+library(caret)
+
+# Define the target variable and predictors
+target <- "percent_change_next_weeks_price"
+predictors <- colnames(train_data)[!(colnames(train_data) %in% c(target, "stock", "date"))]
+
+# Prepare the data for XGBoost
+x_train <- as.matrix(train_data[, predictors])
+y_train <- train_data[[target]]
+x_test <- as.matrix(test_data[, predictors])
+y_test <- test_data[[target]]
+
+# Train the XGBoost model
+set.seed(123)
+dtrain <- xgb.DMatrix(data = x_train, label = y_train)
+dtest <- xgb.DMatrix(data = x_test, label = y_test)
+params <- list(objective = "reg:squarederror", eta = 0.1, max_depth = 6)
+xgb_model <- xgb.train(params = params, data = dtrain, nrounds = 100, watchlist = list(train = dtrain, test = dtest), verbose = 0)
+
+# Make predictions on the test dataset using XGBoost
+y_pred <- predict(xgb_model, newdata = x_test)
+
+# Evaluate the XGBoost model's performance
+mae <- mae(y_test, y_pred)
+rmse <- rmse(y_test, y_pred)
+r2 <- cor(y_test, y_pred)^2
+
+# Convert actuals and predictions to binary (using median as threshold for classification purposes)
+threshold <- median(y_test, na.rm = TRUE)
+y_true <- ifelse(y_test > threshold, 1, 0)
+y_pred_binary <- ifelse(y_pred > threshold, 1, 0)
+
+# Calculate accuracy, precision, recall, and F1 score
+confusion_matrix <- confusionMatrix(factor(y_pred_binary), factor(y_true), positive = "1")
+accuracy <- confusion_matrix$overall["Accuracy"]
+precision <- confusion_matrix$byClass["Pos Pred Value"]
+recall <- confusion_matrix$byClass["Sensitivity"]
+f1_score <- (2 * precision * recall) / (precision + recall)
+
+cat("\nModel Evaluation Metrics:\n")
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Root Mean Square Error (RMSE):", rmse, "\n")
+cat("R-squared:", r2, "\n")
+cat("Accuracy:", accuracy, "\n")
+cat("Precision:", precision, "\n")
+cat("Recall:", recall, "\n")
+cat("F1 Score:", f1_score, "\n")
+
+# Save the model metrics for later comparison
+xgb_metrics <- data.frame(
+  Model = "XGBoost",
+  MAE = mae,
+  RMSE = rmse,
+  R_squared = r2,
+  Accuracy = as.numeric(accuracy),
+  Precision = as.numeric(precision),
+  Recall = as.numeric(recall),
+  F1_Score = as.numeric(f1_score)
+)
+
+# Save metrics to a list for later comparison
+if (!exists("model_metrics_list")) {
+  model_metrics_list <- list()
+}
+model_metrics_list[['XGBoost']] <- xgb_metrics
+
+# Print and save model metrics for later comparison
+print(xgb_metrics)
+
+
+# Plot Predictions vs Actual Values for XGBoost
+library(ggplot2)
+ggplot(data.frame(actual = y_test, predicted = y_pred), aes(x = actual, y = predicted)) +
+  geom_point(alpha = 0.5, color = "blue") +
+  geom_abline(slope = 1, intercept = 0, color = "red") +
+  ggtitle("Predictions vs Actuals for XGBoost Model") +
+  xlab("Actual Values") +
+  ylab("Predicted Values") +
+  theme_minimal()
+
+
+```
+
+```{r}
+
+# Install and load required packages for k-NN
+if (!require("class")) install.packages("class", dependencies = TRUE)
+if (!require("Metrics")) install.packages("Metrics", dependencies = TRUE)
+library(class)
+library(Metrics)
+
+# Load necessary library
+library(caret)
+
+# Define the target variable and predictors
+target <- "percent_change_next_weeks_price"
+predictors <- colnames(train_data)[!(colnames(train_data) %in% c(target, "stock", "date"))]
+
+# Prepare the data for k-NN
+x_train <- scale(train_data[, predictors])
+y_train <- train_data[[target]]
+x_test <- scale(test_data[, predictors])
+y_test <- test_data[[target]]
+
+# Set the number of neighbors
+k <- 5
+
+# Train the k-NN model and make predictions
+set.seed(123)
+y_pred <- knn(train = x_train, test = x_test, cl = y_train, k = k)
+
+# Convert predictions to numeric
+y_pred <- as.numeric(as.character(y_pred))
+
+# Evaluate the k-NN model's performance
+mae <- mae(y_test, y_pred)
+rmse <- rmse(y_test, y_pred)
+r2 <- cor(y_test, y_pred)^2
+
+# Convert actuals and predictions to binary (using median as threshold for classification purposes)
+threshold <- median(y_test, na.rm = TRUE)
+y_true <- ifelse(y_test > threshold, 1, 0)
+y_pred_binary <- ifelse(y_pred > threshold, 1, 0)
+
+# Calculate accuracy, precision, recall, and F1 score
+confusion_matrix <- confusionMatrix(factor(y_pred_binary), factor(y_true), positive = "1")
+accuracy <- confusion_matrix$overall["Accuracy"]
+precision <- confusion_matrix$byClass["Pos Pred Value"]
+recall <- confusion_matrix$byClass["Sensitivity"]
+f1_score <- (2 * precision * recall) / (precision + recall)
+
+cat("\nk-NN Model Evaluation Metrics:\n")
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Root Mean Square Error (RMSE):", rmse, "\n")
+cat("R-squared:", r2, "\n")
+cat("Accuracy:", accuracy, "\n")
+cat("Precision:", precision, "\n")
+cat("Recall:", recall, "\n")
+cat("F1 Score:", f1_score, "\n")
+
+# Save the model metrics for later comparison
+knn_metrics <- data.frame(
+  Model = "k-NN",
+  MAE = mae,
+  RMSE = rmse,
+  R_squared = r2,
+  Accuracy = as.numeric(accuracy),
+  Precision = as.numeric(precision),
+  Recall = as.numeric(recall),
+  F1_Score = as.numeric(f1_score)
+)
+
+# Save metrics to a list for later comparison
+if (!exists("model_metrics_list")) {
+  model_metrics_list <- list()
+}
+model_metrics_list[['k-NN']] <- knn_metrics
+
+# Print and save model metrics for later comparison
+print(knn_metrics)
+
+
+# Plot Predictions vs Actual Values for k-NN
+library(ggplot2)
+ggplot(data.frame(actual = y_test, predicted = y_pred), aes(x = actual, y = predicted)) +
+  geom_point(alpha = 0.5, color = "blue") +
+  geom_abline(slope = 1, intercept = 0, color = "red") +
+  ggtitle("Predictions vs Actuals for k-NN Model") +
+  xlab("Actual Values") +
+  ylab("Predicted Values") +
+  theme_minimal()
+
+
+
+```
+
+
+```{r}
+
+# Install and load required packages for Bayesian Regression
+if (!require("arm")) install.packages("arm", dependencies = TRUE)
+if (!require("Metrics")) install.packages("Metrics", dependencies = TRUE)
+library(arm)
+library(Metrics)
+
+# Load necessary library
+library(caret)
+
+# Define the target variable and predictors
+target <- "percent_change_next_weeks_price"
+predictors <- colnames(train_data)[!(colnames(train_data) %in% c(target, "stock", "date"))]
+
+# Prepare the data for Bayesian Regression
+train_data_bayes <- train_data[, c(predictors, target)]
+test_data_bayes <- test_data[, c(predictors, target)]
+
+# Train the Bayesian Linear Regression model
+set.seed(123)
+formula_bayes <- as.formula(paste(target, "~", paste(predictors, collapse = " + ")))
+
+bayesian_model <- bayesglm(formula_bayes, data = train_data_bayes, family = gaussian())
+
+# Make predictions on the test dataset
+y_pred <- predict(bayesian_model, newdata = test_data_bayes)
+
+# Evaluate the Bayesian Regression model's performance
+mae <- mae(test_data_bayes[[target]], y_pred)
+rmse <- rmse(test_data_bayes[[target]], y_pred)
+r2 <- cor(test_data_bayes[[target]], y_pred)^2
+
+# Convert actuals and predictions to binary (using median as threshold for classification purposes)
+threshold <- median(test_data_bayes[[target]], na.rm = TRUE)
+y_true <- ifelse(test_data_bayes[[target]] > threshold, 1, 0)
+y_pred_binary <- ifelse(y_pred > threshold, 1, 0)
+
+# Calculate accuracy, precision, recall, and F1 score
+confusion_matrix <- confusionMatrix(factor(y_pred_binary), factor(y_true), positive = "1")
+accuracy <- confusion_matrix$overall["Accuracy"]
+precision <- confusion_matrix$byClass["Pos Pred Value"]
+recall <- confusion_matrix$byClass["Sensitivity"]
+f1_score <- (2 * precision * recall) / (precision + recall)
+
+cat("\nBayesian Regression Model Evaluation Metrics:\n")
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Root Mean Square Error (RMSE):", rmse, "\n")
+cat("R-squared:", r2, "\n")
+cat("Accuracy:", accuracy, "\n")
+cat("Precision:", precision, "\n")
+cat("Recall:", recall, "\n")
+cat("F1 Score:", f1_score, "\n")
+
+# Save the model metrics for later comparison
+bayesian_metrics <- data.frame(
+  Model = "Bayesian Regression",
+  MAE = mae,
+  RMSE = rmse,
+  R_squared = r2,
+  Accuracy = as.numeric(accuracy),
+  Precision = as.numeric(precision),
+  Recall = as.numeric(recall),
+  F1_Score = as.numeric(f1_score)
+)
+
+# Save metrics to a list for later comparison
+if (!exists("model_metrics_list")) {
+  model_metrics_list <- list()
+}
+model_metrics_list[['Bayesian Regression']] <- bayesian_metrics
+
+# Print and save model metrics for later comparison
+print(bayesian_metrics)
+
+
+# Plot Predictions vs Actual Values for Bayesian Regression
+library(ggplot2)
+ggplot(data.frame(actual = test_data_bayes[[target]], predicted = y_pred), aes(x = actual, y = predicted)) +
+  geom_point(alpha = 0.5, color = "blue") +
+  geom_abline(slope = 1, intercept = 0, color = "red") +
+  ggtitle("Predictions vs Actuals for Bayesian Regression Model") +
+  xlab("Actual Values") +
+  ylab("Predicted Values") +
+  theme_minimal()
+
+
+
+```
+
+```{r}
+
+# Install and load required packages for ARIMA
+if (!require("forecast")) install.packages("forecast", dependencies = TRUE)
+if (!require("Metrics")) install.packages("Metrics", dependencies = TRUE)
+library(forecast)
+library(Metrics)
+
+# Load necessary library
+library(caret)
+
+# Prepare the data for ARIMA
+# Convert the target variable into a time series object
+target_ts <- ts(train_data[['percent_change_next_weeks_price']], frequency = 52)  # Assuming weekly data
+
+# Check if differencing is needed and make the data stationary if necessary
+ndiffs_value <- ndiffs(target_ts)
+if (ndiffs_value > 0) {
+  target_ts_diff <- diff(target_ts, differences = ndiffs_value)
+} else {
+  target_ts_diff <- target_ts
+}
+
+# Train the ARIMA model with additional tuning
+set.seed(123)
+arima_model <- auto.arima(target_ts_diff, seasonal = TRUE, stepwise = FALSE, approximation = FALSE)
+
+# Summary of the ARIMA model
+summary(arima_model)
+
+# Make predictions on the test dataset (forecasting future values)
+forecast_length <- nrow(test_data)
+y_pred_diff <- forecast(arima_model, h = forecast_length)$mean
+
+# Revert differencing to get actual predictions if differencing was applied
+if (ndiffs_value > 0) {
+  y_pred <- cumsum(c(tail(target_ts, ndiffs_value), y_pred_diff))[(ndiffs_value + 1):(length(y_pred_diff) + ndiffs_value)]
+} else {
+  y_pred <- y_pred_diff
+}
+
+# Evaluate the ARIMA model's performance
+y_test <- test_data[['percent_change_next_weeks_price']]
+mae <- mae(y_test, y_pred)
+rmse <- rmse(y_test, y_pred)
+r2 <- cor(y_test, y_pred)^2
+
+# Convert actuals and predictions to binary (using median as threshold for classification purposes)
+threshold <- median(y_test, na.rm = TRUE)
+y_true <- ifelse(y_test > threshold, 1, 0)
+y_pred_binary <- ifelse(y_pred > threshold, 1, 0)
+
+# Calculate accuracy, precision, recall, and F1 score
+confusion_matrix <- confusionMatrix(factor(y_pred_binary), factor(y_true), positive = "1")
+accuracy <- confusion_matrix$overall["Accuracy"]
+precision <- confusion_matrix$byClass["Pos Pred Value"]
+recall <- confusion_matrix$byClass["Sensitivity"]
+f1_score <- (2 * precision * recall) / (precision + recall)
+
+cat("\nARIMA Model Evaluation Metrics:\n")
+cat("Mean Absolute Error (MAE):", mae, "\n")
+cat("Root Mean Square Error (RMSE):", rmse, "\n")
+cat("R-squared:", r2, "\n")
+cat("Accuracy:", accuracy, "\n")
+cat("Precision:", precision, "\n")
+cat("Recall:", recall, "\n")
+cat("F1 Score:", f1_score, "\n")
+
+# Save the model metrics for later comparison
+arima_metrics <- data.frame(
+  Model = "ARIMA",
+  MAE = mae,
+  RMSE = rmse,
+  R_squared = r2,
+  Accuracy = as.numeric(accuracy),
+  Precision = as.numeric(precision),
+  Recall = as.numeric(recall),
+  F1_Score = as.numeric(f1_score)
+)
+
+# Save metrics to a list for later comparison
+if (!exists("model_metrics_list")) {
+  model_metrics_list <- list()
+}
+model_metrics_list[['ARIMA']] <- arima_metrics
+
+# Print and save model metrics for later comparison
+print(arima_metrics)
+
+
+
+
+```
+
+
+
+
+```{r}
+
+# Install and load required packages for comparison analysis
+if (!require("quantmod")) install.packages("quantmod", dependencies = TRUE)
+if (!require("PerformanceAnalytics")) install.packages("PerformanceAnalytics", dependencies = TRUE)
+library(quantmod)
+library(PerformanceAnalytics)
+
+# Define the assets for comparison
+# We are analyzing all the stocks available in the Dow Jones dataset
+stock_symbols <- c("AA", "AXP", "BA", "BAC", "CAT", "CSCO", "CVX", "DIS", "GE", "GS", "HD", "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM", "MRK", "MSFT", "NKE", "PFE", "PG", "TRV", "UNH", "RTX", "V", "VZ", "WMT", "XOM")
+
+# Set the date range for analysis
+start_date <- as.Date("2022-01-01")
+end_date <- as.Date("2023-01-01")
+
+# Get the stock data
+getSymbols(stock_symbols, src = "yahoo", from = start_date, to = end_date, auto.assign = TRUE)
+
+# Calculate daily returns for the stocks
+stock_returns_list <- lapply(stock_symbols, function(symbol) dailyReturn(Ad(get(symbol))))
+
+# Merge stock returns into a single data frame
+returns_data <- do.call(merge, c(stock_returns_list, all = FALSE))
+colnames(returns_data) <- stock_symbols
+
+# Calculate summary statistics for each stock
+summary_stats <- lapply(1:ncol(returns_data), function(i) {
+  list(
+    Mean = mean(returns_data[, i], na.rm = TRUE),
+    StdDev = sd(returns_data[, i], na.rm = TRUE),
+    Skewness = PerformanceAnalytics::skewness(returns_data[, i], na.rm = TRUE),
+    Kurtosis = PerformanceAnalytics::kurtosis(returns_data[, i], na.rm = TRUE)
+  )
+})
+
+# Display summary statistics for each stock
+cat("\nStock Comparison Results:\n")
+for (i in 1:length(stock_symbols)) {
+  stock <- stock_symbols[i]
+  stats <- summary_stats[[i]]
+  cat(stock, "- Mean:", stats$Mean, " StdDev:", stats$StdDev, " Skewness:", stats$Skewness, " Kurtosis:", stats$Kurtosis, "\n")
+}
+
+# Plot the daily returns for each stock
+par(mfrow = c(3, 3))  # Set up plotting area to show multiple plots
+for (i in 1:length(stock_symbols)) {
+  stock <- stock_symbols[i]
+  plot(returns_data[, i], main = paste("Daily Returns for", stock),
+       xlab = "Date", ylab = "Returns", col = "blue", type = "l")
+  if (i %% 9 == 0) {
+    par(mfrow = c(3, 3))  # Reset plotting layout every 9 plots
+  }
+}
+
+# Reset plotting area
+par(mfrow = c(1, 1))
+
+
+```
+
+```{r}
+
+
+# Add code to create a table comparing the metrics for all models
+
+library(dplyr)
+library(ggplot2)
+
+# Combine all metrics into one dataframe
+all_metrics <- bind_rows(
+  linm_metrics,
+  rf_metrics,
+  dt_metrics,
+  lasso_metrics,
+  svm_metrics,
+  xgb_metrics,
+  knn_metrics,
+  bayesian_metrics,
+  arima_metrics
+)
+
+# Sort models based on RMSE in ascending order to rank them (best to worst)
+all_metrics <- all_metrics %>%
+  arrange(RMSE)
+
+# Display the table
+print(all_metrics)
+
+# Plot a bar graph to visualize RMSE for each model
+ggplot(all_metrics, aes(x = reorder(Model, -RMSE), y = RMSE, fill = Model)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  ggtitle("Comparison of RMSE for Different Models") +
+  xlab("Model") +
+  ylab("RMSE") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Additional Visualizations
+# 1. Comparison of MAE for Different Models
+ggplot(all_metrics, aes(x = reorder(Model, MAE), y = MAE, fill = Model)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  ggtitle("Comparison of MAE for Different Models") +
+  xlab("Model") +
+  ylab("MAE") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# 2. Comparison of R-squared for Different Models
+ggplot(all_metrics, aes(x = reorder(Model, R_squared), y = R_squared, fill = Model)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  ggtitle("Comparison of R-squared for Different Models") +
+  xlab("Model") +
+  ylab("R-squared") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# 3. Comparison of F1 Score for Different Models
+ggplot(all_metrics, aes(x = reorder(Model, F1_Score), y = F1_Score, fill = Model)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  ggtitle("Comparison of F1 Score for Different Models") +
+  xlab("Model") +
+  ylab("F1 Score") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+
+```
+
+

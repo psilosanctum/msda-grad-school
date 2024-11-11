@@ -1,0 +1,1013 @@
+---
+title: "Case Study Down Jones"
+author: "Leonel Salazar, Seth Harris, Joaquin Ramirez, Collin Real"
+format: docx
+---
+
+
+```{r echo=FALSE}
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(gridExtra)
+library(tseries)
+library(dplyr)
+library(quantmod)
+library(caret)
+library(rpart)
+library(e1071)
+here("da-6813-901-data-analytics-applications", "case3")
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Use the here function to construct the file path and import the dataset
+
+data <- read.csv("dow_jones_index.data.csv", header = TRUE, sep = ",")
+
+head(data)
+
+
+str(data)
+
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Check for missing data or NA values in the dataset
+
+missing_data_summary <- colSums(is.na(data))
+missing_data_summary
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# removed. 
+
+data_clean <- data
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Convert 'quarter' variable to a factor
+data_clean$quarter <- as.factor(data_clean$quarter)
+
+# Convert 'stock' variable to a factor
+data_clean$stock <- as.factor(data_clean$stock)
+
+# Convert 'date' variable to Date class format
+data_clean$date <- as.Date(data_clean$date, format = "%m/%d/%Y")
+
+# Remove non-numeric characters from 'open', 'high', 'low', and 'close' before converting to numeric
+data_clean$open <- as.numeric(gsub("[^0-9.]", "", data_clean$open))
+data_clean$high <- as.numeric(gsub("[^0-9.]", "", data_clean$high))
+data_clean$low <- as.numeric(gsub("[^0-9.]", "", data_clean$low))
+data_clean$close <- as.numeric(gsub("[^0-9.]", "", data_clean$close))
+
+# Convert 'volume' variable to numeric
+data_clean$volume <- as.numeric(gsub("[^0-9.]", "", data_clean$volume))
+
+# # Convert 'percent_change_price' to numeric by removing '%' and dividing by 100
+# data_clean$percent_change_price <- as.numeric(gsub("%", "", data_clean$percent_change_price)) / 100
+# 
+# Convert 'percent_change_volume_over_last_wk' to numeric by removing '%'
+data_clean$percent_change_volume_over_last_wk <- as.numeric(gsub("%", "", data_clean$percent_change_volume_over_last_wk))
+
+# Remove non-numeric characters from 'previous_weeks_volume', 'next_weeks_open', and 'next_weeks_close' before converting to numeric
+data_clean$previous_weeks_volume <- as.numeric(gsub("[^0-9.]", "", data_clean$previous_weeks_volume))
+data_clean$next_weeks_open <- as.numeric(gsub("[^0-9.]", "", data_clean$next_weeks_open))
+data_clean$next_weeks_close <- as.numeric(gsub("[^0-9.]", "", data_clean$next_weeks_close))
+
+# # Convert 'percent_change_next_weeks_price' to numeric by removing '%' and dividing by 100
+# data_clean$percent_change_next_weeks_price <- as.numeric(gsub("%", "", data_clean$percent_change_next_weeks_price)) / 100
+
+# Convert 'days_to_next_dividend' to numeric
+data_clean$days_to_next_dividend <- as.numeric(gsub("[^0-9.]", "", data_clean$days_to_next_dividend))
+
+
+
+str(data_clean)
+
+
+```
+
+
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+# Step 1: Inspect the unique stock symbols
+unique_stocks <- unique(data_clean$stock) # Adjust column name if different
+
+# Step 2: Randomly select 5 unique stocks
+set.seed(123) # Set seed for reproducibility
+selected_stocks <- sample(unique_stocks, 30)
+
+
+# Step 3: Create a directory for each stock and save its data
+for (stock in selected_stocks) {
+  # Filter data for the current stock
+  stock_data <- data_clean %>%
+    filter(stock == !!stock) %>%
+    select(stock,date, open, high, low, close, volume) # Adjust column names to match your dataset
+  
+   # Create file path for each stock
+  file_name <- here("da-6813-901-data-analytics-applications", "case3", paste0("stock_", stock, ".csv"))
+  
+  
+  # Save the stock data as a CSV file within its folder
+  file_name <- here("da-6813-901-data-analytics-applications", "case3", paste0("stock_", stock, ".csv"))
+  write.csv(stock_data, file_name, row.names = FALSE)
+}
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+# Step 1: Extract unique stock names from the main dataset
+stock_symbols <- unique(data_clean$stock) # Ensure 'data_clean' is already processed
+
+# Step 2: Load data for each stock into individual variables
+for (symbol in stock_symbols) {
+  # Construct file name dynamically
+  file_path <- here("da-6813-901-data-analytics-applications", "case3", paste0("stock_", symbol, ".csv"))
+  
+  # Check if the file exists
+  if (file.exists(file_path)) {
+    # Read the stock data
+    assign(symbol, read.csv(file_path, header = TRUE, sep = ","))
+    cat("Loaded data for stock:", symbol, "\n")
+  } else {
+    warning(paste("File not found for stock:", symbol))
+  }
+}
+
+# Example: Check the structure of one dataset (e.g., AAPL)
+if (exists("AAPL")) {
+  str(AAPL)
+}
+
+
+
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Step 2: Select only the relevant variables
+clean_stock <- data_clean %>%
+  select(stock,date, open, high, low, close, volume) # Adjust column names to match your dataset
+
+# Step 3: Save the cleaned dataset as dowjones.csv
+output_path <- here("da-6813-901-data-analytics-applications", "case3","clean_stock.csv")
+write.csv(data_clean, output_path, row.names = FALSE)
+
+clean_stock <- read.csv(here("da-6813-901-data-analytics-applications", "case3","clean_stock.csv"), header = TRUE, sep = ",")
+
+str(clean_stock)
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+str(GE)
+
+str(clean_stock)
+
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Convert 'date' column to Date format and numeric conversion for the other columns
+clean_stock <- data %>%
+  mutate(
+    date = as.Date(date, format = "%m/%d/%Y"), # Convert 'date' to Date format
+    open = as.numeric(gsub("\\$", "", open)),  # Remove dollar sign and convert to numeric
+    high = as.numeric(gsub("\\$", "", high)),  # Remove dollar sign and convert to numeric
+    low = as.numeric(gsub("\\$", "", low)),    # Remove dollar sign and convert to numeric
+    close = as.numeric(gsub("\\$", "", close)),# Remove dollar sign and convert to numeric
+    volume = as.numeric(volume)                # Ensure 'volume' is numeric
+  )
+
+# Remove the 'stock' column
+clean_stock <- clean_stock %>%
+  select(date, open, high, low, close, volume)
+
+str(clean_stock)
+```
+
+```{r}
+
+library(dplyr)
+
+
+
+# Ensure columns are properly formatted
+clean_stock <- clean_stock %>%
+  mutate(
+    date = as.Date(date, format = "%m/%d/%Y"),
+    open = as.numeric(gsub("\\$", "", open)),
+    high = as.numeric(gsub("\\$", "", high)),
+    low = as.numeric(gsub("\\$", "", low)),
+    close = as.numeric(gsub("\\$", "", close)),
+    volume = as.numeric(volume)
+    
+  )
+
+# Check for issues in data conversion
+print(summary(data))  # Provides an overview of the data
+
+# Group by 'date' and calculate averages, handling NAs
+averaged_data <- clean_stock %>%
+  group_by(date) %>%
+  summarize(
+    avg_open = mean(open, na.rm = TRUE),
+    avg_high = mean(high, na.rm = TRUE),
+    avg_low = mean(low, na.rm = TRUE),
+    avg_close = mean(close, na.rm = TRUE),
+    avg_volume = mean(volume, na.rm = TRUE)
+  )
+
+# View the cleaned data
+print(head(averaged_data))
+```
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Step 1: Define stock symbols
+stock_symbols <- unique(data_clean$stock)
+
+# Step 2: Remove the 'stock' column for each dataset dynamically
+for (symbol in stock_symbols) {
+  # Check if the dataset exists in the environment
+  if (exists(symbol)) {
+    # Get the dataset
+    stock_data <- get(symbol)
+    
+    # Remove the 'stock' column
+    stock_data <- stock_data %>% select(-stock)
+    
+    # Save the modified dataset back to its original variable
+    assign(symbol, stock_data)
+    
+    # Print confirmation
+    cat("Removed 'stock' column for:", symbol, "\n")
+  } else {
+    warning(paste("Dataset not found for stock:", symbol))
+  }
+}
+
+
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+here("da-6813-901-data-analytics-applications", "case3")
+
+# Load the data files for all stocks
+stock_AA <- read.csv(here("da-6813-901-data-analytics-applications", "case3", "stock_AA.csv"), stringsAsFactors = FALSE)
+stock_AXP <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_AXP.csv"), stringsAsFactors = FALSE)
+stock_BA <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_BA.csv"), stringsAsFactors = FALSE)
+stock_BAC <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_BAC.csv"), stringsAsFactors = FALSE)
+stock_CAT <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_CAT.csv"), stringsAsFactors = FALSE)
+stock_CSCO <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_CSCO.csv"), stringsAsFactors = FALSE)
+stock_CVX <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_CVX.csv"), stringsAsFactors = FALSE)
+stock_DIS <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_DIS.csv"), stringsAsFactors = FALSE)
+stock_DD <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_DD.csv"), stringsAsFactors = FALSE)
+stock_GE <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_GE.csv"), stringsAsFactors = FALSE)
+stock_HD <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_HD.csv"), stringsAsFactors = FALSE)
+stock_HPQ <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_HPQ.csv"), stringsAsFactors = FALSE)
+stock_IBM <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_IBM.csv"), stringsAsFactors = FALSE)
+stock_INTC <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_INTC.csv"), stringsAsFactors = FALSE)
+stock_JNJ <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_JNJ.csv"), stringsAsFactors = FALSE)
+stock_JPM <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_JPM.csv"), stringsAsFactors = FALSE)
+stock_KO <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_KO.csv"), stringsAsFactors = FALSE)
+stock_KRFT <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_KRFT.csv"), stringsAsFactors = FALSE)
+stock_MCD <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_MCD.csv"), stringsAsFactors = FALSE)
+stock_MMM <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_MMM.csv"), stringsAsFactors = FALSE)
+stock_MRK <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_MRK.csv"), stringsAsFactors = FALSE)
+stock_MSFT <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_MSFT.csv"), stringsAsFactors = FALSE)
+stock_PFE <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_PFE.csv"), stringsAsFactors = FALSE)
+stock_PG <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_PG.csv"), stringsAsFactors = FALSE)
+stock_TRV <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_TRV.csv"), stringsAsFactors = FALSE)
+stock_UTX <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_UTX.csv"), stringsAsFactors = FALSE)
+stock_VZ <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_VZ.csv"), stringsAsFactors = FALSE)
+stock_WMT <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_WMT.csv"), stringsAsFactors = FALSE)
+stock_XOM <- read.csv(here("da-6813-901-data-analytics-applications", "case3","stock_XOM.csv"), stringsAsFactors = FALSE)
+
+
+# Save the cleaned data back to their respective files
+write.csv(stock_AA, here("da-6813-901-data-analytics-applications", "case3","stock_AA.csv"), row.names = FALSE)
+write.csv(stock_AXP, here("da-6813-901-data-analytics-applications", "case3","stock_AXP.csv"), row.names = FALSE)
+write.csv(stock_BA, here("da-6813-901-data-analytics-applications", "case3","stock_BA.csv"), row.names = FALSE)
+write.csv(stock_BAC, here("da-6813-901-data-analytics-applications", "case3","stock_BAC.csv"), row.names = FALSE)
+write.csv(stock_CAT, here("da-6813-901-data-analytics-applications", "case3","stock_CAT.csv"), row.names = FALSE)
+write.csv(stock_CSCO, here("da-6813-901-data-analytics-applications", "case3","stock_CSCO.csv"), row.names = FALSE)
+write.csv(stock_CVX, here("da-6813-901-data-analytics-applications", "case3","stock_CVX.csv"), row.names = FALSE)
+write.csv(stock_DIS, here("da-6813-901-data-analytics-applications", "case3","stock_DIS.csv"), row.names = FALSE)
+write.csv(stock_DD, here("da-6813-901-data-analytics-applications", "case3","stock_DD.csv"), row.names = FALSE)
+write.csv(stock_GE, here("da-6813-901-data-analytics-applications", "case3","stock_GE.csv"), row.names = FALSE)
+write.csv(stock_HD, here("da-6813-901-data-analytics-applications", "case3","stock_HD.csv"), row.names = FALSE)
+write.csv(stock_HPQ, here("da-6813-901-data-analytics-applications", "case3","stock_HPQ.csv"), row.names = FALSE)
+write.csv(stock_IBM, here("da-6813-901-data-analytics-applications", "case3","stock_IBM.csv"), row.names = FALSE)
+write.csv(stock_INTC, here("da-6813-901-data-analytics-applications", "case3","stock_INTC.csv"), row.names = FALSE)
+write.csv(stock_JNJ, here("da-6813-901-data-analytics-applications", "case3","stock_JNJ.csv"), row.names = FALSE)
+write.csv(stock_JPM, here("da-6813-901-data-analytics-applications", "case3","stock_JPM.csv"), row.names = FALSE)
+write.csv(stock_KO, here("da-6813-901-data-analytics-applications", "case3","stock_KO.csv"), row.names = FALSE)
+write.csv(stock_KRFT, here("da-6813-901-data-analytics-applications", "case3","stock_KRFT.csv"), row.names = FALSE)
+write.csv(stock_MCD, here("da-6813-901-data-analytics-applications", "case3","stock_MCD.csv"), row.names = FALSE)
+write.csv(stock_MMM, here("da-6813-901-data-analytics-applications", "case3","stock_MMM.csv"), row.names = FALSE)
+write.csv(stock_MRK, here("da-6813-901-data-analytics-applications", "case3","stock_MRK.csv"), row.names = FALSE)
+write.csv(stock_MSFT, here("da-6813-901-data-analytics-applications", "case3","stock_MSFT.csv"), row.names = FALSE)
+write.csv(stock_PFE, here("da-6813-901-data-analytics-applications", "case3","stock_PFE.csv"), row.names = FALSE)
+write.csv(stock_PG, here("da-6813-901-data-analytics-applications", "case3","stock_PG.csv"), row.names = FALSE)
+write.csv(stock_TRV, here("da-6813-901-data-analytics-applications", "case3","stock_TRV.csv"), row.names = FALSE)
+write.csv(stock_UTX, here("da-6813-901-data-analytics-applications", "case3","stock_UTX.csv"), row.names = FALSE)
+write.csv(stock_VZ, here("da-6813-901-data-analytics-applications", "case3","stock_VZ.csv"), row.names = FALSE)
+write.csv(stock_WMT, here("da-6813-901-data-analytics-applications", "case3","stock_WMT.csv"), row.names = FALSE)
+write.csv(stock_XOM, here("da-6813-901-data-analytics-applications", "case3","stock_XOM.csv"), row.names = FALSE)
+
+cat("Data cleaning completed for all stocks.\n")
+
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Remove the 'stock' column for all stocks
+stock_AA <- stock_AA %>% select(-stock)
+stock_AXP <- stock_AXP %>% select(-stock)
+stock_BA <- stock_BA %>% select(-stock)
+stock_BAC <- stock_BAC %>% select(-stock)
+stock_CAT <- stock_CAT %>% select(-stock)
+stock_CSCO <- stock_CSCO %>% select(-stock)
+stock_CVX <- stock_CVX %>% select(-stock)
+stock_DIS <- stock_DIS %>% select(-stock)
+stock_DD <- stock_DD %>% select(-stock)
+stock_GE <- stock_GE %>% select(-stock)
+stock_HD <- stock_HD %>% select(-stock)
+stock_HPQ <- stock_HPQ %>% select(-stock)
+stock_IBM <- stock_IBM %>% select(-stock)
+stock_INTC <- stock_INTC %>% select(-stock)
+stock_JNJ <- stock_JNJ %>% select(-stock)
+stock_JPM <- stock_JPM %>% select(-stock)
+stock_KO <- stock_KO %>% select(-stock)
+stock_KRFT <- stock_KRFT %>% select(-stock)
+stock_MCD <- stock_MCD %>% select(-stock)
+stock_MMM <- stock_MMM %>% select(-stock)
+stock_MRK <- stock_MRK %>% select(-stock)
+stock_MSFT <- stock_MSFT %>% select(-stock)
+stock_PFE <- stock_PFE %>% select(-stock)
+stock_PG <- stock_PG %>% select(-stock)
+stock_TRV <- stock_TRV %>% select(-stock)
+stock_UTX <- stock_UTX %>% select(-stock)
+stock_VZ <- stock_VZ %>% select(-stock)
+stock_WMT <- stock_WMT %>% select(-stock)
+stock_XOM <- stock_XOM %>% select(-stock)
+
+cat("Removed the 'stock' column for all stocks.\n")
+
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Compute returns and remove missing values for all stocks
+ReturnAA <- na.omit(Delt(stock_AA$close))
+ReturnAXP <- na.omit(Delt(stock_AXP$close))
+ReturnBA <- na.omit(Delt(stock_BA$close))
+ReturnBAC <- na.omit(Delt(stock_BAC$close))
+ReturnCAT <- na.omit(Delt(stock_CAT$close))
+ReturnCSCO <- na.omit(Delt(stock_CSCO$close))
+ReturnCVX <- na.omit(Delt(stock_CVX$close))
+ReturnDIS <- na.omit(Delt(stock_DIS$close))
+ReturnDD <- na.omit(Delt(stock_DD$close))
+ReturnGE <- na.omit(Delt(stock_GE$close))
+ReturnHD <- na.omit(Delt(stock_HD$close))
+ReturnHPQ <- na.omit(Delt(stock_HPQ$close))
+ReturnIBM <- na.omit(Delt(stock_IBM$close))
+ReturnINTC <- na.omit(Delt(stock_INTC$close))
+ReturnJNJ <- na.omit(Delt(stock_JNJ$close))
+ReturnJPM <- na.omit(Delt(stock_JPM$close))
+ReturnKO <- na.omit(Delt(stock_KO$close))
+ReturnKRFT <- na.omit(Delt(stock_KRFT$close))
+ReturnMCD <- na.omit(Delt(stock_MCD$close))
+ReturnMMM <- na.omit(Delt(stock_MMM$close))
+ReturnMRK <- na.omit(Delt(stock_MRK$close))
+ReturnMSFT <- na.omit(Delt(stock_MSFT$close))
+ReturnPFE <- na.omit(Delt(stock_PFE$close))
+ReturnPG <- na.omit(Delt(stock_PG$close))
+ReturnTRV <- na.omit(Delt(stock_TRV$close))
+ReturnUTX <- na.omit(Delt(stock_UTX$close))
+ReturnVZ <- na.omit(Delt(stock_VZ$close))
+ReturnWMT <- na.omit(Delt(stock_WMT$close))
+ReturnXOM <- na.omit(Delt(stock_XOM$close))
+
+# Compute returns for averaged data (Dow Jones index)
+ReturnStock <- na.omit(Delt(averaged_data$avg_close))
+
+cat("Computed returns and removed missing values for all stocks.\n")
+
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Merge the returns of all three index into single data
+MyData = cbind(ReturnBA, ReturnGE, ReturnINTC, ReturnJNJ, ReturnMCD, ReturnStock)
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Merge the returns of all stocks into a single data frame
+MyData <- cbind(
+  ReturnAA, ReturnAXP, ReturnBA, ReturnBAC, ReturnCAT, 
+  ReturnCSCO, ReturnCVX, ReturnDIS, ReturnDD, ReturnGE,
+  ReturnHD, ReturnHPQ, ReturnIBM, ReturnINTC, ReturnJNJ,
+  ReturnJPM, ReturnKO, ReturnKRFT, ReturnMCD, ReturnMMM,
+  ReturnMRK, ReturnMSFT, ReturnPFE, ReturnPG, ReturnTRV,
+  ReturnUTX, ReturnVZ, ReturnWMT, ReturnXOM, ReturnStock
+)
+
+# Set column names, excluding NKE
+colnames(MyData) <- c(
+  "AA", "AXP", "BA", "BAC", "CAT", 
+  "CSCO", "CVX", "DIS", "DD", "GE",
+  "HD", "HPQ", "IBM", "INTC", "JNJ",
+  "JPM", "KO", "KRFT", "MCD", "MMM",
+  "MRK", "MSFT", "PFE", "PG", "TRV",
+  "UTX", "VZ", "WMT", "XOM", "Dow"
+)
+
+# Display the first few rows of the combined data
+head(MyData)
+
+
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# See how the data looks. You can see the risk is much lesser in the S&P as this 
+# represents the market, compared to the individual stock. 
+boxplot(MyData,main="Expected Return", xlab="Stock Picks", ylab="Return")
+
+```
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Number of stocks to compare in each plot
+stocks_per_plot <- 4
+
+# Get the column names excluding "Dow"
+stock_columns <- colnames(MyData)[colnames(MyData) != "Dow"]
+
+# Loop through the stocks in chunks of 4 and create boxplots
+for (i in seq(1, length(stock_columns), by = stocks_per_plot)) {
+  # Subset the stocks for the current plot and include Dow
+  selected_columns <- c(stock_columns[i:min(i + stocks_per_plot - 1, length(stock_columns))], "Dow")
+  
+  # Create a boxplot for the selected stocks
+  boxplot(
+    MyData[, selected_columns, drop = FALSE],
+    main = paste("Expected Return for Stocks", paste(selected_columns, collapse = ", ")),
+    xlab = "Stock Picks",
+    ylab = "Return"
+  )
+}
+
+```
+```{r}
+
+# Load the here package
+library(here)
+
+# Define the number of stocks to compare in each plot
+stocks_per_plot <- 4
+
+# Get the column names excluding "Dow"
+stock_columns <- colnames(MyData)[colnames(MyData) != "Dow"]
+
+# Define the output folder using the here package
+output_folder <- here("da-6813-901-data-analytics-applications", "case3","plots")
+
+# Create the folder if it doesn't exist
+if (!dir.exists(output_folder)) {
+  dir.create(output_folder, recursive = TRUE)
+}
+
+# Loop through the stocks in chunks of 4 and create boxplots
+for (i in seq(1, length(stock_columns), by = stocks_per_plot)) {
+  # Subset the stocks for the current plot and include Dow
+  selected_columns <- c(stock_columns[i:min(i + stocks_per_plot - 1, length(stock_columns))], "Dow")
+  
+  # Define the filename for the current plot
+  plot_filename <- file.path(output_folder, paste0("Boxplot_", i, ".png"))
+  
+  # Save the boxplot as a PNG file
+  png(plot_filename, width = 800, height = 600)
+  boxplot(
+    MyData[, selected_columns, drop = FALSE],
+    main = paste("Expected Return for Stocks", paste(selected_columns, collapse = ", ")),
+    xlab = "Stock Picks",
+    ylab = "Return"
+  )
+  dev.off()  # Close the graphics device
+}
+
+
+
+```
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Compute mean and stdev for the returns.
+DataMean=apply(MyData, 2, mean)
+DataSD=apply(MyData, 2, sd)
+# Take a look at the means and standard deviations. 
+cbind(DataMean,DataSD)
+```
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# List of stocks to process
+stocks <- colnames(MyData)[colnames(MyData) != "Dow"] # Exclude Dow
+
+# Initialize an empty data frame to store results
+results <- data.frame(Stock = character(), Beta = numeric(), R_Squared = numeric(), stringsAsFactors = FALSE)
+
+# Loop through each stock and compute the linear model
+for (stock in stocks) {
+  # Construct the formula dynamically
+  formula <- as.formula(paste(stock, "~ Dow"))
+  
+  # Fit the linear model
+  lm_model <- lm(formula, data = as.data.frame(MyData))
+  
+  # Extract Beta (coefficient for Dow) and R-squared
+  beta <- summary(lm_model)$coefficients[2, 1]
+  r_squared <- summary(lm_model)$r.squared
+  
+  # Append results to the data frame
+  results <- rbind(results, data.frame(Stock = stock, Beta = beta, R_Squared = r_squared))
+}
+
+# Order results by Beta (safest to riskiest)
+results <- results[order(results$Beta), ]
+
+# Print as a long list
+for (i in 1:nrow(results)) {
+  cat(paste0(
+    "Stock: ", results$Stock[i], 
+    ", Beta: ", round(results$Beta[i], 4), 
+    ", R-Squared: ", round(results$R_Squared[i], 4), "\n"
+  ))
+}
+
+# Save the ordered results table to a CSV file (optional)
+write.csv(results, file = here("da-6813-901-data-analytics-applications", "case3","stock_beta_results_sorted.csv"), row.names = FALSE)
+
+
+```
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Load the required library
+library(flextable)
+
+# List of stocks to process
+stocks <- colnames(MyData)[colnames(MyData) != "Dow"] # Exclude Dow
+
+# Initialize an empty data frame to store results
+results <- data.frame(Stock = character(), Beta = numeric(), R_Squared = numeric(), Dow_Beta = numeric(), stringsAsFactors = FALSE)
+
+# Loop through each stock and compute the linear model
+for (stock in stocks) {
+  # Construct the formula dynamically
+  formula <- as.formula(paste(stock, "~ Dow"))
+  
+  # Fit the linear model
+  lm_model <- lm(formula, data = as.data.frame(MyData))
+  
+  # Extract Beta (coefficient for Dow) and R-squared
+  beta <- summary(lm_model)$coefficients[2, 1]
+  r_squared <- summary(lm_model)$r.squared
+  
+  # Append results to the data frame
+  results <- rbind(results, data.frame(Stock = stock, Beta = beta, R_Squared = r_squared, Dow_Beta = 1)) # Dow_Beta is always 1
+}
+
+# Order results by Beta (safest to riskiest)
+results <- results[order(results$Beta), ]
+
+# Create the flextable
+ft <- flextable(results) %>%
+  # Add a title
+  set_caption("Beta vs Dow Beta") %>%
+  # Highlight the Dow Beta column in light blue
+  bg(j = "Dow_Beta", bg = "lightblue", part = "body") %>%
+  # Format numeric values
+  colformat_double(j = c("Beta", "R_Squared", "Dow_Beta"), digits = 4) %>%
+  # Autofit column sizes
+  autofit()
+
+# Print the table
+ft
+
+
+```
+
+
+```{r}
+
+# Load the required libraries
+library(flextable)
+library(here)
+library(webshot)
+
+# Install webshot dependencies if not already installed
+# webshot::install_phantomjs()
+
+# Define the output folder using the here package
+output_folder <- here("da-6813-901-data-analytics-applications", "case3","tables")
+
+# Create the folder if it doesn't exist
+if (!dir.exists(output_folder)) {
+  dir.create(output_folder, recursive = TRUE)
+}
+
+# List of stocks to process (excluding "Dow")
+stocks <- colnames(MyData)[colnames(MyData) != "Dow"]
+
+# Initialize an empty data frame to store results
+results <- data.frame(Stock = character(), Beta = numeric(), R_Squared = numeric(), Dow_Beta = numeric(), stringsAsFactors = FALSE)
+
+# Loop through each stock and compute the linear model
+for (stock in stocks) {
+  # Construct the formula dynamically
+  formula <- as.formula(paste(stock, "~ Dow"))
+  
+  # Fit the linear model
+  lm_model <- lm(formula, data = as.data.frame(MyData))
+  
+  # Extract Beta (coefficient for Dow) and R-squared
+  beta <- summary(lm_model)$coefficients[2, 1]
+  r_squared <- summary(lm_model)$r.squared
+  
+  # Append results to the data frame
+  results <- rbind(results, data.frame(Stock = stock, Beta = beta, R_Squared = r_squared, Dow_Beta = 1)) # Dow_Beta is always 1
+}
+
+# Order results by Beta (safest to riskiest)
+results <- results[order(results$Beta), ]
+
+# Split results into chunks of stocks per table
+stocks_per_table <- 10
+num_tables <- ceiling(nrow(results) / stocks_per_table)
+
+# Loop to create and save each table as an image
+for (i in seq(1, num_tables)) {
+  # Subset the data for the current table
+  start_row <- (i - 1) * stocks_per_table + 1
+  end_row <- min(i * stocks_per_table, nrow(results))
+  table_data <- results[start_row:end_row, ]
+  
+  # Create the flextable for the current chunk
+  ft <- flextable(table_data) %>%
+    set_caption(paste("Beta vs Dow Beta (Table", i, ")")) %>%
+    bg(j = "Dow_Beta", bg = "lightblue", part = "body") %>%
+    colformat_double(j = c("Beta", "R_Squared", "Dow_Beta"), digits = 4) %>%
+    autofit()
+  
+  # Define the filename for the current table
+  image_filename <- file.path(output_folder, paste0("Table_", i, ".png"))
+  
+  # Save the flextable as an image
+  save_as_image(ft, path = image_filename)
+}
+
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+# Load the required library
+library(flextable)
+
+# Inputs for CAPM
+risk_free_rate <- 0.03 # Example: 3% annualized (e.g., 10-year Treasury bond yield)
+market_return <- 0.08  # Example: 8% annualized expected return of Dow Jones index
+market_risk_premium <- market_return - risk_free_rate
+
+# Assuming `results` contains Beta values calculated earlier
+# Add Expected Return based on the CAPM formula
+results$Expected_Return <- risk_free_rate + (results$Beta * market_risk_premium)
+
+# Order by Expected Return (safest to riskiest stock based on CAPM)
+results <- results[order(results$Expected_Return), ]
+
+# Create a flextable for results
+ft <- flextable(results) %>%
+  # Add a title
+  set_caption("CAPM: Expected Returns vs Dow Beta") %>%
+  # Highlight the Dow Beta column in light blue
+  bg(j = "Dow_Beta", bg = "lightblue", part = "body") %>%
+  # Format numeric columns
+  colformat_double(j = c("Beta", "R_Squared", "Dow_Beta", "Expected_Return"), digits = 4) %>%
+  # Autofit column sizes
+  autofit()
+
+# Display the flextable
+ft
+
+# Save the results table to a CSV file (optional)
+write.csv(results, file = here("da-6813-901-data-analytics-applications", "case3","stock_capm_results.csv"), row.names = FALSE)
+
+# Print a message to indicate successful calculation
+cat("CAPM calculations and table generation completed successfully.\n")
+
+```
+
+```{r}
+
+
+
+```
+
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+# Ensure MyData is a data frame
+MyData <- as.data.frame(MyData)
+
+# Load required libraries
+library(ggplot2)
+library(patchwork) # For arranging plots in a grid
+
+# Exclude "Dow" from the stock list
+stock_columns <- colnames(MyData)[colnames(MyData) != "Dow"]
+
+# Initialize an empty list to store plots
+plot_list <- list()
+
+# Loop through each stock to generate plots
+for (stock in stock_columns) {
+  # Create a data frame for the current stock and the Dow
+  plot_data <- data.frame(
+    Market_Excess_Return = MyData$Dow, # Dow is the market
+    Stock_Excess_Return = MyData[[stock]]
+  )
+  
+  # Generate the scatter plot with regression line
+  p <- ggplot(plot_data, aes(x = Market_Excess_Return, y = Stock_Excess_Return)) +
+    geom_point(color = "blue", alpha = 0.6) +  # Scatter plot points
+    geom_smooth(method = "lm", color = "red", se = FALSE) +  # Regression line
+    labs(
+      title = paste(stock, "vs. Dow Jones"),
+      x = "Weekly Market Excess Return (%)",
+      y = "Weekly Stock Excess Return (%)"
+    ) +
+    theme_minimal() +
+    annotate(
+      "text",
+      x = max(plot_data$Market_Excess_Return, na.rm = TRUE) * 0.7,
+      y = max(plot_data$Stock_Excess_Return, na.rm = TRUE) * 0.7,
+      label = paste(
+        "Alpha =", round(coef(lm(Stock_Excess_Return ~ Market_Excess_Return, data = plot_data))[1], 4),
+        "\nBeta =", round(coef(lm(Stock_Excess_Return ~ Market_Excess_Return, data = plot_data))[2], 4)
+      ),
+      color = "black"
+    )
+  
+  # Append the plot to the list
+  plot_list[[stock]] <- p
+}
+
+# Combine plots into a grid in batches of 3
+for (i in seq(1, length(plot_list), by = 3)) {
+  # Select up to 3 plots for the current batch
+  selected_plots <- plot_list[i:min(i + 2, length(plot_list))]
+  
+  # Combine the selected plots into a 1 x 3 grid
+  combined_plot <- wrap_plots(selected_plots, ncol = 3)
+  
+  # Save the combined plot as a PNG
+  ggsave(
+    filename = paste0("Week_6_Batch_", ceiling(i / 3), "_Graphs.png"),
+    plot = combined_plot,
+    width = 12, height = 4
+  )
+}
+
+```
+```{r}
+
+# Load required libraries
+library(flextable)
+library(here)
+library(webshot)
+
+# Install webshot dependencies if not already installed
+# webshot::install_phantomjs()
+
+# Inputs for CAPM
+risk_free_rate <- 0.03  # Example: 3% annualized (e.g., 10-year Treasury bond yield)
+market_return <- 0.08   # Example: 8% annualized expected return of Dow Jones index
+market_risk_premium <- market_return - risk_free_rate
+
+# Assuming `results` contains Beta values calculated earlier
+# Add Expected Return based on the CAPM formula
+results$Expected_Return <- risk_free_rate + (results$Beta * market_risk_premium)
+
+# Order by Expected Return (safest to riskiest stock based on CAPM)
+results <- results[order(results$Expected_Return), ]
+
+# Create a flextable for results with proper styling
+ft <- flextable(results) %>%
+  set_caption("CAPM: Expected Returns vs Dow Beta") %>%
+  bg(bg = "white", part = "all") %>%  # Set white background for the entire table
+  color(color = "black", part = "all") %>%  # Set text color to black
+  border_outer() %>%
+  colformat_double(j = c("Beta", "R_Squared", "Dow_Beta", "Expected_Return"), digits = 4) %>%
+  autofit()
+
+# Define the output folder for the image
+output_folder <- here("da-6813-901-data-analytics-applications", "case3","Week 6")
+if (!dir.exists(output_folder)) {
+  dir.create(output_folder, recursive = TRUE)
+}
+
+# Define the image path
+image_path <- file.path(output_folder, "CAPM_Results_Table.png")
+
+# Save the flextable as an image with proper rendering
+save_as_image(ft, path = image_path)
+
+# Print a message to indicate successful saving
+```
+
+
+```{r echo=FALSE, warning=FALSE, error=FALSE}
+
+
+# Stock Analysis Report
+
+# This report includes visualizations for the analysis of stock performance data. Below are the charts for each batch of stocks analyzed.
+
+## Visualizations
+
+# Load knitr package
+library(knitr)
+
+# Display all images in a single code chunk
+knitr::include_graphics(c(
+  "Week_6_Batch_1_Graphs.png",
+  "Week_6_Batch_2_Graphs.png",
+  "Week_6_Batch_3_Graphs.png",
+  "Week_6_Batch_4_Graphs.png",
+  "Week_6_Batch_5_Graphs.png",
+  "Week_6_Batch_6_Graphs.png",
+  "Week_6_Batch_7_Graphs.png",
+  "Week_6_Batch_8_Graphs.png",
+  "Week_6_Batch_9_Graphs.png",
+  "Week_6_Batch_10_Graphs.png"
+))
+
+```
+
+```{r}
+# Load data
+data <- read.csv(here("da-6813-901-data-analytics-applications", "case3", "dow_jones_index.data.csv"))
+
+data <- data %>%
+  mutate(
+    stock = as.factor(stock),
+    date = as.Date(date, format = "%m/%d/%Y"),
+    open = as.numeric(gsub("\\$", "", open)),
+    high = as.numeric(gsub("\\$", "", high)),
+    low = as.numeric(gsub("\\$", "", low)),
+    close = as.numeric(gsub("\\$", "", close)),
+    volume = as.numeric(volume)
+  )
+
+# Convert necessary columns to numeric if they're not already
+cols_to_convert <- c("percent_change_price", "percent_change_volume_over_last_wk",
+                     "days_to_next_dividend", "percent_return_next_dividend",
+                     "percent_change_next_weeks_price", "open", "close", "volume", "high", "low")
+
+data[cols_to_convert] <- lapply(data[cols_to_convert], function(x) as.numeric(as.character(x)))
+
+# Filter training (Q1) and testing data (Q2)
+train_data <- data %>% filter(quarter == 1)
+test_data <- data %>% filter(quarter == 2)
+
+# Scale numeric columns for SVR
+train_data[cols_to_convert] <- scale(train_data[cols_to_convert])
+test_data[cols_to_convert] <- scale(test_data[cols_to_convert])
+
+
+# Fit a linear regression model
+lm_model <- lm(percent_change_next_weeks_price ~ stock + percent_change_price + 
+               percent_change_volume_over_last_wk + days_to_next_dividend +
+              percent_return_next_dividend + volume, data = train_data)
+
+#lm_model <- lm(percent_change_next_weeks_price ~ stock + percent_change_price + 
+ #                 percent_change_volume_over_last_wk + days_to_next_dividend +
+  #                percent_return_next_dividend + volume + high_low_range + open_close_range, data = train_data)
+
+# Predict on test data
+lm_predictions <- predict(lm_model, test_data)
+
+# Evaluate the model
+lm_rmse <- sqrt(mean((lm_predictions - test_data$percent_change_next_weeks_price)^2))
+print(paste("Linear Model RMSE:", lm_rmse))
+
+library(gbm)
+
+# Fit a GBM model
+gbm_model <- gbm(percent_change_next_weeks_price ~ stock + percent_change_price +
+                 percent_change_volume_over_last_wk + days_to_next_dividend +
+                 percent_return_next_dividend + volume,
+                 data = train_data, distribution = "gaussian",
+                 n.trees = 500, interaction.depth = 3, shrinkage = 0.01)
+
+# Predict on test data
+gbm_predictions <- predict(gbm_model, test_data, n.trees = 500)
+gbm_rmse <- sqrt(mean((gbm_predictions - test_data$percent_change_next_weeks_price)^2))
+print(paste("GBM Model RMSE:", gbm_rmse))
+
+# Define a grid of parameters to search
+tune_grid <- expand.grid(cost = c(0.1, 1),
+                         gamma = c(0.01, 0.1),
+                         epsilon = c(0.1, 0.2))
+
+# Perform tuning
+svr_tuned <- tune(svm,
+                  percent_change_next_weeks_price ~ stock + percent_change_price + 
+                  percent_change_volume_over_last_wk + days_to_next_dividend +
+                  percent_return_next_dividend + volume,
+                  data = train_data,
+                  kernel = "radial",
+                  ranges = list(cost = tune_grid$cost, gamma = tune_grid$gamma, epsilon = tune_grid$epsilon))
+
+# Display the best parameters and model performance
+print(svr_tuned$best.parameters)
+print(svr_tuned$best.performance)
+print(svr_tuned$best.model)
+
+# Fit the final model with the best parameters
+best_svr_model <- svm(percent_change_next_weeks_price ~ stock + percent_change_price + 
+                      percent_change_volume_over_last_wk + days_to_next_dividend +
+                      percent_return_next_dividend + volume,
+                      data = train_data,
+                      kernel = "radial",
+                      cost = svr_tuned$best.parameters$cost,
+                      gamma = svr_tuned$best.parameters$gamma,
+                      epsilon = svr_tuned$best.parameters$epsilon)
+
+summary(best_svr_model)
+
+# Predict on the test data
+best_svr_predictions <- predict(best_svr_model, test_data)
+
+# Calculate RMSE for the tuned model
+best_rmse <- sqrt(mean((best_svr_predictions - test_data$percent_change_next_weeks_price)^2))
+print(paste("Tuned SVR Model RMSE:", best_rmse))
+```
+```{r}
+summary(lm_model)
+```
+
+
+```{r}
+
+# Remove rows with NA values in key variables
+data_clean <- data %>% drop_na(one_of(cols_to_convert))
+
+# Select numeric columns
+numeric_vars <- sapply(data_clean, is.numeric)
+numeric_data <- data_clean[, numeric_vars]
+
+# Reshape data for plotting
+library(reshape2)
+melted_data <- melt(numeric_data)
+
+# Plot histograms for all numeric variables
+ggplot(melted_data, aes(x = value)) +
+  geom_histogram(fill = "steelblue", color = "black") +
+  facet_wrap(~ variable, scales = "free_x") +
+  labs(title = "Histograms of Numeric Variables",
+       x = "Value",
+       y = "Frequency") +
+  theme_minimal()
+
+
+```
+```{r}
+library(corrplot)
+
+# Step 5: Calculate the correlation matrix
+cor_matrix <- cor(numeric_data, use = "complete.obs")
+
+# Step 6: Create a correlation plot
+corrplot(cor_matrix, method = "circle", type = "upper", 
+         tl.col = "black", tl.srt = 45, # Text color and rotation
+         addCoef.col = "black")         # Add correlation coe
+cor_matrix
+```
+

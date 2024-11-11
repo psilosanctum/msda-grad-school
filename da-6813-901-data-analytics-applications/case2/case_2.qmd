@@ -1,0 +1,106 @@
+---
+title: Bookbinders Case Study 2
+date: 2024-10-06
+date-format: short
+---
+
+```{r}
+library(tidyverse)
+library(MASS)
+library(corrplot)
+library(readr)
+library(e1071)
+library(readxl)
+library(car)
+library(caTools)
+library(ROSE) # For oversampling
+```
+
+```{r}
+test_data <- read_excel('BBBC-Test.xlsx')
+str(test)
+```
+
+```{r}
+train_data <- read_excel('BBBC-Train.xlsx')
+str(train)
+```
+
+```{r}
+# Convert 'Choice' to factor (binary classification)
+train_data$Choice <- as.factor(train_data$Choice)
+test_data$Choice <- as.factor(test_data$Choice)
+
+#train_data$Gender <- as.factor(train_data$Gender)
+#test_data$Gender <- as.factor(test_data$Gender)
+
+# Oversample the minority class
+oversampled_data <- ovun.sample(Choice ~ ., data = train_data, method = "over", N = max(table(train_data$Choice)) * 2)$data
+
+# Check distribution of the target variable after balancing
+table(oversampled_data$Choice)
+```
+
+```{r}
+# Build the Logit Model using oversampled data
+logit_model <- glm(Choice ~ ., data = oversampled_data, family = binomial)
+
+# Summary of the model
+summary(logit_model)
+
+# Predictions on the test data
+logit_pred <- predict(logit_model, newdata = test_data, type = "response")
+logit_pred_class <- ifelse(logit_pred > 0.5, 1, 0)
+
+# Evaluate accuracy
+logit_accuracy <- mean(logit_pred_class == test_data$Choice)
+print(paste("Logit Model Accuracy:", logit_accuracy))
+
+# Evaluate using confusion matrix (optional)
+confusion_matrix_logit <- table(Predicted = logit_pred_class, Actual = test_data$Choice)
+print(confusion_matrix_logit)
+```
+```{r}
+# Compute class weights for SVM
+class_weights <- table(oversampled_data$Choice)
+class_weights <- class_weights / sum(class_weights) # Normalize
+
+# Build the SVM model with class weights
+svm_model <- svm(Choice ~ ., data = train_data, type = "C-classification", kernel = "linear", 
+                 class.weights = class_weights)
+
+# Predictions on the test data
+svm_pred <- predict(svm_model, newdata = test_data)
+
+# Evaluate accuracy
+svm_accuracy <- mean(svm_pred == test_data$Choice)
+print(paste("SVM Accuracy:", svm_accuracy))
+
+# Evaluate using confusion matrix (optional)
+confusion_matrix_svm <- table(Predicted = svm_pred, Actual = test_data$Choice)
+print(confusion_matrix_svm)
+
+```
+
+```{r}
+# Build the Linear Regression Model
+linear_model <- lm(Choice ~ ., data = oversampled_data)
+
+# Summary of the model
+summary(linear_model)
+
+# Predictions on the test data
+linear_pred <- predict(linear_model, newdata = test_data)
+
+# Convert predictions to binary (0 or 1)
+linear_pred_class <- ifelse(linear_pred > 0.5, 1, 0)
+
+# Evaluate accuracy
+linear_accuracy <- mean(linear_pred_class == test_data$Choice)
+print(paste("Linear Regression Accuracy:", linear_accuracy))
+
+# Confusion matrix (optional)
+confusion_matrix_linear <- table(Predicted = linear_pred_class, Actual = test_data$Choice)
+print(confusion_matrix_linear)
+```
+

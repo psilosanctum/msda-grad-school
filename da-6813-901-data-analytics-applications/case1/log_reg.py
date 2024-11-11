@@ -60,9 +60,9 @@ def bankRandomForest():
     cv_scores_rf = cross_val_score(random_forest, X, y, cv=5)
 
     # Display accuracy and classification report
-    print(f"Test Set Accuracy: {accuracy_rf:.2f}")
+    print(f"Test Set Accuracy: {accuracy_rf:.4f}")
     print("\nClassification Report:\n", classification_report_rf)
-    print(f"\n5-Fold Cross-Validation Accuracy: {cv_scores_rf.mean():.2f}")
+    print(f"\n5-Fold Cross-Validation Accuracy: {cv_scores_rf.mean():.4f}")
 
 bankRandomForest()
     

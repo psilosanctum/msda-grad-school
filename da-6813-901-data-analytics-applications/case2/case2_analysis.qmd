@@ -1,0 +1,36 @@
+---
+title: Bookbinders Case Study 2
+date: 2024-10-06
+date-format: short
+---
+
+```{r}
+library(tidyverse)
+library(MASS)
+library(corrplot)
+library(readr)
+library(e1071)
+library(readxl)
+```
+```{r}
+test <- read_excel('BBBC-Test.xlsx')
+str(test)
+```
+```{r}
+train <- read_excel('BBBC-Train.xlsx')
+str(train)
+```
+```{r}
+train$Gender_factor <- ifelse(train$Gender == 0, 'Female', 'Male')
+train$Gender_factor <- as.factor(train$Gender_factor)
+
+test$Gender_factor <- ifelse(test$Gender == 0, 'Female', 'Male')
+test$Gender_factor <- as.factor(test$Gender_factor)
+
+train$Choice_factor <- ifelse(train$Choice == 0, 'Nonpurchase', 'Purchase')
+train$Choice_factor <- as.factor(train$Choice_factor)
+
+test$Choice_factor <- ifelse(test$Choice == 0, 'Nonpurchase', 'Purchase')
+test$Choice_factor <- as.factor(test$Choice_factor)
+```
+

@@ -1,0 +1,3 @@
+- p-day variable will affect the model. Recode the 999 to "never contacted"
+- duration variable is also wrong. You can't use this variable in the model because it has a 1:1 ratio with the dependent variable.
+    - remove duration from the model
