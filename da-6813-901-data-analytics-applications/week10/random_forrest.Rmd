@@ -1,0 +1,683 @@
+---
+title: "Random Forest"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Install packages
+
+```{r}
+#install.packages(c("SMCRM","dplyr","tidyr","ggplot2","survival","rpart","rattle","randomForestSRC","purrr"))
+```
+
+
+Load Packages
+
+```{r, message=FALSE, warning=FALSE}
+library(SMCRM) # CRM data
+library(dplyr) # data wrangling
+library(tidyr) # data wrangling
+library(ggplot2) # plotting
+library(survival) # survival
+library(rpart) # DT
+library(randomForestSRC) # RF
+
+
+# theme for nice plotting
+theme_nice <- theme_classic()+
+                theme(
+                  axis.line.y.left = element_line(colour = "black"),
+                  axis.line.y.right = element_line(colour = "black"),
+                  axis.line.x.bottom = element_line(colour = "black"),
+                  axis.line.x.top = element_line(colour = "black"),
+                  axis.text.y = element_text(colour = "black", size = 12),
+                  axis.text.x = element_text(color = "black", size = 12),
+                  axis.ticks = element_line(color = "black")) +
+                theme(
+                  axis.ticks.length = unit(-0.25, "cm"), 
+                  axis.text.x = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")), 
+                  axis.text.y = element_text(margin=unit(c(0.5,0.5,0.5,0.5), "cm")))
+```
+
+
+Dataset
+
+```{r}
+data("customerChurn")
+```
+
+
+Decision Trees
+
+```{r}
+dt.model <- rpart(duration ~ avg_ret_exp + 
+                             industry + 
+                             revenue + 
+                             employees + 
+                             total_crossbuy + 
+                             total_freq, 
+                             data = customerChurn) # simple DT model
+
+rattle::fancyRpartPlot(dt.model, sub = "") # vizualize the DT
+```
+
+Classification capability of a single classifier.
+
+```{r}
+predicted.duration.dt <- predict(rpart(duration ~ total_freq + 
+                                                  total_crossbuy, 
+                                                  data = customerChurn)) # save predictions from DT
+
+# vizualize prediction as a function of frequency and cross-buy
+
+data.frame(total_freq = customerChurn$total_freq, # store the data in the frame
+           total_crossbuy = customerChurn$total_crossbuy,
+           predicted.duration = predicted.duration.dt) %>%
+  ggplot(aes(x = total_freq, y = total_crossbuy, fill = predicted.duration.dt))+
+   geom_tile() +
+   viridis::scale_fill_viridis("Predicted duration" ,option = "D") +
+   labs(x = "Total frequency", y = "Total cross-buy") +
+   theme_nice
+```
+
+Classification capability of multiple classifier.
+
+```{r}
+predicted.duration.rf <- predict(rfsrc(duration ~ total_freq + total_crossbuy, data = customerChurn))$predicted # save predictions from a RF
+   
+
+data.frame(total_freq = customerChurn$total_freq,
+           total_crossbuy = customerChurn$total_crossbuy,
+           predicted.duration = predicted.duration.rf) %>%
+  ggplot(aes(x = total_freq, y = total_crossbuy, fill = predicted.duration.rf))+
+   geom_tile() +
+  viridis::scale_fill_viridis("Predicted duration", option="D") +
+   labs(x = "Total frequency", y = "Total cross-buy") +
+   theme_nice
+
+```
+
+Build and inspect a forest
+
+```{r}
+set.seed(123)
+forest1 <- rfsrc(duration ~ avg_ret_exp + 
+                            industry + 
+                            revenue + 
+                            employees + 
+                            total_crossbuy + 
+                            total_freq, 
+                            data = customerChurn, 
+                            importance = TRUE, 
+                            ntree = 1000)
+
+forest1
+```
+
+
+Forest inference
+
+1. Variable importance
+
+```{r}
+forest1$importance # values vary a lot
+
+data.frame(importance = forest1$importance) %>%
+  tibble::rownames_to_column(var = "variable") %>%
+  ggplot(aes(x = reorder(variable,importance), y = importance)) +
+    geom_bar(stat = "identity", fill = "orange", color = "black")+
+    coord_flip() +
+     labs(x = "Variables", y = "Variable importance")+
+     theme_nice          # where's industy? difficult to see
+
+forest1$importance %>% log() # log transform
+
+data.frame(importance = forest1$importance + 100) %>% # add a large +ve constant
+  log() %>%
+  tibble::rownames_to_column(var = "variable") %>%
+  ggplot(aes(x = reorder(variable,importance), y = importance)) +
+    geom_bar(stat = "identity", fill = "orange", color = "black", width = 0.5)+
+    coord_flip() +
+    labs(x = "Variables", y = "Log-transformed variable importance") +
+    theme_nice
+
+```
+
+2. Minimal depth
+
+```{r}
+mindepth <- max.subtree(forest1,
+                        sub.order = TRUE)
+
+# first order depths
+print(round(mindepth$order, 3)[,1])
+
+# vizualise MD
+data.frame(md = round(mindepth$order, 3)[,1]) %>%
+  tibble::rownames_to_column(var = "variable") %>%
+  ggplot(aes(x = reorder(variable,desc(md)), y = md)) +
+    geom_bar(stat = "identity", fill = "orange", color = "black", width = 0.2)+
+    coord_flip() +
+     labs(x = "Variables", y = "Minimal Depth")+
+     theme_nice
+
+# interactions
+mindepth$sub.order
+
+as.matrix(mindepth$sub.order) %>%
+  reshape2::melt() %>%
+  data.frame() %>%
+  ggplot(aes(x = Var1, y = Var2, fill = value)) +
+    scale_x_discrete(position = "top") +
+    geom_tile(color = "white") +
+    viridis::scale_fill_viridis("Relative min. depth") +
+    labs(x = "", y = "") +
+    theme_bw()
+
+# cross-check with vimp
+find.interaction(forest1,
+                      method = "vimp",
+                      importance = "permute")
+```
+
+
+3. Partial dependence
+
+```{r}
+# regression with linear specification
+regression <- lm(duration ~  avg_ret_exp + industry + revenue + employees + total_crossbuy + total_freq, data = customerChurn)
+summary(regression)
+```
+
+```{r}
+# verify with survival model (AFT type as in publication)
+# surv.model <- survreg(Surv(duration, censor) ~  avg_ret_exp + industry + revenue + employees + total_crossbuy + total_freq, data = customerChurn, dist = "weibull")
+# summary(surv.model)
+
+# regression with non-linear specification similar to publication
+regression2 <- lm(duration ~  avg_ret_exp + avg_ret_exp_sq + industry + revenue + employees + total_crossbuy + total_freq + total_freq_sq, data = customerChurn)
+summary(regression2)
+```
+
+
+```{r}
+# inspect relationship of avg_ret_exp with predicted duration with PDP
+min(forest1$xvar$avg_ret_exp)
+max(forest1$xvar$avg_ret_exp)
+ret_exp_seq = seq(0,145,5)
+```
+
+```{r}
+# extract marginal effect using partial dependence
+marginal.effect <- partial(forest1,
+                           partial.xvar = "avg_ret_exp",
+                           partial.values = ret_exp_seq)
+
+means.exp <- marginal.effect$regrOutput$duration %>% colMeans()
+```
+
+```{r}
+marginal.effect.df <-
+  data.frame(pred.duration = means.exp, ret_exp_seq = ret_exp_seq)
+```
+
+
+```{r}
+ggplot(marginal.effect.df, aes(x = ret_exp_seq, y = pred.duration)) +
+  geom_point(shape = 21, color = "purple", size = 2, stroke = 1.2)+
+  geom_smooth(method = "lm", formula = y ~ poly(x,3), se = FALSE, color = "black")+ # try with other values 
+  labs(x = "Average retention in $", y = "Predicted duration") +
+  scale_x_continuous(breaks = seq(0,150,25))+
+  theme_nice # positive effect of ret_exp not clear as suggested by reg coefs
+```
+
+
+```{r}
+# first check relationship between actual duration and ret_exp
+
+ggplot(customerChurn, aes(x = avg_ret_exp, y = duration)) +
+  geom_point(shape = 21, col = "purple", size = 3) +
+  stat_smooth(method = "lm", se = FALSE, color = "black") +
+  scale_x_continuous(breaks = seq(0,150,25)) +
+  scale_y_continuous(breaks = seq(0,800,120)) +
+  geom_rug(sides = "b", col = "red", alpha = 0.2) +
+  labs(y = "Actual duration", x = "Average retention in $") +
+  theme_nice
+```
+
+
+```{r}
+# repeat with smaller values of ret_exp
+ret_exp_seq2 = seq(0,25,1)
+
+marginal.effect.new <- partial(forest1,
+                           partial.xvar = "avg_ret_exp",
+                           partial.values = ret_exp_seq2)
+
+means.exp.new <- marginal.effect.new$regrOutput$duration %>% colMeans()
+
+marginal.effect.df.new <-
+  data.frame(pred.duration = means.exp.new, ret_exp_seq = ret_exp_seq2)
+
+ggplot(marginal.effect.df.new, aes(x = ret_exp_seq, y = pred.duration)) +
+  geom_point(shape = 21, color = "purple", size = 2, stroke = 1.2)+
+  geom_path()+
+  labs(x = "Average retention in $", y = "Predicted duration") +
+  scale_x_continuous(breaks = seq(0,25,2))+
+  theme_nice
+```
+
+
+4. Conditional partial dependence plots
+
+```{r}
+grp <- 1:6
+get_coplot_data <- function(i) {
+
+subset.coplot <- forest1$xvar$avg_ret_exp[forest1$xvar$total_crossbuy == i]
+coplot <- plot.variable(forest1,
+                        xvar.names = "avg_ret_exp",
+                        partial = TRUE,
+                        subset = subset.coplot) }
+
+coplot_data_list <- purrr::map(grp,get_coplot_data)
+
+coplot.df <- data.frame(avg_ret_exp =
+                          c(coplot_data_list[[1]]$pData[[1]]$x.uniq,
+                            coplot_data_list[[2]]$pData[[1]]$x.uniq,
+                            coplot_data_list[[3]]$pData[[1]]$x.uniq,
+                            coplot_data_list[[4]]$pData[[1]]$x.uniq,
+                            coplot_data_list[[5]]$pData[[1]]$x.uniq,
+                            coplot_data_list[[6]]$pData[[1]]$x.uniq),
+                        predicted_duration = 
+                          c(coplot_data_list[[1]]$pData[[1]]$yhat,
+                            coplot_data_list[[2]]$pData[[1]]$yhat,
+                            coplot_data_list[[3]]$pData[[1]]$yhat,
+                            coplot_data_list[[4]]$pData[[1]]$yhat,
+                            coplot_data_list[[5]]$pData[[1]]$yhat,
+                            coplot_data_list[[6]]$pData[[1]]$yhat),
+                        groups = as.factor(rep(grp, each = 25)))
+
+
+coplot.df %>%
+  filter(groups %in% c(2,6)) %>%
+  ggplot(aes(x = avg_ret_exp, y = predicted_duration, fill = groups, color = groups))+
+  geom_point(shape = 21, color = "black", size = 4, stroke = 1.2)+
+  stat_smooth(method = "lm", se = FALSE) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_color_brewer(palette = "Set1") +
+  labs(y = "Predicted duration", x = "Average retention expense in $") +
+  theme_nice +
+  guides(fill = guide_legend(override.aes = list(linetype = 0)))
+```
+
+5. Test non-linear and interaction terms
+
+```{r}
+# add cubed acqusition-retention dollar term and interaction term
+customerChurn <- 
+  customerChurn %>%
+    mutate(avg_ret_exp_cube = (avg_ret_exp)^3,
+           interaction = avg_ret_exp*total_crossbuy)       
+
+# regress using the cubed term
+regression3 <- lm(duration ~  avg_ret_exp + avg_ret_exp_sq + avg_ret_exp_cube + industry + revenue + employees + total_crossbuy + total_freq, data = customerChurn)
+summary(regression3)
+
+
+# regress with cubed term and interaction term.
+
+regression4 <- lm(duration ~  avg_ret_exp + avg_ret_exp_sq + avg_ret_exp_cube + industry + revenue + employees + total_crossbuy + total_freq + avg_ret_exp*total_crossbuy, data = customerChurn)
+summary(regression4)
+
+# RSF with interaction terms
+
+forest.interaction <- rfsrc(duration ~ avg_ret_exp + 
+                            industry + 
+                            revenue + 
+                            employees + 
+                            total_crossbuy + 
+                            total_freq +
+                            interaction, 
+                            data = customerChurn, 
+                            importance = TRUE, 
+                            ntree = 1000)
+
+# importance of interaction term
+
+data.frame(importance = forest.interaction$importance) %>%
+  log() %>%
+  tibble::rownames_to_column(var = "variable") %>%
+  ggplot(aes(x = reorder(variable,importance), y = importance)) +
+    geom_bar(stat = "identity", fill = "orange", color = "black", width = 0.5)+
+    coord_flip() +
+    labs(x = "Variables", y = "Log-transformed variable importance") +
+    theme_nice
+
+# Compare fit of suggested model vs. our model
+AIC(regression2, regression3)
+BIC(regression2, regression3)
+lmtest::lrtest(regression3, regression4)
+
+# compare % variance explained and cumulative OOB error rate
+forest.interaction
+forest1
+```
+
+6. Proximity plot
+
+```{r}
+proximity_mat <- rfsrc(duration ~ avg_ret_exp + 
+                                  industry + 
+                                  revenue + 
+                                  employees + 
+                                  total_crossbuy + 
+                                  total_freq, 
+                                  data = customerChurn, 
+                                  importance = TRUE, 
+                                  ntree = 1000,
+                                  proximity = "oob")$proximity
+
+proximity_mat[1:50,1:50] %>%
+  as.data.frame(col.names = 1:nrow(customerChurn)) %>%
+  tibble::rowid_to_column() %>%
+  gather(key = columnid, value = proximity, -rowid) %>%
+  mutate(columnid = as.numeric(columnid)) %>%
+  ggplot(aes(x = rowid, y = columnid, fill = proximity))+
+   geom_tile() +
+   viridis::scale_fill_viridis("Proximity" ,option = "D") +
+   labs(x = "Case #", y = "Case #") +
+   theme_nice
+```
+
+
+Forest Prediction
+
+1. Train test split
+
+```{r}
+set.seed(123)
+idx.train <- sample(1:nrow(customerChurn), size = 0.7 * nrow(customerChurn))
+train.df <- customerChurn[idx.train,]
+test.df <- customerChurn[-idx.train,]
+```
+
+2. Build forest on train
+
+```{r}
+set.seed(123)
+forest2 <- rfsrc(duration ~ avg_ret_exp + 
+                            industry + 
+                            revenue + 
+                            employees + 
+                            total_crossbuy + 
+                            total_freq +
+                            interaction, 
+                            data = train.df, 
+                            importance = TRUE, 
+                            ntree = 1000)
+
+forest2
+
+
+# construct linear and non-linear parametric models on training set
+regression.linear <- lm(duration ~  avg_ret_exp + industry + revenue + employees + total_crossbuy + total_freq, data = train.df)
+
+
+regression.nlinear1 <- lm(duration ~  avg_ret_exp + avg_ret_exp_sq + industry + revenue + employees + total_crossbuy + total_freq + total_freq_sq, data = train.df)
+
+regression.nlinear2 <- lm(duration ~  avg_ret_exp + avg_ret_exp_sq + avg_ret_exp_cube + industry + revenue + employees + total_crossbuy + total_freq, data = train.df)
+
+regression.nlinear.interaction <- lm(duration ~  avg_ret_exp + avg_ret_exp_sq + avg_ret_exp_cube + industry + revenue + employees + total_crossbuy + total_freq + interaction, data = train.df)
+
+```
+
+2. OOB error rates
+
+```{r}
+forest2$err.rate[length(forest2$err.rate)]
+
+# plot the OOB error rate
+data.frame(err.rate = forest2$err.rate) %>%
+  na.omit() %>%
+  tibble::rownames_to_column(var = "trees") %>%
+  mutate(trees = as.numeric(trees)) %>%
+  ggplot(aes(x = trees, y = err.rate, group = 1))+
+  geom_line()+
+  scale_x_continuous(breaks = seq(0,1050,100))+
+  labs(x = "Number of trees", y = "OOB Error rate")+
+  theme_nice
+
+# compare OOB error rates of original forest and forest with interaction variables
+set.seed(123)
+forest3 <- rfsrc(duration ~ avg_ret_exp + 
+                            industry + 
+                            revenue + 
+                            employees + 
+                            total_crossbuy + 
+                            total_freq +
+                            interaction, # include interaction terms
+                            data = train.df, 
+                            importance = TRUE, 
+                            ntree = 1000)
+
+forest3$importance
+
+data.frame(forest2 = forest2$err.rate, forest3 = forest3$err.rate) %>%
+  na.omit() %>%
+  tibble::rownames_to_column(var = "trees") %>%
+  mutate(trees = as.numeric(trees)) %>%
+  gather(key = forest_type, value = OOB.err, -trees) %>%
+  ggplot(aes(x = trees, y = OOB.err, color = forest_type))+
+  geom_line()+
+  scale_color_brewer(palette = "Set1")+
+  scale_x_continuous(breaks = seq(0,1050,100))+
+  labs(x = "Number of trees", y = "OOB Error rate")+
+  theme_nice  
+```
+
+
+3. Tuning a forest hyper-parameters for predictive accuracy
+
+```{r}
+# Establish a list of possible values for hyper-parameters
+mtry.values <- seq(4,6,1)
+nodesize.values <- seq(4,8,2)
+ntree.values <- seq(4e3,6e3,1e3)
+
+# Create a data frame containing all combinations 
+hyper_grid <- expand.grid(mtry = mtry.values, nodesize = nodesize.values, ntree = ntree.values)
+
+# Create an empty vector to store OOB error values
+oob_err <- c()
+
+# Write a loop over the rows of hyper_grid to train the grid of models
+for (i in 1:nrow(hyper_grid)) {
+
+    # Train a Random Forest model
+   model <- rfsrc(duration ~ avg_ret_exp + 
+                            industry +
+                            revenue + 
+                            employees + 
+                            total_crossbuy + 
+                            total_freq +
+                            interaction, 
+                            data = train.df,
+                            mtry = hyper_grid$mtry[i],
+                            nodesize = hyper_grid$nodesize[i],
+                            ntree = hyper_grid$ntree[i])  
+  
+                          
+    # Store OOB error for the model                      
+    oob_err[i] <- model$err.rate[length(model$err.rate)]
+}
+
+# Identify optimal set of hyperparmeters based on OOB error
+opt_i <- which.min(oob_err)
+print(hyper_grid[opt_i,])
+```
+
+
+4. Rebuild training forest with optimal hyper-params
+
+```{r}
+set.seed(123)
+forest.hyper <- rfsrc(duration ~ avg_ret_exp +
+                            industry +
+                            revenue + 
+                            employees + 
+                            total_crossbuy + 
+                            total_freq +
+                            interaction, 
+                            data = train.df,
+                            mtry = 6,
+                            nodesize = 4,
+                            ntree = 5000)
+```
+
+
+5. Predict on the test set
+
+```{r}
+
+error.df <- 
+  data.frame(pred1 = predict.rfsrc(forest3,newdata = test.df)$predicted, 
+             pred2 = predict.rfsrc(forest.hyper, newdata = test.df)$predicted, 
+             pred3 = predict(regression.linear, newdata = test.df), 
+             pred4 = predict(regression.nlinear1, newdata = test.df), 
+             pred5 = predict(regression.nlinear2, newdata = test.df),
+             pred6 = predict(regression.nlinear.interaction, newdata = test.df),
+             actual = test.df$duration, 
+             customer = test.df$customer) %>%
+  mutate_at(.funs = funs(abs.error = abs(actual - .),
+                         abs.percent.error = abs(actual - .)/abs(actual)),
+            .vars = vars(pred1:pred6))
+
+#mae
+error.df %>%
+  summarise_at(.funs = funs(mae = mean(.)), 
+               .vars = vars(pred1_abs.error:pred6_abs.error))
+
+#mape
+error.df %>%
+  summarise_at(.funs = funs(mape = mean(.*100)), 
+               .vars = vars(pred1_abs.percent.error:pred6_abs.percent.error))
+
+
+# errors from the top customer portfolios
+
+error.df2 <-
+  error.df %>%
+  left_join(test.df, "customer") %>%
+  mutate(customer_portfolio = cut(x = rev <- revenue, 
+               breaks = qu <- quantile(rev, probs = seq(0, 1, 0.25)),
+               labels = names(qu)[-1],
+               include.lowest = T)) 
+
+
+
+portfolio.mae <- 
+  error.df2 %>%
+  group_by(customer_portfolio) %>%
+  summarise_at(.funs = funs(mae = mean(.)), 
+               .vars = vars(pred1_abs.error:pred6_abs.error)) %>%
+  ungroup()
+
+portfolio.mape <- 
+  error.df2 %>%
+  group_by(customer_portfolio) %>%
+  summarise_at(.funs = funs(mape = mean(.*100)), 
+               .vars = vars(pred1_abs.percent.error:pred6_abs.percent.error)) %>%
+  ungroup()
+
+portfolio.errors <- 
+  portfolio.mae %>%
+  left_join(portfolio.mape, "customer_portfolio") %>%
+  gather(key = error_type, value = error, -customer_portfolio) %>%
+  mutate(error_type2 = ifelse(grepl(pattern = "mae", error_type),"MAE","MAPE"),
+         model_type = ifelse(grepl(pattern = "pred1", error_type),"Untuned Forest",
+                        ifelse(grepl(pattern = "pred2", error_type),"Tuned Forest",
+                          ifelse(grepl(pattern = "pred3", error_type),"Linear Model",
+                            ifelse(grepl(pattern = "pred4", error_type),"Non-linear Model A",ifelse(grepl(pattern = "pred5", error_type),"Non-linear Model B","Non-linear w interaction"))))),
+         model_type_reordered = factor(model_type, levels = c("Linear Model","Non-linear Model A","Non-linear Model B","Non-linear w interaction","Untuned Forest","Tuned Forest"))) 
+  
+
+
+ggplot(portfolio.errors, aes(x = customer_portfolio, 
+                             y = error, 
+                             color = model_type_reordered, 
+                             group = model_type_reordered))+
+  geom_line(size = 1.02)+
+  geom_point(shape = 15) +
+  facet_wrap(~error_type2, scales = "free_y")+
+  scale_color_brewer(palette = "Set1") +
+  labs(y = "Error", x = "Customer portfolios")+
+  theme_nice +
+  theme(legend.position = "top")+
+  guides(color = guide_legend(title = "Model Type", size = 4,nrow = 2,byrow = TRUE))
+
+error.df2 %>%
+  group_by(customer_portfolio) %>%
+  summarise(mean_retention_expense = mean(avg_ret_exp),
+            sum_retention_expense = sum(avg_ret_exp))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

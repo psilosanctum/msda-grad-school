@@ -1,0 +1,346 @@
+---
+title: "Case Study – Customer Acquisition & Retention"
+author: "Joaquin, Seth, Collin, Leonel"
+format: html
+---
+
+## Setup and Data Loading
+
+```{r setup, include=FALSE}
+# Load required packages
+library(SMCRM)
+library(randomForest)
+library(rpart)
+library(caret)
+library(xgboost)
+library(tidyverse)
+library(vip)  # For variable importance
+library(pdp)  # For Partial Dependence Plots (PDPs)
+library(pROC)  # For ROC curve and AUC
+library(nnet)  # For Neural Networks
+library(e1071) # For SVM
+library(themis) # For SMOTE
+
+# Load data
+data(acquisitionRetention)
+head(acquisitionRetention)
+```
+
+```{r}
+# View data structure
+str(acquisitionRetention)
+summary(acquisitionRetention$Acquired)
+table(acquisitionRetention$Acquired)
+
+# Convert 'Acquired' to a factor variable
+acquisitionRetention$Acquired <- as.factor(acquisitionRetention$acquisition)
+```
+
+
+# Data Preprocessing and Train/Test Split
+
+```{r}
+acquisitionRetention$Acquired <- sample(c(0, 1), size = nrow(acquisitionRetention), replace = TRUE)
+acquisitionRetention$Acquired <- factor(acquisitionRetention$Acquired)
+
+
+# Check for missing values
+sum(is.na(acquisitionRetention$Acquired))
+
+# Check the distribution of the Acquired variable
+table(acquisitionRetention$Acquired)
+```
+
+```{r}
+set.seed(123)
+trainIndex <- createDataPartition(acquisitionRetention$Acquired, p = 0.7, list = FALSE)
+train <- acquisitionRetention[trainIndex, ]
+test <- acquisitionRetention[-trainIndex, ]
+
+# Combine train and test data to handle near-zero variance predictors
+combined_data <- rbind(train, test)
+
+# Remove near-zero variance predictors
+nzv <- nearZeroVar(combined_data, saveMetrics = TRUE)
+
+# Subset both train and test based on the non-zero variance predictors
+train <- train[, !nzv$nzv]
+test <- test[, !nzv$nzv]
+
+# Optional: Check if Acquired is imbalanced
+table(train$Acquired)
+# Check for missing values across all columns
+sum(is.na(acquisitionRetention))
+```
+
+
+# Logistic Regression with SMOTE
+
+
+
+```{r}
+library(tidymodels)
+library(glmnet)
+
+# Balance the classes
+recipe_smote <- recipe(Acquired ~ ., data = train) %>%
+  step_smote(Acquired, over_ratio = 0.5) %>%
+  step_normalize(all_predictors())
+
+smote_prep <- prep(recipe_smote, training = train)
+train_balanced <- bake(smote_prep, new_data = NULL)
+
+# Fit Regularized Logistic Regression
+x <- as.matrix(train_balanced[, -1])
+y <- train_balanced$Acquired
+
+cv_fit <- cv.glmnet(x, y, family = "binomial", alpha = 1)
+best_lambda <- cv_fit$lambda.min
+
+# Predict on test data
+x_test <- as.matrix(test[, -1])
+lr_probs <- predict(cv_fit, newx = x_test, s = best_lambda, type = "response")
+lr_preds <- ifelse(lr_probs > 0.5, 1, 0)
+
+# Evaluate performance
+conf_matrix_lr <- confusionMatrix(factor(lr_preds), test$Acquired)
+print(conf_matrix_lr)
+
+# ROC Curve and AUC
+roc_lr <- roc(test$Acquired, lr_probs)
+plot(roc_lr)
+auc(roc_lr)
+```
+
+
+# Random Forest with Hyperparameter Tuning
+
+
+
+
+
+```{r}
+# Tune Random Forest model using caret with ntree parameter
+rf_tune <- train(
+  Acquired ~ ., data = train, method = "rf",
+  trControl = trainControl(method = "cv", number = 5),
+  tuneGrid = expand.grid(mtry = c(2, 3, 4, 5)),
+  ntree = 500  # Increase the number of trees for better stability
+)
+
+# Best Random Forest Model
+rf_model <- rf_tune$finalModel
+
+# Predict on test data
+rf_preds <- predict(rf_model, test)
+
+# Evaluate performance
+conf_matrix_rf <- confusionMatrix(rf_preds, test$Acquired)
+print(conf_matrix_rf)
+
+# ROC curve and AUC
+roc_rf <- roc(test$Acquired, as.numeric(rf_preds))
+plot(roc_rf)
+auc(roc_rf)
+
+# Variable Importance Plot
+vip(rf_model)
+```
+
+
+# Decision Tree
+
+
+
+```{r}
+set.seed(123)
+trainIndex <- createDataPartition(acquisitionRetention$Acquired, p = 0.7, list = FALSE)
+train <- acquisitionRetention[trainIndex, ]
+test <- acquisitionRetention[-trainIndex, ]
+
+# Combine train and test data to handle near-zero variance predictors
+combined_data <- rbind(train, test)
+
+# Remove near-zero variance predictors
+nzv <- nearZeroVar(combined_data, saveMetrics = TRUE)
+
+# Subset both train and test based on the non-zero variance predictors
+train <- train[, !nzv$nzv]
+test <- test[, !nzv$nzv]
+
+# Fit a Decision Tree model with hyperparameter tuning
+dt_model <- rpart(Acquired ~ ., data = train, method = "class", 
+                  control = rpart.control(cp = 0.01, minsplit = 20, maxdepth = 5))
+
+# Predict on test data (probabilities for ROC curve)
+dt_probs <- predict(dt_model, test, type = "prob")[, 2]
+dt_preds <- predict(dt_model, test, type = "class")
+
+# Evaluate performance
+conf_matrix_dt <- confusionMatrix(dt_preds, test$Acquired)
+print(conf_matrix_dt)
+
+# ROC curve and AUC
+roc_dt <- roc(test$Acquired, dt_probs)
+plot(roc_dt)
+auc(roc_dt)
+
+# Plot the tree
+rpart.plot::rpart.plot(dt_model)
+```
+
+
+# Gradient Boosting (XGBoost) with Hyperparameter Tuning
+
+```{r}
+# Prepare data for xgboost
+train_matrix <- xgb.DMatrix(data = as.matrix(train %>% select(-Acquired)), label = as.numeric(train$Acquired) - 1)
+test_matrix <- xgb.DMatrix(data = as.matrix(test %>% select(-Acquired)), label = as.numeric(test$Acquired) - 1)
+
+# Tune Gradient Boosting model using caret
+gbm_tune <- train(
+  Acquired ~ ., data = train, method = "xgbTree",
+  trControl = trainControl(method = "cv", number = 5),
+  tuneGrid = expand.grid(
+    nrounds = c(100),               # Reduced number of boosting rounds
+    max_depth = c(3),               # Reduced max depth
+    eta = c(0.1),                   # Learning rate
+    gamma = c(0),                   # Minimum loss reduction
+    colsample_bytree = c(0.7),      # Proportion of columns for each tree
+    min_child_weight = c(1),        # Minimum sum of weights in a child
+    subsample = c(0.8)              # Subsample ratio
+  )
+)
+
+# Best XGBoost Model
+gbm_model <- gbm_tune$finalModel
+
+# Predict on test data
+gbm_probs <- predict(gbm_model, test_matrix)
+gbm_preds <- ifelse(gbm_probs > 0.5, 1, 0)
+
+# Evaluate performance
+conf_matrix_gbm <- confusionMatrix(factor(gbm_preds), test$Acquired)
+print(conf_matrix_gbm)
+
+# ROC curve and AUC
+roc_gbm <- roc(test$Acquired, gbm_probs)
+plot(roc_gbm)
+auc(roc_gbm)
+```
+
+
+# Support Vector Machine (SVM)
+
+```{r}
+# Fit an SVM model
+svm_model <- svm(Acquired ~ ., data = train, kernel = "linear")
+
+# Predict on test data
+svm_preds <- predict(svm_model, test)
+
+# Evaluate performance
+conf_matrix_svm <- confusionMatrix(svm_preds, test$Acquired)
+print(conf_matrix_svm)
+
+# ROC curve and AUC
+roc_svm <- roc(test$Acquired, as.numeric(svm_preds))
+plot(roc_svm)
+auc(roc_svm)
+```
+
+
+# k-Nearest Neighbors (kNN)
+
+```{r}
+# Install the 'class' package if it's not installed
+if (!require(class)) {
+  install.packages("class")
+}
+
+# Load the 'class' package
+library(class)
+
+# Ensure Acquired is a factor variable for classification
+train$Acquired <- as.factor(train$Acquired)
+test$Acquired <- as.factor(test$Acquired)
+
+
+# Fit a kNN model
+knn_preds <- knn(train = as.matrix(train %>% select(-Acquired)), 
+                 test = as.matrix(test %>% select(-Acquired)), 
+                 cl = train$Acquired, k = 5)
+
+# Evaluate performance
+conf_matrix_knn <- confusionMatrix(knn_preds, test$Acquired)
+print(conf_matrix_knn)
+
+# ROC curve and AUC
+roc_knn <- roc(test$Acquired, as.numeric(knn_preds))
+plot(roc_knn)
+auc(roc_knn)
+```
+
+Model Comparison
+
+```{r}
+# Create a data frame to compare model performance
+results <- tibble(
+  Model = c("Random Forest", "Decision Tree", "Logistic Regression", "Gradient Boosting", "SVM", "kNN"),
+  Accuracy = c(
+    mean(rf_preds == test$Acquired),
+    mean(dt_preds == test$Acquired),
+    mean(lr_preds == test$Acquired),
+    mean(gbm_preds == test$Acquired),
+    mean(svm_preds == test$Acquired),
+    mean(knn_preds == test$Acquired)
+  ),
+  AUC = c(
+    auc(roc_rf),
+    auc(roc_dt),
+    auc(roc_lr),
+    auc(roc_gbm),
+    auc(roc_svm),
+    auc(roc_knn)
+  )
+)
+
+# Display results
+results %>%
+  arrange(desc(Accuracy)) %>%
+  knitr::kable()
+```
+
+
+7. Partial Dependence Plots (PDPs)
+Generate PDPs for the most important variables in the Random Forest model.
+
+
+```{r pdp}
+# Check column names in the train dataset
+colnames(train)
+```
+
+```{r}
+# Generate Partial Dependence Plot for the "customer" variable
+pdp_result <- partial(rf_model, 
+                      pred.var = "customer", 
+                      train = train,  # Specify the training data
+                      plot = TRUE)
+
+# Display the plot
+pdp_result
+
+
+# List of important variables for PDP generation
+important_vars <- c("customer", "employees", "revenue")
+
+# Loop through the variables and generate PDPs
+for (var in important_vars) {
+  print(partial(rf_model, 
+                pred.var = var, 
+                train = train,  # Specify the training data
+                plot = TRUE))
+}
+
+```
